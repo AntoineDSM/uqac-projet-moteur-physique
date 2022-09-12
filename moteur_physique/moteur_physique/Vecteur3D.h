@@ -134,26 +134,28 @@ class Vecteur3D
 			vect1 = get_normalization(vect1);
 			vect2 = get_normalization(vect2);
 			Vecteur3D vect3 = vectorialProduct(vect1,vect2);
-			//if (vect3 != Vecteur3D())
-			//{
-			//	vect2 = vectorialProduct(vect1, vect3);
-			//	orthonormalBasis myBase;
-			//	myBase.basis = [vect1.x, vect1.y, vect1.z, vect2.x, vect2.y, vect2.z, vect3.x, vect3.y, vect3.z];
-			//	return myBase;
-			//}
+			if (isNULL(vect3))
+			{
+				vect2 = vectorialProduct(vect1, vect3);
+				orthonormalBasis myBase;
+				double list[9] = { vect1.x, vect1.y, vect1.z, vect2.x, vect2.y, vect2.z, vect3.x, vect3.y, vect3.z };
+				memcpy(myBase.basis, list, sizeof(list));
+				return myBase;
+			}
 
 		}
 
-		//OPERATORS ON VECTEUR3D
 
-		bool operator!=(Vecteur3D& vect1)
+		bool isNULL(Vecteur3D& vect1)
 		{
-			if (x == vect1.x)
-				if (y == vect1.y)
-					if (z == vect1.z)
+			if (vect1.x == 0)
+				if (vect1.y == 0)
+					if (vect1.z == 0)
 						return true;
 			return false;
 		}
+
+		//OPERATORS ON VECTEUR3D
 
 		Vecteur3D operator*(double value)
 		{
