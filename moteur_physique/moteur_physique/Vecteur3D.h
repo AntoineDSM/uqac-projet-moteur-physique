@@ -84,26 +84,110 @@ class Vecteur3D
 			return sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
  		}
 
-		//ajout d'un vecteur multiplié par un facteur (this += Vecteur3D*facteur)
-		//ajout du produit entre deux Vecteur3D (x = x1*x2, y = y1*y2 , z = z1*z2)
-		//ajout du produit vectoriel entre deux Vecteur3D (x = y1*z2 - z1*y2, y = z1*x2 - x1*z2, z = x1*y2 - y1*x2)
-		//ajout du produit scalaire entre deux Vecteur3D (x1*x2 + y1*y2 + z1*z2) 
-		//creation d'une base orthonormée avec deux Vecteur3D (a et b) car "a" vectoriel "b" donne "c", "c" normal à "a" et "b", "c" vectoriel "a" donne "d", "a","c" et "d" forment une base orthonormée.
+		//ADDITION AND MULTIPLICATION BY SCALAR VALUE
+
+		//add a to our Vecteur3D another one that is multiplied by a scalar
+		void addMultipliedVector(Vecteur3D& vect, double facteur)
+		{
+			Vecteur3D multiplied = vect * facteur;
+			(*this) += multiplied;
+		}
+
+		//multiply our Vecteur3D with another one
+		Vecteur3D multiplyBy(Vecteur3D& vect)
+		{
+			return (*this) *= vect;
+		}
+
+		//VECTORIAL PRODUCT
+
+		//get the vectorial product between our vector and another one (axb means to obtain a vector orthogonal with a and b)
+		Vecteur3D vectorialProduct(Vecteur3D& vect)
+		{
+			return Vecteur3D(y*vect.z - z*vect.y, z*vect.x - x*vect.z, x*vect.y - y*vect.x);
+		}
+
+		//get vectorial product between 2 specified vectors
+		Vecteur3D vectorialProduct(Vecteur3D& vect1, Vecteur3D& vect2)
+		{
+			return Vecteur3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
+		}
+		
+		//SCALAR PRODUCT
+
+		//get the scalar product between our vector and another one (a.b means the size of b projected on a)
+		double scalarProduct(Vecteur3D& vect)
+		{
+			return x * vect.x + y * vect.y + z * vect.z;
+		}
+		
+		//CREATE AN ORTHONOMAL BASIS
+
+		struct orthonormalBasis //9 points int the basis, 3 for vect(x), 3 for vect(y), 3 for vect(z)
+		{
+			double basis[9];
+		};
+
+		//return an orthonormal basis, 3 vectors.
+		orthonormalBasis createOrthonormalBasis(Vecteur3D& vect1, Vecteur3D& vect2)
+		{
+			vect1 = get_normalization(vect1);
+			vect2 = get_normalization(vect2);
+			Vecteur3D vect3 = vectorialProduct(vect1,vect2);
+			//if (vect3 != Vecteur3D())
+			//{
+			//	vect2 = vectorialProduct(vect1, vect3);
+			//	orthonormalBasis myBase;
+			//	myBase.basis = [vect1.x, vect1.y, vect1.z, vect2.x, vect2.y, vect2.z, vect3.x, vect3.y, vect3.z];
+			//	return myBase;
+			//}
+
+		}
 
 		//OPERATORS ON VECTEUR3D
+
+		bool operator!=(Vecteur3D& vect1)
+		{
+			if (x == vect1.x)
+				if (y == vect1.y)
+					if (z == vect1.z)
+						return true;
+			return false;
+		}
+
+		Vecteur3D operator*(double value)
+		{
+			x * value;
+			y * value;
+			z * value;
+		}
+
+		Vecteur3D operator*=(Vecteur3D& vect)
+		{
+			x * vect.x;
+			y * vect.y;
+			z * vect.z;
+		}
 
 		//be able to multiplied our Vecteur3D with a scalar value (double value here) //void operator*=(double value)
 		Vecteur3D operator*=(double value)
 		{
-			x* value;
-			y* value;
-			z* value;
+			x * value;
+			y * value;
+			z * value;
 		}
 
 		//return a copy of a Vecteur3D of a multiplication between a scalar value (double value here) and our Vecteur3D
 		Vecteur3D operator*=(double value) const //avoid our object to be modified
 		{
 			return Vecteur3D(x * value, y * value, z * value);
+		}
+
+		void operator+(Vecteur3D& v) //get "v" attribute by the memory reference
+		{
+			x += v.x;
+			y += v.y;
+			z += v.z;
 		}
 
 		//be able to add a Vecteur3D to our Vecteur3D
