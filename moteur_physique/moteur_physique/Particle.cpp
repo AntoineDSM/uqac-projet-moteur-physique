@@ -25,7 +25,8 @@ void integrate(double duration) {
 	// Update linear velocity from the acceleration. 
 	velocity.addScaledVector(resultingAcc, duration); 
 	// Impose drag. 
-	velocity *= real_pow(damping, duration); } 
+	velocity *= real_pow(damping, duration); 
+} 
     // Clear the forces. 
     clearAccumulator();
 	

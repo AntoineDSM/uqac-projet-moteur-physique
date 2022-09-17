@@ -14,22 +14,26 @@ class Ballistic {
 
 	enum ShotType
 	{
-		UNUSED ,
+		UNUSED,
 		PISTOL,
 		ARTILLERY,
 		FIREBALL,
 		LASER
 	};
 
-	enum AmmoRound {
+	struct AmmoRound {
 		//je sais pas trop quoi mettre dedans
 		//j'ai déduis la structure depuis les variables et fonction en dessous
-	ShotType shot;
-	double startTime;
-	Particle particle;
+	
+	   ShotType shot;
+	   double startTime;
+	   //Particle particle;
 
 	};
-
+	const static unsigned ammoRounds = 16;
+	AmmoRound ammo[ammoRounds];
+	
+	ShotType type;
 
 	// Update the physics of each particle in turn. 
 	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++) {
@@ -51,9 +55,8 @@ class Ballistic {
 	
 	ShotType currentShotType;
 
-	switch (currentShotType) {
 
-	
+	switch (currentShotType) {
 
 	case PISTOL: 
 		shot-particle.setMass(2.0f); // 2.0kg // Equivalent de shot.particle.setMass(2.0f);
@@ -79,6 +82,9 @@ class Ballistic {
 		shot->particle.setAcceleration(0.0f, 0.0f, 0.0f); // No gravity 
 		shot->particle.setDamping(0.99f); 
 		break; 
+
+	default: return null
+		break;
 	
 	}
 

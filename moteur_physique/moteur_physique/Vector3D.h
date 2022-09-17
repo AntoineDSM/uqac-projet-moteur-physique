@@ -98,6 +98,15 @@ class Vector3D
 			Vector3D multiplied = vect * facteur;
 			(*this) += multiplied;
 		}
+		
+		// Adds the given vector to this, scaled by the given amount.
+		 
+		void addScaledVector(const Vector3D& vector, double scale)
+		{
+			x += vector.x * scale;
+			y += vector.y * scale;
+			z += vector.z * scale;
+		}
 
 		//multiply our Vecteur3D with another one
 		Vector3D multiplyBy(Vector3D& vect)

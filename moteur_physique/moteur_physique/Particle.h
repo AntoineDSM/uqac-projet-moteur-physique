@@ -20,6 +20,10 @@ namespace Particle {
 	class Particle
 	{
 
+		Particle() {
+
+		}
+
 	protected:
 		/*  Holds the linear position of the particle in * world space. */
 		Vector3D position;
@@ -45,6 +49,9 @@ namespace Particle {
 
 		/** * Integrates the particle forward in time by the given amount. * This function uses a Newton-Euler integration method, which is a * linear approximation to the correct integral. For this reason it * may be inaccurate in some cases. */
 
+
+
+	    public :
 		void integrate(double duration);
 
 		/**
@@ -52,6 +59,36 @@ namespace Particle {
 	   * called automatically after each integration step.
 	   */
 		void clearAccumulator();
+
+
+		void setMass(const double mass);
+
+		double getMass() const;
+
+
+		void setPosition(const Vector3D& position);
+
+		void getPosition(Vector3D* position) const;
+
+		void setPosition(const double x, const double y, const double z);
+
+
+		void setVelocity(const Vector3D& position);
+
+		void getVelocity(Vector3D *position) const;
+
+		void setVelocity(const double x, const double y, const double z);
+
+
+		void setAcceleration(const Vector3D position);
+
+		void getAcceleration(Vector3D position) const;
+
+		void setAcceleration(const double x, const double y, const double z);
+
+		void setDamping(const double damping);
+
+		double getDamping() const;
 
 	};
 
