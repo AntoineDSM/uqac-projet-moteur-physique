@@ -1,14 +1,20 @@
+//Date de création :
+//Créer par :
+//Date de dernière modification :
+//Modifié par : 
+
+
 #pragma once
 #include <math.h>
 #include <iostream>
 
-#ifndef VECTEUR3D_HPP
-#define VECTEUR3D_HPP
+#ifndef VECTOR3D_HPP
+#define VECTOR3D_HPP
 
 namespace moteurJeux {
 
 //Our 3D vector just contain 3 coordinates. A lot of method can be usefull, get magnitude, normalize it, get his angle with the origin
-class Vecteur3D
+class Vector3D
 	{
 
 	//attributes
@@ -22,13 +28,13 @@ class Vecteur3D
 	public:
 
 		//default constructor that creates a (0,0,0) Vector3D
-		Vecteur3D() : x(0), y(0), z(0) 
+		Vector3D() : x(0), y(0), z(0) 
 		{
 			//nothing more to be had here
 		}
 
 		//constructors with parameters to create a new one
-		Vecteur3D(const double xCoord, const double yCoord, const double zCoord) : x(xCoord), y(yCoord), z(zCoord) 
+		Vector3D(const double xCoord, const double yCoord, const double zCoord) : x(xCoord), y(yCoord), z(zCoord) 
 		{
 			//nothing more to be had here
 		}
@@ -61,7 +67,7 @@ class Vecteur3D
 		}
 
 		//get the normalized vector of a given Vecteur3D
-		Vecteur3D get_normalization(Vecteur3D& vect)
+		Vector3D get_normalization(Vector3D& vect)
 		{
 			if (get_magnitude(vect) > 1)
 			{
@@ -79,7 +85,7 @@ class Vecteur3D
 
 
 		//get the norm of a vector Vecteur3D
-		double get_magnitude(Vecteur3D& vect)
+		double get_magnitude(Vector3D& vect)
 		{
 			return sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);
  		}
@@ -87,14 +93,23 @@ class Vecteur3D
 		//ADDITION AND MULTIPLICATION BY SCALAR VALUE
 
 		//add a to our Vecteur3D another one that is multiplied by a scalar
-		void addMultipliedVector(Vecteur3D& vect, double facteur)
+		void addMultipliedVector(Vector3D& vect, double facteur)
 		{
-			Vecteur3D multiplied = vect * facteur;
+			Vector3D multiplied = vect * facteur;
 			(*this) += multiplied;
+		}
+		
+		// Adds the given vector to this, scaled by the given amount.
+		 
+		void addScaledVector(const Vector3D& vector, double scale)
+		{
+			x += vector.x * scale;
+			y += vector.y * scale;
+			z += vector.z * scale;
 		}
 
 		//multiply our Vecteur3D with another one
-		Vecteur3D multiplyBy(Vecteur3D& vect)
+		Vector3D multiplyBy(Vector3D& vect)
 		{
 			return (*this) *= vect;
 		}
@@ -102,21 +117,21 @@ class Vecteur3D
 		//VECTORIAL PRODUCT
 
 		//get the vectorial product between our vector and another one (axb means to obtain a vector orthogonal with a and b)
-		Vecteur3D vectorialProduct(Vecteur3D& vect)
+		Vector3D vectorialProduct(Vector3D& vect)
 		{
-			return Vecteur3D(y*vect.z - z*vect.y, z*vect.x - x*vect.z, x*vect.y - y*vect.x);
+			return Vector3D(y*vect.z - z*vect.y, z*vect.x - x*vect.z, x*vect.y - y*vect.x);
 		}
 
 		//get vectorial product between 2 specified vectors
-		Vecteur3D vectorialProduct(Vecteur3D& vect1, Vecteur3D& vect2)
+		Vector3D vectorialProduct(Vector3D& vect1, Vector3D& vect2)
 		{
-			return Vecteur3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
+			return Vector3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
 		}
 		
 		//SCALAR PRODUCT
 
 		//get the scalar product between our vector and another one (a.b means the size of b projected on a)
-		double scalarProduct(Vecteur3D& vect)
+		double scalarProduct(Vector3D& vect)
 		{
 			return x * vect.x + y * vect.y + z * vect.z;
 		}
@@ -129,11 +144,11 @@ class Vecteur3D
 		};
 
 		//return an orthonormal basis, 3 vectors.
-		orthonormalBasis createOrthonormalBasis(Vecteur3D& vect1, Vecteur3D& vect2)
+		orthonormalBasis createOrthonormalBasis(Vector3D& vect1, Vector3D& vect2)
 		{
 			vect1 = get_normalization(vect1);
 			vect2 = get_normalization(vect2);
-			Vecteur3D vect3 = vectorialProduct(vect1,vect2);
+			Vector3D vect3 = vectorialProduct(vect1,vect2);
 			if (!isNULL(vect3))
 			{
 				vect2 = vectorialProduct(vect1, vect3);
@@ -146,7 +161,7 @@ class Vecteur3D
 		}
 
 
-		bool isNULL(Vecteur3D& vect1)
+		bool isNULL(Vector3D& vect1)
 		{
 			if (vect1.x == 0)
 				if (vect1.y == 0)
@@ -157,14 +172,14 @@ class Vecteur3D
 
 		//OPERATORS ON VECTEUR3D
 
-		Vecteur3D operator*(double value)
+		Vector3D operator*(double value)
 		{
 			x * value;
 			y * value;
 			z * value;
 		}
 
-		Vecteur3D operator*=(Vecteur3D& vect)
+		Vector3D operator*=(Vector3D& vect)
 		{
 			x * vect.x;
 			y * vect.y;
@@ -172,7 +187,7 @@ class Vecteur3D
 		}
 
 		//be able to multiplied our Vecteur3D with a scalar value (double value here) //void operator*=(double value)
-		Vecteur3D operator*=(double value)
+		Vector3D operator*=(double value)
 		{
 			x * value;
 			y * value;
@@ -180,12 +195,12 @@ class Vecteur3D
 		}
 
 		//return a copy of a Vecteur3D of a multiplication between a scalar value (double value here) and our Vecteur3D
-		Vecteur3D operator*=(double value) const //avoid our object to be modified
+		Vector3D operator*=(double value) const //avoid our object to be modified
 		{
-			return Vecteur3D(x * value, y * value, z * value);
+			return Vector3D(x * value, y * value, z * value);
 		}
 
-		void operator+(Vecteur3D& v) //get "v" attribute by the memory reference
+		void operator+(Vector3D& v) //get "v" attribute by the memory reference
 		{
 			x += v.x;
 			y += v.y;
@@ -193,7 +208,7 @@ class Vecteur3D
 		}
 
 		//be able to add a Vecteur3D to our Vecteur3D
-		void operator+=(Vecteur3D& v) //get "v" attribute by the memory reference
+		void operator+=(Vector3D& v) //get "v" attribute by the memory reference
 		{
 			x += v.x;
 			y += v.y;
@@ -201,13 +216,13 @@ class Vecteur3D
 		}
 
 		//return a copy of a Vecteur3D of an addition between a Vecteur3D added to our Vecteur3D
-		Vecteur3D operator+=(Vecteur3D& v) const 
+		Vector3D operator+=(Vector3D& v) const 
 		{
-			return Vecteur3D(x + v.x, y + v.y, z + v.z);
+			return Vector3D(x + v.x, y + v.y, z + v.z);
 		}
 
 		//be able to substract a Vecteur3D to our Vecteur3D
-		void operator-=(Vecteur3D& v)
+		void operator-=(Vector3D& v)
 		{
 			x -= v.x;
 			y -= v.y;
@@ -215,15 +230,15 @@ class Vecteur3D
 		}
 
 		//return a copy of a Vecteur3D of an substraction between a Vecteur3D substracted to our Vecteur3D
-		Vecteur3D operator-=(Vecteur3D& v) const
+		Vector3D operator-=(Vector3D& v) const
 		{
-			return Vecteur3D(x - v.x, y - v.y, z - v.z);
+			return Vector3D(x - v.x, y - v.y, z - v.z);
 		}
 
 	};
 
 } //namespace moteurJeux
 
-#endif VECTEUR3D_HPP
+#endif VECTOR3D_HPP
 
 
