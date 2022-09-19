@@ -134,7 +134,7 @@ class Vecteur3D
 			vect1 = get_normalization(vect1);
 			vect2 = get_normalization(vect2);
 			Vecteur3D vect3 = vectorialProduct(vect1,vect2);
-			if (isNULL(vect3))
+			if (!isNULL(vect3))
 			{
 				vect2 = vectorialProduct(vect1, vect3);
 				orthonormalBasis myBase;
