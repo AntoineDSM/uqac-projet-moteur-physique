@@ -12,87 +12,101 @@
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
 
-using namespace moteurJeux;
+//namespace Particle {
 
-//Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
+	//Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
 
 	class Particle
 	{
+		protected :
+			/*  Holds the linear position of the particle in * world space. */
+			Vector3D position;
 
-		
+			/* Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
 
-	protected:
-		/*  Holds the linear position of the particle in * world space. */
-		Vector3D position;
-
-		/* Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
-
-		Vector3D velocity;
+			Vector3D velocity;
 
 
-		/** * Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
+			/** * Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
 
-		Vector3D acceleration;
+			Vector3D acceleration;
 
 
+			/** * Holds the amount of damping applied to linear * motion. Damping is required to remove energy added * through numerical instability in the integrator. **/
 
-		/** * Holds the amount of damping applied to linear * motion. Damping is required to remove energy added * through numerical instability in the integrator. **/
+			double damping;
 
-		double amortissement;
+			/*Holds the inverse of the mass of the particle.It* is more useful to hold the inverse mass because* integration is simpler, and because in real - time * simulation it is more useful to have objects with * infinite mass(immovable) than zero mass * (completely unstable in numerical simulation). */
 
-		/*Holds the inverse of the mass of the particle.It* is more useful to hold the inverse mass because* integration is simpler, and because in real - time * simulation it is more useful to have objects with * infinite mass(immovable) than zero mass * (completely unstable in numerical simulation). */
+			double inverseMass;
 
-		double inverseMass;
-
-		/** * Integrates the particle forward in time by the given amount. * This function uses a Newton-Euler integration method, which is a * linear approximation to the correct integral. For this reason it * may be inaccurate in some cases. */
+			/** * Integrates the particle forward in time by the given amount. * This function uses a Newton-Euler integration method, which is a * linear approximation to the correct integral. For this reason it * may be inaccurate in some cases. */
 
 
 
-	    public :
-		void integrate(double duration);
+		public:
+			void integrate(double duration) {};
 
-		/**
-	   * Clears the forces applied to the particle. This will be
-	   * called automatically after each integration step.
-	   */
-		void clearAccumulators();
-
-
-		void setMass(const double mass);
-
-		double getMass() const;
+			/**
+		   * Clears the forces applied to the particle. This will be
+		   * called automatically after each integration step.
+		   */
+			void clearAccumulators() {};
 
 
-		void setPosition(const Vector3D& position);
+			void setMass(const double mass) {};
 
-		void getPosition(Vector3D* position) const;
-
-        Vector3D getPosition() const;
-
-		void setPosition(const double x, const double y, const double z);
+			double getMass() const {};
 
 
-		void setVelocity(const Vector3D& position);
+			void setPosition(const Vector3D& position) {};
 
-		void getVelocity(Vector3D *position) const;
+			void getPosition(Vector3D* position) const {};
 
-		void setVelocity(const double x, const double y, const double z);
+			Vector3D getPosition() const {};
 
-
-		void setAcceleration(const Vector3D position);
-
-		void getAcceleration(Vector3D position) const;
-
-		void setAcceleration(const double x, const double y, const double z);
-
-		void setDamping(const double damping);
-
-		double getDamping() const;
+			void setPosition(const double x, const double y, const double z) {};
 
 
+			void setVelocity(const Vector3D& position) {};
+
+			void getVelocity(Vector3D* position) const {};
+
+			void setVelocity(const double x, const double y, const double z) {};
+
+
+			void setAcceleration(const Vector3D position){};
+
+			void getAcceleration(Vector3D position) const {};
+
+			void setAcceleration(const double x, const double y, const double z) {};
+
+			void setDamping(const double damping) {};
+
+			double getDamping() const {};
+
+
+			//force de ressort
+	/*
+	Soit 2 particules P1 et P2 reliées par un ressort
+	d-> = P1-> - P2->
+	Fr-> = -K(|d->|-l0)*d->/|d->|
+	Si on veut faire ça à chaque frame il faut que P1 connaisse P2. Il faut donc réfléchir à comment caractériser la force dans l'engine
+	*/
+
+			//flotabilité
+			/*
+              objet immergé dès que y0-yw<-S 
+			  y0 : centre objet
+			  yw: coord liquide
+			  S: profondeur
+			  
+			  Est ce que mon objet va frapper un fluid
+*/
 
 
 	};
+//}
 
 //namespace Particle
 

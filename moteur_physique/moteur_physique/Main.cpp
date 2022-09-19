@@ -29,7 +29,7 @@ int main(int, char**)
         return -1;
     }
 
-    /*
+    
     //Make the window's context current //
     glfwMakeContextCurrent(window);
     // Initialize ImGUI
@@ -85,13 +85,13 @@ int main(int, char**)
     }
 
     // Deletes all ImGUI instances
-   // ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
 
     glfwTerminate();
-    */
+    
 }
 
 

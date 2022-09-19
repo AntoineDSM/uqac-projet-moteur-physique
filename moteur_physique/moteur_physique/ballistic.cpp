@@ -11,7 +11,7 @@
 
 //using namespace Particle;
 using namespace moteurJeux;
-//using namespace TimingData;
+using namespace TimingDate;
 
 class Ballistic {
 
@@ -37,7 +37,7 @@ class Ballistic {
 
 	const static unsigned ammoRounds = 16;
 	AmmoRound ammo[ammoRounds];
-	float duration = (float)TimingData::get().lastFrameDuration;
+	float duration = (float)TimingData::get().lastFrameDuration*0.001f;
 	AmmoRound *shot;
 	
 	void shoot() {
@@ -98,8 +98,6 @@ class Ballistic {
 
 		default: return ;
 
-			break;
-
 		}
 
 		// Set the data common to all particle types. 
@@ -110,7 +108,8 @@ class Ballistic {
 		// Clear the force accumulators. 
 		shot->particle.clearAccumulators();
 	}
-
+	//la boucle de jeu?
+	//faire evoluer avec un pas de temps discret (plus petit, plus haute precision, il faut donc trouver un compromis en essayant)
 	void update()
 	{
 		// Find the duration of the last frame in seconds
@@ -120,9 +119,10 @@ class Ballistic {
 		{
 			if (shot->type != UNUSED)
 			{
+				//TODO Update the shot
 			}
 		}
 		//Application::update();
 	}
-
+	
 };

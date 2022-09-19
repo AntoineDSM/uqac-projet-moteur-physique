@@ -5,28 +5,29 @@
 //Modifié par : Victor GUIRAUD
 
 #include "assert.h"
-#include "Particle.h"
+#include "Particle.h";
 #include "Vector3D.h"
 
-
+/*
 
 using namespace moteurJeux;
 //using namespace Particle;
+Particle p;
 
-//void integrate(double duration) { 
-    /*
+void integrate(double duration) { 
+    
 	// We don’t integrate things with infinite mass.
-	if (inverseMass <= 0.0f) return; assert(duration > 0.0); 
+	if (p.inverseMass <= 0.0f) return; assert(duration > 0.0); 
 	// Update linear position. 
-	position.addScaledVector(velocity, duration); 
+	p.position.addScaledVector(p.velocity, duration); 
 	
 	// Work out the acceleration from the force. 
 	// (We’ll add to this vector when we come to generate forces.) 
-	Vector3D resultingAcc = acceleration; 
+	Vector3D resultingAcc = p.acceleration; 
 	// Update linear velocity from the acceleration. 
-	velocity.addScaledVector(resultingAcc, duration); 
+	p.velocity.addScaledVector(resultingAcc, duration); 
 	// Impose drag. 
-	velocity *= pow(damping, duration); 
+	p.velocity *= pow(p.damping, duration); 
 } 
     // Clear the forces. 
     //clearAccumulator();
@@ -35,106 +36,107 @@ using namespace moteurJeux;
     void setMass(const double mass)
     {
         assert(mass != 0);
-        inverseMass = 1.0f / mass;
+         p.inverseMass = 1.0f / mass;
     }
 
     double getMass() 
     {
         
-            return 1.0f / inverseMass;
+            return 1.0f / p.inverseMass;
         
     }
 
     void setInverseMass(const double inverseMass)
     {
-        inverseMass = inverseMass;
+        p.inverseMass = inverseMass;
     }
 
     double getInverseMass() 
     {
-        return inverseMass;
+        return p.inverseMass;
     }
 
 
 
     void setDamping(const double damping)
     {
-        damping = damping;
+        p.damping = damping;
     }
 
     double getDamping() 
     {
-        return damping;
+        return p.damping;
     }
 
     void setPosition(const Vector3D& position)
     {
-        position = position;
+        p.position = position;
     }
 
     void setPosition(const double x, const double y, const double z)
     {
-        position.x = x;
-        position.y = y;
-        position.z = z;
+        p.position.x = x;
+        p.position.y = y;
+        p.position.z = z;
     }
 
-    void getPosition(Vector3D* position) 
+    void getPosition(Vector3D& position) 
     {
-        *position = position;
+        p.position = position;
     }
 
     Vector3D getPosition() 
     {
-        return position;
+        return p.position;
     }
 
     void setVelocity(const Vector3D& velocity)
     {
-        Particle::velocity = velocity;
+        p.velocity = velocity;
     }
 
     void setVelocity(const double x, const double y, const double z)
     {
-        velocity.x = x;
-        velocity.y = y;
-        velocity.z = z;
+        p.velocity.x = x;
+        p.velocity.y = y;
+        p.velocity.z = z;
     }
 
-    void getVelocity(Vector3D* velocity) 
+    void getVelocity(Vector3D& velocity) 
     {
-        *velocity = velocity;
+       p.velocity = velocity;
     }
 
     Vector3D getVelocity() 
     {
-        return velocity;
+        return p.velocity;
     }
 
     void setAcceleration(const Vector3D& acceleration)
     {
-        acceleration = acceleration;
+        p.acceleration = acceleration;
     }
 
     void setAcceleration(const double x, const double y, const double z)
     {
-        acceleration.x = x;
-        acceleration.y = y;
-        acceleration.z = z;
+        p.acceleration.x = x;
+        p.acceleration.y = y;
+        p.acceleration.z = z;
     }
 
-    void getAcceleration(Vector3D* acceleration) 
+    void getAcceleration(Vector3D& acceleration) 
     {
-        *acceleration = acceleration;
+        p.acceleration = acceleration;
     }
 
     Vector3D getAcceleration()
     {
-        return acceleration;
+        return p.acceleration;
     }
 
     void clearAccumulator()
     {
-        forceAccum.clear();
+       // p.forceAccum.clear();
     }
-	*/
+    */
+	
