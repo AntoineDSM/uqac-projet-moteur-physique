@@ -15,6 +15,7 @@
 using namespace moteurJeux;
 
 //Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
+namespace moteurJeux {
 
 	class Particle
 	{
@@ -43,7 +44,7 @@ using namespace moteurJeux;
 
 	    public :
 
-		//----------------------------------------------------OTHER METHODS-------------------------------------------------------------------
+		//----------------------------------------------------OTHER METHODS, NOT INLINE-------------------------------------------------------------------
 
 		void integrate(double duration);
 
@@ -55,48 +56,83 @@ using namespace moteurJeux;
 
 		//--------------------------------------------------MASS METHOD-----------------------------------------------------------------------
 
-		void setMass(const double mass);
+		inline void setMass(const double mass)
+		{
+			assert(mass != 0);
+			inverseMass = 1.0f / mass;
+		}
 
-		double getMass() const;
+		inline double getMass() const { return 1.0f / inverseMass;}
 
-		void setInverseMass(const double inverseMassValue);
+		inline void setInverseMass(const double inverseMassValue)
+		{
+			inverseMass = inverseMassValue;
+		}
 
-		double getInverseMass();
+		inline double getInverseMass() { return inverseMass;}
 
 		//--------------------------------------------------POSITION METHODS------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
 
-        Vector3D getPosition() const;
+		inline Vector3D getPosition() const { return position;}
 
-		void setPosition(const double x, const double y, const double z);
+		inline void setPosition(const Vector3D& newPosition)
+		{
+			position = newPosition;
+		}
 
-		void setPosition(const Vector3D& position);
+		 inline void setPosition(const double x, const double y, const double z)
+		{
+			position.x = x;
+			position.y = y;
+			position.z = z;
+		}
 
 		//-------------------------------------------------------VELOCITY METHODS-------------------------------------------------------
 
 		//void getVelocity(Vector3D *position) const;
-		Vector3D getVelocity() const;
 
-		void setVelocity(const double x, const double y, const double z);
+		inline Vector3D getVelocity() const { return velocity; }
 
-		void setVelocity(const Vector3D& position);
+		inline void setVelocity(const Vector3D& newVelocity)
+		{
+			velocity = newVelocity;
+		}
+
+		inline void setVelocity(const double x, const double y, const double z)
+		{
+			velocity.x = x;
+			velocity.y = y;
+			velocity.z = z;
+		}
 
 		//-------------------------------------------------------ACCELERATION METHODS--------------------------------------------------------------
 
-		Vector3D getAcceleration();
+		 inline void setAcceleration(const Vector3D& newAcceleration)
+		{
+			acceleration = newAcceleration;
+		}
 
-		void setAcceleration(const Vector3D& position);
+		inline void setAcceleration(const double x, const double y, const double z)
+		{
+			acceleration.x = x;
+			acceleration.y = y;
+			acceleration.z = z;
+		}
 
-		void setAcceleration(const double x, const double y, const double z);
+		inline Vector3D getAcceleration() { return acceleration;}
 
 		//-------------------------------------------------------DAMPING METHODS-----------------------------------------------------------------
 
-		void setDamping(const double damping);
+		inline void setDamping(const double dampingValue)
+		{
+			damping = dampingValue;
+		}
 
-		double getDamping() const;
+		inline double getDamping() const { return damping; }
 
 	};
-//namespace Particle
+}//moteurJeux
 
 #endif PARTICLE_HPP
