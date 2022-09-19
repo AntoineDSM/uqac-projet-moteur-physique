@@ -70,6 +70,8 @@ class Vector3D
 			{
 				return vect *= ((double)1) / get_magnitude(vect);
 			}
+			else
+				return vect;
 		}
 
 		//---------------------------------------------------------MAGNITUDE---------------------------------------------------------
@@ -106,7 +108,7 @@ class Vector3D
 		
 		//---------------------------------------------------------CREATE AN ORTHONOMAL BASIS---------------------------------------------------------
 
-		inline struct orthonormalBasis //9 points int the basis, 3 for vect(x), 3 for vect(y), 3 for vect(z)
+		struct orthonormalBasis //9 points int the basis, 3 for vect(x), 3 for vect(y), 3 for vect(z)
 		{
 			double basis[9];
 		};
@@ -117,25 +119,21 @@ class Vector3D
 
 		Vector3D operator*(double value)
 		{
-			x * value;
-			y * value;
-			z * value;
+			return Vector3D(x * value, y * value, z * value);
 		}
 
 		Vector3D operator*=(Vector3D& vect)
 		{
-			x * vect.x;
-			y * vect.y;
-			z * vect.z;
+			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
 		}
 
 		//be able to multiplied our Vecteur3D with a scalar value (double value here) //void operator*=(double value)
-		Vector3D operator*=(double value)
-		{
-			x * value;
-			y * value;
-			z * value;
-		}
+		//Vector3D operator*=(double value)
+		//{
+		//	x * value;
+		//	y * value;
+		//	z * value;
+		//}
 
 		//return a copy of a Vecteur3D of a multiplication between a scalar value (double value here) and our Vecteur3D
 		Vector3D operator*=(double value) const //avoid our object to be modified
