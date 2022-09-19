@@ -58,8 +58,12 @@ namespace moteurJeux {
 
 		inline void setMass(const double mass)
 		{
-			assert(mass != 0);
-			inverseMass = 1.0f / mass;
+			if (mass != 0)
+			{
+				inverseMass = 1.0f / mass;
+			}
+			else
+				std::cout << "Mass has not been setted, this inputed mass was equal to 0 \n";
 		}
 
 		inline double getMass() const { return 1.0f / inverseMass;}

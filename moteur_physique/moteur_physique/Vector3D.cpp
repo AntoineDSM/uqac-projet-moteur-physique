@@ -5,6 +5,7 @@
 
 #include "Vector3D.h"
 #include "assert.h"
+#include <iostream>
 
 using namespace moteurJeux;
 
@@ -16,14 +17,16 @@ Vector3D::orthonormalBasis createOrthonormalBasis(Vector3D& vect1, Vector3D& vec
 	vect1 = Vector3D::get_normalization(vect1);
 	vect2 = Vector3D::get_normalization(vect2);
 	Vector3D vect3 = Vector3D::vectorialProduct(vect1, vect2);
-	if (!isNULL(vect3))
+	if (!Vector3D::isNULL(vect3))
 	{
-		vect2 = vectorialProduct(vect1, vect3);
+		vect2 = Vector3D::vectorialProduct(vect1, vect3);
 		Vector3D::orthonormalBasis myBase;
 		double list[9] = { vect1.x, vect1.y, vect1.z, vect2.x, vect2.y, vect2.z, vect3.x, vect3.y, vect3.z };
 		memcpy(myBase.basis, list, sizeof(list));
 		return myBase;
 	}
+	else
+		std::cout << "Theses vector are parallel, creating a basis is impossible\n";
 }
 
 //-----------------------------------------------------------------OPERATION ON VECTOR3D-----------------------------------------------------
