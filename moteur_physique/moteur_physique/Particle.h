@@ -15,14 +15,11 @@
 using namespace moteurJeux;
 
 //Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
-namespace Particle {
 
 	class Particle
 	{
 
-		Particle() {
-
-		}
+		
 
 	protected:
 		/*  Holds the linear position of the particle in * world space. */
@@ -58,7 +55,7 @@ namespace Particle {
 	   * Clears the forces applied to the particle. This will be
 	   * called automatically after each integration step.
 	   */
-		void clearAccumulator();
+		void clearAccumulators();
 
 
 		void setMass(const double mass);
@@ -69,6 +66,8 @@ namespace Particle {
 		void setPosition(const Vector3D& position);
 
 		void getPosition(Vector3D* position) const;
+
+        Vector3D getPosition() const;
 
 		void setPosition(const double x, const double y, const double z);
 
@@ -90,8 +89,11 @@ namespace Particle {
 
 		double getDamping() const;
 
+
+
+
 	};
 
-} //namespace Particle
+//namespace Particle
 
 #endif PARTICLE_HPP

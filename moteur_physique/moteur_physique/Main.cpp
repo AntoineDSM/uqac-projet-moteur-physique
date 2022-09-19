@@ -17,7 +17,7 @@ int main(int, char**)
     GLFWwindow* window;
 
     glGetString(GL_VERSION);
-    /*Initialize the library */
+    //Initialize the library //
     if (!glfwInit())
         return -1;
 
@@ -29,8 +29,8 @@ int main(int, char**)
         return -1;
     }
 
-
-    /* Make the window's context current */
+    /*
+    //Make the window's context current //
     glfwMakeContextCurrent(window);
     // Initialize ImGUI
     IMGUI_CHECKVERSION();
@@ -38,7 +38,7 @@ int main(int, char**)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 450");
+   // ImGui_ImplOpenGL3_Init("#version 450");
 
     // Variables to be changed in the ImGUI window
     bool drawTriangle = true;
@@ -47,16 +47,16 @@ int main(int, char**)
 
 
 
-    /* Loop until the user closes the window */
+    // Loop until the user closes the window //
     while (!glfwWindowShouldClose(window))
     {
-        /* Render here */
+        // Render here //
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Tell OpenGL a new frame is about to begin
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        //ImGui_ImplOpenGL3_NewFrame();
+        //ImGui_ImplGlfw_NewFrame();
+        //ImGui::NewFrame();
 
 
         // ImGUI window creation
@@ -75,23 +75,23 @@ int main(int, char**)
 
         // Renders the ImGUI elements
         ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        /* Swap front and back buffers */
+        // Swap front and back buffers //
         glfwSwapBuffers(window);
 
-        /* Poll for and process events */
+        // Poll for and process events //
         glfwPollEvents();
     }
 
     // Deletes all ImGUI instances
-    ImGui_ImplOpenGL3_Shutdown();
+   // ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
 
     glfwTerminate();
-
+    */
 }
 
 
