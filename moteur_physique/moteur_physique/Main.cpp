@@ -21,6 +21,44 @@ using namespace moteurJeux;
 
 Ballistic* ball;
 
+void GestionSouris(int button, int state, int x,int y)
+{
+    ball->MouseInput(button,state,x,y);
+}
+
+void GestionClavier(unsigned char key,int x, int y)
+{
+    ball->KeyboardInput(key);
+}
+
+
+//Fonction permettant la création d'un repere x,y,z orthonorme.
+void DessineRepereOrthonorme()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    //permet de regarder un point precis a partir d'un point de vue.
+    gluLookAt(3, 2, 3, 0, 0, 0, 0, 1, 0);
+
+    //Repere XYZ
+    glBegin(GL_LINES);
+
+    glColor3ub(0, 0, 255); //axe bleue
+    glVertex3d(0, 0, 0);  glVertex3d(1, 0, 0); // X
+
+    glColor3ub(0, 255, 0); //axe vert
+    glVertex3d(0, 0, 0);  glVertex3d(0, 1, 0); // Y
+
+    glColor3ub(255, 0, 0); //axe rouge
+    glVertex3d(0, 0, 0);  glVertex3d(0, 0, 1); // Z
+
+    glEnd();
+}
+
+
 int main(int argc, char** argv)
 {
 
@@ -152,26 +190,26 @@ int main(int argc, char** argv)
 
     //-------------------------------------------------------------TEST PARTIE 3, PARTICULES et OPENGL--------------------------------------------------------------
 
-    /*
+    //Creation de l'objet correspondant a notre fenetre.
     GLFWwindow* window;
 
     glGetString(GL_VERSION);
-    //Initialize the library //
+    //Initialisation de la librairie de OpenGL.
     if (!glfwInit())
         return -1;
 
-    // Create a windowed mode window and its OpenGL context 
-    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
+    //Creer une fenetre OpenGL.
+    window = glfwCreateWindow(1280, 720, "Ballistic & particule", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
         return -1;
     }
 
-    
-    //Make the window's context current //
+    //Donner le contexte a la fenetre actuelle.
     glfwMakeContextCurrent(window);
-    // Initialize ImGUI
+    
+    //Initialiser IMGUI.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGuiIO& io = ImGui::GetIO(); (void)io;
@@ -179,63 +217,74 @@ int main(int argc, char** argv)
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 450");
 
-    // Variables to be changed in the ImGUI window
+    //Parametres d'affichages de notre monde.
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(70, (double)640 / 480, 1, 1000);
+    glEnable(GL_DEPTH_TEST);
+
+    //Liste des variables modifiables par IMGUI.
     bool drawTriangle = true;
     float size = 1.0f;
     float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
 
+    //lancement du timer.
+    TimingData::init();
 
-
-    // Loop until the user closes the window //
+    //Boucle while jusqu'a une fermeture de fenetre de la part de l'utilisateur.
     while (!glfwWindowShouldClose(window))
     {
-        // Render here //
+        //On peut rendre des elements dans cette boucle.
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // Tell OpenGL a new frame is about to begin
+        //Dire a OpenGL que une nouvelle image va devoir etre affichee.
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
-
-        // ImGUI window creation
-        ImGui::Begin("Window to modify parameters :");
-        // Text that appears in the window
-        ImGui::Text("Triangle modification");
-        // Checkbox that appears in the window
-        ImGui::Checkbox("Draw Triangle", &drawTriangle);
-        // Slider that appears in the window
+        //Creation fenetre IMGUI.
+        ImGui::Begin("Modify attributes here :");
+        //Texte dans la fenetre.
+        ImGui::Text("......");
+        //Slider pour choisir la taille d'un element.
         ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
-        // Fancy color editor that appears in the window
+        //Choix de la couleur de l'element.
         ImGui::ColorEdit4("Color", color);
-        // Ends the window
+        //La fenetre est complete.
         ImGui::End();
 
-        // Renders the ImGUI elements
+        //-----------------------------------------------Recuperer les interactions clavier/souris de l'utilisateur.----------------------------------------------
+        glutKeyboardFunc(GestionClavier);
+        glutMouseFunc(GestionSouris);
+        //-----------------------------------------------------Actualisation des positions des projectiles.--------------------------------------------------------
+        TimingData::update();
+        ball->UpdateVariousFrameRate();
+        //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
+        DessineRepereOrthonorme();
+        //--------------------------------------------------------------Rendre nos projectiles.--------------------------------------------------------------------
+        ball->DisplayOpenGL();
+        //---------------------Boucle globale de tous les elements ajoutes en tant que callback, les fonctions ci-dessus de facon plus generale.-------------------
+        glutMainLoop();
+
+        //Affichage des elements de IMGUI
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        glBegin(GL_TRIANGLES);
-        glColor3f(color[0], color[1], color[2]);
-        glVertex3f(0, 0, size);
-        glVertex3f(size, 0, 0);
-        glVertex3f(0, size, 0);
-        glEnd();
-
         // Swap front and back buffers //
         glfwSwapBuffers(window);
-
         // Poll for and process events //
         glfwPollEvents();
     }
 
-    // Deletes all ImGUI instances
+    //arret du timer.
+    TimingData::deinit();
+
+    //Si nous quitter la boucle, on déinitialise les elements de OpenGL et de IMGUI
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
     glfwTerminate();
-    */
 }
 
 

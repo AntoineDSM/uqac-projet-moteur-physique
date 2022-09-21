@@ -63,6 +63,7 @@ public:
 					return "PISTOL ";
 			}
 		}
+
 	};
 
 	//le maximum de munition/d'object que nous pouvons avoir en meme temps dans l'espace virtuel
@@ -93,11 +94,15 @@ public:
 
 	void UpdateFixedFrameRate(double frameRate);
 
-	void Display();
+	void DisplayConsole();
+
+	void DisplayOpenGL();
 
 	void MouseInput(int button, int state, int x, int y);
 
 	void KeyboardInput(unsigned char key);
+
+	void AfficherProjectile(AmmoRound* amo);
 
 	//tant que le clavier ne fonctionne pas
 	void setCurrentType(ShotType myType);

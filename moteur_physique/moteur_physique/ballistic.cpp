@@ -155,7 +155,7 @@ void Ballistic::UpdateFixedFrameRate(double frameRateMS)
 
 //Fonction display affichage console, pour toutes les particules lancees a l'instant t, nous affichons son type, son ordre de liste pour les differencier
 //et sa position.
-void Ballistic::Display()
+void Ballistic::DisplayConsole()
 {
 	int cpt = 0;
 	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
@@ -165,6 +165,19 @@ void Ballistic::Display()
 		{
 			shot->particle.getPosition().display("Position particle " + shot->getType() + " : " + std::to_string(cpt));
 		} 
+	}
+}
+
+//Fonction display d'affichage sur OpenGL de nos projectiles. Vu que nos particule possede dans leur structure un attribut les affichants,
+//cette methode est appelee pour chacun a chaque appel de displayOpenGL()
+void Ballistic::DisplayOpenGL()
+{
+	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
+	{
+		if (shot->type != ShotType::UNUSED)
+		{
+			AfficherProjectile(shot);
+		}
 	}
 }
 
@@ -193,4 +206,26 @@ void Ballistic::KeyboardInput(unsigned char key)
 void Ballistic::setCurrentType(ShotType myType)
 {
 	currentType = myType;
+}
+
+//Permet au projectile de s'afficher sur OpenGL en fonction de sa position.
+void Ballistic::AfficherProjectile(AmmoRound *amo)
+{
+	//ajouter des differentes couleurs en fonciton des types de projectiles.
+	
+	Vector3D position;
+	position = amo->particle.getPosition();
+
+	glColor3f(0, 0, 0);
+	glPushMatrix();
+	glTranslatef(position.x, position.y, position.z);
+	glutSolidSphere(0.3f, 5, 4);
+	glPopMatrix();
+
+	glColor3f(0.75, 0.75, 0.75);
+	glPushMatrix();
+	glTranslatef(position.x, 0, position.z);
+	glScalef(1.0f, 0.1f, 1.0f);
+	glutSolidSphere(0.6f, 5, 4);
+	glPopMatrix();
 }
