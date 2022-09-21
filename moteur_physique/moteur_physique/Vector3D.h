@@ -7,47 +7,70 @@
 #pragma once
 #include <math.h>
 #include <iostream>
+#include <xmemory>
+#include <memory>
 
 #ifndef VECTOR3D_HPP
 #define VECTOR3D_HPP
 
 namespace moteurJeux {
 
-//Our 3D vector just contain 3 coordinates. A lot of method can be usefull, get magnitude, normalize it, get his angle with the origin
+//Notre objet Vector3D contient 3 coordonnees, X,Y et Z. Permet de modeliser des positions, des vitesses, des accelarations....
 class Vector3D
 	{
 
-	//attributes
+	//---------------------------------------------------------------------ATTRIBUTES--------------------------------------------------------------------------
+
+	//Les coordonnees de notre vecteur.
 	public:
 		
 		double x;
 		double y;
 		double z;
 
-	//constructors
+	//------------------------------------------------------------------CONSTRUCTEURS---------------------------------------------------------------------------
+	
 	public:
 
-		//default constructor that creates a (0,0,0) Vector3D
+		//Constructeur par defaut.
 		Vector3D() : x(0), y(0), z(0) 
 		{
 			//nothing more to be had here
 		}
 
-		//constructors with parameters to create a new one
-		Vector3D(const double xCoord, const double yCoord, const double zCoord) : x(xCoord), y(yCoord), z(zCoord) 
+		//Constructeur avec initialisation
+		Vector3D(const double xCoord, const double yCoord, const double zCoord) : 
+			x(xCoord)
+			, y(yCoord)
+			, z(zCoord) 
 		{
-			//nothing more to be had here
 		}
 
-	//methods
+		//Constructeur par copie
+		Vector3D(const Vector3D& vec)
+		{
+			x = vec.x;
+			y = vec.y;
+			z = vec.z;
+		}
+
+		//Destructeur
+		~Vector3D()
+		{
+		}
+
+		//-----------------------------------------------------------------------METHODS-------------------------------------------------------------------------
+
 	public :
 
-		//---------------------------------------------------------DISPLAY OUR VECTOR---------------------------------------------------------
-		inline void display() {
-			std::cout << "(" << x << "," << y << "," << z << ")" << std::endl;
+		//------------------------------------------------------------------DISPLAY OUR VECTOR------------------------------------------------------------------------------
+		
+		inline void display(std::string indication) {
+			std::cout << indication << "\n";
+			std::cout << "(" << x << "," << y << "," << z << ")\n" << std::endl;
 		}
 
-		//---------------------------------------------------------NORMALIZATION---------------------------------------------------------
+		//--------------------------------------------------------------------NORMALIZATION--------------------------------------------------------------------------------
 
 		//normalize a vector means to obtain his coordinates between 0 and 1, in the unit circle. We normalize only if the actual Vector3D is not in the unit circle.
 		/*
@@ -63,7 +86,7 @@ class Vector3D
 			}
 		}
 
-		//get the normalized vector of a given Vecteur3D
+		//Obtenir la normalisation de notre vecteur. (dans le cercle unite 0-1)
 		inline static Vector3D get_normalization(Vector3D& vect)
 		{
 			if (get_magnitude(vect) > 1)
@@ -74,95 +97,102 @@ class Vector3D
 				return vect;
 		}
 
-		//---------------------------------------------------------MAGNITUDE---------------------------------------------------------
+		//------------------------------------------------------------------------MAGNITUDE-------------------------------------------------------------------------
 
-		//get the norm of a vector means to calculate his lenght, get the magnitude of this vector
+		//avoir la magnitude veut dire obtenir la longueur de ce vecteur par rapport a l'origine du repere (0,0,0)
 		inline double get_magnitude() { return sqrt(x * x + y * y + z * z);}
 
-		//get the norm of a vector Vecteur3D
+		//avoir la magnitude d'un vecteur donne.
 		inline static double get_magnitude(Vector3D& vect) { return sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);}
 
-		//---------------------------------------------------------ADDITION AND MULTIPLICATION BY SCALAR VALUE---------------------------------------------------------
+		//-----------------------------------------------------------ADDITION AND MULTIPLICATION BY SCALAR VALUE---------------------------------------------------------
 
-		//add a to our Vecteur3D another one that is multiplied by a scalar
+		//ajouter un vecteur multiplie par un facteur a notre vecteur.
 		void addMultipliedVector(Vector3D& vect, double facteur);
 		
-		// Adds the given vector to this, scaled by the given amount.
+		//meme methode que precedemment avec implementation differente.
 		void addScaledVector(const Vector3D& vector, double scale);
 
-		//multiply our Vecteur3D with another one
+		//multiplication entre notre vecteur et un second.
 		Vector3D multiplyBy(Vector3D& vect);
 
-		//---------------------------------------------------------VECTORIAL PRODUCT---------------------------------------------------------
+		//------------------------------------------------------------------------VECTORIAL PRODUCT-----------------------------------------------------------------
 
-		//get the vectorial product between our vector and another one (axb means to obtain a vector orthogonal with a and b)
+		//obtenir le produit vectoriel entre notre vecteur et un second. a X b veut dire obtenir un troisieme vecteur orthogonal de a et b
 		Vector3D vectorialProduct(Vector3D& vect);
 
-		//get vectorial product between 2 specified vectors
-		static Vector3D vectorialProduct(Vector3D& vect1, Vector3D& vect2);
+		//avoir le produit vectoriel entre deux vecteur donnes.
+		inline static Vector3D vectorialProduct(Vector3D& vect1, Vector3D& vect2)
+		{
+			return Vector3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
+		}
 		
-		//---------------------------------------------------------SCALAR PRODUCT---------------------------------------------------------
+		//-------------------------------------------------------------------------SCALAR PRODUCT-------------------------------------------------------------------
 
-		//get the scalar product between our vector and another one (a.b means the size of b projected on a)
+		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
 		double scalarProduct(Vector3D& vect);
 		
-		//---------------------------------------------------------CREATE AN ORTHONOMAL BASIS---------------------------------------------------------
+		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 
-		struct orthonormalBasis //9 points int the basis, 3 for vect(x), 3 for vect(y), 3 for vect(z)
+		struct orthonormalBasis //9 points dans la base, basis[0-2] vecteur1, basis[3-5] vecteur2, basis[6-8] vecteur3.
 		{
-			double basis[9];
+			double basis[8];
 		};
 
-		static bool isNULL(Vector3D& vect1);
+		//savoir si un vecteur est un vecteur null, soit (0,0,0).
+		inline static bool isNULL(Vector3D& vect1)
+		{
+			if (vect1.x == 0)
+				if (vect1.y == 0)
+					if (vect1.z == 0)
+						return true;
+			return false;
+		}
 
-		//---------------------------------------------------------OPERATORS ON VECTEUR3D---------------------------------------------------------
+		//si nous voulons remettre a (0,0,0) notre vecteur.
+		inline void clear()
+		{
+			x = 0;
+			y = 0;
+			z = 0;
+		}
 
+
+		//---------------------------------------------------------------------OPERATORS ON VECTEUR3D-----------------------------------------------------------------
+
+		//permettre de multiplier notre vecteur avec un scalaire, un facteur.
 		Vector3D operator*(double value)
 		{
 			return Vector3D(x * value, y * value, z * value);
 		}
 
+		//permettre de multiplier notre vecteur avec un scalaire, un facteur.
+		Vector3D operator*=(double value)
+		{
+			return Vector3D(x * value, y * value, z * value);
+		}
+
+		//permettre de multiplier notre vecteur avec un second.
 		Vector3D operator*=(Vector3D& vect)
 		{
 			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
 		}
 
-		//be able to multiplied our Vecteur3D with a scalar value (double value here) //void operator*=(double value)
-		//Vector3D operator*=(double value)
-		//{
-		//	x * value;
-		//	y * value;
-		//	z * value;
-		//}
-
-		//return a copy of a Vecteur3D of a multiplication between a scalar value (double value here) and our Vecteur3D
-		Vector3D operator*=(double value) const //avoid our object to be modified
-		{
-			return Vector3D(x * value, y * value, z * value);
-		}
-
-		void operator+(Vector3D& v) //get "v" attribute by the memory reference
-		{
-			x += v.x;
-			y += v.y;
-			z += v.z;
-		}
-
-		//be able to add a Vecteur3D to our Vecteur3D
-		void operator+=(Vector3D& v) //get "v" attribute by the memory reference
-		{
-			x += v.x;
-			y += v.y;
-			z += v.z;
-		}
-
-		//return a copy of a Vecteur3D of an addition between a Vecteur3D added to our Vecteur3D
-		Vector3D operator+=(Vector3D& v) const 
+		//permettre d'obtenir un vecteur correspondant a l'addition entre notre vecteur et un second.
+		Vector3D operator+(Vector3D& v)
 		{
 			return Vector3D(x + v.x, y + v.y, z + v.z);
 		}
 
-		//be able to substract a Vecteur3D to our Vecteur3D
+		//ajouter un vecteur a notre vecteur.
+		void operator+=(const Vector3D& v)
+		{
+			x += v.x;
+			y += v.y;
+			z += v.z;
+		}
+
+		//soustraire un vecteur a notre vecteur.
 		void operator-=(Vector3D& v)
 		{
 			x -= v.x;
@@ -170,10 +200,25 @@ class Vector3D
 			z -= v.z;
 		}
 
-		//return a copy of a Vecteur3D of an substraction between a Vecteur3D substracted to our Vecteur3D
-		Vector3D operator-=(Vector3D& v) const
+		//avoir un vecteur correspondant a la soustraction entre notre vecteur et un second.
+		Vector3D operator-(Vector3D& v)
 		{
 			return Vector3D(x - v.x, y - v.y, z - v.z);
+		}
+
+		//permettre d'associer a notre vecteur les valeurs d'un autre vecteur.
+		void operator=(Vector3D& v)
+		{
+			x = v.x;
+			y = v.y;
+			z = v.z;
+		}
+
+		void operator=(const Vector3D& v)
+		{
+			x = v.x;
+			y = v.y;
+			z = v.z;
 		}
 
 	};

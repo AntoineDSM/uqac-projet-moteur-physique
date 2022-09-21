@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Fichiers sources">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Fichiers d%27en-tête">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -13,46 +9,74 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\imgui">
-      <UniqueIdentifier>{7447aeff-0757-4eaf-87a3-a36b43a501fd}</UniqueIdentifier>
+    <Filter Include="Fichiers d%27en-tête\IMGUI">
+      <UniqueIdentifier>{5faef5c4-8ddb-4805-a9f8-c7e2f89c7e53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\OGL">
+      <UniqueIdentifier>{b61470f3-ccbe-4de1-b7ed-16f925269fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ">
+      <UniqueIdentifier>{aa2e04ad-635b-4ebe-ad54-fbd24a70861b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\UTILS">
+      <UniqueIdentifier>{e910718a-b13f-42c0-8ebc-c67b31c6c5f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Fichiers sources\IMGUI">
+      <UniqueIdentifier>{791c3c53-dcb5-4216-8f1b-e6b85e86af22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\OBJ">
+      <UniqueIdentifier>{aba55553-68b8-4391-86a8-ce9f5ef4b329}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\UTILS">
+      <UniqueIdentifier>{f2d23430-505d-47e1-a911-3f51b08182b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\Ballistic">
+      <UniqueIdentifier>{d24d4430-68f7-43b6-a42f-f1300c6010df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\Ballistic">
+      <UniqueIdentifier>{6036e0a6-a69d-4a74-bd1c-89966827f8ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_widgets.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="include\imgui.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="include\imgui_demo.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_demo.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="include\imgui_draw.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_draw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="include\imgui_impl_glfw.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_tables.cpp">
-      <Filter>Fichiers sources\imgui</Filter>
+    <ClCompile Include="include\imgui_tables.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="Mainimgui.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Mainopengl.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3D.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="include\imgui_widgets.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
     <ClCompile Include="Particle.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\OBJ</Filter>
     </ClCompile>
-    <ClCompile Include="ballistic.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Vector3D.cpp">
+      <Filter>Fichiers sources\OBJ</Filter>
+    </ClCompile>
+    <ClCompile Include="Ballistic.cpp">
+      <Filter>Fichiers sources\Ballistic</Filter>
+    </ClCompile>
+    <ClCompile Include="Timing.cpp">
+      <Filter>Fichiers sources\UTILS</Filter>
     </ClCompile>
     <ClCompile Include="ParticleForceGenerator.cpp">
       <Filter>Fichiers sources</Filter>
@@ -83,50 +107,68 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\GLFW\glfw3.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_opengl3.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imgui_internal.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_rectpack.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_textedit.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="imgui\imstb_truetype.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="MoteurUtils.h">
+      <Filter>Fichiers sources\UTILS</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imconfig.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="imgui\imgui.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="include\imgui.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
     <ClInclude Include="imgui\imgui_impl_glfw.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="imgui\imgui_impl_opengl3.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="imgui\imgui_impl_opengl3_loader.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="MoteurUtils.h">
-      <Filter>Fichiers sources</Filter>
+    <ClInclude Include="imgui\imgui_internal.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="Precision.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="imgui\imstb_rectpack.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_textedit.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui\imstb_truetype.h">
+      <Filter>Fichiers d%27en-tête\IMGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLFW\glfw3.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\glut.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
     </ClInclude>
     <ClInclude Include="Timing.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector3D.h">
+      <Filter>Fichiers d%27en-tête\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Fichiers d%27en-tête\OBJ</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\fgl.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\fglu.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\fglut.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\glsmap.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GL\tube.h">
+      <Filter>Fichiers d%27en-tête\OGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Ballistic.h">
+      <Filter>Fichiers d%27en-tête\Ballistic</Filter>
     </ClInclude>
     <ClInclude Include="ParticleForceGenerator.h">
       <Filter>Fichiers d%27en-tête</Filter>
