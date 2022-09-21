@@ -82,6 +82,12 @@
     <ClCompile Include="TimingData.cpp">
       <Filter>Sources\Utils</Filter>
     </ClCompile>
+    <ClCompile Include="imgui_impl_opengl3.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleAnchoredSpring.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -182,6 +188,9 @@
     </ClInclude>
     <ClInclude Include="AmatParticules.h">
       <Filter>Headers\Demos</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleAnchoredSpring.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
