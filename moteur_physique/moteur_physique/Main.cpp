@@ -1,7 +1,7 @@
 //Date de création :
 //Créer par :
-//Date de dernière modification :
-//Modifié par : 
+//Date de dernière modification : Victor Guiraud
+//Modifié par : 19/09/2022
 
 
 
@@ -38,7 +38,14 @@ int main(int, char**)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-   // ImGui_ImplOpenGL3_Init("#version 450");
+    ImGui_ImplOpenGL3_Init("#version 430");
+    
+   
+    
+
+
+    
+    
 
     // Variables to be changed in the ImGUI window
     bool drawTriangle = true;
@@ -54,15 +61,15 @@ int main(int, char**)
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Tell OpenGL a new frame is about to begin
-        //ImGui_ImplOpenGL3_NewFrame();
-        //ImGui_ImplGlfw_NewFrame();
-        //ImGui::NewFrame();
+        ImGui_ImplOpenGL3_NewFrame();
+        ImGui_ImplGlfw_NewFrame();
+        ImGui::NewFrame();
 
 
         // ImGUI window creation
-        ImGui::Begin("My name is window, ImGUI window");
+        ImGui::Begin("Window to modify parameters :");
         // Text that appears in the window
-        ImGui::Text("Hello there adventurer!");
+        ImGui::Text("Triangle modification");
         // Checkbox that appears in the window
         ImGui::Checkbox("Draw Triangle", &drawTriangle);
         // Slider that appears in the window
@@ -72,10 +79,16 @@ int main(int, char**)
         // Ends the window
         ImGui::End();
 
-
         // Renders the ImGUI elements
         ImGui::Render();
-        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+        glBegin(GL_TRIANGLES);
+        glColor3f(color[0], color[1], color[2]);
+        glVertex3f(0, 0, size);
+        glVertex3f(size, 0, 0);
+        glVertex3f(0, size, 0);
+        glEnd();
 
         // Swap front and back buffers //
         glfwSwapBuffers(window);
@@ -88,7 +101,6 @@ int main(int, char**)
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
-
 
     glfwTerminate();
     

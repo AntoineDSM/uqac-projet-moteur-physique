@@ -1,7 +1,7 @@
 
 //Date de création :
 //Créer par :
-//Date de dernière modification : 16/09/22
+//Date de dernière modification : 19/09/22
 //Modifié par : Victor GUIRAUD
 
 #include "assert.h"
@@ -134,9 +134,11 @@ void integrate(double duration) {
         return p.acceleration;
     }
 
-    void clearAccumulator()
-    {
-       // p.forceAccum.clear();
-    }
-    */
-	
+ // Clear the forces. 
+ void Particle::clearAccumulators(){
+    forceAccum.clear();
+ }
+
+ void Particle::addForce(Vector3D& force) { 
+	 forceAccum += force;
+ } 

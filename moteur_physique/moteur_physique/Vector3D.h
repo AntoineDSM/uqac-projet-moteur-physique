@@ -1,7 +1,7 @@
 //Date de création :
 //Créer par :
-//Date de dernière modification :
-//Modifié par : 
+//Date de dernière modification : 19/09/2022
+//Modifié par : Victor Guiraud
 
 
 #pragma once
@@ -233,6 +233,12 @@ class Vector3D
 		Vector3D operator-=(Vector3D& v) const
 		{
 			return Vector3D(x - v.x, y - v.y, z - v.z);
+		}
+
+		//reset the vector
+		void clear()
+		{
+			x = y = z = 0;
 		}
 
 	};

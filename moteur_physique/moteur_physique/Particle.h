@@ -18,41 +18,42 @@
 
 	class Particle
 	{
-		protected :
-			/*  Holds the linear position of the particle in * world space. */
-			Vector3D position;
 
-			/* Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
+	protected:
+		// Holds the linear position of the particle in * world space. 
+		Vector3D position;
 
-			Vector3D velocity;
+		// Holds the linear velocity of the particle in * world space. 
+		Vector3D velocity;
 
-
-			/** * Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
+		// Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary use), or any other constant acceleration. 
 
 			Vector3D acceleration;
 
+		//Holds the accumulated force to be applied at the next simulation iteration only. This value is zeroed at each  integration step. 
 
-			/** * Holds the amount of damping applied to linear * motion. Damping is required to remove energy added * through numerical instability in the integrator. **/
+		Vector3D forceAccum;
 
-			double damping;
+		// Holds the amount of damping applied to linear * motion. Damping is required to remove energy added through numerical instability in the integrator. 
+		double damping;
 
-			/*Holds the inverse of the mass of the particle.It* is more useful to hold the inverse mass because* integration is simpler, and because in real - time * simulation it is more useful to have objects with * infinite mass(immovable) than zero mass * (completely unstable in numerical simulation). */
+		// Holds the inverse of the mass of the particle.It is more useful to hold the inverse mass because integration is simpler,
+		// and because in real - time simulation it is more useful to have objects with infinite mass(immovable) than zero mass (completely unstable in numerical simulation).
 
 			double inverseMass;
 
-			/** * Integrates the particle forward in time by the given amount. * This function uses a Newton-Euler integration method, which is a * linear approximation to the correct integral. For this reason it * may be inaccurate in some cases. */
+		
 
 
 
-		public:
-			void integrate(double duration) {};
+	    // Integrates the particle forward in time by the given amount.
+		// This function uses a Newton-Euler integration method, which is a  linear approximation to the correct integral. For this reason it may be inaccurate in some cases. 
+		void integrate(double duration);
 
-			/**
-		   * Clears the forces applied to the particle. This will be
-		   * called automatically after each integration step.
-		   */
-			void clearAccumulators() {};
-
+		
+	   // Clears the forces applied to the particle. This will be called automatically after each integration step.
+	   
+		void clearAccumulators();
 
 			void setMass(const double mass) {};
 
@@ -104,6 +105,13 @@
 			  Est ce que mon objet va frapper un fluid
 */
 
+
+
+		// Clears the forces applied to the particle. This will be called automatically after each integration step.
+		void clearAccumulator();
+
+		/** * Adds the given force to the particle to be applied at the * next iteration only. */
+		void addForce(Vector3D& force);
 
 	};
 //}
