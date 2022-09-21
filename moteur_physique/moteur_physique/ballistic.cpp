@@ -3,126 +3,194 @@
 //Date de dernière modification : 18/09/22
 //Modifié par : Victor GUIRAUD
 
+#include "Ballistic.h"
 
-#include <stdio.h>
-#include "Particle.h"
-#include "Timing.h"
-#include "Vector3D.h"
+void Ballistic::Shoot() {
 
-//using namespace Particle;
-using namespace moteurJeux;
-//using namespace TimingData;
+	//Le projectile que nous allons lancer, avoir acces a son initialisation en fonction de son type
+	AmmoRound* shot;
 
-class Ballistic {
-
-
-	enum ShotType
+	//Nous avons la liste de munition ammo qui contient les objets a initialiser, nous chercons le premier non utilise.
+	for (shot = ammo; shot < ammo + ammoRounds; shot++)
 	{
-		UNUSED,
-		PISTOL,
-		ARTILLERY,
-		FIREBALL,
-		LASER
-	};
+		if (shot->type == ShotType::UNUSED) break;
+	}
+	//Si les ammoRounds (16) munitions sont deja en train d'evoluer dans l'espace, nous ne pouvons pas en tirer une supplementaire.
+	if (shot >= ammo + ammoRounds) return;
 
-	struct AmmoRound {
-		//je sais pas trop quoi mettre dedans
-		//j'ai déduis la structure depuis les variables et fonction en dessous
-
-		ShotType type;
-		double startTime;
-		Particle particle;
-
-	};
-
-	const static unsigned ammoRounds = 16;
-	AmmoRound ammo[ammoRounds];
-	float duration = (float)TimingData::get().lastFrameDuration;
-	AmmoRound *shot;
-	
-	void shoot() {
-
-
-		// Update the physics of each particle in turn. 
-		for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++) {
-			if (shot->type != UNUSED) {
-
-				// Run the physics. 
-				shot->particle.integrate(duration);
-			}
-		}
-
-		// If we didn't find a round, then exit - we can't fire.
-		if (shot >= ammo + ammoRounds) return;
-
-		// Check to see if the particle is now invalid. 
-		if (shot->particle.getPosition().y < 0.0f || shot->startTime + 5000 < TimingData::get().lastFrameTimestamp || shot->particle.getPosition().z > 200.0f)
-		{
-			// We simply set the shot type to be unused, so the // memory it occupies can be reused by another shot.
-			shot->type = UNUSED;
-
-		}
-
-		shoot();
-
-
-		ShotType currentShotType;
-
-
-		switch (currentShotType) {
-
-		case PISTOL:
-			shot->particle.setMass(2.0f); // 2.0kg // Equivalent de shot.particle.setMass(2.0f);
-			shot->particle.setVelocity(0.0f, 0.0f, 35.0f); // 35m/s 
-			shot->particle.setAcceleration(0.0f, -1.0f, 0.0f);
-			shot->particle.setDamping(0.99f);
-			break;
-		case ARTILLERY:
-			shot->particle.setMass(200.0f); // 200.0kg 
-			shot->particle.setVelocity(0.0f, 30.0f, 40.0f); // 50m/s 
-			shot->particle.setAcceleration(0.0f, -20.0f, 0.0f);
-			shot->particle.setDamping(0.99f);
-			break;
-		case FIREBALL:
-			shot->particle.setMass(1.0f); // 1.0kg - mostly blast damage 											  
-			shot->particle.setVelocity(0.0f, 0.0f, 10.0f); // 5m/s 
-			shot->particle.setAcceleration(0.0f, 0.6f, 0.0f); // Floats up 
-			shot->particle.setDamping(0.9f);
-			break;
-		case LASER: // Note that this is the kind of laser bolt seen in films, // not a realistic laser beam! 
-			shot->particle.setMass(0.1f); // 0.1kg - almost no weight 
-			shot->particle.setVelocity(0.0f, 0.0f, 100.0f); // 100m/s 
-			shot->particle.setAcceleration(0.0f, 0.0f, 0.0f); // No gravity 
-			shot->particle.setDamping(0.99f);
-			break;
-
-		default: return ;
-
-			break;
-
-		}
-
-		// Set the data common to all particle types. 
-		shot->particle.setPosition(0.0f, 1.5f, 0.0f);
-		shot->startTime = TimingData::get().lastFrameTimestamp;
-		shot->type = currentShotType;
-
-		// Clear the force accumulators. 
-		shot->particle.clearAccumulators();
+	//Nous affectons a notre objet ses attributs initiaux en fonction du type de projectile souhaite.
+	switch (currentType) {
+	case ShotType::PISTOL:
+		shot->particle.setMass(2.0f); //2KG
+		shot->particle.setVelocity(0.0f, 0.0f, 35.0f); //35m/s ou 110m/s 
+		shot->particle.setAcceleration(0.0f, -1.0f, 0.0f);//-1.0f ou -9.81f 
+		shot->particle.setDamping(0.99f);
+		break;
+	case ShotType::ARTILLERY:
+		shot->particle.setMass(200.0f); // 200KG
+		shot->particle.setVelocity(0.0f, 30.0f, 40.0f); // 50m/s 
+		shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);//g force gravitationnelle
+		shot->particle.setDamping(0.99f);
+		break;
+	case ShotType::FIREBALL:
+		shot->particle.setMass(1.0f); // 1KG											  
+		shot->particle.setVelocity(0.0f, 0.0f, 10.0f); //10m/s 
+		shot->particle.setAcceleration(0.0f, 0.6f, 0.0f);
+		shot->particle.setDamping(0.9f);
+		break;
+	case ShotType::LASER:
+		shot->particle.setMass(0.1f); //0.1KG
+		shot->particle.setVelocity(0.0f, 0.0f, 100.0f); // 100m/s 
+		shot->particle.setAcceleration(0.0f, 0.0f, 0.0f); //Un laser est un rayon lumineux, nous ne pouvons pas lui donner une masse = 0 pour des raisons de calculs.
+		//Ainsi nous ne mettons pas d'acceleration, force gravitationnelle par exemple car ce rayon lumineux peut evoluer a l'infini.
+		shot->particle.setDamping(0.99f);
+		break;
+	case ShotType::ARROW:
+		shot->particle.setMass(0.5f); // 1KG											  
+		shot->particle.setVelocity(0.0f, 0.0f, 70.0f); //70m/s 
+		shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);
+		shot->particle.setDamping(0.9f);
+		break;
+	default: return;
+		break;
 	}
 
-	void update()
+	shot->particle.setPosition(0.0f, 1.5f, 0.0f);//1,5m hauteur de lancement pour une personne lambda si nous devions lancer un de ces projectiles.
+	shot->startTime = TimingData::get().lastFrameTimestamp;
+	shot->type = currentType;
+	shot->alreadyPrinted = false;
+}
+
+//Rafraichissement des valeurs de position et de vitesse a valeur de temps variable, nous actualisons a la duree prise par la derniere frame pour s'executer.
+void Ballistic::UpdateVariousFrameRate()
+{
+	//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
+	//Nous prenons donc volontairement une unite de retard pour la simulation.
+	float duration = (float)TimingData::get().lastFrameDuration * 0.001f;//on discretise plus que la normale
+	if (duration <= 0.0f) return;
+
+	//Actualisation de la vitesse et de l'acceleration de notre particule avec l'integration en fonction du temps (temps de la frame n-1).
+	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
 	{
-		// Find the duration of the last frame in seconds
-		float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
-		if (duration <= 0.0f) return;
-		for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
+		if (shot->type != ShotType::UNUSED) {
+			shot->particle.integrate(duration);
+		}
+
+		//Ici nous detectons si notre particule sort des limites de simultations et/ou des limites realistes.
+		//En dessous du sol pour l'axe Y et au dessus de 300m pour la simulation sur Z et X.
+		if (shot->particle.getPosition().y < 0.0f  || shot->particle.getPosition().z > 300.0f || shot->particle.getPosition().x > 300.0f || shot->startTime + 5000 < TimingData::get().lastFrameTimestamp)
 		{
-			if (shot->type != UNUSED)
+			//Pour les tests sur console, nous voulons un affichage de la fin de la simulation, nous detectons si la particule a deja ete affiche comme etant morte ou non.
+			//Oblige de conditionner car nous passons tout le temps dans cette boucle meme en UNUSED car nous balayons la liste de munitions.
+			//Les UNUSED restent a une position y = 0f par exemple.
+			if (!shot->alreadyPrinted)
 			{
+				double LivingTime = (TimingData::get().lastFrameTimestamp - shot->startTime) / 1000;
+				if (shot->particle.getPosition().y < 0.0f)
+				{
+					std::cout << "La particule " + shot->getType() + " vient de toucher le sol en : " + std::to_string(LivingTime) + " secondes.\n";
+				}
+				else if (shot->particle.getPosition().z > 200.0f)
+				{
+					std::cout << "La particule " + shot->getType() + " a dépassé les limites du terrain (300m) en : " + std::to_string(LivingTime) + " secondes.\n";
+				}
+				else
+				{
+					std::cout << "La temps de deplacement de la particule a depasse le temps maximum alloue a la simulation.\n";
+				}
+				shot->alreadyPrinted = true;
 			}
-		}
-		//Application::update();
-	}
+			//Un fois que la particule est considere comme non utilisable, on la repasse en inactive pour que plus tard, lors d'un tir, une autre particule puisse prendre sa place
+			//et etre tiree.
+			shot->type = ShotType::UNUSED;
 
-};
+		}
+	}
+}
+
+//Rafraichissement des valeurs de position et de vitesse a valeur de temps fixe, nous actualisons a la duree voulu par l'utilisateur.
+void Ballistic::UpdateFixedFrameRate(double frameRateMS)
+{
+	float duration = frameRateMS * 0.001f;//on discretise plus que la normale
+	if (duration <= 0.0f) return;
+
+	//Actualisation de la vitesse et de l'acceleration de notre particule avec l'integration en fonction du temps voulu de rafraichissement.
+	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
+	{
+		if (shot->type != ShotType::UNUSED) {
+			shot->particle.integrate(duration);
+		}
+
+		//Ici nous detectons si notre particule sort des limites de simultations et/ou des limites realistes.
+		//En dessous du sol pour l'axe Y et au dessus de 300m pour la simulation sur Z et X.
+		if (shot->particle.getPosition().y < 0.0f || shot->particle.getPosition().z > 300.0f || shot->particle.getPosition().x > 300.0f || shot->startTime + 5000 < TimingData::get().lastFrameTimestamp)
+		{
+			//Pour les tests sur console, nous voulons un affichage de la fin de la simulation, nous detectons si la particule a deja ete affiche comme etant morte ou non.
+			//Oblige de conditionner car nous passons tout le temps dans cette boucle meme en UNUSED car nous balayons la liste de munitions.
+			//Les UNUSED restent a une position y = 0f par exemple.
+			if (!shot->alreadyPrinted)
+			{
+				double LivingTime = (TimingData::get().lastFrameTimestamp - shot->startTime) / 1000;
+				if (shot->particle.getPosition().y < 0.0f)
+				{
+					std::cout << "La particule " + shot->getType() + " vient de toucher le sol en : " + std::to_string(LivingTime) + " secondes.\n";
+				}
+				else if (shot->particle.getPosition().z > 200.0f)
+				{
+					std::cout << "La particule " + shot->getType() + " a dépassé les limites du terrain (300m) en : " + std::to_string(LivingTime) + " secondes.\n";
+				}
+				else
+				{
+					std::cout << "La temps de deplacement de la particule a depasse le temps maximum alloue a la simulation.\n";
+				}
+				shot->alreadyPrinted = true;
+			}
+			//Un fois que la particule est considere comme non utilisable, on la repasse en inactive pour que plus tard, lors d'un tir, une autre particule puisse prendre sa place
+			//et etre tiree.
+			shot->type = ShotType::UNUSED;
+
+		}
+	}
+}
+
+//Fonction display affichage console, pour toutes les particules lancees a l'instant t, nous affichons son type, son ordre de liste pour les differencier
+//et sa position.
+void Ballistic::Display()
+{
+	int cpt = 0;
+	for (AmmoRound* shot = ammo; shot < ammo + ammoRounds; shot++)
+	{
+		cpt++;
+		if (shot->type != ShotType::UNUSED)
+		{
+			shot->particle.getPosition().display("Position particle " + shot->getType() + " : " + std::to_string(cpt));
+		} 
+	}
+}
+
+//Lors d'un appui sur le bouton gauche de la souris une particle du type actuel pourra etre lancee.
+void Ballistic::MouseInput(int button, int state, int x, int y)
+{
+	if (state == GLUT_DOWN)
+	{
+		Shoot();
+	}
+}
+
+//Lors d'un appui sur une de ces touches (A,Z,E,R) du clavier, nous pourrons changer de type de projectile respectivemetn entre PISTOL, ARTILLERY, FIREBALL et LASER.
+void Ballistic::KeyboardInput(unsigned char key)
+{
+	switch (key)
+	{
+	case 'A': currentType = ShotType::PISTOL; break;
+	case 'Z': currentType = ShotType::ARTILLERY; break;
+	case 'E': currentType = ShotType::FIREBALL; break;
+	case 'R': currentType = ShotType::LASER; break;
+	}
+}
+
+//Setter du type courant tant que l'interaction clavier ne fonctionne pas.
+void Ballistic::setCurrentType(ShotType myType)
+{
+	currentType = myType;
+}

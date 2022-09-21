@@ -15,7 +15,6 @@
 namespace Precision {
 
 
-
 }//namespace Precision
 
 #endif PRECISION_HPP

@@ -17,45 +17,75 @@ using namespace moteurJeux;
 //Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
 namespace moteurJeux {
 
-	class Particle
-	{
+class Particle
+{
+	public :
+
+		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
+
+		//Constructeur par defaut
+		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
+		{
+		}
+		
+		//Constructeur avec initialisation
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) : 
+			position(newPosition)
+			, velocity(newVelocity)
+			, acceleration(newAcceleration)
+			, damping(newDamping)
+			, inverseMass(newInverseMass)
+		{
+		}
+
+		//Constructeur par copie.
+		Particle(const Particle& p)
+		{
+			position = p.position;
+			velocity = p.velocity;
+			acceleration = p.acceleration;
+			damping = p.damping;
+			inverseMass = p.inverseMass;
+		}
+
+		//Destructeur
+		~Particle()
+		{
+		}
 
 	protected:
-		/*  Holds the linear position of the particle in * world space. */
+
+		//------------------------------------------------------------------ATTRIBUTS-----------------------------------------------------------------------------
+
+		//Position de la particule dans l'espace, evolue en fonction du temps et de la vitesse.
 		Vector3D position;
 
-		/* Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
-
+		//Vitesse actuelle de la particule, evolue en fonciton du temps et de l'acceleration. Est impacte par l'ammortissement (ex : frottements).
 		Vector3D velocity;
 
-		/** * Holds the linear velocity of the particle in * world space. */  /** * Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary * use), or any other constant acceleration. */
-
+		//Acceleration de la particule.
 		Vector3D acceleration;
 
-		/** * Holds the amount of damping applied to linear * motion. Damping is required to remove energy added * through numerical instability in the integrator. **/
-
+		//Facteur d'ammortissement.
 		double damping;
 
-		/*Holds the inverse of the mass of the particle.It* is more useful to hold the inverse mass because* integration is simpler, and because in real - time * simulation it is more useful to have objects with * infinite mass(immovable) than zero mass * (completely unstable in numerical simulation). */
-
+		//FAIRE LE COMMENTAIRE
 		double inverseMass;
 
-		/** * Integrates the particle forward in time by the given amount. * This function uses a Newton-Euler integration method, which is a * linear approximation to the correct integral. For this reason it * may be inaccurate in some cases. */
+		//Dans la partie 2, notre particule pourra etre impactee par de multiples forces exterieure, nous les concatenerons dans un seul vecteur3D qui agira sur l'acceleration.
+		Vector3D forceAccum;
 
 	    public :
 
-		//----------------------------------------------------OTHER METHODS, NOT INLINE-------------------------------------------------------------------
+		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------
 
+		//Permet de faire evoluer la position et la vitesse en fonction du temps. Permettra d'actualiser a chaque frame les valeurs.
 		void integrate(double duration);
 
-		/**
-	   * Clears the forces applied to the particle. This will be
-	   * called automatically after each integration step.
-	   */
-		void clearAccumulators();
 
-		//--------------------------------------------------MASS METHOD-----------------------------------------------------------------------
+		//--------------------------------------------------MASS METHOD, GETTER & SETTER-----------------------------------------------------------------------
 
+		//Setter de la masse, une masse ne peut etre egale a 0 pour eviter une erreur de division.
 		inline void setMass(const double mass)
 		{
 			if (mass != 0)
@@ -63,7 +93,7 @@ namespace moteurJeux {
 				inverseMass = 1.0f / mass;
 			}
 			else
-				std::cout << "Mass has not been setted, this inputed mass was equal to 0 \n";
+				std::cout << "La masse voulue n'est pas possible car egale a 0. \n";
 		}
 
 		inline double getMass() const { return 1.0f / inverseMass;}
@@ -75,7 +105,7 @@ namespace moteurJeux {
 
 		inline double getInverseMass() { return inverseMass;}
 
-		//--------------------------------------------------POSITION METHODS------------------------------------------------------------------
+		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
 
@@ -93,7 +123,7 @@ namespace moteurJeux {
 			position.z = z;
 		}
 
-		//-------------------------------------------------------VELOCITY METHODS-------------------------------------------------------
+		//-------------------------------------------------------VELOCITY METHODS, GETTER & SETTER-------------------------------------------------------
 
 		//void getVelocity(Vector3D *position) const;
 
@@ -111,9 +141,9 @@ namespace moteurJeux {
 			velocity.z = z;
 		}
 
-		//-------------------------------------------------------ACCELERATION METHODS--------------------------------------------------------------
+		//-------------------------------------------------------ACCELERATION METHODS, GETTER & SETTER--------------------------------------------------------------
 
-		 inline void setAcceleration(const Vector3D& newAcceleration)
+		inline void setAcceleration(const Vector3D& newAcceleration)
 		{
 			acceleration = newAcceleration;
 		}
@@ -127,7 +157,7 @@ namespace moteurJeux {
 
 		inline Vector3D getAcceleration() { return acceleration;}
 
-		//-------------------------------------------------------DAMPING METHODS-----------------------------------------------------------------
+		//-------------------------------------------------------DAMPING METHODS, GETTER & SETTER-----------------------------------------------------------------
 
 		inline void setDamping(const double dampingValue)
 		{
@@ -135,6 +165,14 @@ namespace moteurJeux {
 		}
 
 		inline double getDamping() const { return damping; }
+
+		//------------------------------------------------------METHOD FOR FORCE ACCUMULATOR, GETTER & SETTER-------------------------------------------------------
+
+		//Notre accumulateur de force qui agira sur l'acceleration pourra etre reinitialise.
+		void clearAccumulator();
+
+		//Ajouter une force a cet accumulateur. 
+		void addForce(const Vector3D& force);
 
 	};
 }//moteurJeux
