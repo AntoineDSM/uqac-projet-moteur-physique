@@ -8,7 +8,7 @@
 #include "Particle.h";
 #include "Vector3D.h"
 
-/*
+
 
 using namespace moteurJeux;
 //using namespace Particle;
@@ -39,6 +39,7 @@ void integrate(double duration) {
          p.inverseMass = 1.0f / mass;
     }
 
+<<<<<<< Updated upstream
     double getMass() 
     {
         
@@ -134,6 +135,13 @@ void integrate(double duration) {
         return p.acceleration;
     }
 
+    void clearAccumulator()
+    {
+       // p.forceAccum.clear();
+    }
+    
+	
+=======
  // Clear the forces. 
  void Particle::clearAccumulators(){
     forceAccum.clear();
@@ -142,3 +150,4 @@ void integrate(double duration) {
  void Particle::addForce(Vector3D& force) { 
 	 forceAccum += force;
  } 
+

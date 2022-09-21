@@ -160,6 +160,7 @@
     <ClCompile Include="Mainimgui.cpp" />
     <ClCompile Include="Mainopengl.cpp" />
     <ClCompile Include="Particle.cpp" />
+    <ClCompile Include="ParticleAnchoredSpring.cpp" />
     <ClCompile Include="ParticleBuoyancy.cpp" />
     <ClCompile Include="ParticleDrag.cpp" />
     <ClCompile Include="ParticleForceGenerator.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ParticleAnchoredSpring.h" />
     <ClInclude Include="ParticleBuoyancy.h" />
     <ClInclude Include="ParticleDrag.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
