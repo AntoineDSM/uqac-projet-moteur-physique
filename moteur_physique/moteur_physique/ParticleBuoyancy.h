@@ -16,10 +16,13 @@ class ParticleBuoyancy
 	float m_volume;
 
 	//effect properties
-	float m_waterweight;
-	float m_liquidensity;
+	float m_waterHeight;
+	float m_liquidDensity;
 
-
+public:
+	
+	/** Creates a new buoyancy force with the given parameters. */
+	ParticleBuoyancy(float m_maxDepth, float m_volume, float m_waterWeight, float m_liquidDensity = 1000.f);
 	//apply Buoyancy based on particle position
 	void updateForce(Particle* particle, float duration);
 };

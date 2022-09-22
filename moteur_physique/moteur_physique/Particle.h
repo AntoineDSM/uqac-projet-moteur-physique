@@ -53,11 +53,16 @@
 		
 	   // Clears the forces applied to the particle. This will be called automatically after each integration step.
 	   
-		void clearAccumulators();
+
+	public: 
+		    void clearAccumulators();
 
 			void setMass(const double mass) {};
 
 			double getMass() const {};
+
+			//check if the particle has a mass (mass >=0)
+			bool hasFiniteMass() const;
 
 
 			void setPosition(const Vector3D& position) {};

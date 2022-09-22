@@ -39,7 +39,7 @@ void integrate(double duration) {
          p.inverseMass = 1.0f / mass;
     }
 
-<<<<<<< Updated upstream
+
     double getMass() 
     {
         
@@ -57,7 +57,10 @@ void integrate(double duration) {
         return p.inverseMass;
     }
 
-
+    bool Particle::hasFiniteMass() const
+    {
+        return inverseMass >= 0.0f;
+    }
 
     void setDamping(const double damping)
     {

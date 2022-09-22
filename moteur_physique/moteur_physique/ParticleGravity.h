@@ -17,9 +17,12 @@ class ParticleGravity : public ParticleForceGenerator
 
 protected :
 
-	Vector3D gravity;
+	const Vector3D gravity;
 
 public:
+
+	/** Creates the generator with the given acceleration. */
+	ParticleGravity(const Vector3D& gravity);
 
 	// F= particle-> GetMass()*m_gravity
 	void updateForce(Particle* particle, float duration);

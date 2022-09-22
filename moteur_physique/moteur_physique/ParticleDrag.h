@@ -18,6 +18,10 @@ private :
 
 public:
 
+	/** Creates the generator with the given coefficients. */ 
+		
+		ParticleDrag(float m_k1, float m_k2);
+
 	//apply simplified drag based on particle's velocity
 	void updateForce(Particle* particle, float duration);
 };
