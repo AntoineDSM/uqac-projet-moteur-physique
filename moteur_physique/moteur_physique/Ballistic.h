@@ -13,6 +13,7 @@
 #include "Particle.h"
 #include "Timing.h"
 #include "Vector3D.h"
+#include <vector>
 
 using namespace moteurJeux;
 
@@ -61,6 +62,26 @@ public:
 					return "LASER ";
 				case ShotType::PISTOL :
 					return "PISTOL ";
+				case ShotType::ARROW :
+						return "ARROW";
+			}
+		}
+
+		std::vector<int> getDisplayedColor()
+		{
+			switch (type) {
+			case ShotType::UNUSED:
+				return {255,87,51};//rouge
+			case ShotType::ARTILLERY:
+				return { 51,191,255 };//bleu
+			case ShotType::FIREBALL:
+				return { 238,51,255 };//rose
+			case ShotType::LASER:
+				return { 79,255,51 };//vert
+			case ShotType::PISTOL:
+				return { 255,169,47 };//orange
+			case ShotType::ARROW:
+				return { 255,246,51 };//jaune
 			}
 		}
 
@@ -100,7 +121,9 @@ public:
 
 	void MouseInput(int button, int state, int x, int y);
 
-	void KeyboardInput(unsigned char key);
+	//void KeyboardInput(unsigned char key);
+	void KeyboardInput();
+
 
 	void AfficherProjectile(AmmoRound* amo);
 

@@ -72,11 +72,15 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\SFML-2.5.1\include;$ (WindowsSDK_IncludePath);$(IncludePath)</IncludePath>
+    <ExternalIncludePath>$ (WindowsSDK_IncludePath);$(ExternalIncludePath)</ExternalIncludePath>
+    <LibraryPath>$ (WindowsSDK_IncludePath);$(LibraryPath)</LibraryPath>
+    <ReferencePath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\SFML-2.5.1\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\lib-vc2019;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\SFML-2.5.1\include;$(VC_IncludePath);$(WindowsSDK_IncludePath);</IncludePath>
+    <ReferencePath>C:\Users\antoi\Documents\UQAC\MoteurPhysique\MoteurPhysiqueProjet\moteur_physique\moteur_physique\SFML-2.5.1\lib;$(ReferencePath)</ReferencePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -88,7 +92,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -96,7 +100,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;glut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -105,7 +109,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SFML_STATIC;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)include</AdditionalIncludeDirectories>
     </ClCompile>
@@ -115,7 +119,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;glut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -150,29 +154,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Ballistic.cpp" />
+    <ClCompile Include="ballistic.cpp" />
+    <ClCompile Include="imgui\imgui.cpp" />
+    <ClCompile Include="imgui\imgui_demo.cpp" />
+    <ClCompile Include="imgui\imgui_draw.cpp" />
+    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
+    <ClCompile Include="imgui\imgui_tables.cpp" />
+    <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="imgui_impl_opengl3.cpp" />
-    <ClCompile Include="include\imgui.cpp" />
-    <ClCompile Include="include\imgui_demo.cpp" />
-    <ClCompile Include="include\imgui_draw.cpp" />
-    <ClCompile Include="include\imgui_impl_glfw.cpp" />
-    <ClCompile Include="include\imgui_tables.cpp" />
-    <ClCompile Include="include\imgui_widgets.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Particle.cpp" />
     <ClCompile Include="Timing.cpp" />
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Ballistic.h" />
-    <ClInclude Include="include\GL\fgl.h" />
-    <ClInclude Include="include\GL\fglu.h" />
-    <ClInclude Include="include\GL\fglut.h" />
-    <ClInclude Include="include\GL\glsmap.h" />
-    <ClInclude Include="include\GL\glut.h" />
-    <ClInclude Include="include\GL\tube.h" />
-    <ClInclude Include="include\imgui.h" />
+    <ClInclude Include="Precision.h" />
     <ClInclude Include="imgui\imconfig.h" />
+    <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3.h" />
     <ClInclude Include="imgui\imgui_impl_opengl3_loader.h" />
@@ -181,7 +179,6 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
-    <ClInclude Include="MoteurUtils.h" />
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Vector3D.h" />

@@ -5,10 +5,16 @@
 
 #pragma once //optimisation de compilation
 
-#include <GLFW/glfw3.h>
 #include <Windows.h>
+#include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GLFW/glfw3.h>
 #include <dos.h>
 #include <string.h>
+#include <SFML/Window/Keyboard.hpp>
+#include <SFML/Window/Mouse.hpp>
+
 
 #include "Timing.h"
 #include "Ballistic.h"
@@ -21,19 +27,24 @@ using namespace moteurJeux;
 
 Ballistic* ball;
 
-void GestionSouris(int button, int state, int x,int y)
+void GestionSouris()//(int button, int state, int x,int y)
 {
-    ball->MouseInput(button,state,x,y);
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+    {
+        ball->Shoot();
+    }
+    //ball->MouseInput(button,state,x,y);
 }
 
-void GestionClavier(unsigned char key,int x, int y)
+void GestionClavier()//(unsigned char key,int x, int y)
 {
-    ball->KeyboardInput(key);
+    ball->KeyboardInput();
+    //ball->KeyboardInput(key);
 }
 
 
 //Fonction permettant la création d'un repere x,y,z orthonorme.
-void DessineRepereOrthonorme()
+void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 100)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -41,19 +52,19 @@ void DessineRepereOrthonorme()
     glLoadIdentity();
 
     //permet de regarder un point precis a partir d'un point de vue.
-    gluLookAt(3, 2, 3, 0, 0, 0, 0, 1, 0);
+    gluLookAt(posCamX, posCamY, posCamZ, 0, 0, 0, 0, 1, 0);
 
     //Repere XYZ
     glBegin(GL_LINES);
 
     glColor3ub(0, 0, 255); //axe bleue
-    glVertex3d(0, 0, 0);  glVertex3d(1, 0, 0); // X
+    glVertex3d(0, 0, 0);  glVertex3d(20, 0, 0); // X
 
     glColor3ub(0, 255, 0); //axe vert
-    glVertex3d(0, 0, 0);  glVertex3d(0, 1, 0); // Y
+    glVertex3d(0, 0, 0);  glVertex3d(0, 20, 0); // Y
 
     glColor3ub(255, 0, 0); //axe rouge
-    glVertex3d(0, 0, 0);  glVertex3d(0, 0, 1); // Z
+    glVertex3d(0, 0, 0);  glVertex3d(0, 0, 20); // Z
 
     glEnd();
 }
@@ -198,6 +209,10 @@ int main(int argc, char** argv)
     if (!glfwInit())
         return -1;
 
+    //FONCTIONNE PAS
+    //Initialisation de la librairie de glut.
+    //glutInit(&argc, argv);
+
     //Creer une fenetre OpenGL.
     window = glfwCreateWindow(1280, 720, "Ballistic & particule", NULL, NULL);
     if (!window)
@@ -224,12 +239,15 @@ int main(int argc, char** argv)
     glEnable(GL_DEPTH_TEST);
 
     //Liste des variables modifiables par IMGUI.
-    bool drawTriangle = true;
-    float size = 1.0f;
-    float color[4] = { 0.8f, 0.3f, 0.02f, 1.0f };
+    int posCamX = 100;
+    int posCamY = 50;
+    int posCamZ = 100;
 
     //lancement du timer.
     TimingData::init();
+
+    //creation de notre objet.
+    ball = new Ballistic();
 
     //Boucle while jusqu'a une fermeture de fenetre de la part de l'utilisateur.
     while (!glfwWindowShouldClose(window))
@@ -244,32 +262,47 @@ int main(int argc, char** argv)
 
         //Creation fenetre IMGUI.
         ImGui::Begin("Modify attributes here :");
-        //Texte dans la fenetre.
-        ImGui::Text("......");
         //Slider pour choisir la taille d'un element.
-        ImGui::SliderFloat("Size", &size, 0.5f, 2.0f);
-        //Choix de la couleur de l'element.
-        ImGui::ColorEdit4("Color", color);
+        ImGui::Text("Changer la position de la caméra sur X :");
+        ImGui::SliderInt("Pos X 0-300", &posCamX, 0, 300);
+        //Slider pour choisir la taille d'un element.
+        ImGui::Text("Changer la position de la caméra sur Y :");
+        ImGui::SliderInt("Pos Y 0-100", &posCamY, 0, 100);
+        //Slider pour choisir la taille d'un element.
+        ImGui::Text("Changer la position de la caméra sur Z :");
+        ImGui::SliderInt("Pos Z 0-300", &posCamZ, 0, 300);
+        //Fonctionnement
+        ImGui::Text("Appuyez sur click droit de la souris pour tirer.");
+        ImGui::Text("A : PISTOL, Z : ARTILLERY, E : FIREBALL, R : LASER,T : ARROW.");
+        //Projectile selectionne 
+        //FAIRE LA FONCTION ADAPTE
         //La fenetre est complete.
         ImGui::End();
 
         //-----------------------------------------------Recuperer les interactions clavier/souris de l'utilisateur.----------------------------------------------
-        glutKeyboardFunc(GestionClavier);
-        glutMouseFunc(GestionSouris);
+        //FONCTIONNE PAS
+        //glutKeyboardFunc(GestionClavier);
+        //FONCTIONNE PAS
+        //glutMouseFunc(GestionSouris);
+        GestionClavier();
+        GestionSouris();
         //-----------------------------------------------------Actualisation des positions des projectiles.--------------------------------------------------------
         TimingData::update();
         ball->UpdateVariousFrameRate();
         //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
-        DessineRepereOrthonorme();
+        DessineRepereOrthonorme(posCamX,posCamY,posCamZ);
         //--------------------------------------------------------------Rendre nos projectiles.--------------------------------------------------------------------
         ball->DisplayOpenGL();
         //---------------------Boucle globale de tous les elements ajoutes en tant que callback, les fonctions ci-dessus de facon plus generale.-------------------
-        glutMainLoop();
+        //FONCTIONNE PAS
+        //glutMainLoop();
 
         //Affichage des elements de IMGUI
         ImGui::Render();
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
+        //Forcer l'actualisation
+        glFlush();
         // Swap front and back buffers //
         glfwSwapBuffers(window);
         // Poll for and process events //
