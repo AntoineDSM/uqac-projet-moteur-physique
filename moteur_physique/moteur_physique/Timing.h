@@ -8,21 +8,20 @@
         struct TimingData
         {
 
-            /**
-            * The timestamp when the last frame ended. Times are
-            * given in milliseconds since some undefined time.
-            */
+            /*La timestamp de la fin de la dernière image. Les temps sont
+                *donnés en millisecondes depuis un temps indéfini.
+                */
             unsigned lastFrameTimestamp;
 
-            /**
-             * The duration of the last frame in milliseconds.
-             */
+           
+              //La durée de la dernière en frème en millisecondes 
+             
             unsigned lastFrameDuration;
 
 
-            /**
-            * Gets the global timing data object.
-            */
+            
+             //Gets the global timing data object.
+            
 
             static TimingData& get();
 

@@ -11,7 +11,7 @@
 
 using namespace moteurJeux;
 
-//gravitational forces
+//forces gravitationnels 
 class ParticleGravity : public ParticleForceGenerator
 {
 
@@ -21,10 +21,11 @@ protected :
 
 public:
 
-	/** Creates the generator with the given acceleration. */
+	// Crée le générateur avec l'accélération donnée. 
 	ParticleGravity(const Vector3D& gravity);
 
 	// F= particle-> GetMass()*m_gravity
+
 	void updateForce(Particle* particle, float duration);
 
 };

@@ -9,12 +9,11 @@
 
 
 #pragma once
-/** * A force generator can be asked to add a force to one or more * particles. */
+// On peut demander à un générateur de force d'ajouter une force à une ou plusieurs particules.
 
 class ParticleForceGenerator {
 public:
- /** * Overload this in implementations of the interface to calculate * and update the force applied to the given particle. */ 
-
+	// Surcharge cette fonction dans les implémentations de l'interface pour calculer et mettre à jour la force appliquée à la particule donnée. 
 virtual void updateForce(Particle* particle, float duration) = 0;
 };
 

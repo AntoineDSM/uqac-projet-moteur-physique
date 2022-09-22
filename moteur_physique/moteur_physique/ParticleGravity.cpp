@@ -15,11 +15,12 @@ using namespace moteurJeux
 void ParticleGravity::updateForce(Particle* particle, float duration) {
 
 
-	// Check that we do not have infinite mass. 
+	// Vérifier que nous n'avons pas une masse infinie.
 	if (!particle->hasFiniteMass()) return;
 
 
-	// Apply the mass-scaled force to the particle.
-	// le code multiply un vecteur et un scalaire je ne sais pas pourquoi
+	// Appliquer la force à l'échelle de la masse à la particule.
+	// 
+	// le code multiplie un vecteur et un scalaire je ne sais pas pourquoi
 	particle->addForce(gravity * particle->getMass());
 }

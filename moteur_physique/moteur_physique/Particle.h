@@ -20,48 +20,49 @@
 	{
 
 	protected:
-		// Holds the linear position of the particle in * world space. 
+		// Détient la position linéaire de la particule dans l'espace
 		Vector3D position;
 
-		// Holds the linear velocity of the particle in * world space. 
+		// Détient la vélocité de la particule dans l'espace 
 		Vector3D velocity;
 
-		// Holds the acceleration of the particle. This value * can be used to set acceleration due to gravity (its primary use), or any other constant acceleration. 
+		// Détient l'accélération de la particule. Cette valeur peut être utilisée pour définir l'accélération due à la gravité (son utilisation principale), ou toute autre accélération constante
 
 			Vector3D acceleration;
 
-		//Holds the accumulated force to be applied at the next simulation iteration only. This value is zeroed at each  integration step. 
+		// Maintient la force accumulée à appliquer uniquement à l'itération de simulation suivante. Cette valeur est remise à zéro à chaque étape d'intégration. 
 
 		Vector3D forceAccum;
 
-		// Holds the amount of damping applied to linear * motion. Damping is required to remove energy added through numerical instability in the integrator. 
+		// Détient la quantité d'amortissement appliquée au mouvement linéaire *. L'amortissement est nécessaire pour supprimer l'énergie ajoutée par l'instabilité numérique de l'intégrateur
 		double damping;
 
-		// Holds the inverse of the mass of the particle.It is more useful to hold the inverse mass because integration is simpler,
-		// and because in real - time simulation it is more useful to have objects with infinite mass(immovable) than zero mass (completely unstable in numerical simulation).
+		// Il est plus utile de détenir l'inverse de la masse de la particule car l'intégration est plus simple,
+		// et parce qu'en simulation en temps réel il est plus utile d'avoir des objets de masse infinie (inamovible) que de masse nulle (complètement instable en simulation numérique)
 
 			double inverseMass;
 
-		
 
+			// Intègre la particule dans le temps selon la quantité donnée.
+			// Cette fonction utilise une méthode d'intégration Newton-Euler, qui est une approximation linéaire de l'intégrale correcte. Pour cette raison, elle peut être imprécise dans certains cas. 
 
-
-	    // Integrates the particle forward in time by the given amount.
-		// This function uses a Newton-Euler integration method, which is a  linear approximation to the correct integral. For this reason it may be inaccurate in some cases. 
 		void integrate(double duration);
 
 		
-	   // Clears the forces applied to the particle. This will be called automatically after each integration step.
-	   
+	  
+
+
 
 	public: 
+		    // Efface les forces appliquées à la particule. Ceci sera appelé automatiquement après chaque étape d'intégration.
+
 		    void clearAccumulators();
 
 			void setMass(const double mass) {};
 
 			double getMass() const {};
 
-			//check if the particle has a mass (mass >=0)
+			//vérifier si la particule a une masse (masse >=0)
 			bool hasFiniteMass() const;
 
 
@@ -112,10 +113,9 @@
 
 
 
-		// Clears the forces applied to the particle. This will be called automatically after each integration step.
+        // Efface les forces appliquées à la particule. Ceci sera appelé automatiquement après chaque étape d'intégration.
 		void clearAccumulator();
-
-		/** * Adds the given force to the particle to be applied at the * next iteration only. */
+		// Ajoute la force donnée à la particule pour être appliquée à la * prochaine itération seulement.
 		void addForce(Vector3D& force);
 
 	};
