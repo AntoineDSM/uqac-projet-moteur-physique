@@ -4,6 +4,7 @@
 //Modifié par : Victor GUIRAUD
 
 #include "Ballistic.h"
+#include <SFML/Window/Keyboard.hpp>
 
 void Ballistic::Shoot() {
 
@@ -191,15 +192,35 @@ void Ballistic::MouseInput(int button, int state, int x, int y)
 }
 
 //Lors d'un appui sur une de ces touches (A,Z,E,R) du clavier, nous pourrons changer de type de projectile respectivemetn entre PISTOL, ARTILLERY, FIREBALL et LASER.
-void Ballistic::KeyboardInput(unsigned char key)
+void Ballistic::KeyboardInput()
 {
-	switch (key)
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 	{
-	case 'A': currentType = ShotType::PISTOL; break;
-	case 'Z': currentType = ShotType::ARTILLERY; break;
-	case 'E': currentType = ShotType::FIREBALL; break;
-	case 'R': currentType = ShotType::LASER; break;
+		currentType = ShotType::PISTOL;
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Z))
+	{
+		currentType = ShotType::ARTILLERY;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::E))
+	{
+		currentType = ShotType::FIREBALL;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
+	{
+		currentType = ShotType::LASER;
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::T))
+	{
+		currentType = ShotType::ARROW;
+	}
+	//switch (key)
+	//{
+	//case 'A': currentType = ShotType::PISTOL; break;
+	//case 'Z': currentType = ShotType::ARTILLERY; break;
+	//case 'E': currentType = ShotType::FIREBALL; break;
+	//case 'R': currentType = ShotType::LASER; break;
+	//}
 }
 
 //Setter du type courant tant que l'interaction clavier ne fonctionne pas.
@@ -212,20 +233,15 @@ void Ballistic::setCurrentType(ShotType myType)
 void Ballistic::AfficherProjectile(AmmoRound *amo)
 {
 	//ajouter des differentes couleurs en fonciton des types de projectiles.
-	
 	Vector3D position;
 	position = amo->particle.getPosition();
 
-	glColor3f(0, 0, 0);
+	std::vector<int> couleurs = amo->getDisplayedColor();
+
+	//affichage de notre sphere. Notre projectile.
+	glColor3f(couleurs[0], couleurs[1], couleurs[2]);
 	glPushMatrix();
 	glTranslatef(position.x, position.y, position.z);
-	glutSolidSphere(0.3f, 5, 4);
-	glPopMatrix();
-
-	glColor3f(0.75, 0.75, 0.75);
-	glPushMatrix();
-	glTranslatef(position.x, 0, position.z);
-	glScalef(1.0f, 0.1f, 1.0f);
-	glutSolidSphere(0.6f, 5, 4);
+	glutSolidSphere(2, 2, 2);
 	glPopMatrix();
 }
