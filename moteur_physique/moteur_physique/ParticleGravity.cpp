@@ -11,7 +11,10 @@
 using namespace moteurJeux
 ;
 
-	
+ParticleGravity::ParticleGravity(const Vector3D& gravity)
+	: gravity(gravity)
+{
+}
 void ParticleGravity::updateForce(Particle* particle, float duration) {
 
 
@@ -20,7 +23,8 @@ void ParticleGravity::updateForce(Particle* particle, float duration) {
 
 
 	// Appliquer la force à l'échelle de la masse à la particule.
-	// 
-	// le code multiplie un vecteur et un scalaire je ne sais pas pourquoi
-	particle->addForce(gravity * particle->getMass());
+	
+	// le code multiplie un vecteur et un scalaire je n'arrive pas à le faire fonctionner
+	particle->addForce(gravity*particle->getMass());
+	//particle->addForce(gravity.operator*=(particle->getMass()));
 }
