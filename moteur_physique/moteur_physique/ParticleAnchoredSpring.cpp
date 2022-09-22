@@ -9,8 +9,8 @@
 
 void ParticleAnchoredSpring::updateForce(Particle* particle, float duration) {
 	
-	// Calculate the vector of the spring. 
-	
+	// Calcule le vecteur du ressort.
+
 	Vector3D force; 
 	
 	particle->getPosition(&force); 

@@ -8,23 +8,23 @@
 #include "ParticleForceGenerator.h"
 
 using namespace moteurJeux;
-//spring between two particles
+//ressort entre deux particules
 class ParticleSpring : public ParticleForceGenerator
 {
 protected:
-	//other anchor
+	//autre ancrage
 	Particle* m_other;
 
-	//spring constant
+	//constante du resort
 	float m_k;
 
-	//rest lenght of the spring
+	//longueur au repos du ressort
 	float m_restlength;
 
 public:
-	/** Creates a new spring with the given parameters. */ 
+	// Crée un nouveau ressort avec les paramètres donnés.
 	ParticleSpring(Particle* other, float m_k, float m_restLength);
-	//apply Hook's law based on particle position
+	//Applique la loi de Hook basée sur la position de la particule
 	void updateForce(Particle* particle, float duration);
 };
 

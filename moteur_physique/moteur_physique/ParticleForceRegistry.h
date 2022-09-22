@@ -1,5 +1,3 @@
-
-
 //Date de création : 19/09/22
 //Créer par : Victor GUIRAUD
 //Date de dernière modification : 19/09/22
@@ -18,13 +16,13 @@ using namespace std;
 using namespace moteurJeux;
 
 
-//Apply forces to all particles that are linked to this forces
+//Applique des forces à toutes les particules qui sont liées à ces forces.
 
-/** * Holds all the force generators and the particles that they apply to. */
+// Détient tous les générateurs de force et les particules auxquelles ils s'appliquent.
 class ParticleForceRegistry
 {
 protected:
-/* Keeps track of one force generator and the particle it * applies to. */ 
+	// Garde la trace d'un générateur de force et de la particule à laquelle il s'applique.
 
 struct ParticleForceRegistration {
 
@@ -35,26 +33,24 @@ struct ParticleForceRegistration {
 
 
 
-/** * Holds the list of registrations. */ 
+//Détient la liste des enregistrements
 
 using Registry = std::vector<ParticleForceRegistration> ;
 
 Registry registrations; 
 
 public: 
-	/** * Registers the given force generator to apply to the * given particle. */ 
+	// Enregistre le générateur de force donné à appliquer à la particule donnée.
 	
-	void add(Particle* particle, ParticleForceGenerator* fg); 
+	void add(Particle* particle, ParticleForceGenerator* forceGenerator); 
 	
-	/** * Removes the given registered pair from the registry. * If the pair is not registered, this method will have * no effect. */ 
+	// Supprime la paire enregistrée donnée du registre. Si la paire n'est pas enregistrée, cette méthode n'aura aucun effet. */
+	void remove(Particle* particle, ParticleForceGenerator* forceGenerator); 
 	
-	void remove(Particle* particle, ParticleForceGenerator* fg); 
-	
-	/** * Clears all registrations from the registry. This will * not delete the particles or the force generators * themselves, just the records of their connection. */ 
-	void clear();
+	//Efface tous les enregistrements du registre.Cela* ne supprimera pas les particules ou les générateurs de force* eux - mêmes, seulement les enregistrements de leur connexion.* /
+    void clear();
 
-	/** * Calls all the force generators to update the forces of * their corresponding particles. */
-
+	//Appelle tous les générateurs de force pour mettre à jour les forces de leurs particules correspondantes.* /
 
 	void updateForces(float duration);
 }; 

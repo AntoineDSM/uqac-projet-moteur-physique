@@ -7,18 +7,18 @@
 #include <math.h>
 
 void ParticleSpring::updateForce(Particle* particle, float duration) {
-	// Calculate the vector of the spring. 
+	// Calcule le vecteur du ressort
 	Vector3D force; 
 	particle->getPosition(&force); 
     force -= m_other->getPosition();
 
-	// Calculate the magnitude of the force. 
+	// Calcule la magnitude de la force. 
 
 	double magnitude = force.get_magnitude();
 	magnitude = abs(magnitude - m_restlength);
 	magnitude *= m_k;
 
-	// Calculate the final force and apply it. 
+	// Calcule la force finale et l'applique.
 
 	force.get_normalization();
 	force *= -magnitude;

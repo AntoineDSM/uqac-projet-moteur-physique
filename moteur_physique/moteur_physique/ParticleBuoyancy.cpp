@@ -12,15 +12,15 @@
 
 void ParticleBuoyancy::updateForce(Particle* particle, float duration) {
 
-	// Calculate the submersion depth.
+	// Calcule la profondeur de submersion.
 
 	double depth = particle->getPosition().y;
 
-	// Check if we’re out of the water. 
+	// Vérifie si on est hors de l'eau. 
 
 	if (depth >= m_waterHeight + m_maxDepth) return; Vector3D force(0, 0, 0);
 
-	// Check if we’re at maximum depth. 
+	// Vérifier si nous sommes à la profondeur maximale.  
 
 	if (depth <= m_waterHeight - m_maxDepth) {
 	}
@@ -32,7 +32,7 @@ void ParticleBuoyancy::updateForce(Particle* particle, float duration) {
 
 
 
-	// Otherwise we are partly submerged. 
+	// Sinon, nous sommes partiellement submergés.
 
 	force.y = m_liquidDensity * m_volume * (depth - m_maxDepth - m_waterHeight) / 2 * m_maxDepth; particle->addForce(force);
 }

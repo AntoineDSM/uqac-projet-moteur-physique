@@ -9,7 +9,7 @@
 #include "ParticleForceGenerator.h"
 using namespace moteurJeux;
 
-// spring fixed to a position
+// ressort fixé à une position
 class ParticleAnchoredSpring : public ParticleForceGenerator {
 private:
 
@@ -17,18 +17,18 @@ private:
 
 	Vector3D m_anchor;
 
-	// drag coefficients
+	// autre ancre
 	float m_k;
 
-	// length of the string in rest position
+	// longueur de la chaîne en position de repos
 	float m_restLength;
 
 public:
 
-	/** Creates a new spring with the given parameters. */ 
-	
+	// Crée un nouveau ressort avec les paramètres donnés.
 	ParticleAnchoredSpring(Vector3D* anchor, float m_k, float m_restLength);
-	// apply Hooke's law based on particles position
+
+	// Applique la loi de Hooke en fonction de la position des particules
 	void updateForce(Particle* particle, float duration);
 };
 

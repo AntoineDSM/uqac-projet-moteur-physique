@@ -12,12 +12,12 @@ using namespace moteurJeux;
 void ParticleDrag::updateForce(Particle* particle, float duration) {
 
 	Vector3D force; particle->getVelocity(&force); 
-	// Calculate the total drag coefficient. 
+	// Calculer le coefficient de traînée total  
 	double dragCoeff = force.get_magnitude(); 
 	
 	dragCoeff = m_k1 * dragCoeff + m_k2 * dragCoeff * dragCoeff; 
 
-	// Calculate the final force and apply it. 
+	// Calcule la force finale et l'applique. 
 
 	force.get_normalization();
 

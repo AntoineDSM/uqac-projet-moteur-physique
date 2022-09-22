@@ -12,17 +12,17 @@ using namespace moteurJeux;
 class ParticleDrag : public ParticleForceGenerator
 {
 private :
-		//drag coefficients
+	//Coefficients de traînée
 	float m_k1;
 	float m_k2;
 
 public:
 
-	/** Creates the generator with the given coefficients. */ 
+	// Crée le générateur avec les coefficients donnés. 
 		
 		ParticleDrag(float m_k1, float m_k2);
 
-	//apply simplified drag based on particle's velocity
+    // Applique une traînée simplifiée basée sur la vélocité de la particule
 	void updateForce(Particle* particle, float duration);
 };
 
