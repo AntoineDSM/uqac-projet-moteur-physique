@@ -52,12 +52,14 @@ public:
 	
 	/** * Clears all registrations from the registry. This will * not delete the particles or the force generators * themselves, just the records of their connection. */ 
 	void clear();
+
+	/** * Calls all the force generators to update the forces of * their corresponding particles. */
+
+
+	void updateForces(float duration);
 }; 
 
-/** * Calls all the force generators to update the forces of * their corresponding particles. */ 
 
-
-void updateForces(float duration);
 
 
 

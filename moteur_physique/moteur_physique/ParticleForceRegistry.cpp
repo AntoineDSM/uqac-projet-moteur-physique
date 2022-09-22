@@ -19,7 +19,7 @@ Registry::iterator i = registrations.begin();
 for (; i != registrations.end(); i++) {
 
 
- i->fg->updateForce(i->particle, duration);
+ i->forceGenerator->updateForce(i->particle, duration);
 
 
 }

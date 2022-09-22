@@ -24,7 +24,11 @@ private:
 	float m_restLength;
 
 public:
+
+	/** Creates a new spring with the given parameters. */ 
+	
+	ParticleAnchoredSpring(Vector3D* anchor, float m_k, float m_restLength);
 	// apply Hooke's law based on particles position
-	void UpdateForce(Particle* particle, float duration);
+	void updateForce(Particle* particle, float duration);
 };
 
