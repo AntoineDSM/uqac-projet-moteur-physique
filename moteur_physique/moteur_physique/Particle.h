@@ -19,7 +19,7 @@
 	class Particle
 	{
 
-	protected:
+	public:
 		// Détient la position linéaire de la particule dans l'espace
 		Vector3D position;
 
@@ -43,17 +43,18 @@
 			double inverseMass;
 
 
-			// Intègre la particule dans le temps selon la quantité donnée.
-			// Cette fonction utilise une méthode d'intégration Newton-Euler, qui est une approximation linéaire de l'intégrale correcte. Pour cette raison, elle peut être imprécise dans certains cas. 
-
-		void integrate(double duration);
-
 		
 	  
 
 
 
-	public: 
+	 
+		// Intègre la particule dans le temps selon la quantité donnée.
+		// Cette fonction utilise une méthode d'intégration Newton-Euler, qui est une approximation linéaire de l'intégrale correcte. Pour cette raison, elle peut être imprécise dans certains cas. 
+
+		void integrate(double duration);
+
+
 		    // Efface les forces appliquées à la particule. Ceci sera appelé automatiquement après chaque étape d'intégration.
 
 		    void clearAccumulators();
@@ -92,6 +93,12 @@
 
 			double getDamping() const {};
 
+			// Efface les forces appliquées à la particule. Ceci sera appelé automatiquement après chaque étape d'intégration.
+			void clearAccumulator();
+			// Ajoute la force donnée à la particule pour être appliquée à la * prochaine itération seulement.
+
+			void addForce(Vector3D& force);
+
 
 			//force de ressort
 	/*
@@ -113,11 +120,7 @@
 
 
 
-        // Efface les forces appliquées à la particule. Ceci sera appelé automatiquement après chaque étape d'intégration.
-		void clearAccumulator();
-		// Ajoute la force donnée à la particule pour être appliquée à la * prochaine itération seulement.
-		void addForce(Vector3D& force);
-
+        
 	};
 //}
 

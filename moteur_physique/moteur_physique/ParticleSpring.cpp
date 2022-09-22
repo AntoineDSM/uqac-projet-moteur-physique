@@ -9,8 +9,11 @@
 void ParticleSpring::updateForce(Particle* particle, float duration) {
 	// Calcule le vecteur du ressort
 	Vector3D force; 
-	particle->getPosition(&force); 
-    force -= m_other->getPosition();
+	particle->getPosition(&force);
+
+	//Je n'arrive pas à faire fonctionner 
+	force-=m_other->getPosition();
+    //force.operator-=(m_other->getPosition());
 
 	// Calcule la magnitude de la force. 
 

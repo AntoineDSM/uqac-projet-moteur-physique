@@ -222,7 +222,7 @@ class Vector3D
 		}
 
 		//be able to substract a Vecteur3D to our Vecteur3D
-		void operator-=(Vector3D& v)
+		void operator-=(Vector3D& v) 
 		{
 			x -= v.x;
 			y -= v.y;

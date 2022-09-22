@@ -144,7 +144,7 @@ void integrate(double duration) {
     }
     
 	
-=======
+//=======
  // Clear the forces. 
  void Particle::clearAccumulators(){
     forceAccum.clear();

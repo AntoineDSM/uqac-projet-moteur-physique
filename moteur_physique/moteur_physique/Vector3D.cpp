@@ -4,7 +4,8 @@
 //Modifié par : 
 
 
-
+#include "Vector3D.h"
+using namespace moteurJeux;
 //---------------------------------------------------------------USEFULL METHOD ON VECTOR3D------------------------------------------------------------
 
 //return an orthonormal basis, 3 vectors.
