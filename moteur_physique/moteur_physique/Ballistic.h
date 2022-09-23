@@ -109,7 +109,7 @@ public:
 
 	//---------------------------------------------------------------------------VARIOUS METHODS--------------------------------------------------------------------
 
-	void Shoot();
+	void Shoot(float listParamsObj[], bool initialValues);
 	
 	void UpdateVariousFrameRate();
 
@@ -129,6 +129,8 @@ public:
 
 	//tant que le clavier ne fonctionne pas
 	void setCurrentType(ShotType myType);
+
+	const char* getCurrentType();
 
 };
 		

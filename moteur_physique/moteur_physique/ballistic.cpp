@@ -6,7 +6,7 @@
 #include "Ballistic.h"
 #include <SFML/Window/Keyboard.hpp>
 
-void Ballistic::Shoot() {
+void Ballistic::Shoot(float listParamsObj[] = {}, bool initialValues = true) {
 
 	//Le projectile que nous allons lancer, avoir acces a son initialisation en fonction de son type
 	AmmoRound* shot;
@@ -20,43 +20,56 @@ void Ballistic::Shoot() {
 	if (shot >= ammo + ammoRounds) return;
 
 	//Nous affectons a notre objet ses attributs initiaux en fonction du type de projectile souhaite.
-	switch (currentType) {
-	case ShotType::PISTOL:
-		shot->particle.setMass(2.0f); //2KG
-		shot->particle.setVelocity(0.0f, 0.0f, 35.0f); //35m/s ou 110m/s 
-		shot->particle.setAcceleration(0.0f, -1.0f, 0.0f);//-1.0f ou -9.81f 
-		shot->particle.setDamping(0.99f);
-		break;
-	case ShotType::ARTILLERY:
-		shot->particle.setMass(200.0f); // 200KG
-		shot->particle.setVelocity(0.0f, 30.0f, 40.0f); // 50m/s 
-		shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);//g force gravitationnelle
-		shot->particle.setDamping(0.99f);
-		break;
-	case ShotType::FIREBALL:
-		shot->particle.setMass(1.0f); // 1KG											  
-		shot->particle.setVelocity(0.0f, 0.0f, 10.0f); //10m/s 
-		shot->particle.setAcceleration(0.0f, 0.6f, 0.0f);
-		shot->particle.setDamping(0.9f);
-		break;
-	case ShotType::LASER:
-		shot->particle.setMass(0.1f); //0.1KG
-		shot->particle.setVelocity(0.0f, 0.0f, 100.0f); // 100m/s 
-		shot->particle.setAcceleration(0.0f, 0.0f, 0.0f); //Un laser est un rayon lumineux, nous ne pouvons pas lui donner une masse = 0 pour des raisons de calculs.
-		//Ainsi nous ne mettons pas d'acceleration, force gravitationnelle par exemple car ce rayon lumineux peut evoluer a l'infini.
-		shot->particle.setDamping(0.99f);
-		break;
-	case ShotType::ARROW:
-		shot->particle.setMass(0.5f); // 1KG											  
-		shot->particle.setVelocity(0.0f, 0.0f, 70.0f); //70m/s 
-		shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);
-		shot->particle.setDamping(0.9f);
-		break;
-	default: return;
-		break;
+	if (initialValues)
+	{
+		switch (currentType) {
+		case ShotType::PISTOL:
+			shot->particle.setMass(2.0f); //2KG
+			shot->particle.setVelocity(0.0f, 0.0f, 35.0f); //35m/s ou 110m/s 
+			shot->particle.setAcceleration(0.0f, -1.0f, 0.0f);//-1.0f ou -9.81f 
+			shot->particle.setDamping(0.99f);
+			break;
+		case ShotType::ARTILLERY:
+			shot->particle.setMass(200.0f); // 200KG
+			shot->particle.setVelocity(0.0f, 30.0f, 40.0f); // 50m/s 
+			shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);//g force gravitationnelle
+			shot->particle.setDamping(0.99f);
+			break;
+		case ShotType::FIREBALL:
+			shot->particle.setMass(1.0f); // 1KG											  
+			shot->particle.setVelocity(0.0f, 0.0f, 10.0f); //10m/s 
+			shot->particle.setAcceleration(0.0f, 0.6f, 0.0f);
+			shot->particle.setDamping(0.9f);
+			break;
+		case ShotType::LASER:
+			shot->particle.setMass(0.1f); //0.1KG
+			shot->particle.setVelocity(0.0f, 0.0f, 100.0f); // 100m/s 
+			shot->particle.setAcceleration(0.0f, 0.0f, 0.0f); //Un laser est un rayon lumineux, nous ne pouvons pas lui donner une masse = 0 pour des raisons de calculs.
+			//Ainsi nous ne mettons pas d'acceleration, force gravitationnelle par exemple car ce rayon lumineux peut evoluer a l'infini.
+			shot->particle.setDamping(0.99f);
+			break;
+		case ShotType::ARROW:
+			shot->particle.setMass(0.5f); // 1KG											  
+			shot->particle.setVelocity(0.0f, 0.0f, 70.0f); //70m/s 
+			shot->particle.setAcceleration(0.0f, -9.81f, 0.0f);
+			shot->particle.setDamping(0.9f);
+			break;
+		default: return;
+			break;
+		}
+
+		//Appliquer la position initiale
+		shot->particle.setPosition(0.0f, 1.5f, 0.0f);//1,5m hauteur de lancement pour une personne lambda si nous devions lancer un de ces projectiles.
+	}
+	else
+	{
+		shot->particle.setPosition(listParamsObj[1], listParamsObj[2], listParamsObj[3]);
+		shot->particle.setMass(listParamsObj[0]);
+		shot->particle.setVelocity(listParamsObj[4], listParamsObj[5], listParamsObj[6]);
+		shot->particle.setAcceleration(listParamsObj[7], listParamsObj[8], listParamsObj[9]);
+		shot->particle.setDamping(listParamsObj[10]);
 	}
 
-	shot->particle.setPosition(0.0f, 1.5f, 0.0f);//1,5m hauteur de lancement pour une personne lambda si nous devions lancer un de ces projectiles.
 	shot->startTime = TimingData::get().lastFrameTimestamp;
 	shot->type = currentType;
 	shot->alreadyPrinted = false;
@@ -95,7 +108,7 @@ void Ballistic::UpdateVariousFrameRate()
 				{
 					std::cout << "La particule " + shot->getType() + " a dépassé les limites du terrain (300m) en : " + std::to_string(LivingTime) + " secondes.\n";
 				}
-				else
+				else if(shot->startTime + 5000 < TimingData::get().lastFrameTimestamp)
 				{
 					std::cout << "La temps de deplacement de la particule a depasse le temps maximum alloue a la simulation.\n";
 				}
@@ -140,7 +153,7 @@ void Ballistic::UpdateFixedFrameRate(double frameRateMS)
 				{
 					std::cout << "La particule " + shot->getType() + " a dépassé les limites du terrain (300m) en : " + std::to_string(LivingTime) + " secondes.\n";
 				}
-				else
+				else if(shot->startTime + 5000 < TimingData::get().lastFrameTimestamp)
 				{
 					std::cout << "La temps de deplacement de la particule a depasse le temps maximum alloue a la simulation.\n";
 				}
@@ -179,6 +192,14 @@ void Ballistic::DisplayOpenGL()
 		{
 			AfficherProjectile(shot);
 		}
+	}
+
+	//Rendu du texte du projectile actuelle
+	glColor3f(1.0, 0.0, 0.0);//Couleur du text
+	glRasterPos2f(-240, 120);//Position sur l'écran
+	const char* string = getCurrentType();//Retourne le type de projectile selectionne.
+	while (*string) {
+		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *string++);
 	}
 }
 
@@ -244,4 +265,22 @@ void Ballistic::AfficherProjectile(AmmoRound *amo)
 	glTranslatef(position.x, position.y, position.z);
 	glutSolidSphere(2, 2, 2);
 	glPopMatrix();
+}
+
+const char* Ballistic::getCurrentType()
+{
+	switch (currentType) {
+	case ShotType::UNUSED:
+		return "ERROR";
+	case ShotType::ARTILLERY:
+		return "ARTILLERY";
+	case ShotType::FIREBALL:
+		return "FIREBALL";
+	case ShotType::LASER:
+		return "LASER";
+	case ShotType::PISTOL:
+		return "PISTOL";
+	case ShotType::ARROW:
+		return "ARROW";
+	}
 }
