@@ -26,12 +26,23 @@
 using namespace moteurJeux;
 
 Ballistic* ball;
+bool buttonPressedRecently = false;
 
-void GestionSouris()//(int button, int state, int x,int y)
+void StartTimer()
 {
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+    //Permet d'attendre avant de detecter un appui car ça peut etre le meme.
+    Sleep(100);
+    buttonPressedRecently = false;
+}
+
+void GestionSouris(float listParams[], bool initialValues)//(int button, int state, int x,int y)
+{
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !buttonPressedRecently)
     {
-        ball->Shoot();
+        buttonPressedRecently = true;
+        //Eviter de prendre plusieurs entrees en une.
+        StartTimer();
+        ball->Shoot(listParams, initialValues);
     }
     //ball->MouseInput(button,state,x,y);
 }
@@ -242,6 +253,13 @@ int main(int argc, char** argv)
     int posCamX = 100;
     int posCamY = 50;
     int posCamZ = 100;
+    float posXObj, posYObj, posZObj = 0;
+    float vitXObj, vitYObj, vitZObj = 0;
+    float accXObj, accYObj, accZObj = 0;
+    float dampingObj = 0;
+    float masseObj = 0;
+    //Pour choisir si l'objet selectionne sera lance avec les valeurs initiales du code en dur ou avec les parametres modifiables ci dessus.
+    bool initialValues = true;
 
     //lancement du timer.
     TimingData::init();
@@ -276,6 +294,30 @@ int main(int argc, char** argv)
         ImGui::Text("A : PISTOL, Z : ARTILLERY, E : FIREBALL, R : LASER,T : ARROW.");
         //Projectile selectionne 
         //FAIRE LA FONCTION ADAPTE
+        //Changer la masse de l'objet
+        ImGui::Text("Changer la masse de l'objet :");
+        ImGui::SliderFloat("Masse 0-20", &masseObj, 0, 20);
+        // Position Obj
+        ImGui::Text("Changer la position initiale de l'objet :");
+        ImGui::SliderFloat("Pos X 0-150", &posXObj, 0, 150);
+        ImGui::SliderFloat("Pos Y 0-150", &posYObj, 0, 150);
+        ImGui::SliderFloat("Pos Z 0-150", &posZObj, 0, 150);
+        // Vitesse Obj
+        ImGui::Text("Changer la vitesse initiale de l'objet :");
+        ImGui::SliderFloat("Vit X 0-50", &vitXObj, 0, 50);
+        ImGui::SliderFloat("Vit Y 0-50", &vitYObj, 0, 50);
+        ImGui::SliderFloat("Vit Z 0-50", &vitZObj, 0, 50);
+        // Acceleration Obj
+        ImGui::Text("Changer l'acceleration de l'objet :");
+        ImGui::SliderFloat("Acc X -50-50", &accXObj, -50, 50);
+        ImGui::SliderFloat("Acc Y -50-50", &accYObj, -50, 50);
+        ImGui::SliderFloat("Acc Z -50-50", &accZObj, -50, 50);
+        //Changer l'ammortissement
+        ImGui::Text("Changer le facteur d'ammortissement de l'objet :");
+        ImGui::SliderFloat("Damp 0-1", &dampingObj, 0, 1);
+        //Changer le type d'initialisation du projectile
+        ImGui::Text("Changer le type d'initialisation de la particule, TRUE > valeurs par defaut, FALSE > valeurs inserees ici :");
+        ImGui::Checkbox("Valeurs par defaut", &initialValues);
         //La fenetre est complete.
         ImGui::End();
 
@@ -284,8 +326,9 @@ int main(int argc, char** argv)
         //glutKeyboardFunc(GestionClavier);
         //FONCTIONNE PAS
         //glutMouseFunc(GestionSouris);
+        float listParams[11] = {masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj};
         GestionClavier();
-        GestionSouris();
+        GestionSouris(listParams, initialValues);
         //-----------------------------------------------------Actualisation des positions des projectiles.--------------------------------------------------------
         TimingData::update();
         ball->UpdateVariousFrameRate();
