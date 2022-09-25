@@ -1,34 +1,36 @@
+ï»¿//Date de crï¿½ation : 16/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 22/09/22
+//Modifiï¿½ par : Victor GUIRAUD
+
 #pragma once
 
 #ifndef TIMING_HPP
 #define TIMING_HPP
 
-    namespace TimingDate {  
-
-        struct TimingData
-        {
-
-            /*La timestamp de la fin de la dernière image. Les temps sont
-                *donnés en millisecondes depuis un temps indéfini.
-                */
-            unsigned lastFrameTimestamp;
-
-           
-              //La durée de la dernière en frème en millisecondes 
-             
-            unsigned lastFrameDuration;
 
 
-            
-             //Gets the global timing data object.
-            
+struct TimingData
+{
 
-            static TimingData& get();
+    /**
+    * The timestamp when the last frame ended. Times are
+    * given in milliseconds since some undefined time.
+    */
+    unsigned lastFrameTimestamp;
 
-        };
+    /**
+     * The duration of the last frame in milliseconds.
+     */
+    unsigned lastFrameDuration;
 
-    
 
-    }
+    /**
+    * Gets the global timing data object.
+    */
+
+    static TimingData& get();
+
+};
 
 #endif // TIMING_H

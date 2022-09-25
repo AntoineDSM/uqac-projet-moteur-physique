@@ -1,7 +1,7 @@
-//Date de création :
-//Créer par :
-//Date de dernière modification : Victor Guiraud
-//Modifié par : 19/09/2022
+ï»¿//Date de crï¿½ation :
+//Crï¿½er par :
+//Date de derniï¿½re modification : 22/09/2022
+//Modifiï¿½ par : Victor Guiraud
 
 
 
@@ -29,7 +29,7 @@ int main(int, char**)
         return -1;
     }
 
-    
+    /*
     //Make the window's context current //
     glfwMakeContextCurrent(window);
     // Initialize ImGUI
@@ -38,14 +38,7 @@ int main(int, char**)
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
-    ImGui_ImplOpenGL3_Init("#version 430");
-    
-   
-    
-
-
-    
-    
+   // ImGui_ImplOpenGL3_Init("#version 450");
 
     // Variables to be changed in the ImGUI window
     bool drawTriangle = true;
@@ -61,15 +54,15 @@ int main(int, char**)
         glClear(GL_COLOR_BUFFER_BIT);
 
         // Tell OpenGL a new frame is about to begin
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        //ImGui_ImplOpenGL3_NewFrame();
+        //ImGui_ImplGlfw_NewFrame();
+        //ImGui::NewFrame();
 
 
         // ImGUI window creation
-        ImGui::Begin("Window to modify parameters :");
+        ImGui::Begin("My name is window, ImGUI window");
         // Text that appears in the window
-        ImGui::Text("Triangle modification");
+        ImGui::Text("Hello there adventurer!");
         // Checkbox that appears in the window
         ImGui::Checkbox("Draw Triangle", &drawTriangle);
         // Slider that appears in the window
@@ -79,16 +72,10 @@ int main(int, char**)
         // Ends the window
         ImGui::End();
 
+
         // Renders the ImGUI elements
         ImGui::Render();
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glBegin(GL_TRIANGLES);
-        glColor3f(color[0], color[1], color[2]);
-        glVertex3f(0, 0, size);
-        glVertex3f(size, 0, 0);
-        glVertex3f(0, size, 0);
-        glEnd();
+        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // Swap front and back buffers //
         glfwSwapBuffers(window);
@@ -98,12 +85,12 @@ int main(int, char**)
     }
 
     // Deletes all ImGUI instances
-    ImGui_ImplOpenGL3_Shutdown();
+   // ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
-    glfwTerminate();
-    
-}
 
+    glfwTerminate();
+    */
+}
 

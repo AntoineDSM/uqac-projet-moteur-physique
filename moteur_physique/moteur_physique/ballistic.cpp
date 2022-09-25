@@ -1,7 +1,7 @@
-//Date de création : 16/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 18/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿//Date de crï¿½ation : 16/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 22/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 
 #include <stdio.h>
@@ -11,11 +11,11 @@
 
 //using namespace Particle;
 using namespace moteurJeux;
-using namespace TimingDate;
+//using namespace TimingData;
 
 class Ballistic {
 
-	// Enumeration of each types of shot shoot.
+
 	enum ShotType
 	{
 		UNUSED,
@@ -24,29 +24,22 @@ class Ballistic {
 		FIREBALL,
 		LASER
 	};
-	// Structure of an ammo round.
+
 	struct AmmoRound {
 		//je sais pas trop quoi mettre dedans
-		//j'ai déduis la structure depuis les variables et fonction en dessous
+		//j'ai dï¿½duis la structure depuis les variables et fonction en dessous
 
-		// Shot type.
 		ShotType type;
-		// Start time of the shot.
 		double startTime;
-		// Particle linked to the shot.
 		Particle particle;
 
 	};
-	// Amount of ammo shot.
+
 	const static unsigned ammoRounds = 16;
-	// Aimple array of ammo rounds.
 	AmmoRound ammo[ammoRounds];
-	// get the last frame duration of the shot for the "update" function as we use it to fire another shot.
 	float duration = (float)TimingData::get().lastFrameDuration;
-	// A shot.
-	AmmoRound *shot;
-	
-	// The "shoot" function.
+	AmmoRound* shot;
+
 	void shoot() {
 
 
@@ -65,30 +58,29 @@ class Ballistic {
 		// Check to see if the particle is now invalid. 
 		if (shot->particle.getPosition().y < 0.0f || shot->startTime + 5000 < TimingData::get().lastFrameTimestamp || shot->particle.getPosition().z > 200.0f)
 		{
-			// We simply set the shot type to be unused, so the  memory it occupies can be reused by another shot.
+			// We simply set the shot type to be unused, so the // memory it occupies can be reused by another shot.
 			shot->type = UNUSED;
 
 		}
 
-		// We shoot.
 		shoot();
 
-		// Initialise the type of the current shot.
+
 		ShotType currentShotType;
 
-		// Apply differents settings depending on the type of the shot.
+
 		switch (currentShotType) {
 
 		case PISTOL:
-			shot->particle.setMass(2.0f); // 2.0kg // Equivalent of shot.particle.setMass(2.0f);
+			shot->particle.setMass(2.0f); // 2.0kg // Equivalent de shot.particle.setMass(2.0f);
 			shot->particle.setVelocity(0.0f, 0.0f, 35.0f); // 35m/s 
-			shot->particle.setAcceleration(0.0f, -1.0f, 0.0f); // Floats down
+			shot->particle.setAcceleration(0.0f, -1.0f, 0.0f);
 			shot->particle.setDamping(0.99f);
 			break;
 		case ARTILLERY:
 			shot->particle.setMass(200.0f); // 200.0kg 
 			shot->particle.setVelocity(0.0f, 30.0f, 40.0f); // 50m/s 
-			shot->particle.setAcceleration(0.0f, -20.0f, 0.0f); // Goes down
+			shot->particle.setAcceleration(0.0f, -20.0f, 0.0f);
 			shot->particle.setDamping(0.99f);
 			break;
 		case FIREBALL:
@@ -104,7 +96,9 @@ class Ballistic {
 			shot->particle.setDamping(0.99f);
 			break;
 
-		default: return ;
+		default: return;
+
+			break;
 
 		}
 
@@ -116,8 +110,7 @@ class Ballistic {
 		// Clear the force accumulators. 
 		shot->particle.clearAccumulators();
 	}
-	//la boucle de jeu?
-	//faire evoluer avec un pas de temps discret (plus petit, plus haute precision, il faut donc trouver un compromis en essayant)
+
 	void update()
 	{
 		// Find the duration of the last frame in seconds
@@ -127,10 +120,9 @@ class Ballistic {
 		{
 			if (shot->type != UNUSED)
 			{
-				//TODO Update the shot
 			}
 		}
 		//Application::update();
 	}
-	
+
 };
