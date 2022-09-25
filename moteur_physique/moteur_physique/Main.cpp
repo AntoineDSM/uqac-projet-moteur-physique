@@ -28,9 +28,9 @@ using namespace moteurJeux;
 Ballistic* ball;
 bool buttonPressedRecently = false;
 
+//Permet d'attendre avant de detecter un appui car ça peut etre le meme.
 void StartTimer()
 {
-    //Permet d'attendre avant de detecter un appui car ça peut etre le meme.
     Sleep(100);
     buttonPressedRecently = false;
 }
