@@ -3,12 +3,19 @@
 ## Comment utiliser l'application
 
 Le tire c’est clic droit
+
 Vous pouvez changer les arme avec les touches AZERT
+
 Changer la caméra avec les 3 première réglette
+
 Changer la masse
+
 Changer la vitesse
+
 Changer l’accélération
+
 l'amortissement
+
 la position initiale
 
 ## Getting started
