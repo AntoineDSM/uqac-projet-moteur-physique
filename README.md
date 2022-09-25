@@ -10,6 +10,7 @@ Changer la vitesse
 Changer l’accélération
 l'amortissement
 la position initiale
+<<<<<<< refs/remotes/origin/Victor
 
 ## Comment utiliser la version 2
 
@@ -36,6 +37,8 @@ la position initiale
   
     -Les problèmes ont normalement été résolus, cependant pour tester le précédant rendu, un release à été déposé également. Son nom est "Release_demoBallisitc.exe".
 
+=======
+>>>>>>> Modif Read me + Add document
 
 ## Add your files
 
