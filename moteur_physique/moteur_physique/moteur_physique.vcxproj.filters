@@ -46,6 +46,9 @@
     <Filter Include="Fichiers sources\OBJ\Forces">
       <UniqueIdentifier>{a0dad9b0-9a00-4521-81bc-5a7d139c8a8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ\Contacts">
+      <UniqueIdentifier>{1aa79020-f39d-4038-a6e9-56305aa1fea9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -169,6 +172,30 @@
     </ClInclude>
     <ClInclude Include="Precision.h">
       <Filter>Fichiers d%27en-tête\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="NaiveParticleConctactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleCable.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleConctactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContact.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleContactResolver.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="Particlelink.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleRod.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="WallContactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

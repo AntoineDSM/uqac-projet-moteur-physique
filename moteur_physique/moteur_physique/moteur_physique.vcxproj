@@ -175,12 +175,19 @@
     <ClCompile Include="Vector3D.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="NaiveParticleConctactGenerator.h" />
     <ClInclude Include="ParticleAnchoredSpring.h" />
     <ClInclude Include="ParticleBuoyancy.h" />
+    <ClInclude Include="ParticleCable.h" />
+    <ClInclude Include="ParticleConctactGenerator.h" />
+    <ClInclude Include="ParticleContact.h" />
+    <ClInclude Include="ParticleContactResolver.h" />
     <ClInclude Include="ParticleDrag.h" />
     <ClInclude Include="ParticleForceGenerator.h" />
     <ClInclude Include="ParticleForceRegistry.h" />
     <ClInclude Include="ParticleGravity.h" />
+    <ClInclude Include="Particlelink.h" />
+    <ClInclude Include="ParticleRod.h" />
     <ClInclude Include="ParticleSpring.h" />
     <ClInclude Include="Precision.h" />
     <ClInclude Include="imgui\imconfig.h" />
@@ -196,6 +203,7 @@
     <ClInclude Include="Particle.h" />
     <ClInclude Include="Timing.h" />
     <ClInclude Include="Vector3D.h" />
+    <ClInclude Include="WallContactGenerator.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
