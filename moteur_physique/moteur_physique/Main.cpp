@@ -16,12 +16,12 @@
 #include <SFML/Window/Mouse.hpp>
 
 
-#include "Timing.h"
-#include "Ballistic.h"
-#include "imgui.h"
-#include "imgui_impl_glfw.h"
-#include "imgui_impl_opengl3.h"
-#include "Vector3D.h"
+#include "Utils/Timing.h"
+#include "Demos/Ballistic.h"
+#include "IMGUI/imgui.h"
+#include "IMGUI/imgui_impl_glfw.h"
+#include "IMGUI/imgui_impl_opengl3.h"
+#include "Vector3D/Vector3D.h"
 
 using namespace moteurJeux;
 

@@ -46,64 +46,79 @@
     <Filter Include="Fichiers sources\OBJ\Forces">
       <UniqueIdentifier>{a0dad9b0-9a00-4521-81bc-5a7d139c8a8b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ\Contacts">
+      <UniqueIdentifier>{644ccee0-ecbd-4ea8-8f6e-7267965b9951}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ\Particles">
+      <UniqueIdentifier>{c0e7b7b3-63c0-4669-827b-11bd8af86433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ\Vector3D">
+      <UniqueIdentifier>{8c077bb1-6b5c-4ea4-a99c-d3a07f484b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\OBJ\Particles">
+      <UniqueIdentifier>{d2e8fd89-4e4b-41ed-ab92-356af093296e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\OBJ\Vector3D">
+      <UniqueIdentifier>{f13837a3-7950-44d9-839d-17b220493ec4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="Particle.cpp">
-      <Filter>Fichiers sources\OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector3D.cpp">
-      <Filter>Fichiers sources\OBJ</Filter>
-    </ClCompile>
-    <ClCompile Include="Ballistic.cpp">
+    <ClCompile Include="Sources\Demos\ballistic.cpp">
       <Filter>Fichiers sources\Ballistic</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_draw.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_demo.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_impl_glfw.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_draw.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_tables.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_impl_glfw.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_widgets.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_tables.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_impl_opengl3.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="imgui\imgui_widgets.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui.cpp">
       <Filter>Fichiers sources\IMGUI</Filter>
     </ClCompile>
-    <ClCompile Include="Timing.cpp">
+    <ClCompile Include="Sources\IMGUI\imgui_demo.cpp">
+      <Filter>Fichiers sources\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleForceGenerator.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleForceRegistry.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleGravity.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleSpring.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleAnchoredSpring.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleBuoyancy.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\ParticleDrag.cpp">
+      <Filter>Fichiers sources\OBJ\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Vector3D\Vector3D.cpp">
+      <Filter>Fichiers sources\OBJ\Vector3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Particles\Particle.cpp">
+      <Filter>Fichiers sources\OBJ\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Utils\Timing.cpp">
       <Filter>Fichiers sources\UTILS</Filter>
-    </ClCompile>
-    <ClCompile Include="imgui_impl_opengl3.cpp">
-      <Filter>Fichiers sources\IMGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleAnchoredSpring.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleBuoyancy.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleDrag.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleForceGenerator.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleForceRegistry.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleGravity.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="ParticleSpring.cpp">
-      <Filter>Fichiers sources\OBJ\Forces</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -134,41 +149,68 @@
     <ClInclude Include="include\GLFW\glfw3.h">
       <Filter>Fichiers d%27en-tête\OGL</Filter>
     </ClInclude>
-    <ClInclude Include="Timing.h">
-      <Filter>Fichiers d%27en-tête\UTILS</Filter>
-    </ClInclude>
-    <ClInclude Include="Vector3D.h">
-      <Filter>Fichiers d%27en-tête\OBJ</Filter>
-    </ClInclude>
-    <ClInclude Include="Particle.h">
-      <Filter>Fichiers d%27en-tête\OBJ</Filter>
-    </ClInclude>
     <ClInclude Include="imgui\imgui.h">
       <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleAnchoredSpring.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Particles\Particle.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Particles</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleBuoyancy.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Vector3D\Vector3D.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Vector3D</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleDrag.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Contacts\ParticleConctactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Contacts\ParticleContact.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleForceRegistry.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Contacts\ParticleContactResolver.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleGravity.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Contacts\Particlelink.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleSpring.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    <ClInclude Include="include\Contacts\ParticleRod.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="Precision.h">
+    <ClInclude Include="include\Contacts\WallContactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Contacts\ParticleCable.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\MoteurUtils.h">
       <Filter>Fichiers d%27en-tête\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Precision.h">
+      <Filter>Fichiers d%27en-tête\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Timing.h">
+      <Filter>Fichiers d%27en-tête\UTILS</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleForceGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleForceRegistry.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleGravity.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleSpring.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleAnchoredSpring.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleBuoyancy.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ParticleDrag.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
