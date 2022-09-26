@@ -2,21 +2,29 @@
 
 ## Comment utiliser l'application
 
-Le tire c’est clic droit
+-Pour tirer vous devez appuyer sur clic droit de la souris.
 
-Vous pouvez changer les arme avec les touches AZERT
+-Vous pouvez changer les arme avec les touches AZERT, l'arme courante sera affichée en rouge sur l'écran. Respectivement PISTOLET, ARRILLERY, FIREBALL, LAZER, ARROW.
 
-Changer la caméra avec les 3 première réglette
+-Après un tir, un retour utilisateur sur son comportement sera disponible dans la console de l'application ouverte simultanément avec la fenêtre OpenGL.
 
-Changer la masse
+-Changer la position de la caméra avec les 3 premières réglettes, ce qui permet
+de se placer à un endroit différent dans le repère pour obtenir un 
+angle de vue différent sur le tir.
 
-Changer la vitesse
+-Changer la masse du projectile voulu
 
-Changer l’accélération
+-Changer la vitesse du projectile voulu
 
-l'amortissement
+-Changer l’accélération du projectile voulu
 
-la position initiale
+-Changer l'amortissement du projectile voulu
+
+-Changer la position initiale du projectile voulu
+
+Ces modifications seront prises en compte si vous décochez le booléen
+"DefaultValues". Si il est à "True", les valeurs des projectiles rentrées 
+en dur dans le code seront prises, celle du Ballistic.cpp méthode Shoot().
 
 ## Getting started
 
