@@ -195,9 +195,10 @@ void Ballistic::DisplayOpenGL()
 	}
 
 	//Rendu du texte du projectile actuelle
+	const char* string = nullptr;
 	glColor3f(1.0, 0.0, 0.0);//Couleur du text
 	glRasterPos2f(-240, 120);//Position sur l'écran
-	const char* string = getCurrentType();//Retourne le type de projectile selectionne.
+	string = getCurrentType();//Retourne le type de projectile selectionne.
 	while (*string) {
 		glutBitmapCharacter(GLUT_BITMAP_8_BY_13, *string++);
 	}
