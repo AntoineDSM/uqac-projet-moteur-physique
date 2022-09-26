@@ -6,8 +6,8 @@
 #pragma once
 
 #include "math.h"
-#include "Vector3D.h"
-#include "Particule.h"
+#include "Vector3D/Vector3D.h"
+#include "Particles/Particle.h"
 
 #ifndef PARTICLECONTACT_HPP
 #define PARTICLECONTACT_HPP
