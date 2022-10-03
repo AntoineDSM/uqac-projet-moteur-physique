@@ -28,7 +28,7 @@ using namespace moteurJeux;
 Ballistic* ball;
 bool buttonPressedRecently = false;
 
-//Permet d'attendre avant de detecter un appui car ça peut etre le meme.
+//Permet d'attendre avant de detecter un appui car ï¿½a peut etre le meme.
 void StartTimer()
 {
     Sleep(100);
@@ -54,7 +54,7 @@ void GestionClavier()//(unsigned char key,int x, int y)
 }
 
 
-//Fonction permettant la création d'un repere x,y,z orthonorme.
+//Fonction permettant la crï¿½ation d'un repere x,y,z orthonorme.
 void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 100)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -281,13 +281,13 @@ int main(int argc, char** argv)
         //Creation fenetre IMGUI.
         ImGui::Begin("Modify attributes here :");
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur X :");
+        ImGui::Text("Changer la position de la camï¿½ra sur X :");
         ImGui::SliderInt("Pos X 0-300", &posCamX, 0, 300);
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur Y :");
+        ImGui::Text("Changer la position de la camï¿½ra sur Y :");
         ImGui::SliderInt("Pos Y 0-100", &posCamY, 0, 100);
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur Z :");
+        ImGui::Text("Changer la position de la camï¿½ra sur Z :");
         ImGui::SliderInt("Pos Z 0-300", &posCamZ, 0, 300);
         //Fonctionnement
         ImGui::Text("Appuyez sur click droit de la souris pour tirer.");
@@ -355,7 +355,7 @@ int main(int argc, char** argv)
     //arret du timer.
     TimingData::deinit();
 
-    //Si nous quitter la boucle, on déinitialise les elements de OpenGL et de IMGUI
+    //Si nous quitter la boucle, on dï¿½initialise les elements de OpenGL et de IMGUI
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
