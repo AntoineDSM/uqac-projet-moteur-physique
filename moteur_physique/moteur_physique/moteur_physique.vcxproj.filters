@@ -49,6 +49,9 @@
     <Filter Include="Fichiers d%27en-tête\OBJ\Contacts">
       <UniqueIdentifier>{1aa79020-f39d-4038-a6e9-56305aa1fea9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers sources\OBJ\Contacts">
+      <UniqueIdentifier>{2d2c9a43-9210-4b37-b97e-fbbe9f31035b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">

@@ -5,8 +5,8 @@
 //Modifié par : Victor GUIRAUD
 
 #include "assert.h"
-#include "Particle.h"
-#include "Vector3D.h"
+#include "Particles/Particle.h"
+#include "Vector3D/Vector3D.h"
 
 using namespace moteurJeux;
 
@@ -27,26 +27,6 @@ void Particle::integrate(double duration) {
 	//Damping correspond au facteur d'ammortissement (les frottements par exemple dus a la composition du milieu ambiant). Ainsi cette ammortissement agis sur notre vitesse.
 	//Car doit ralentir notre objet.
 	velocity *= pow(damping, duration); 
-
-
-}
-
-//bouger ça dans particule.h
-
-bool Particle::hasFiniteMass() const
-{
-	return inverseMass >= 0.0f;
-}
-
-
-void Particle::getPosition(Vector3D* position) const
-{
-	*position = Particle::position;
-}
-
-void Particle::getVelocity(Vector3D* velocity) const
-{
-	*velocity = Particle::velocity;
 }
 
 //NECESSAIRE PLUS TARD

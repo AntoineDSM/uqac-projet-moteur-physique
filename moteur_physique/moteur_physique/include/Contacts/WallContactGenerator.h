@@ -1,0 +1,4 @@
+class WallContactGenerator : public ParticleContactGenerator
+{
+//…
+}

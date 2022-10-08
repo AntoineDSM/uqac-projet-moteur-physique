@@ -6,7 +6,7 @@
 #pragma once
 
 #include "math.h"
-#include "Vector3D.h"
+#include "Vector3D/Vector3D.h"
 
 
 #ifndef PARTICLE_HPP
@@ -105,15 +105,11 @@ class Particle
 
 		inline double getInverseMass() { return inverseMass;}
 
-		bool hasFiniteMass() const;
-
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
 
 		inline Vector3D getPosition() const { return position;}
-
-		void getPosition(Vector3D* position) const;
 
 		inline void setPosition(const Vector3D& newPosition)
 		{
@@ -126,14 +122,12 @@ class Particle
 			position.y = y;
 			position.z = z;
 		}
-		 
+
 		//-------------------------------------------------------VELOCITY METHODS, GETTER & SETTER-------------------------------------------------------
 
 		//void getVelocity(Vector3D *position) const;
 
 		inline Vector3D getVelocity() const { return velocity; }
-
-		void getVelocity(Vector3D* velocity) const;
 
 		inline void setVelocity(const Vector3D& newVelocity)
 		{
