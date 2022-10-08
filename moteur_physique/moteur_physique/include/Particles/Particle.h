@@ -112,18 +112,24 @@ class Particle
 
 		inline double getInverseMass() { return inverseMass;}
 
+<<<<<<<< HEAD:moteur_physique/moteur_physique/include/Particles/Particle.h
 		inline double getRadius() { return radius; }
 
 		inline void setRadius(double _radius)
 		{
 			radius = _radius;
 		}
+========
+		bool hasFiniteMass() const;
+>>>>>>>> bug fix:moteur_physique/moteur_physique/Particle.h
 
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
 
 		inline Vector3D getPosition() const { return position;}
+
+		void getPosition(Vector3D* position) const;
 
 		inline void setPosition(const Vector3D& newPosition)
 		{
@@ -136,12 +142,14 @@ class Particle
 			position.y = y;
 			position.z = z;
 		}
-
+		 
 		//-------------------------------------------------------VELOCITY METHODS, GETTER & SETTER-------------------------------------------------------
 
 		//void getVelocity(Vector3D *position) const;
 
 		inline Vector3D getVelocity() const { return velocity; }
+
+		void getVelocity(Vector3D* velocity) const;
 
 		inline void setVelocity(const Vector3D& newVelocity)
 		{

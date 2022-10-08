@@ -30,6 +30,38 @@ void Particle::integrate(double duration) {
 	//Damping correspond au facteur d'ammortissement (les frottements par exemple dus a la composition du milieu ambiant). Ainsi cette ammortissement agis sur notre vitesse.
 	//Car doit ralentir notre objet.
 	velocity *= pow(damping, duration); 
+<<<<<<<< HEAD:moteur_physique/moteur_physique/Sources/Particles/Particle.cpp
+========
+
+
+}
+
+//bouger ça dans particule.h
+
+bool Particle::hasFiniteMass() const
+{
+	return inverseMass >= 0.0f;
+}
+
+
+void Particle::getPosition(Vector3D* position) const
+{
+	*position = Particle::position;
+}
+
+void Particle::getVelocity(Vector3D* velocity) const
+{
+	*velocity = Particle::velocity;
+}
+
+//NECESSAIRE PLUS TARD
+/*
+//Dans la prochaine phase nous viendront accumuler des forces sur un vecteur force qui s'ajouterons et permettrons d'agir sur le comportement de notre particule.
+void Particle::clearAccumulator()
+{
+    forceAccum.clear();
+}
+>>>>>>>> bug fix:moteur_physique/moteur_physique/Particle.cpp
 
 	//on nettoie notre accumulateur de force, une force à l'instant t n'est peut etre plus appliquee à t+1
 	//clearAccumulator();
