@@ -84,86 +84,6 @@ void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 
 int main(int argc, char** argv)
 {
 
-    //------------------------------------------------------------TEST PARTIE 1, TEST DES VECTEURS3D-------------------------------------------------------------------
-    
-    //-----------------------TEST DES FONCTIONS IMPLEMENTEES SUR CONSOLE--------------
-
-    /*
-    //compteur d'actualisation
-    int cpt = 0;
-    
-    //mes vecteurs
-    Vector3D myVec = Vector3D(1,1,1);
-    Vector3D mySecondVec = Vector3D(2, 2, 3);
-    Vector3D vitesse = Vector3D(0.1, 0.1, 0.1);
-    Vector3D acceleration = Vector3D(0.1,0.1,0.1);
-    
-    //scalaire
-    double myScalarValue = 5;
-
-    //addition of  2 vectors
-    Vector3D result = Vector3D();
-    result = (myVec + mySecondVec);
-    result.display("addition : ");
-    //soustraction of 2 vectors
-    result = (myVec - mySecondVec);
-    result.display("soustraction : ");
-    //multiplication  by scalar value
-    result = myVec * myScalarValue;
-    result.display("multiplication by scalar :");
-    //normalisation of vector
-    result = moteurJeux::Vector3D::get_normalization(mySecondVec);
-    result.display("normalization : ");
-    //produit scalaire et vectoriel
-    double scalarResult = myVec.scalarProduct(mySecondVec);
-    std::cout << "scalar product :  " <<scalarResult << "\n";
-
-    result = myVec.vectorialProduct(mySecondVec);
-    result.display("vectorial product : ");
-    
-    while (cpt < 100)
-    {
-        myVec += vitesse;
-        myVec.display("nouvelle position : ");
-
-        vitesse += acceleration;
-        vitesse.display("evolution vitesse : ");
-
-        cpt++;
-    }
-    return 0;
-    */
-
-    //-----------------------------------------------------------TEST PARTIE 2, PARTICULES et CONSOLE----------------------------------------------------------------------
-
-    //-----------------------------DUREE DE RAFRAICHISSEMENT VARIABLE-----------------
-
-    /*
-    TimingData::init();
-
-    ball = new Ballistic();
-
-    bool shotOne = true;
-
-    while (1)
-    {
-        //test pour ne lancer qu'une balle a la fois tant que l'interaction clavier/souris n'est pas mise en place.
-        if (shotOne)
-        {
-            ball->setCurrentType(Ballistic::ShotType::FIREBALL);//changer le type ici pour voir les comportements des differents projectiles.
-            ball->Shoot();
-            shotOne = false;
-        }
-        TimingData::update();
-        ball->UpdateVariousFrameRate();
-        ball->Display();
-    }
-
-    TimingData::deinit();
-    
-    return 0;
-    */
-
     //------------------------------DUREE DE RAFRAICHISSEMENT FIXE--------------------
 
     /*
@@ -219,10 +139,6 @@ int main(int argc, char** argv)
     //Initialisation de la librairie de OpenGL.
     if (!glfwInit())
         return -1;
-
-    //FONCTIONNE PAS
-    //Initialisation de la librairie de glut.
-    //glutInit(&argc, argv);
 
     //Creer une fenetre OpenGL.
     window = glfwCreateWindow(1280, 720, "Ballistic & particule", NULL, NULL);
@@ -322,10 +238,6 @@ int main(int argc, char** argv)
         ImGui::End();
 
         //-----------------------------------------------Recuperer les interactions clavier/souris de l'utilisateur.----------------------------------------------
-        //FONCTIONNE PAS
-        //glutKeyboardFunc(GestionClavier);
-        //FONCTIONNE PAS
-        //glutMouseFunc(GestionSouris);
         float listParams[11] = {masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj};
         GestionClavier();
         GestionSouris(listParams, initialValues);
@@ -337,8 +249,6 @@ int main(int argc, char** argv)
         //--------------------------------------------------------------Rendre nos projectiles.--------------------------------------------------------------------
         ball->DisplayOpenGL();
         //---------------------Boucle globale de tous les elements ajoutes en tant que callback, les fonctions ci-dessus de facon plus generale.-------------------
-        //FONCTIONNE PAS
-        //glutMainLoop();
 
         //Affichage des elements de IMGUI
         ImGui::Render();
@@ -362,5 +272,3 @@ int main(int argc, char** argv)
 
     glfwTerminate();
 }
-
-

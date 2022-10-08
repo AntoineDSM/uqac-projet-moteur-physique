@@ -9,22 +9,24 @@
 #include "Forces/ParticleForceGenerator.h"
 
 using namespace moteurJeux;
-class ParticleBuoyancy
+class ParticleBuoyancy : ParticleForceGenerator
 {
-	// propriétés des particules
-	float m_maxDepth;
-	float m_volume;
 
-	// propriétés des effets
-	float m_waterHeight;
-	float m_liquidDensity;
-
-public:
+	protected : 
+		// propriétés des particules
+		float m_maxDepth;
+		float m_volume;
 	
-	// Créer une nouvelle force de flottabilité avec les paramètres donnés. 
-	ParticleBuoyancy(float m_maxDepth, float m_volume, float m_waterWeight, float m_liquidDensity = 1000.f);
+		// propriétés des effets
+		float m_waterHeight;
+		float m_liquidDensity;
 	
-	//Applique de la flottabilité basée sur la position de la particule
-	void updateForce(Particle* particle, float duration);
+	public:
+		
+		// Créer une nouvelle force de flottabilité avec les paramètres donnés. 
+		ParticleBuoyancy(float m_maxDepth, float m_volume, float m_waterWeight, float m_liquidDensity = 1000.f);
+		
+		//Applique de la flottabilité basée sur la position de la particule
+		void updateForce(Particle* particle, float duration);
 };
 

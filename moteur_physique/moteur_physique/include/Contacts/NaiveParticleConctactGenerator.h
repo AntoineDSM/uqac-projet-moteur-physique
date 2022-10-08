@@ -7,10 +7,16 @@
 
 class NaiveParticleContactGenerator : public ParticleContactGenerator
 {
-	// Particle radius
-	float radius;
-	// particles that could collide together 
-	std::vector<Particle*> particles;
-	// iterate through every pair of particles to check their penetration
-	unsigned int addContact (ParticleContact* contact, unsigned int limit) const;
+
+	public :
+		
+		//Rayon de la particule
+		float radius;
+		
+		//Particules qui peuvent avoir des collisions
+		std::vector<Particle*> particles;
+		
+		//Iteration a travers toutes les paires de particules pour verifier l'état de la pénétration.
+		unsigned int addContact(ParticleContact* contact, unsigned int limit) const;
+
 };

@@ -154,7 +154,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="include\Contacts\ParticleCable.cpp" />
+    <ClCompile Include="include\Contacts\ParticleContact.cpp" />
+    <ClCompile Include="include\Contacts\ParticleContactResolver.cpp" />
+    <ClCompile Include="include\Contacts\Particlelink.cpp" />
+    <ClCompile Include="include\Contacts\ParticleRod.cpp" />
+    <ClCompile Include="Main_rendu1.cpp" />
+    <ClCompile Include="Main_rendu2.cpp" />
+    <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Sources\Demos\ballistic.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_demo.cpp" />
@@ -164,7 +171,6 @@
     <ClCompile Include="Sources\IMGUI\imgui_widgets.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_impl_opengl3.cpp" />
     <ClCompile Include="Sources\Particles\Particle.cpp" />
-    <ClCompile Include="Sources\Forces\ParticleAnchoredSpring.cpp" />
     <ClCompile Include="Sources\Forces\ParticleBuoyancy.cpp" />
     <ClCompile Include="Sources\Forces\ParticleDrag.cpp" />
     <ClCompile Include="Sources\Forces\ParticleForceGenerator.cpp" />
@@ -176,7 +182,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
-    <ClInclude Include="include\Forces\ParticleAnchoredSpring.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />
     <ClInclude Include="include\Contacts\ParticleConctactGenerator.h" />
@@ -204,6 +209,7 @@
     <ClInclude Include="include\Utils\Timing.h" />
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
+    <ClInclude Include="PhysicWorld.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
