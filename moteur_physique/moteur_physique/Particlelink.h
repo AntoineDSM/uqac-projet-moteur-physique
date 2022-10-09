@@ -1,3 +1,7 @@
+
+#include "ParticleContactGenerator.h"
+
+
 class ParticleLink : public ParticleContactGenerator
 { public:
 // Linked particles

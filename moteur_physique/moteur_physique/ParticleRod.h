@@ -1,4 +1,8 @@
-class ParticleRod: public ParticleLink
+
+#include "ParticleContact.h"
+#include "ParticleLink.h"
+
+class ParticleRod: public ParticleLink{
 public:
 // a contact will be genereated if the distance / between particles is not equal to the length.
 float length;

@@ -1,3 +1,7 @@
+#include "ParticleContact.h"
+
+
+
 class ParticleContactGenerator
 { public:
 

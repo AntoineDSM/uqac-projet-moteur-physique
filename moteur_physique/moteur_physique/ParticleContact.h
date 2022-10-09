@@ -7,7 +7,7 @@
 
 #include "math.h"
 #include "Vector3D.h"
-#include "Particule.h"
+#include "Particle.h"
 
 #ifndef PARTICLECONTACT_HPP
 #define PARTICLECONTACT_HPP
@@ -19,6 +19,10 @@ class ParticleContact{
   // Particle[0] => Particle A
   // Particle[0] => Particle B - could be nullptr
   
+
+
+	  
+
   Particle* particle[2];
   
   // value between 0 - 1
