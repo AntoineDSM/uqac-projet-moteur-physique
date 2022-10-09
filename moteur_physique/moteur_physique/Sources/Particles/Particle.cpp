@@ -55,7 +55,7 @@ void Particle::getVelocity(Vector3D* velocity) const
 }
 
 //NECESSAIRE PLUS TARD
-/*
+
 //Dans la prochaine phase nous viendront accumuler des forces sur un vecteur force qui s'ajouterons et permettrons d'agir sur le comportement de notre particule.
 void Particle::clearAccumulator()
 {
