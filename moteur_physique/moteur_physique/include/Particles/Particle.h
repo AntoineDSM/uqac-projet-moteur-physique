@@ -24,17 +24,18 @@ class Particle
 		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
 
 		//Constructeur par defaut
-		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
+		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0), radius(0)
 		{
 		}
 		
 		//Constructeur avec initialisation
-		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) : 
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass, double radius) : 
 			position(newPosition)
 			, velocity(newVelocity)
 			, acceleration(newAcceleration)
 			, damping(newDamping)
 			, inverseMass(newInverseMass)
+			, radius(radius)
 		{
 		}
 
@@ -46,6 +47,7 @@ class Particle
 			acceleration = p.acceleration;
 			damping = p.damping;
 			inverseMass = p.inverseMass;
+			radius = p.radius;
 		}
 
 		//Destructeur
@@ -72,8 +74,8 @@ class Particle
 		//FAIRE LE COMMENTAIRE
 		double inverseMass;
 
-		//Dans la partie 2, notre particule pourra etre impactee par de multiples forces exterieure, nous les concatenerons dans un seul vecteur3D qui agira sur l'acceleration.
-		Vector3D forceAccum;
+		//rayon de notre particule
+		double radius;
 
 	    public :
 
@@ -104,6 +106,8 @@ class Particle
 		}
 
 		inline double getInverseMass() { return inverseMass;}
+
+		inline double getRadius() { return radius; }
 
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 

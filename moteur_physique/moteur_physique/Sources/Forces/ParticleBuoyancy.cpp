@@ -4,7 +4,6 @@
 //Date de dernière modification : 21/09/22
 //Modifié par : Victor GUIRAUD
 
-#include "Forces/ParticleAnchoredSpring.h"
 #include "Forces/ParticleBuoyancy.h"
 
 

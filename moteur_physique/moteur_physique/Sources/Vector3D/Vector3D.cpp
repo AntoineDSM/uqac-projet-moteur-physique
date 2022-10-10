@@ -42,7 +42,7 @@ Vector3D Vector3D::vectorialProduct(Vector3D& vect)
 }
 
 //obtenir le produit scalaire entre le vecteur actuel et un second.
-double Vector3D::scalarProduct(Vector3D& vect)
+double Vector3D::scalarProduct(const Vector3D& vect)
 {
 	return x * vect.x + y * vect.y + z * vect.z;
 }

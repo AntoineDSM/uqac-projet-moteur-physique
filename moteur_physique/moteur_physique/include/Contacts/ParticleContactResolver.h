@@ -15,6 +15,6 @@ class ParticleContactResolver
 		//Prend un array de contacts,
 		//Itere sur chaque contact par rapport à leur separatingVelocity
 		//s'arrete lorsque tous les contacts ont été résolu ou que le nombre max d'itérations est atteind.
-		void resolveContacts (ParticleContact* contactArray, unsigned int numContact, float duration);
+		void resolveContacts (ParticleContact* contactArray[], unsigned int numContact, float duration);
 
 };

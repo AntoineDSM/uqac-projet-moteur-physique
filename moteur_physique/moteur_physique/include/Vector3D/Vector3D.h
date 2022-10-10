@@ -122,7 +122,7 @@ class Vector3D
 		Vector3D vectorialProduct(Vector3D& vect);
 
 		//avoir le produit vectoriel entre deux vecteur donnes.
-		inline static Vector3D vectorialProduct(Vector3D& vect1, Vector3D& vect2)
+		inline static Vector3D vectorialProduct(const Vector3D& vect1,const Vector3D& vect2)
 		{
 			return Vector3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
 		}
@@ -130,7 +130,7 @@ class Vector3D
 		//-------------------------------------------------------------------------SCALAR PRODUCT-------------------------------------------------------------------
 
 		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
-		double scalarProduct(Vector3D& vect);
+		double scalarProduct(const Vector3D& vect);
 		
 		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 
@@ -184,6 +184,16 @@ class Vector3D
 			return Vector3D(x + v.x, y + v.y, z + v.z);
 		}
 
+		Vector3D operator+(const Vector3D& v)
+		{
+			return Vector3D(x + v.x, y + v.y, z + v.z);
+		}
+
+		Vector3D* operator-(Vector3D* v)
+		{
+			return new Vector3D(x - v->x, y - v->y, z - v->z);
+		}
+
 		//ajouter un vecteur a notre vecteur.
 		void operator+=(const Vector3D& v)
 		{
@@ -201,7 +211,7 @@ class Vector3D
 		}
 
 		//avoir un vecteur correspondant a la soustraction entre notre vecteur et un second.
-		Vector3D operator-(Vector3D& v)
+		Vector3D operator-(const Vector3D& v)
 		{
 			return Vector3D(x - v.x, y - v.y, z - v.z);
 		}

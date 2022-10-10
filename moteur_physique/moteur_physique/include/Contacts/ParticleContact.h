@@ -8,6 +8,7 @@
 #include "math.h"
 #include "Vector3D/Vector3D.h"
 #include "Particles/Particle.h"
+#include "Utils/Precision.h"
 
 #ifndef PARTICLECONTACT_HPP
 #define PARTICLECONTACT_HPP
@@ -28,7 +29,9 @@ class ParticleContact{
 		
 		//Vecteur normal aux particles.
 		Vector3D contactNormal;
-		
+
+		ParticleContact(Particle* particle[2], float restitution, float penetration, Vector3D contactNormal);
+
 		//Resoud la vitesse et l'interpenetration de nos particles.
 		void resolve (float duration);
 		
@@ -36,7 +39,7 @@ class ParticleContact{
 		float calculatingSeparatingVelocity();
 		
 		//Resoud l'impulsion générée.
-		void resolveVelocity();
+		void resolveVelocity(float e = 1);
 		
 		//Resoud l'interpénétration entre nos particles.
 		void resolveInterpretation();

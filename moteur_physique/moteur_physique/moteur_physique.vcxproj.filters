@@ -52,9 +52,6 @@
     <ClCompile Include="include\Contacts\Particlelink.cpp">
       <Filter>Sources\Contacts</Filter>
     </ClCompile>
-    <ClCompile Include="include\Contacts\ParticleContactResolver.cpp">
-      <Filter>Headers\Contacts</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\IMGUI\imgui.cpp">
       <Filter>Sources\Imgui</Filter>
     </ClCompile>
@@ -75,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="Sources\IMGUI\imgui_widgets.cpp">
       <Filter>Sources\Imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Contacts\ParticleContactResolver.cpp">
+      <Filter>Sources\Contacts</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

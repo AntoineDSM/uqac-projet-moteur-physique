@@ -32,5 +32,5 @@ void ParticleDrag::updateForce(Particle* particle, float duration)
 	dragCoeff = Vector3D::get_normalization(velocity) * sum;
 
 	//On applique la force de trainée pendant la durée de la frame à notre vitesse. 
-	particle->setVelocity((velocity - dragCoeff) * duration);
+	particle->setVelocity((velocity - dragCoeff) * (double)duration);
 } 
