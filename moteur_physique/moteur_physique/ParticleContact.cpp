@@ -14,10 +14,10 @@ Particle* particle[2];
 float sv = calculatingSeparatingVelocity();
 // je met e à 1 pour l'instant
 float e = 1;
-float restitution = -e*sv;
+float restitution = -e * sv;
 
 //tentative de calcul de la conservation de la quantité de mouvement
-float cqm = particle[0]->getMass()*particle[0]->getPosition() + particle[1]->getMass() * particle[1]->getPosition();
+float cqm = particle[0]->getMass() * particle[0]->getPosition() + particle[1]->getMass() * particle[1]->getPosition();
 
 
 
@@ -30,24 +30,24 @@ double impulsion = sv / totalInverseMass;
 float calculatingSeparatingVelocity() {
 
 	//tentative d'implémenation de la formule 7.2
-	
+
 	float vs;
 	Vector3D v1 = particle[0]->getPosition().operator-(particle[1]->getPosition());
 	Vector3D v2 = particle[0]->getPosition().operator-(particle[1]->getPosition());
 	Vector3D n = get_normalization(v2);
-	vs=(float)v1.getScalar(n);
-	
+	vs = (float)v1.getScalar(n);
+
 	return vs;
 };
 
 void resolve(float duration) {
 
-//
+	//
 };
 
 void resolveVelocity() {
 
-//
+	//
 };
 
 void resolveInterpretation() {

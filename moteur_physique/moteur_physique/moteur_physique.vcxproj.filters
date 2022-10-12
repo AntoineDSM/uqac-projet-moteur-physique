@@ -185,6 +185,9 @@
     <ClInclude Include="ParticleCable.h">
       <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
+    <ClInclude Include="ParticleContactGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
     <ClInclude Include="ParticleContact.h">
       <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
@@ -200,16 +203,5 @@
     <ClInclude Include="WallContactGenerator.h">
       <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleContactGenerator.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="moteur_physique.rc">
-      <Filter>Fichiers de ressources</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>
