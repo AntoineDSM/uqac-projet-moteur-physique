@@ -1,7 +1,7 @@
-//Date de création : 16/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 16/09/22
-//Modifié par : Victor GUIRAUD
+//Date de crï¿½ation : 16/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 16/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 #pragma once
 
