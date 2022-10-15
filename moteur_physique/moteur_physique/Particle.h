@@ -1,64 +1,194 @@
+ï»¿//Date de crï¿½ation :
+//Crï¿½er par : 
+//Date de derniï¿½re modification : 16/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
-//Date de création :
-//Créer par :
-//Date de dernière modification : 16/09/22
-//Modifié par : Victor GUIRAUD
+#pragma once
 
-#include "assert.h"
-#include "Particle.h"
+#include "math.h"
 #include "Vector3D.h"
+
+
+#ifndef PARTICLE_HPP
+#define PARTICLE_HPP
 
 using namespace moteurJeux;
 
-void Particle::integrate(double duration) {
+//Implï¿½menter la classe contenant les diffï¿½rents types de particules (balles, boulets, laser...) et les comportements diffï¿½rents de ces objets
+namespace moteurJeux {
 
-	//Si nous avons une masse infinie nous ne pouvons pas integrer.
-	if (inverseMass <= 0.0f) return;
-	assert(duration > 0.0);
+	class Particle
+	{
+	public:
 
-	//nous actualisons la position en fonction de la vitesse et de la duree de la derniere frame. Vu que nous n'avons pas encore le temps de la frame courante
-	//et le temps que les calculs vont nous prendre, nous nous callons sur la duree de la frame n-1. Nous gardons un decalage de 1 pour se preserver des pertes
-	//de performances eventuelles. p = p + vt
-	position.addScaledVector(velocity, duration);
+		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
 
-	//Nous avons actualise la position, maintenant nous actualisons l'evolution de la vitesse en fonction de l'acceleration positive ou negative.
-	//Cette vitesse agira sur la position a la frame suivante. v = v + at
-	velocity.addScaledVector(acceleration, duration);
-	//Damping correspond au facteur d'ammortissement (les frottements par exemple dus a la composition du milieu ambiant). Ainsi cette ammortissement agis sur notre vitesse.
-	//Car doit ralentir notre objet.
-	velocity *= pow(damping, duration);
+		//Constructeur par defaut
+		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
+		{
+		}
+
+		//Constructeur avec initialisation
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) :
+			position(newPosition)
+			, velocity(newVelocity)
+			, acceleration(newAcceleration)
+			, damping(newDamping)
+			, inverseMass(newInverseMass)
+			, radius(radius)
+		{
+		}
+
+		//Constructeur par copie.
+		Particle(const Particle& p)
+		{
+			position = p.position;
+			velocity = p.velocity;
+			acceleration = p.acceleration;
+			damping = p.damping;
+			inverseMass = p.inverseMass;
+			radius = p.radius;
+		}
+
+		//Destructeur
+		~Particle()
+		{
+		}
+
+	protected:
+
+		//------------------------------------------------------------------ATTRIBUTS-----------------------------------------------------------------------------
+
+		//Position de la particule dans l'espace, evolue en fonction du temps et de la vitesse.
+		Vector3D position;
+
+		//Vitesse actuelle de la particule, evolue en fonciton du temps et de l'acceleration. Est impacte par l'ammortissement (ex : frottements).
+		Vector3D velocity;
+
+		//Acceleration de la particule.
+		Vector3D acceleration;
+
+		//Facteur d'ammortissement.
+		double damping;
+
+		//FAIRE LE COMMENTAIRE
+		double inverseMass;
+
+		//Dans la partie 2, notre particule pourra etre impactee par de multiples forces exterieure, nous les concatenerons dans un seul vecteur3D qui agira sur l'acceleration.
+		Vector3D forceAccum;
+
+		//rayon de notre particule
+		double radius;
+		
+	public:
+
+		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------
+
+		//Permet de faire evoluer la position et la vitesse en fonction du temps. Permettra d'actualiser a chaque frame les valeurs.
+		void integrate(double duration);
 
 
-}
+		//--------------------------------------------------MASS METHOD, GETTER & SETTER-----------------------------------------------------------------------
 
-//bouger ça dans particule.h
+		//Setter de la masse, une masse ne peut etre egale a 0 pour eviter une erreur de division.
+		inline void setMass(const double mass)
+		{
+			if (mass != 0)
+			{
+				inverseMass = 1.0f / mass;
+			}
+			else
+				std::cout << "La masse voulue n'est pas possible car egale a 0. \n";
+		}
 
-bool Particle::hasFiniteMass() const
-{
-	return inverseMass >= 0.0f;
-}
+		inline double getMass() const { return 1.0f / inverseMass; }
 
+		inline void setInverseMass(const double inverseMassValue)
+		{
+			inverseMass = inverseMassValue;
+		}
 
-void Particle::getPosition(Vector3D* position) const
-{
-	*position = Particle::position;
-}
+		inline double getInverseMass() { return inverseMass; }
 
-void Particle::getVelocity(Vector3D* velocity) const
-{
-	*velocity = Particle::velocity;
-}
+		bool hasFiniteMass() const
+		{
+			return inverseMass >= 0.0f;
+		}
 
-//NECESSAIRE PLUS TARD
+		 inline double getRadius() { return radius; }
 
-//Dans la prochaine phase nous viendront accumuler des forces sur un vecteur force qui s'ajouterons et permettrons d'agir sur le comportement de notre particule.
-void Particle::clearAccumulator()
-{
-	forceAccum.clear();
-}
+		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
-//Pour ajouter une nouvelle force a cette accumulateur de force et agir en consequence sur la particule.
-void Particle::addForce(const Vector3D& force)
-{
-	forceAccum += force;
-}
+		void getPosition(Vector3D* position) const;
+
+		inline Vector3D getPosition() const { return position; }
+
+		inline void setPosition(const Vector3D& newPosition)
+		{
+			position = newPosition;
+		}
+
+		inline void setPosition(const double x, const double y, const double z)
+		{
+			position.x = x;
+			position.y = y;
+			position.z = z;
+		}
+
+		//-------------------------------------------------------VELOCITY METHODS, GETTER & SETTER-------------------------------------------------------
+
+		void getVelocity(Vector3D *position) const;
+
+		inline Vector3D getVelocity() const { return velocity; }
+
+		
+
+		inline void setVelocity(const Vector3D& newVelocity)
+		{
+			velocity = newVelocity;
+		}
+
+		inline void setVelocity(const double x, const double y, const double z)
+		{
+			velocity.x = x;
+			velocity.y = y;
+			velocity.z = z;
+		}
+
+		//-------------------------------------------------------ACCELERATION METHODS, GETTER & SETTER--------------------------------------------------------------
+
+		inline void setAcceleration(const Vector3D& newAcceleration)
+		{
+			acceleration = newAcceleration;
+		}
+
+		inline void setAcceleration(const double x, const double y, const double z)
+		{
+			acceleration.x = x;
+			acceleration.y = y;
+			acceleration.z = z;
+		}
+
+		inline Vector3D getAcceleration() { return acceleration; }
+
+		//-------------------------------------------------------DAMPING METHODS, GETTER & SETTER-----------------------------------------------------------------
+
+		inline void setDamping(const double dampingValue)
+		{
+			damping = dampingValue;
+		}
+
+		inline double getDamping() const { return damping; }
+
+		//------------------------------------------------------METHOD FOR FORCE ACCUMULATOR, GETTER & SETTER-------------------------------------------------------
+
+		//Notre accumulateur de force qui agira sur l'acceleration pourra etre reinitialise.
+		void clearAccumulator();
+
+		//Ajouter une force a cet accumulateur. 
+		void addForce(const Vector3D& force);
+
+	};
+}//moteurJeux
+
+#endif PARTICLE_HPP

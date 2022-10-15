@@ -1,30 +1,34 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification 21/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification 21/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 
-#include "ParticleGravity.h"
-#include "Particle.h"
-#include "Vector3D.h"
-	
+#include "Forces/ParticleGravity.h"
+#include "Particles/Particle.h"
+#include "Vector3D/Vector3D.h"
+
 using namespace moteurJeux
 ;
 
-ParticleGravity::ParticleGravity(const Vector3D& gravity)
-	: gravity(gravity)
+//Constructeur
+ParticleGravity::ParticleGravity(const Vector3D& gravity) : gravity(gravity)
 {
+	//rien a faire ici.
 }
-void ParticleGravity::updateForce(Particle* particle, float duration) {
 
+//implï¿½mentation de updateForce() de l'interface ParticleForceGenerator permettant d'appliquer la force de gravitï¿½ ï¿½ notre objet. 
+void ParticleGravity::updateForce(Particle* particle, float duration)
+{
+	// Appliquer la force ï¿½ l'ï¿½chelle de la masse ï¿½ la particule.
 
-	// Vérifier que nous n'avons pas une masse infinie.
-	if (!particle->hasFiniteMass()) return;
+	//On cast la gravitï¿½ dans un vector3D non const
+	Vector3D adaptedGravity = gravity;
+	adaptedGravity *= particle->getMass();
 
+	//On cast la vitesse dans un vecteur3D non const
+	Vector3D velocity = particle->getVelocity();
 
-	// Appliquer la force à l'échelle de la masse à la particule.
-	
-	// le code multiplie un vecteur et un scalaire je n'arrive pas à le faire fonctionner
-	particle->addForce(gravity*particle->getMass());
-	//particle->addForce(gravity.operator*=(particle->getMass()));
+	//On applique la force de gravitï¿½ pendant la durï¿½e de la frame ï¿½ notre vitesse. 
+	particle->setVelocity((velocity + adaptedGravity) * duration);
 }

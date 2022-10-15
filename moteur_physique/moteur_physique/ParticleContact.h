@@ -8,52 +8,41 @@
 #include "math.h"
 #include "Vector3D.h"
 #include "Particle.h"
+#include "Precision.h"
 
 #ifndef PARTICLECONTACT_HPP
 #define PARTICLECONTACT_HPP
 
-
 class ParticleContact {
 
 public:
+
 	// Particle[0] => Particle A
 	// Particle[0] => Particle B - could be nullptr
-
-
-
-
-
 	Particle* particle[2];
 
-	// value between 0 - 1
-	// define the elasticness of the collision  
+	//valeur entre 0 et 1 qui définie l'elasticité de la collision.
 	float restitution;
 
-	//distance of penetration of the contact
+	//distance de pénétration du contact.
 	float penetration;
 
-	// normal of the vector
+	//Vecteur normal aux particles.
 	Vector3D contactNormal;
 
-	//resolve velocity and interpenetration
+	ParticleContact(Particle* particle[2], float restitution, float penetration, Vector3D contactNormal);
 
+	//Resoud la vitesse et l'interpenetration de nos particles.
 	void resolve(float duration);
 
-
-	// return the separation velocity of the particules
-
+	//retourne la différence de vitesse entre nos particles.
 	float calculatingSeparatingVelocity();
 
-	//handle impulse for this collision
-	void resolveVelocity();
+	//Resoud l'impulsion générée.
+	void resolveVelocity(float e = 1);
 
-
-	//handle interpenetration of the collision
-
+	//Resoud l'interpénétration entre nos particles.
 	void resolveInterpretation();
-
-
-
 
 };
 

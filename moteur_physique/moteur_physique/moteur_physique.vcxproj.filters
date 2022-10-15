@@ -54,9 +54,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Main.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Particle.cpp">
       <Filter>Fichiers sources\OBJ</Filter>
     </ClCompile>
@@ -113,6 +110,24 @@
     </ClCompile>
     <ClCompile Include="ParticleContact.cpp">
       <Filter>Fichiers sources\OBJ\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleCable.cpp">
+      <Filter>Fichiers sources\OBJ\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleContactResolver.cpp">
+      <Filter>Fichiers sources\OBJ\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleLink.cpp">
+      <Filter>Fichiers sources\OBJ\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="ParticleRod.cpp">
+      <Filter>Fichiers sources\OBJ\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="Main_rendu1.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Main_rendu2.cpp">
+      <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

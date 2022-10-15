@@ -1,29 +1,41 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 21/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 21/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
-#include "ParticleSpring.h"
+#include "Forces/ParticleSpring.h"
+#include "Vector3D/Vector3D.h"
+#include "Particles/Particle.h"
 #include <math.h>
 
-void ParticleSpring::updateForce(Particle* particle, float duration) {
-	// Calcule le vecteur du ressort
-	Vector3D force; 
-	particle->getPosition(&force);
+using namespace moteurJeux;
 
-	//Je n'arrive pas à faire fonctionner 
-	force-=m_other->getPosition();
-    //force.operator-=(m_other->getPosition());
+ParticleSpring::ParticleSpring(Particle* other, float m_k, float m_restLength) : m_other(other), m_k(m_k), m_restlength(m_restLength)
+{
+	//Rien a ajouter ici.
+}
 
-	// Calcule la magnitude de la force. 
+void ParticleSpring::updateForce(Particle* particle, float duration)
+{
 
-	double magnitude = force.get_magnitude();
-	magnitude = abs(magnitude - m_restlength);
-	magnitude *= m_k;
+	//On cast la vitesse dans un vecteur3D non const
+	Vector3D velocity_1 = particle->getVelocity();
+	Vector3D velocity_2 = m_other->getVelocity();
 
-	// Calcule la force finale et l'applique.
+	//de mï¿½me avec la position
+	Vector3D position_1 = particle->getPosition();
+	Vector3D position_2 = m_other->getPosition();
 
-	force.get_normalization();
-	force *= -magnitude;
-	particle->addForce(force);
+	//On initialise la force
+	Vector3D force(0, 0, 0);
+
+	//On initialise le delta position entre les deux
+	Vector3D d = position_1 - position_2;
+	force = Vector3D::get_normalization(d) * m_k * (d.get_magnitude() - m_restlength);
+
+	//On applique
+	particle->setVelocity((velocity_1 - force) * duration);
+	m_other->setVelocity((velocity_2 - force) * duration);
+
+
 }

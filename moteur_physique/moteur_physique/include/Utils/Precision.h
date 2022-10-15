@@ -14,8 +14,6 @@
 
 namespace Precision {
 
-<<<<<<< Updated upstream
-=======
 	inline double carre(double x)
 	{
 		return x * x;
@@ -54,7 +52,7 @@ namespace Precision {
     }
 
     
->>>>>>> Stashed changes
+
 
 }//namespace Precision
 

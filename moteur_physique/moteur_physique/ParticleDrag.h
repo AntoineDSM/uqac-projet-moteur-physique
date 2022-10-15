@@ -1,28 +1,27 @@
-
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 19/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿
+//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 19/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 #pragma once
-#include "Vector3D.h"
-#include "ParticleForceGenerator.h"
+#include "Vector3D/Vector3D.h"
+#include "Forces/ParticleForceGenerator.h"
 
 using namespace moteurJeux;
 class ParticleDrag : public ParticleForceGenerator
 {
-private :
-	//Coefficients de traînée
-	float m_k1;
-	float m_k2;
+private:
+
+	//Coefficients de traï¿½nï¿½e
+	double m_k1;
+	double m_k2;
 
 public:
 
-	// Crée le générateur avec les coefficients donnés. 
-		
-		ParticleDrag(float m_k1, float m_k2);
+	// Crï¿½e le gï¿½nï¿½rateur avec les coefficients donnï¿½s. 	
+	ParticleDrag(double m_k1, double m_k2);
 
-    // Applique une traînée simplifiée basée sur la vélocité de la particule
+	// Applique une traï¿½nï¿½e simplifiï¿½e basï¿½e sur la vï¿½locitï¿½ de la particule
 	void updateForce(Particle* particle, float duration);
 };
-
