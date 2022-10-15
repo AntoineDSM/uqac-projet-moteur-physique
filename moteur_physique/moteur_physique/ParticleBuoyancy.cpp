@@ -1,38 +1,43 @@
+ï»¿
+//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 21/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 21/09/22
-//Modifié par : Victor GUIRAUD
-
-#include "ParticleAnchoredSpring.h"
-
-
-#include "ParticleBuoyancy.h"
+#include "Forces/ParticleBuoyancy.h"
 
 
-void ParticleBuoyancy::updateForce(Particle* particle, float duration) {
+ParticleBuoyancy::ParticleBuoyancy(float m_maxDepth, float m_volume, float m_waterheight, float m_liquidDensity) : m_maxDepth(m_maxDepth), m_volume(m_volume), m_waterHeight(m_waterheight), m_liquidDensity(m_liquidDensity)
+{
+	//Rien a ajouter ici
+}
+
+void ParticleBuoyancy::updateForce(Particle* particle, float duration)
+{
+	//On initialise notre vecteur force.
+	Vector3D force(0, 0, 0);
+
+	//On cast la vitesse dans un vecteur3D non const
+	Vector3D velocity = particle->getVelocity();
 
 	// Calcule la profondeur de submersion.
-
 	double depth = particle->getPosition().y;
 
-	// Vérifie si on est hors de l'eau. 
-
-	if (depth >= m_waterHeight + m_maxDepth) return; Vector3D force(0, 0, 0);
-
-	// Vérifier si nous sommes à la profondeur maximale.  
-
-	if (depth <= m_waterHeight - m_maxDepth) {
+	// Vï¿½rifie si on est hors de l'eau. 
+	if (depth >= m_waterHeight + m_maxDepth)
+	{
+		return;
 	}
 
-	force.y = m_liquidDensity * m_volume;
+	// Vï¿½rifier si nous sommes ï¿½ la profondeur maximale. L'object est complï¿½tement submergï¿½.
+	if (depth <= m_waterHeight - m_maxDepth)
+	{
+		force.y = m_liquidDensity * m_volume;//densitï¿½ du liquide par le volume de l'objet.
+		particle->setVelocity((velocity + force) * duration);
+		return;
+	}
 
-	particle->addForce(force);
-	return;
-
-
-
-	// Sinon, nous sommes partiellement submergés.
-
-	force.y = m_liquidDensity * m_volume * (depth - m_maxDepth - m_waterHeight) / 2 * m_maxDepth; particle->addForce(force);
+	// Sinon, nous sommes partiellement submergï¿½s.
+	force.y = m_liquidDensity * m_volume * (depth - m_maxDepth - m_waterHeight) / 2 * m_maxDepth;
+	particle->setVelocity((velocity + force) * duration);
 }

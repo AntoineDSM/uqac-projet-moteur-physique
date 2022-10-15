@@ -1,26 +1,72 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 19/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 19/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
-#include "ParticleForceRegistry.h"
+#include "Forces/ParticleForceRegistry.h"
+#include "Vector3D/Vector3D.h"
 
-using namespace moteurJeux; 
+using namespace moteurJeux;
 
+//Permet d'ajouter un registre de force, une force ï¿½ appliquer ï¿½ une particle ï¿½ chaque tour de boucle
+void ParticleForceRegistry::add(Particle* particle, ParticleForceGenerator* forceGenerator)
+{
+	//On crï¿½er notre registre
+	ParticleForceRegistration newPFR;
+	newPFR.particle = particle;
+	newPFR.forceGenerator = forceGenerator;
 
-void ParticleForceRegistry::updateForces(float duration) { 
-
-
-
-
-Registry::iterator i = registrations.begin(); 
-
-
-for (; i != registrations.end(); i++) {
-
-
- i->forceGenerator->updateForce(i->particle, duration);
-
-
+	//On l'ajoute dans la liste les repertoriant
+	registrations.push_back(newPFR);
 }
+
+//Permet de supprimer l'application d'une force ï¿½ une particle
+void ParticleForceRegistry::remove(Particle* particle, ParticleForceGenerator* forceGenerator)
+{
+	bool exist = false;
+	for (int i = 0; i < registrations.size(); i++)
+	{
+		ParticleForceRegistration PFR = registrations[i];
+		if (PFR.particle == particle && PFR.forceGenerator == forceGenerator)
+		{
+			registrations.erase(registrations.begin() + i);
+			exist = true;
+		}
+	}
+	if (exist == true)
+	{
+		std::cout << "La force ne sera plus appliquï¿½e ï¿½ la particule. \n";
+	}
+	else
+	{
+		std::cout << "La force n'ï¿½tait pas appliquï¿½e ï¿½ cette particule. \n";
+	}
+}
+
+//Permet de supprimer l'ensemble des forces enregistrï¿½es.
+void ParticleForceRegistry::clear()
+{
+	if (registrations.size() != 0)
+	{
+		std::cout << "La liste des enregistrements est vide.\n";
+	}
+	else
+	{
+		for (int i = 0; i < registrations.size(); i++)
+		{
+			registrations.erase(registrations.begin() + i);
+		}
+		std::cout << "La liste des enregistrements a ï¿½tï¿½ vidï¿½e.\n";
+	}
+}
+
+//Cette fonction sera appelï¿½e dans la boucle de jeu et permettra d'appliquï¿½ par le biais des registres de force, une force ï¿½ une particle ï¿½  chaque tour de boucle.
+void ParticleForceRegistry::updateForces(float duration)
+{
+	Registry::iterator i = registrations.begin();
+
+	for (; i != registrations.end(); i++)
+	{
+		i->forceGenerator->updateForce(i->particle, duration);
+	}
 }

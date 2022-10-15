@@ -5,8 +5,8 @@
 //Modifié par : Victor GUIRAUD
 
 #include "ParticleAnchoredSpring.h"
-
-
+#include "Particle.h"
+/*
 void ParticleAnchoredSpring::updateForce(Particle* particle, float duration) {
 
 	// Calcule le vecteur du ressort.
@@ -17,3 +17,4 @@ void ParticleAnchoredSpring::updateForce(Particle* particle, float duration) {
 
 	force -= m_anchor;
 }
+*/

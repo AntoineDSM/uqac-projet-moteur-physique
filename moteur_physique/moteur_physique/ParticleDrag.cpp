@@ -1,7 +1,7 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 21/09/22
-//Modifié par : Victor GUIRAUD
+ï»¿//Date de crï¿½ation : 19/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 21/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 #include "ParticleDrag.h"
 #include "Vector3D.h"
@@ -9,19 +9,28 @@
 
 using namespace moteurJeux;
 
-void ParticleDrag::updateForce(Particle* particle, float duration) {
+ParticleDrag::ParticleDrag(double m_k1, double m_k2) : m_k1(m_k1), m_k2(m_k2)
+{
+	//rien de plus a faire ici.
+}
 
-	Vector3D force; particle->getVelocity(&force); 
-	// Calculer le coefficient de traînée total  
-	double dragCoeff = force.get_magnitude(); 
-	
-	dragCoeff = m_k1 * dragCoeff + m_k2 * dragCoeff * dragCoeff; 
+void ParticleDrag::updateForce(Particle* particle, float duration)
+{
+	//On rï¿½cupï¿½re la vitesse de notre particle
+	Vector3D velocity;
+	velocity = particle->getVelocity();
 
-	// Calcule la force finale et l'applique. 
+	//On rï¿½cupï¿½re son accï¿½lï¿½ration
+	Vector3D acceleration;
+	velocity = particle->getAcceleration();
 
-	force.get_normalization();
+	//On calcule notre force de trainï¿½e relative aux coefficient relatifs
+	Vector3D dragCoeff;
+	double arg1 = velocity.get_magnitude() * m_k1;
+	double arg2 = acceleration.get_magnitude() * m_k2;
+	double sum = arg1 + arg2;
+	dragCoeff = Vector3D::get_normalization(velocity) * sum;
 
-	force *= -dragCoeff;
-
-	particle->addForce(force);
-} 
+	//On applique la force de trainï¿½e pendant la durï¿½e de la frame ï¿½ notre vitesse. 
+	particle->setVelocity((velocity - dragCoeff) * (double)duration);
+}
