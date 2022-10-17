@@ -9,6 +9,7 @@
 
 using namespace moteurJeux;
 
+<<<<<<< HEAD
 ParticleDrag::ParticleDrag(double m_k1, double m_k2) : m_k1(m_k1), m_k2(m_k2)
 {
 	//rien de plus a faire ici.
@@ -33,4 +34,23 @@ void ParticleDrag::updateForce(Particle* particle, float duration)
 
 	//On applique la force de trainée pendant la durée de la frame à notre vitesse. 
 	particle->setVelocity((velocity - dragCoeff) * (double)duration);
+=======
+void ParticleDrag::updateForce(Particle* particle, float duration) {
+
+	/*
+	Vector3D force; particle->getVelocity(&force); 
+	// Calculer le coefficient de traînée total  
+	double dragCoeff = force.get_magnitude(); 
+	
+	dragCoeff = m_k1 * dragCoeff + m_k2 * dragCoeff * dragCoeff; 
+
+	// Calcule la force finale et l'applique. 
+
+	force.get_normalization();
+
+	force *= -dragCoeff;
+
+	particle->addForce(force);
+	*/
+>>>>>>> origin/Victor
 } 

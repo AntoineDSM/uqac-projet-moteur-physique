@@ -19,6 +19,20 @@ namespace Precision {
 		return x * x;
 	}
 
+<<<<<<< HEAD
+=======
+    inline void swapNums(int nums[],
+        int first, int second, int secondArray[])
+    {
+        int curr = nums[first];
+        int currSecond = secondArray[first];
+        nums[first] = nums[second];
+        secondArray[first] = secondArray[second];
+        nums[second] = curr;
+        secondArray[second] = currSecond;
+    }
+
+>>>>>>> origin/Victor
     inline void sort(int num[] ,int len, int secondArray[])
     {
         bool isSwapped;
@@ -40,6 +54,7 @@ namespace Precision {
         }
     }
 
+<<<<<<< HEAD
     inline void swapNums(int nums[],
         int first, int second, int secondArray[])
     {
@@ -50,6 +65,10 @@ namespace Precision {
         nums[second] = curr;
         secondArray[second] = currSecond;
     }
+=======
+    
+
+>>>>>>> origin/Victor
 
 }//namespace Precision
 

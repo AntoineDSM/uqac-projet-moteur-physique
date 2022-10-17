@@ -24,18 +24,29 @@ class Particle
 		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
 
 		//Constructeur par defaut
+<<<<<<< HEAD
 		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0), radius(0)
+=======
+		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
+>>>>>>> origin/Victor
 		{
 		}
 		
 		//Constructeur avec initialisation
+<<<<<<< HEAD
 		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass, double radius) : 
+=======
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) : 
+>>>>>>> origin/Victor
 			position(newPosition)
 			, velocity(newVelocity)
 			, acceleration(newAcceleration)
 			, damping(newDamping)
 			, inverseMass(newInverseMass)
+<<<<<<< HEAD
 			, radius(radius)
+=======
+>>>>>>> origin/Victor
 		{
 		}
 
@@ -47,7 +58,10 @@ class Particle
 			acceleration = p.acceleration;
 			damping = p.damping;
 			inverseMass = p.inverseMass;
+<<<<<<< HEAD
 			radius = p.radius;
+=======
+>>>>>>> origin/Victor
 		}
 
 		//Destructeur
@@ -74,8 +88,13 @@ class Particle
 		//FAIRE LE COMMENTAIRE
 		double inverseMass;
 
+<<<<<<< HEAD
 		//rayon de notre particule
 		double radius;
+=======
+		//Dans la partie 2, notre particule pourra etre impactee par de multiples forces exterieure, nous les concatenerons dans un seul vecteur3D qui agira sur l'acceleration.
+		Vector3D forceAccum;
+>>>>>>> origin/Victor
 
 	    public :
 
@@ -107,8 +126,11 @@ class Particle
 
 		inline double getInverseMass() { return inverseMass;}
 
+<<<<<<< HEAD
 		inline double getRadius() { return radius; }
 
+=======
+>>>>>>> origin/Victor
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;

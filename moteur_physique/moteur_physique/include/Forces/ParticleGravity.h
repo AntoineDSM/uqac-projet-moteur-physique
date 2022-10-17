@@ -15,6 +15,7 @@ using namespace moteurJeux;
 class ParticleGravity : public ParticleForceGenerator
 {
 
+<<<<<<< HEAD
 	protected :
 
 		const Vector3D gravity;
@@ -26,6 +27,20 @@ class ParticleGravity : public ParticleForceGenerator
 
 		//Applique la force de gravité en fonction de la masse de particle adapté en fonction de la durée de la frame.
 		void updateForce(Particle* particle, float duration);
+=======
+protected :
+
+	const Vector3D gravity;
+
+public:
+
+	// Crée le générateur avec l'accélération donnée. 
+	ParticleGravity(const Vector3D& gravity);
+
+	// F= particle-> GetMass()*m_gravity
+
+	void updateForce(Particle* particle, float duration);
+>>>>>>> origin/Victor
 
 };
 

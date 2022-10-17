@@ -11,6 +11,7 @@
 using namespace moteurJeux
 ;
 
+<<<<<<< HEAD
 //Constructeur
 ParticleGravity::ParticleGravity(const Vector3D& gravity) : gravity(gravity)
 {
@@ -31,4 +32,24 @@ void ParticleGravity::updateForce(Particle* particle, float duration)
 
 	//On applique la force de gravité pendant la durée de la frame à notre vitesse. 
 	particle->setVelocity((velocity+adaptedGravity)*duration);
+=======
+ParticleGravity::ParticleGravity(const Vector3D& gravity)
+	: gravity(gravity)
+{
+}
+void ParticleGravity::updateForce(Particle* particle, float duration) {
+
+	/*
+
+	// Vérifier que nous n'avons pas une masse infinie.
+	if (!particle->hasFiniteMass()) return;
+
+
+	// Appliquer la force à l'échelle de la masse à la particule.
+	
+	// le code multiplie un vecteur et un scalaire je n'arrive pas à le faire fonctionner
+	particle->addForce(gravity*particle->getMass());
+	//particle->addForce(gravity.operator*=(particle->getMass()));
+	*/
+>>>>>>> origin/Victor
 }

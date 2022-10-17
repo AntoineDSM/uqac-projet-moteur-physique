@@ -16,12 +16,29 @@
 #include <SFML/Window/Mouse.hpp>
 
 
+<<<<<<< HEAD
 #include "Utils/Timing.h"
 #include "Demos/Ballistic.h"
 #include "IMGUI/imgui.h"
 #include "IMGUI/imgui_impl_glfw.h"
 #include "IMGUI/imgui_impl_opengl3.h"
 #include "Vector3D/Vector3D.h"
+=======
+
+#include "Timing.h"
+#include "Ballistic.h"
+#include "imgui.h"
+#include "imgui_impl_glfw.h"
+#include "imgui_impl_opengl3.h"
+#include "Vector3D.h"
+#include "ParticleForceGenerator.h"
+#include "ParticleGravity.h"
+#include "ParticleSpring.h"
+#include "ParticleAnchoredSpring.h"
+#include "ParticleDrag.h"
+#include "ParticleBuoyancy.h"
+#include "ParticleForceRegistry.h"
+>>>>>>> origin/Victor
 
 using namespace moteurJeux;
 
@@ -63,12 +80,17 @@ void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 
     glLoadIdentity();
 
     //permet de regarder un point precis a partir d'un point de vue.
+<<<<<<< HEAD
     gluLookAt(posCamX, posCamY, posCamZ, 0, 0, 0, 0, 1, 0);
+=======
+    gluLookAt(posCamX, posCamY, posCamZ, 0, 0, 0, 0, 1, 0); // original :  gluLookAt(posCamX, posCamY, posCamZ, 0, 0, 0, 0, 1, 0);
+>>>>>>> origin/Victor
 
     //Repere XYZ
     glBegin(GL_LINES);
 
     glColor3ub(0, 0, 255); //axe bleue
+<<<<<<< HEAD
     glVertex3d(0, 0, 0);  glVertex3d(20, 0, 0); // X
 
     glColor3ub(0, 255, 0); //axe vert
@@ -76,6 +98,15 @@ void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 
 
     glColor3ub(255, 0, 0); //axe rouge
     glVertex3d(0, 0, 0);  glVertex3d(0, 0, 20); // Z
+=======
+    glVertex3d(0, 0, 0);  glVertex3d(70, 0, 0); // X
+
+    glColor3ub(0, 255, 0); //axe vert
+    glVertex3d(0, 0, 0);  glVertex3d(0, 70, 0); // Y
+
+    glColor3ub(255, 0, 0); //axe rouge
+    glVertex3d(0, 0, 0);  glVertex3d(0, 0, 70); // Z
+>>>>>>> origin/Victor
 
     glEnd();
 }
@@ -150,7 +181,11 @@ int main(int argc, char** argv)
 
     //Donner le contexte a la fenetre actuelle.
     glfwMakeContextCurrent(window);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> origin/Victor
     //Initialiser IMGUI.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -174,6 +209,12 @@ int main(int argc, char** argv)
     float accXObj, accYObj, accZObj = 0;
     float dampingObj = 0;
     float masseObj = 0;
+<<<<<<< HEAD
+=======
+    float radiusObj = 20;
+    float forceAccumObj = 0;
+
+>>>>>>> origin/Victor
     //Pour choisir si l'objet selectionne sera lance avec les valeurs initiales du code en dur ou avec les parametres modifiables ci dessus.
     bool initialValues = true;
 
@@ -238,14 +279,22 @@ int main(int argc, char** argv)
         ImGui::End();
 
         //-----------------------------------------------Recuperer les interactions clavier/souris de l'utilisateur.----------------------------------------------
+<<<<<<< HEAD
         float listParams[11] = {masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj};
+=======
+        float listParams[11] = { masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj };
+>>>>>>> origin/Victor
         GestionClavier();
         GestionSouris(listParams, initialValues);
         //-----------------------------------------------------Actualisation des positions des projectiles.--------------------------------------------------------
         TimingData::update();
         ball->UpdateVariousFrameRate();
         //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
+<<<<<<< HEAD
         DessineRepereOrthonorme(posCamX,posCamY,posCamZ);
+=======
+        DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
+>>>>>>> origin/Victor
         //--------------------------------------------------------------Rendre nos projectiles.--------------------------------------------------------------------
         ball->DisplayOpenGL();
         //---------------------Boucle globale de tous les elements ajoutes en tant que callback, les fonctions ci-dessus de facon plus generale.-------------------

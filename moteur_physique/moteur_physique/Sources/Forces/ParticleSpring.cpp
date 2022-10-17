@@ -10,6 +10,7 @@
 
 using namespace moteurJeux;
 
+<<<<<<< HEAD
 ParticleSpring::ParticleSpring(Particle* other, float m_k, float m_restLength) : m_other(other), m_k(m_k), m_restlength(m_restLength)
 {
 	//Rien a ajouter ici.
@@ -38,4 +39,30 @@ void ParticleSpring::updateForce(Particle* particle, float duration)
 	m_other->setVelocity((velocity_2 - force) * duration);
 	
 
+=======
+void ParticleSpring::updateForce(Particle* particle, float duration) {
+	
+	/*
+	// Calcule le vecteur du ressort
+	Vector3D force; 
+	particle->getPosition(&force);
+
+	//Je n'arrive pas à faire fonctionner 
+	force-=m_other->getPosition();
+    //force.operator-=(m_other->getPosition());
+
+	// Calcule la magnitude de la force. 
+
+	double magnitude = force.get_magnitude();
+	magnitude = abs(magnitude - m_restlength);
+	magnitude *= m_k;
+
+	// Calcule la force finale et l'applique.
+
+	force.get_normalization();
+	force *= -magnitude;
+	particle->addForce(force);
+
+	*/
+>>>>>>> origin/Victor
 }

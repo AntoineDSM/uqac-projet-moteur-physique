@@ -8,11 +8,15 @@
 #include "math.h"
 #include "Vector3D/Vector3D.h"
 #include "Particles/Particle.h"
+<<<<<<< HEAD
 #include "Utils/Precision.h"
+=======
+>>>>>>> origin/Victor
 
 #ifndef PARTICLECONTACT_HPP
 #define PARTICLECONTACT_HPP
 
+<<<<<<< HEAD
 class ParticleContact{
   
 	public:
@@ -44,6 +48,47 @@ class ParticleContact{
 		//Resoud l'interpénétration entre nos particles.
 		void resolveInterpretation();
 
+=======
+
+class ParticleContact{
+  
+  public:
+  // Particle[0] => Particle A
+  // Particle[0] => Particle B - could be nullptr
+  
+  Particle* particle[2];
+  
+  // value between 0 - 1
+  // define the elasticness of the collision  
+  float restitution;
+  
+  //distance of penetration of the contact
+  float penetration;
+  
+  // normal of the vector
+  Vector3D contactNormal;
+  
+  //resolve velocity and interpenetration
+  
+  void resolve (float duration);
+  
+  
+  // return the separation velocity of the particules
+  
+  float calculatingSeparatingVelocity();
+  
+  //handle impulse for this collision
+  void resolveVelocity();
+  
+  
+  //handle interpenetration of the collision
+  
+  void resolveInterpretation();
+  
+  
+  
+  
+>>>>>>> origin/Victor
 };
 
 #endif PARTICLECONTACT_HPP

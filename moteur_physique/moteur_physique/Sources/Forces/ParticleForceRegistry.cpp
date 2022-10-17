@@ -8,6 +8,7 @@
 
 using namespace moteurJeux; 
 
+<<<<<<< HEAD
 //Permet d'ajouter un registre de force, une force à appliquer à une particle à chaque tour de boucle
 void ParticleForceRegistry::add(Particle* particle, ParticleForceGenerator* forceGenerator)
 {
@@ -69,4 +70,22 @@ void ParticleForceRegistry::updateForces(float duration)
 	{
 		i->forceGenerator->updateForce(i->particle, duration);
 	}
+=======
+
+void ParticleForceRegistry::updateForces(float duration) { 
+
+
+
+
+Registry::iterator i = registrations.begin(); 
+
+
+for (; i != registrations.end(); i++) {
+
+
+ i->forceGenerator->updateForce(i->particle, duration);
+
+
+}
+>>>>>>> origin/Victor
 }
