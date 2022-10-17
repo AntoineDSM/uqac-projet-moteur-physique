@@ -27,6 +27,7 @@ void ParticleContact::resolve(float duration)// si nous resolvons les contacts i
 {
 	resolveInterpretation();
 	resolveVelocity();
+
 	//gestion des contacts au repos a peut etre besoin de duration, ajouter methode : resolveAtRestState(float duration) !!!!!!!!!!!!!
 };
 

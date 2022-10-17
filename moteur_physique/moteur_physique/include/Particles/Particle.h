@@ -77,8 +77,6 @@ class Particle
 		//rayon de notre particule
 		double radius;
 
-		//Etat dormant
-		bool isSleep;
 
 	    public :
 
@@ -181,13 +179,6 @@ class Particle
 		//Ajouter une force a cet accumulateur. 
 		void addForce(const Vector3D& force);
 
-		bool isSpleeping() {
-			return this->isSleep;
-		}
-
-		void setIsSpleep() {
-			this->isSleep = !this->isSleep;
-		}
 
 	};
 }//moteurJeux
