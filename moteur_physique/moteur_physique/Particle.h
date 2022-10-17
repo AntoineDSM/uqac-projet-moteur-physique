@@ -24,12 +24,12 @@ namespace moteurJeux {
 		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
 
 		//Constructeur par defaut
-		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
+		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0), radius(0)
 		{
 		}
 
 		//Constructeur avec initialisation
-		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) :
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass, double radius) :
 			position(newPosition)
 			, velocity(newVelocity)
 			, acceleration(newAcceleration)
