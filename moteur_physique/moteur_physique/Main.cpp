@@ -1,7 +1,7 @@
-//Date de création :
-//Créer par :
-//Date de dernière modification :
-//Modifié par : 
+ï»¿//Date de crï¿½ation :
+//Crï¿½er par :
+//Date de derniï¿½re modification :
+//Modifiï¿½ par : 
 
 #pragma once //optimisation de compilation
 
@@ -16,6 +16,7 @@
 #include <SFML/Window/Mouse.hpp>
 
 
+
 #include "Timing.h"
 #include "Ballistic.h"
 #include "imgui.h"
@@ -23,12 +24,13 @@
 #include "imgui_impl_opengl3.h"
 #include "Vector3D.h"
 
+
 using namespace moteurJeux;
 
 Ballistic* ball;
 bool buttonPressedRecently = false;
 
-//Permet d'attendre avant de detecter un appui car ça peut etre le meme.
+//Permet d'attendre avant de detecter un appui car ï¿½a peut etre le meme.
 void StartTimer()
 {
     Sleep(100);
@@ -54,7 +56,7 @@ void GestionClavier()//(unsigned char key,int x, int y)
 }
 
 
-//Fonction permettant la création d'un repere x,y,z orthonorme.
+//Fonction permettant la crï¿½ation d'un repere x,y,z orthonorme.
 void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 100)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -85,19 +87,19 @@ int main(int argc, char** argv)
 {
 
     //------------------------------------------------------------TEST PARTIE 1, TEST DES VECTEURS3D-------------------------------------------------------------------
-    
+
     //-----------------------TEST DES FONCTIONS IMPLEMENTEES SUR CONSOLE--------------
 
     /*
     //compteur d'actualisation
     int cpt = 0;
-    
+
     //mes vecteurs
     Vector3D myVec = Vector3D(1,1,1);
     Vector3D mySecondVec = Vector3D(2, 2, 3);
     Vector3D vitesse = Vector3D(0.1, 0.1, 0.1);
     Vector3D acceleration = Vector3D(0.1,0.1,0.1);
-    
+
     //scalaire
     double myScalarValue = 5;
 
@@ -120,7 +122,7 @@ int main(int argc, char** argv)
 
     result = myVec.vectorialProduct(mySecondVec);
     result.display("vectorial product : ");
-    
+
     while (cpt < 100)
     {
         myVec += vitesse;
@@ -160,7 +162,7 @@ int main(int argc, char** argv)
     }
 
     TimingData::deinit();
-    
+
     return 0;
     */
 
@@ -234,11 +236,12 @@ int main(int argc, char** argv)
 
     //Donner le contexte a la fenetre actuelle.
     glfwMakeContextCurrent(window);
-    
+
     //Initialiser IMGUI.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 450");
@@ -281,13 +284,13 @@ int main(int argc, char** argv)
         //Creation fenetre IMGUI.
         ImGui::Begin("Modify attributes here :");
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur X :");
+        ImGui::Text("Changer la position de la camï¿½ra sur X :");
         ImGui::SliderInt("Pos X 0-300", &posCamX, 0, 300);
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur Y :");
+        ImGui::Text("Changer la position de la camï¿½ra sur Y :");
         ImGui::SliderInt("Pos Y 0-100", &posCamY, 0, 100);
         //Slider pour choisir la taille d'un element.
-        ImGui::Text("Changer la position de la caméra sur Z :");
+        ImGui::Text("Changer la position de la camï¿½ra sur Z :");
         ImGui::SliderInt("Pos Z 0-300", &posCamZ, 0, 300);
         //Fonctionnement
         ImGui::Text("Appuyez sur click droit de la souris pour tirer.");
@@ -326,14 +329,14 @@ int main(int argc, char** argv)
         //glutKeyboardFunc(GestionClavier);
         //FONCTIONNE PAS
         //glutMouseFunc(GestionSouris);
-        float listParams[11] = {masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj};
+        float listParams[11] = { masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj };
         GestionClavier();
         GestionSouris(listParams, initialValues);
         //-----------------------------------------------------Actualisation des positions des projectiles.--------------------------------------------------------
         TimingData::update();
         ball->UpdateVariousFrameRate();
         //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
-        DessineRepereOrthonorme(posCamX,posCamY,posCamZ);
+        DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
         //--------------------------------------------------------------Rendre nos projectiles.--------------------------------------------------------------------
         ball->DisplayOpenGL();
         //---------------------Boucle globale de tous les elements ajoutes en tant que callback, les fonctions ci-dessus de facon plus generale.-------------------
@@ -355,12 +358,11 @@ int main(int argc, char** argv)
     //arret du timer.
     TimingData::deinit();
 
-    //Si nous quitter la boucle, on déinitialise les elements de OpenGL et de IMGUI
+    //Si nous quitter la boucle, on dï¿½initialise les elements de OpenGL et de IMGUI
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
 
     glfwTerminate();
 }
-
 

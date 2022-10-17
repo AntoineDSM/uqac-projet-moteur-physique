@@ -122,5 +122,8 @@
     <ClInclude Include="imgui\imgui.h">
       <Filter>Fichiers d%27en-tête\IMGUI</Filter>
     </ClInclude>
+    <ClInclude Include="include\GLUT\glut.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
