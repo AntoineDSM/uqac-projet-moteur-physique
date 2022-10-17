@@ -96,6 +96,9 @@ class Particle
 		Vector3D forceAccum;
 >>>>>>> origin/Victor
 
+		//Etat dormant
+		bool isSleep;
+
 	    public :
 
 		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------
@@ -199,6 +202,14 @@ class Particle
 
 		//Ajouter une force a cet accumulateur. 
 		void addForce(const Vector3D& force);
+
+		bool isSpleeping() {
+			return this->isSleep;
+		}
+
+		void setIsSpleep() {
+			this->isSleep = !this->isSleep;
+		}
 
 	};
 }//moteurJeux
