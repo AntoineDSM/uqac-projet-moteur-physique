@@ -267,6 +267,10 @@ class Vector3D
 		{
 			return Vector3D(x - v.x, y - v.y, z - v.z);
 		}
+		const Vector3D operator-(const Vector3D& v)
+		{
+			return Vector3D(x - v.x, y - v.y, z - v.z);
+		}
 
 		//permettre d'associer a notre vecteur les valeurs d'un autre vecteur.
 		void operator=(Vector3D& v)

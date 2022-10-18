@@ -1,7 +1,8 @@
 #pragma once
 
-#include "Forces/ParticleForceGenerator.h"
+#include "ParticleForceGenerator.h"
 
+#include "Particle.h"
 using namespace moteurJeux;
 
 class ParticleBuoyancy : public ParticleForceGenerator
