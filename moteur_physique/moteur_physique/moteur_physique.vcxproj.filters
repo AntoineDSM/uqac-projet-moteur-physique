@@ -52,6 +52,12 @@
     <Filter Include="Fichiers sources\OBJ\Contacts">
       <UniqueIdentifier>{2d2c9a43-9210-4b37-b97e-fbbe9f31035b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Fichiers d%27en-tête\OBJ\Rotations">
+      <UniqueIdentifier>{9da6a847-7b34-4b6c-8450-a41b7e6e53cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\OBJ\Rotations">
+      <UniqueIdentifier>{ea6a4b29-f01e-4409-8a56-577cb9c8915d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Particle.cpp">
@@ -129,6 +135,18 @@
     <ClCompile Include="Main_rendu2.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
+    <ClCompile Include="Quaternion.cpp">
+      <Filter>Fichiers sources\OBJ\Rotations</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix33.cpp">
+      <Filter>Fichiers sources\OBJ\Rotations</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix34.cpp">
+      <Filter>Fichiers sources\OBJ\Rotations</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBody.cpp">
+      <Filter>Fichiers sources\OBJ\Rotations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -179,9 +197,6 @@
     <ClInclude Include="ParticleDrag.h">
       <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleForceGenerator.h">
-      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
-    </ClInclude>
     <ClInclude Include="ParticleForceRegistry.h">
       <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
     </ClInclude>
@@ -194,7 +209,7 @@
     <ClInclude Include="Precision.h">
       <Filter>Fichiers d%27en-tête\UTILS</Filter>
     </ClInclude>
-    <ClInclude Include="NaiveParticleConctactGenerator.h">
+    <ClInclude Include="NaiveParticleContactGenerator.h">
       <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
     </ClInclude>
     <ClInclude Include="ParticleCable.h">
@@ -217,6 +232,21 @@
     </ClInclude>
     <ClInclude Include="WallContactGenerator.h">
       <Filter>Fichiers d%27en-tête\OBJ\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="Quaternion.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix33.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix34.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBody.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleForceGenerator.h">
+      <Filter>Fichiers d%27en-tête\OBJ\Forces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

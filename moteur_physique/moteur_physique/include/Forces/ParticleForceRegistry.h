@@ -6,11 +6,12 @@
 
 #pragma once
 
-#include "Vector3D/Vector3D.h"
-#include "Particles/Particle.h"
-#include "Forces/ParticleForceGenerator.h"
+#include "Vector3D.h"
+#include "Particle.h"
+
 #include <iostream>
 #include <vector>
+#include "../../ParticleForceGenerator.h"
 
 using namespace std;
 using namespace moteurJeux;

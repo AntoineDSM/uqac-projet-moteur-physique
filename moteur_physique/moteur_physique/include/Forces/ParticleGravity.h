@@ -7,8 +7,8 @@
 
 #pragma once
 #include "Vector3D/Vector3D.h"
-#include "Forces/ParticleForceGenerator.h"
-
+#include "ParticleForceGenerator.h"
+#include "../../ParticleForceGenerator.h"
 using namespace moteurJeux;
 
 //forces gravitationnels 
@@ -24,7 +24,7 @@ public:
 	// Crée le générateur avec l'accélération donnée. 
 	ParticleGravity(const Vector3D& gravity);
 
-	// F= particle-> GetMass()*m_gravity
+	//F = particle->GetMass() * m_gravity
 
 	void updateForce(Particle* particle, float duration);
 

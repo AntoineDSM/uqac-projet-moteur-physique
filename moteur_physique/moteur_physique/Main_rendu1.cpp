@@ -1,4 +1,4 @@
-//Date de création :
+/*//Date de création :
 //Créer par :
 //Date de dernière modification :
 //Modifié par : 
@@ -141,7 +141,7 @@ int main(int argc, char** argv)
     //-------------------------------------------------------------TEST PARTIE 3, PARTICULES et OPENGL--------------------------------------------------------------
 
     //Creation de l'objet correspondant a notre fenetre.
-    GLFWwindow* window;
+   /* GLFWwindow* window; 
 
     glGetString(GL_VERSION);
     //Initialisation de la librairie de OpenGL.
@@ -283,3 +283,4 @@ int main(int argc, char** argv)
 
     glfwTerminate();
 }
+*/

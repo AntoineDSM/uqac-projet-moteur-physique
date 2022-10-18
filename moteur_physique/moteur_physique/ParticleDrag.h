@@ -6,7 +6,7 @@
 
 #pragma once
 #include "Vector3D/Vector3D.h"
-#include "Forces/ParticleForceGenerator.h"
+#include "ParticleForceGenerator.h"
 
 using namespace moteurJeux;
 class ParticleDrag : public ParticleForceGenerator
