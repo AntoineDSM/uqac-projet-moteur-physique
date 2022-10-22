@@ -5,6 +5,9 @@
 
 #include "Demos/Ballistic.h"
 #include <SFML/Window/Keyboard.hpp>
+#include "../../TimingData.h"
+
+using namespace TimingOldMethod;
 
 void Ballistic::Shoot(float listParamsObj[] = {}, bool initialValues = true) {
 

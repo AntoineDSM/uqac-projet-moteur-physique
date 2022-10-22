@@ -1,9 +1,11 @@
+#include "TimingData.h"
+
 // Import the high performance timer (c. 4ms).
 #include <windows.h>
 #include <mmsystem.h>
 #include <stdlib.h>
-#include "Utils/timing.h"
 
+using namespace TimingOldMethod;
 
 // Hold internal timing data for the performance counter.
 static bool qpcFlag;
@@ -15,7 +17,7 @@ static double qpcFrequency;
 // Internal time and clock access functions
 unsigned systemTime()
 {
-    if(qpcFlag)
+    if (qpcFlag)
     {
         static LONGLONG qpcMillisPerTick;
         QueryPerformanceCounter((LARGE_INTEGER*)&qpcMillisPerTick);
@@ -36,7 +38,7 @@ unsigned TimingData::getTime()
 unsigned long systemClock()
 {
     __asm {
-    	rdtsc;
+        rdtsc;
     }
 }
 #endif
@@ -60,7 +62,7 @@ void initTime()
 
 
 // Holds the global frame time that is passed around
-static TimingData *timingData = NULL;
+static TimingData* timingData = NULL;
 
 // Retrieves the global frame info instance
 TimingData& TimingData::get()
@@ -82,13 +84,13 @@ void TimingData::update()
     // Update the timing information.
     unsigned thisTime = systemTime();
     timingData->lastFrameDuration = thisTime -
-                timingData->lastFrameTimestamp;
+        timingData->lastFrameTimestamp;
     timingData->lastFrameTimestamp = thisTime;
 
     // Update the tick information.
     unsigned long thisClock = getClock();
     timingData->lastFrameClockTicks =
-    thisClock - timingData->lastFrameClockstamp;
+        thisClock - timingData->lastFrameClockstamp;
     timingData->lastFrameClockstamp = thisClock;
 
     // Update the RWA frame rate if we are able to.
@@ -107,7 +109,7 @@ void TimingData::update()
 
             // Invert to get FPS
             timingData->fps =
-                (float)(1000.0/timingData->averageFrameDuration);
+                (float)(1000.0 / timingData->averageFrameDuration);
         }
     }
 }
@@ -137,6 +139,6 @@ void TimingData::init()
 
 void TimingData::deinit()
 {
-        delete timingData;
-        timingData = NULL;
+    delete timingData;
+    timingData = NULL;
 }

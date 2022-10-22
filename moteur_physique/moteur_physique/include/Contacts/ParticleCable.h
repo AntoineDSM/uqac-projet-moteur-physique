@@ -7,10 +7,17 @@ class ParticleCable: public ParticleLink
 {
 	public:
 
-		//un contact sera généré entre deux particules si la distance les séparant est inférieure à cette variable.
+		//un contact sera généré entre deux particules si la distance les séparant est supérieure à cette variable.
 		float maxLength;
 
+		float restitution;
+
+		ParticleCable(Particle* particles[2], float maxLength, float restitution);
+
+		//Retourne la longueur du lien
+		float currentLength() const;
+
 		//Rempli un ParticleContact en fonction des informations de particles et de contact générator.
-		unsigned int addContact (ParticleContact* contact, unsigned int limit) const;
+		void addContact(ParticleContact* contact);
 
 };

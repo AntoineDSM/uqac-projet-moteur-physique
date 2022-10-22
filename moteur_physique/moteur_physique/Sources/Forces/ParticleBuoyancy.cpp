@@ -1,9 +1,3 @@
-
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 21/09/22
-//Modifié par : Victor GUIRAUD
-
 #include "Forces/ParticleBuoyancy.h"
 
 

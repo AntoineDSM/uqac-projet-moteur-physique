@@ -1,20 +1,15 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification 21/09/22
-//Modifié par : Victor GUIRAUD
-
-
 #include "Forces/ParticleGravity.h"
 #include "Particles/Particle.h"
 #include "Vector3D/Vector3D.h"
+#include "..\ValuesReferences.h"
 	
-using namespace moteurJeux
-;
+using namespace moteurJeux;
+using namespace valuesReferences;
 
 //Constructeur
-ParticleGravity::ParticleGravity(const Vector3D& gravity) : gravity(gravity)
+ParticleGravity::ParticleGravity(Vector3D& gravity) : gravity(gravity)
 {
-	//rien a faire ici.
+	gravityValue = gravity;
 }
 
 //implémentation de updateForce() de l'interface ParticleForceGenerator permettant d'appliquer la force de gravité à notre objet. 

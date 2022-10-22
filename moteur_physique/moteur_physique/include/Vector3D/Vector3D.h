@@ -178,10 +178,25 @@ class Vector3D
 			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
 		}
 
+		Vector3D operator*(Vector3D& vect)
+		{
+			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
+		}
+
+		Vector3D operator*(const Vector3D& vect)
+		{
+			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
+		}
+
 		//permettre d'obtenir un vecteur correspondant a l'addition entre notre vecteur et un second.
 		Vector3D operator+(Vector3D& v)
 		{
 			return Vector3D(x + v.x, y + v.y, z + v.z);
+		}
+
+		Vector3D* operator+(double value)
+		{
+			return new Vector3D(x + value, y + value, z + value);
 		}
 
 		Vector3D operator+(const Vector3D& v)
@@ -229,6 +244,18 @@ class Vector3D
 			x = v.x;
 			y = v.y;
 			z = v.z;
+		}
+
+		bool operator==(const Vector3D& v2)
+		{
+			if (x == v2.x && y == v2.y && z == v2.z)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	};

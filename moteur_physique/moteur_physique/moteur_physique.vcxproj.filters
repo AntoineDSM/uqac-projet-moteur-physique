@@ -25,9 +25,6 @@
     <ClCompile Include="Sources\Forces\ParticleSpring.cpp">
       <Filter>Sources\Forces</Filter>
     </ClCompile>
-    <ClCompile Include="Sources\Utils\Timing.cpp">
-      <Filter>Sources\Utils</Filter>
-    </ClCompile>
     <ClCompile Include="Sources\Vector3D\Vector3D.cpp">
       <Filter>Sources\Vector3D</Filter>
     </ClCompile>
@@ -75,6 +72,15 @@
     </ClCompile>
     <ClCompile Include="include\Contacts\ParticleContactResolver.cpp">
       <Filter>Sources\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="include\Contacts\WallContactGenerator.cpp">
+      <Filter>Sources\Contacts</Filter>
+    </ClCompile>
+    <ClCompile Include="Wall.cpp">
+      <Filter>Sources\Element</Filter>
+    </ClCompile>
+    <ClCompile Include="TimingData.cpp">
+      <Filter>Sources\Utils</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -147,12 +153,6 @@
     <ClInclude Include="include\Forces\ParticleSpring.h">
       <Filter>Headers\Forces</Filter>
     </ClInclude>
-    <ClInclude Include="include\Utils\Precision.h">
-      <Filter>Headers\Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Utils\Timing.h">
-      <Filter>Headers\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="include\Contacts\WallContactGenerator.h">
       <Filter>Headers\Contacts</Filter>
     </ClInclude>
@@ -165,6 +165,21 @@
     <ClInclude Include="PhysicWorld.h">
       <Filter>Headers\Demos</Filter>
     </ClInclude>
+    <ClInclude Include="Headers\Wall.h">
+      <Filter>Headers\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Precision.h">
+      <Filter>Headers\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utils\Timing.h">
+      <Filter>Headers\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="ValuesReferences.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="TimingData.h">
+      <Filter>Headers\Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -175,9 +190,6 @@
     </Filter>
     <Filter Include="Headers\Particles">
       <UniqueIdentifier>{bce940dd-532a-4cfc-bbc3-88bbd795b4dd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Headers\Forces">
-      <UniqueIdentifier>{09a7c2e8-a664-4e50-b5e8-ff06bf0260f8}</UniqueIdentifier>
     </Filter>
     <Filter Include="Headers\Vector3D">
       <UniqueIdentifier>{ea1efaab-0353-47e6-aa4a-1a626b32b28c}</UniqueIdentifier>
@@ -220,6 +232,15 @@
     </Filter>
     <Filter Include="Headers\Contacts">
       <UniqueIdentifier>{eb5577fc-1ab6-4724-9c5a-039bfd45070e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Elements">
+      <UniqueIdentifier>{952830bf-3db7-4726-9e8e-3c548579f3d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Element">
+      <UniqueIdentifier>{c0adf668-4a92-4364-a485-9576f5713199}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Forces">
+      <UniqueIdentifier>{09a7c2e8-a664-4e50-b5e8-ff06bf0260f8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

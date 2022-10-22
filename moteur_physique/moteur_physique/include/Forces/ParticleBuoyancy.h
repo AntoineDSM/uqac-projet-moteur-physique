@@ -1,18 +1,13 @@
-
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 19/09/22
-//Modifié par : Victor GUIRAUD
-
 #pragma once
 
 #include "Forces/ParticleForceGenerator.h"
 
 using namespace moteurJeux;
-class ParticleBuoyancy : ParticleForceGenerator
+
+class ParticleBuoyancy : public ParticleForceGenerator
 {
 
-	protected : 
+	private : 
 		// propriétés des particules
 		float m_maxDepth;
 		float m_volume;

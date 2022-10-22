@@ -5,7 +5,7 @@
 
 using namespace moteurJeux;
 
-ParticleContact::ParticleContact(Particle* particles[2], float restitution, float penetration, Vector3D contactNormal) : restitution(restitution), penetration(penetration), contactNormal(contactNormal)
+ParticleContact::ParticleContact(Particle* particles[2], float restitution, float penetration) : restitution(restitution), penetration(penetration)
 {
 	particle[0] = particles[0];
 	particle[1] = particles[1];
@@ -23,28 +23,27 @@ float ParticleContact::calculatingSeparatingVelocity()
 	return vs;
 };
 
-void ParticleContact::resolve(float duration)// si nous resolvons les contacts ici, l'inversion de vitesse et l'ajustement de la position sont instantanés, la durée d'une frame n'a pas grand chose a faire la ? rien ne dépend du temps c'est une impulsion
+void ParticleContact::resolve()// si nous resolvons les contacts ici, l'inversion de vitesse et l'ajustement de la position sont instantanés, la durée d'une frame n'a pas grand chose a faire la ? rien ne dépend du temps c'est une impulsion
 {
 	resolveInterpretation();
 	resolveVelocity();
-	//gestion des contacts au repos a peut etre besoin de duration, ajouter methode : resolveAtRestState(float duration) !!!!!!!!!!!!!
 };
 
-void ParticleContact::resolveVelocity(float e) 
+void ParticleContact::resolveVelocity() 
 {
 	float seperatingVelocity = calculatingSeparatingVelocity();
 
-	if (e == 1)//parfaitement elastique
+	if (restitution == 1)//parfaitement elastique
 	{
 		//seperatingVelocity reste la meme
 	}
-	else if (e == 0)//parfaitement inélastique
+	else if (restitution == 0)//parfaitement inélastique
 	{
 		seperatingVelocity = 0;
 	}
-	else if (e > 0 && e < 1)//elastique
+	else if (restitution > 0 && restitution < 1)//elastique
 	{
-		seperatingVelocity *= e;
+		seperatingVelocity *= restitution;
 	}
 	
 	//difference de vitesse entre nos deux objets
@@ -52,7 +51,7 @@ void ParticleContact::resolveVelocity(float e)
 	//calcul du vecteur normal à nos objets
 	Vector3D normal = Vector3D::vectorialProduct(particle[0]->getVelocity(),particle[1]->getVelocity());
 	//calcul du facteur k, cf document cours.
-	double k = normal.scalarProduct(velocity * ((double)e + 1)) / ((1/particle[0]->getMass() + 1/particle[1]->getMass()));
+	double k = normal.scalarProduct(velocity * ((double)restitution + 1)) / ((1/particle[0]->getMass() + 1/particle[1]->getMass()));
 
 	Vector3D newVelocity_1 = particle[0]->getVelocity() - (normal * k ) * (1/particle[0]->getMass()) * seperatingVelocity;
 	Vector3D newVelocity_2 = particle[1]->getVelocity() - (normal * k) * (1/particle[1]->getMass()) * seperatingVelocity;
@@ -61,7 +60,7 @@ void ParticleContact::resolveVelocity(float e)
 	particle[1]->setVelocity(newVelocity_2);
 };
 
-void ParticleContact::resolveInterpretation()
+float ParticleContact::resolveInterpretation()
 {
 	//vecteur normal entre nos deux objets
 	Vector3D normal = Vector3D::vectorialProduct(particle[0]->getVelocity(), particle[1]->getVelocity());
@@ -75,9 +74,19 @@ void ParticleContact::resolveInterpretation()
 	//distance entre cet extreme et le centre seconde particule
 	double distance = std::sqrt((Precision::carre(particle[1]->getPosition().x-contactPointParticle_0.x))+(Precision::carre(particle[1]->getPosition().y-contactPointParticle_0.y))+(Precision::carre(particle[1]->getPosition().z-contactPointParticle_0.z)));
 
-
 	//FAIRE ATTENTION AUX OBJETS STATIQUES, VOIR PDF cours page 20.21
 
+	if (penetration != 0)//nous sommes face à une tige
+	{
+		if (distance > penetration)
+		{
+			double dif = distance - penetration;
+			Vector3D direction = particle[0]->getPosition() - particle[1]->getPosition();
+			direction.get_normalization();
+			particle[0]->setPosition(particle[0]->getPosition() - direction * (dif / 2));
+			particle[0]->setPosition(particle[1]->getPosition() + direction * (dif / 2));
+		}
+	}
 
 	if (distance < particle[1]->getRadius())
 	{
@@ -87,7 +96,10 @@ void ParticleContact::resolveInterpretation()
 		double masse_2 = particle[1]->getMass();
 		particle[0]->setPosition(normal* tailleInterpenetration * (masse_1 / (masse_1+masse_2)));
 		particle[1]->setPosition(normal * -tailleInterpenetration * (masse_1 / (masse_1 + masse_2)));
+		return tailleInterpenetration;
 	}
+
+	return distance;
 };
 
 

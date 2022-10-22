@@ -8,6 +8,11 @@
 #include "math.h"
 #include "Vector3D/Vector3D.h"
 
+#include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GLFW/glfw3.h>
+
 
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
@@ -29,7 +34,7 @@ class Particle
 		}
 		
 		//Constructeur avec initialisation
-		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass, double radius) : 
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass = 1, double radius = 2) : 
 			position(newPosition)
 			, velocity(newVelocity)
 			, acceleration(newAcceleration)
@@ -109,6 +114,11 @@ class Particle
 
 		inline double getRadius() { return radius; }
 
+		inline void setRadius(double _radius)
+		{
+			radius = _radius;
+		}
+
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
@@ -177,6 +187,22 @@ class Particle
 
 		//Ajouter une force a cet accumulateur. 
 		void addForce(const Vector3D& force);
+
+		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
+
+		inline void render()
+		{
+			Vector3D position = getPosition();
+			double radius = getRadius();
+
+			//affichage de notre sphere.
+			glColor3f(1, 0, 0);
+			glPushMatrix();
+			glTranslatef(position.x, position.y, position.z);
+			glutSolidSphere(radius, radius, radius);
+			//glutSolidSphere(radius, radius, radius);
+			glPopMatrix();
+		}
 
 	};
 }//moteurJeux

@@ -34,15 +34,3 @@ void Particle::integrate(double duration) {
 	//on nettoie notre accumulateur de force, une force à l'instant t n'est peut etre plus appliquee à t+1
 	//clearAccumulator();
 }
-
-//Dans la prochaine phase nous viendront accumuler des forces sur un vecteur force qui s'ajouterons et permettrons d'agir sur le comportement de notre particule.
-//void Particle::clearAccumulator()
-//{
-//    forceAccum.clear();
-//}
-//
-////Pour ajouter une nouvelle force a cette accumulateur de force et agir en consequence sur la particule.
-//void Particle::addForce(const Vector3D& force)
-//{
-//	forceAccum += force;
-//}
