@@ -24,7 +24,8 @@ public:
 
 	void resolveContact();
 
-	void resolveVelocity(Particle* particle, Vector3D* pointContact);
+	void resolveVelocity(Particle* particle, Vector3D resultante);
 
-	void resolvePenetration(Particle* particle, Vector3D* pointContact);
+	void resolvePenetration(Particle* particle, Vector3D resultante);
+	Vector3D get_resultante(Particle* particle);
 };

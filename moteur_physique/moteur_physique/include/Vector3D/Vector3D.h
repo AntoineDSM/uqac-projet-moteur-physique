@@ -97,6 +97,33 @@ class Vector3D
 				return vect;
 		}
 
+		inline static Vector3D get_normalization_2(Vector3D vect)
+		{
+			if (get_magnitude(vect) > 1)
+			{
+				return vect *= ((double)1) / get_magnitude(vect);
+			}
+			else
+				return vect;
+		}
+
+		inline static Vector3D get_abs(Vector3D &v)
+		{
+			if (v.x < 0)
+			{
+				v.x* (-1);
+			}
+			if (v.y < 0)
+			{
+				v.y* (-1);
+			}
+			if (v.z < 0)
+			{
+				v.z* (-1);
+			}
+			return v;
+		}
+
 		//------------------------------------------------------------------------MAGNITUDE-------------------------------------------------------------------------
 
 		//avoir la magnitude veut dire obtenir la longueur de ce vecteur par rapport a l'origine du repere (0,0,0)
@@ -194,9 +221,9 @@ class Vector3D
 			return Vector3D(x + v.x, y + v.y, z + v.z);
 		}
 
-		Vector3D* operator+(double value)
+		Vector3D operator+(double value)
 		{
-			return new Vector3D(x + value, y + value, z + value);
+			return Vector3D(x + value, y + value, z + value);
 		}
 
 		Vector3D operator+(const Vector3D& v)
@@ -207,6 +234,16 @@ class Vector3D
 		Vector3D* operator-(Vector3D* v)
 		{
 			return new Vector3D(x - v->x, y - v->y, z - v->z);
+		}
+
+		Vector3D operator-(float value)
+		{
+			return Vector3D(x - value, y - value, z - value);
+		}
+
+		Vector3D operator*(float value)
+		{
+			return Vector3D(x * value, y * value, z * value);
 		}
 
 		//ajouter un vecteur a notre vecteur.
@@ -256,6 +293,12 @@ class Vector3D
 			{
 				return false;
 			}
+		}
+
+		//Permet d'afficher dans la console notre type personne.
+		friend std::ostream& operator<<(std::ostream& out, Vector3D& v) {
+			out << "X : " <<  v.x << ", Y : " << v.y << ", Z : " << v.z << "\n";
+			return out;
 		}
 
 	};

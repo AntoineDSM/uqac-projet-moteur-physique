@@ -203,6 +203,18 @@ class Particle
 			//glutSolidSphere(radius, radius, radius);
 			glPopMatrix();
 		}
+			
+		friend bool operator==(Particle p1, Particle p2)
+		{
+			if (p1.acceleration == p2.acceleration && p1.damping == p2.damping && p1.inverseMass == p2.inverseMass && p1.position == p2.position && p1.radius == p2.radius && p1.velocity == p2.velocity)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
 
 	};
 }//moteurJeux

@@ -15,17 +15,16 @@ void ParticleDrag::updateForce(Particle* particle, float duration)
 	Vector3D velocity; 
 	velocity = particle->getVelocity(); 
 
-	//On récupère son accélération
-	Vector3D acceleration;
-	velocity = particle->getAcceleration();
 	
 	//On calcule notre force de trainée relative aux coefficient relatifs
 	Vector3D dragCoeff;
-	double arg1 = velocity.get_magnitude() * m_k1;
-	double arg2 = acceleration.get_magnitude() * m_k2;
-	double sum = arg1 + arg2;
-	dragCoeff = Vector3D::get_normalization(velocity) * sum;
+	Vector3D powVelocity = (velocity * velocity);
+	Vector3D arg1 = moteurJeux::Vector3D::get_abs(velocity) * m_k1;
+	Vector3D arg2 = moteurJeux::Vector3D::get_abs(powVelocity) * m_k2;
+	Vector3D sum = arg1 + arg2;
+	dragCoeff = Vector3D::get_normalization(sum);
 
 	//On applique la force de trainée pendant la durée de la frame à notre vitesse. 
-	particle->setVelocity((velocity - dragCoeff) * (double)duration);
+	velocity.addScaledVector(dragCoeff  * (float)(-1), duration);
+	particle->setVelocity(velocity);
 } 

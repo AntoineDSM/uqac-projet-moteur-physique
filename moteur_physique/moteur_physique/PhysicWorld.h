@@ -91,11 +91,10 @@ public :
 			//PCR->resolveContacts(listeParticulesContacts);
 
 			////Resolutions des contacts en rapport avec nos murs.
-
-			//for (WallContactGenerator* wallContactGenerator : listeMursResolveurs)
-			//{
-			//	wallContactGenerator->resolveContact();
-			//}
+			for (WallContactGenerator* wallContactGenerator : listeMursResolveurs)
+			{
+				wallContactGenerator->resolveContact();
+			}
 		}
 	}
 
@@ -120,11 +119,11 @@ public :
 		CreerContacts(newParticule);
 	}
 
-	void InstancierMur(float listParamsObj[] = {})
+	void InstancierMur(Vector3D plan, float listParamsObj[] = {})
 	{
 		Vector3D pointA = Vector3D(listParamsObj[0], listParamsObj[1], listParamsObj[2]);
 		Vector3D pointB = Vector3D(listParamsObj[3], listParamsObj[4], listParamsObj[5]);
-		Wall* newWall = new Wall(pointA, pointB);
+		Wall* newWall = new Wall(pointA, pointB, plan);
 	
 		listeMurs.push_back(newWall);
 
@@ -156,9 +155,16 @@ public :
 		}
 		case 3 :
 		{
-			ParticleSpring* PFG = new ParticleSpring(otherParticule, listParamsForceGenerator[7], listParamsForceGenerator[8]);
-			PFR->add(particule, PFG);
-			break;
+			if (!(*otherParticule == Particle()))
+			{
+				ParticleSpring* PFG = new ParticleSpring(otherParticule, listParamsForceGenerator[7], listParamsForceGenerator[8]);
+				PFR->add(particule, PFG);
+				break;
+			}
+			else
+			{
+				std::cout << "Impossible d'ajouter un particle spring avec une seconde particule non initialisée.\n";
+			}
 		}
 		default:
 		{

@@ -41,9 +41,9 @@ bool buttonPressedRecently = false;
 
 //Liste des variables modifiables par IMGUI.
 //parametre de position de la camera dans notre repère
-int posCamX = 100;
-int posCamY = 50;
-int posCamZ = 100;
+int posCamX = 70;
+int posCamY = 5;
+int posCamZ = 0;
 //attribut d'une particule
 int posXObj = 0, posYObj = 0, posZObj = 0;
 int vitXObj = 0, vitYObj = 0, vitZObj = 0;
@@ -55,6 +55,7 @@ double radius = 2;
 float restitution = 0;
 int posXMurA = 0, posYMurA = 0, posZMurA = 0;
 int posXMurB = 0, posYMurB = 0, posZMurB = 0;
+int planXMur = 0, planYMur = 0, planZMur = 0;
 //Choisir entre instancier mur ou particule, un contact ou un generateur
 bool instancierMur = false;
 bool instancierParticule = false;
@@ -62,7 +63,7 @@ bool InstancierGenerateurForce = false;
 bool InstancierContact = false;
 
 //Mettre en pause l'evolution des elements
-bool pause = true;
+bool pause = false;
 
 //Ajout des parametres pour les generateurs de force à appliquer sur les particules
 int typeGenerateurForce=0;
@@ -96,7 +97,7 @@ void StartTimer()
     buttonPressedRecently = false;
 }
 
-void GestionSouris(float listParamsParticule[], float listParamsMur[], float listeParamsGenerateurForce[], float listeParamsContacts[], int typeGenerateurForce, int typeContact, Particle* particule1, Particle* particule2, bool InstancierParticule = false, bool InstancierMur = false)
+void GestionSouris(float listParamsParticule[], float listParamsMur[], float listeParamsGenerateurForce[], float listeParamsContacts[], int typeGenerateurForce, int typeContact, Particle* particule1, Particle* particule2, Vector3D plan,bool InstancierParticule = false, bool InstancierMur = false)
 {
     buttonPressedRecently = true;
     //Eviter de prendre plusieurs entrees en une.
@@ -107,7 +108,7 @@ void GestionSouris(float listParamsParticule[], float listParamsMur[], float lis
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !buttonPressedRecently && InstancierMur)
     {
-        physicWorld->InstancierMur(listParamsMur);
+        physicWorld->InstancierMur(plan, listParamsMur);
     }
     if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !buttonPressedRecently && InstancierGenerateurForce)
     {
@@ -191,6 +192,10 @@ void IMGUI_ParticulesMursParameters()
     ImGui::InputInt("Pos Bx 0-150", &posXMurB, 0, 150);
     ImGui::InputInt("Pos By 0-150", &posYMurB, 0, 150);
     ImGui::InputInt("Pos Bz 0-150", &posZMurB, 0, 150);
+    ImGui::Text("Changer l'orientation du plan de notre mur :");
+    ImGui::InputInt("Plan X mur 0-1", &planXMur, 0, 1);
+    ImGui::InputInt("Plan Y mur 0-1", &planYMur, 0, 1);
+    ImGui::InputInt("Plan Z mur 0-1", &planZMur, 0, 1);
     ImGui::Text("Changer la valeur de restitution du mur en cas de contact :");
     ImGui::InputFloat("0-1", &restitution, 0, 1);
     //La fenetre est complete.
@@ -286,7 +291,7 @@ int main(int argc, char** argv)
         return -1;
 
     //Creer une fenetre OpenGL.
-    window = glfwCreateWindow(1280, 720, "PhysicWorld, ammat de particules, forces et contacts", NULL, NULL);
+    window = glfwCreateWindow(1600, 1000, "PhysicWorld, ammat de particules, forces et contacts", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -316,6 +321,37 @@ int main(int argc, char** argv)
 
     //creation de notre objet.
     physicWorld = new PhysicWorld();
+
+    //--------------------------------------------------------------------------------------------------------------------------TEST FORCES OK
+    // masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj, radius
+    // m_maxDepth, m_volume, m_waterHeight, m_liquidDensity, m_k1Drag, m_k2Drag, posYGravity, m_k, m_restLength
+    //GRAVITY OK, DRAG OK, SPRING OK, BUOANCY OK
+    float listP1[12] = { 1,0,10,5,0,-2,5,0,0,0,0.9,2 };
+    float listP2[12] = { 1,0,15,-5,0,0,-5,0,0,0,0.9,2 };
+    //BUOANCY
+    float list2[9] = { 1,100,10,0.1,0,0,0,0,0 };
+    //GRAVITE
+    float list3[9] = { 0,0,0,0,0,0,-5,0,0 };
+    //DRAG
+    float list4[9] = { 0,0,0,0,5,5,0,0,0 };
+    //SPRING
+    float list5[9] = { 0,0,0,0,0,0,0,0.1,10 };
+    physicWorld->InstancierParticule(listP1);
+    //physicWorld->InstancierParticule(listP2);
+    //physicWorld->CreerGenerateurForce(2, physicWorld->listeParticules[0], list3);
+    //physicWorld->CreerGenerateurForce(0, physicWorld->listeParticules[0], list2);
+    //physicWorld->CreerGenerateurForce(1, physicWorld->listeParticules[0], list4);
+    //physicWorld->CreerGenerateurForce(3, physicWorld->listeParticules[0], list5, physicWorld->listeParticules[1]);
+    
+    //--------------------------------------------------------------------------------------------------------------------------TEST MURS CONTACT OK
+    //posXMurA,posYMurA,posZMurA,posXMurB,posYMurB,posZMurB, restitution
+    float listM1[7] = { 0,0,15,0,10,15,0.8};
+    Vector3D normalPlan = Vector3D(0, 0, 1);
+    physicWorld->InstancierMur(normalPlan, listM1);
+
+    //--------------------------------------------------------------------------------------------------------------------------TEST CONTACT
+    //physicWorld->CreerTypeContactParticules(typeContact, particule1, particule2, listeParamsContacts);
+
 
     //Boucle while jusqu'a une fermeture de fenetre de la part de l'utilisateur.
     while (!glfwWindowShouldClose(window))
@@ -359,7 +395,8 @@ int main(int argc, char** argv)
         float listeParamsMur[7] = { posXMurA,posYMurA,posZMurA,posXMurB,posYMurB,posZMurB, restitution };
         float listeParamsGenerator[9] = {m_maxDepth, m_volume, m_waterHeight, m_liquidDensity, m_k1Drag, m_k2Drag, posYGravity, m_k, m_restLength };
         float listeParamsContacts[3] = {maxLength,restitutionContacts,length };
-        GestionSouris(listParamsParticule, listeParamsMur, listeParamsGenerator, listeParamsContacts, typeGenerateurForce, typeContact , particule1, particule2, instancierParticule, instancierMur);
+        Vector3D plan = Vector3D(planXMur, planYMur, planZMur);
+        GestionSouris(listParamsParticule, listeParamsMur, listeParamsGenerator, listeParamsContacts, typeGenerateurForce, typeContact , particule1, particule2, plan,instancierParticule, instancierMur);
         //----------------------------Actualisation des positions des particules + gestion des contacts entre nos particules, et ceux des murs--------------------------------------------------------
         TimingData::update();
         physicWorld->UpdateVariousFrameRate(pause);//getLastFrameDuration(startTime, endTime));

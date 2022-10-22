@@ -25,5 +25,6 @@ void ParticleGravity::updateForce(Particle* particle, float duration)
 	Vector3D velocity = particle->getVelocity();
 
 	//On applique la force de gravité pendant la durée de la frame à notre vitesse. 
-	particle->setVelocity((velocity+adaptedGravity)*duration);
+	velocity.addScaledVector(gravity, duration);
+	particle->setVelocity(velocity);
 }

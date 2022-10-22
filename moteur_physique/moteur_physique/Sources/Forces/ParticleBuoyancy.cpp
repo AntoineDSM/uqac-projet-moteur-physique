@@ -27,11 +27,13 @@ void ParticleBuoyancy::updateForce(Particle* particle, float duration)
 	if (depth <= m_waterHeight - m_maxDepth) 
 	{
 		force.y = m_liquidDensity * m_volume;//densité du liquide par le volume de l'objet.
-		particle->setVelocity((velocity + force) * duration);
+		velocity.addScaledVector(force, duration);
+		particle->setVelocity(velocity);
 		return;
 	}
 
 	// Sinon, nous sommes partiellement submergés.
 	force.y = m_liquidDensity * m_volume * (depth - m_maxDepth - m_waterHeight) / 2 * m_maxDepth;
-	particle->setVelocity((velocity + force) * duration);
+	velocity.addScaledVector(force, duration);
+	particle->setVelocity(velocity);
 }
