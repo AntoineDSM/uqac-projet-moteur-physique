@@ -67,34 +67,36 @@ public :
 	}
 
 	//Rafraichissement des valeurs de position et de vitesse a valeur de temps variable, nous actualisons a la duree prise par la derniere frame pour s'executer.
-	void UpdateVariousFrameRate()//float duration)
+	void UpdateVariousFrameRate(bool pause)//float duration)
 	{
-		//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
-		//Nous prenons donc volontairement une unite de retard pour la simulation.
-
-		//on discretise plus que la normale//duration *=  0.0005f;//on discretise plus que la normale
-		float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
-		if (duration <= 0.0f) return;
-
-		//Actualisation de la vitesse et de l'acceleration de notre particule avec l'integration en fonction du temps (temps de la frame n-1).
-		for(Particle* particule : listeParticules)
+		if (pause)
 		{
-			particule->integrate(duration);
-		}
-		 
-		//Actualisation des forces appliquées à nos particules
-		PFR->updateForces(duration);
-		
-		////Resolutions de l'ensemble des contacts entre nos particules
-		//PCR->resolveContacts(listeParticulesContacts);
-		
-		////Resolutions des contacts en rapport avec nos murs.
-		
-		//for (WallContactGenerator* wallContactGenerator : listeMursResolveurs)
-		//{
-		//	wallContactGenerator->resolveContact();
-		//}
+			//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
+			//Nous prenons donc volontairement une unite de retard pour la simulation.
+			
+			//on discretise plus que la normale//duration *=  0.0005f;//on discretise plus que la normale
+			float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
+			if (duration <= 0.0f) return;
 
+			//Actualisation de la vitesse et de l'acceleration de notre particule avec l'integration en fonction du temps (temps de la frame n-1).
+			for (Particle* particule : listeParticules)
+			{
+				particule->integrate(duration);
+			}
+
+			//Actualisation des forces appliquées à nos particules
+			PFR->updateForces(duration);
+
+			////Resolutions de l'ensemble des contacts entre nos particules
+			//PCR->resolveContacts(listeParticulesContacts);
+
+			////Resolutions des contacts en rapport avec nos murs.
+
+			//for (WallContactGenerator* wallContactGenerator : listeMursResolveurs)
+			//{
+			//	wallContactGenerator->resolveContact();
+			//}
+		}
 	}
 
 	void DisplayOpenGL()
@@ -129,49 +131,40 @@ public :
 		CreerMursResolveurs(newWall, listParamsObj[6]);
 	}
 
-	void CreerGenerateurForce(int type, std::vector<Particle*> listeParticules, float listParamsForceGenerator[] = {}, Particle* otherParticule = new Particle())//0 Buoancy, 1 drag, 2 gravity, 3 spring
+	void CreerGenerateurForce(int type, Particle* particule, float listParamsForceGenerator[] = {}, Particle* otherParticule = new Particle())//0 Buoancy, 1 drag, 2 gravity, 3 spring
 	{
 		switch(type)
 		{
 		case 0 :
-			for (Particle* particule : listeParticules)
-			{
-				ParticleBuoyancy* PFG = new ParticleBuoyancy(listParamsForceGenerator[0], listParamsForceGenerator[1], listParamsForceGenerator[2], listParamsForceGenerator[3]);
-				PFR->add(particule, PFG);
-			}
+		{
+			ParticleBuoyancy* PFG = new ParticleBuoyancy(listParamsForceGenerator[0], listParamsForceGenerator[1], listParamsForceGenerator[2], listParamsForceGenerator[3]);
+			PFR->add(particule, PFG);
 			break;
+		}
 		case 1 :
-			for (Particle* particule : listeParticules)
-			{
-				ParticleDrag* PFG = new ParticleDrag(listParamsForceGenerator[0], listParamsForceGenerator[1]);
-				PFR->add(particule, PFG);
-			}
+		{
+			ParticleDrag* PFG = new ParticleDrag(listParamsForceGenerator[4], listParamsForceGenerator[5]);
+			PFR->add(particule, PFG);
 			break;
+		}
 		case 2 :
 		{
-			Vector3D gravity = Vector3D(listParamsForceGenerator[0], listParamsForceGenerator[1], listParamsForceGenerator[2]);
-			for (Particle* particule : listeParticules)
-			{
-				ParticleGravity* PFG = new ParticleGravity(gravity);
-				PFR->add(particule, PFG);
-			}
+			Vector3D gravity = Vector3D(0, listParamsForceGenerator[6], 0);
+			ParticleGravity* PFG = new ParticleGravity(gravity);
+			PFR->add(particule, PFG);
 			break;
 		}
 		case 3 :
-			for (Particle* particule : listeParticules)
-			{
-				ParticleSpring* PFG = new ParticleSpring(otherParticule, listParamsForceGenerator[0], listParamsForceGenerator[1]);
-				PFR->add(particule, PFG);	
-			}
+		{
+			ParticleSpring* PFG = new ParticleSpring(otherParticule, listParamsForceGenerator[7], listParamsForceGenerator[8]);
+			PFR->add(particule, PFG);
 			break;
+		}
 		default:
 		{
-			Vector3D gravity = Vector3D(listParamsForceGenerator[0], listParamsForceGenerator[1], listParamsForceGenerator[2]);
-			for (Particle* particule : listeParticules)
-			{
-				ParticleGravity* PFG = new ParticleGravity(gravity);
-				PFR->add(particule, PFG);
-			}
+			Vector3D gravity = Vector3D(0, listParamsForceGenerator[6], 0);
+			ParticleGravity* PFG = new ParticleGravity(gravity);
+			PFR->add(particule, PFG);
 			break;
 		}
 		}
@@ -200,7 +193,7 @@ public :
 		}
 		case 1 :
 		{
-			ParticleRod newParticleContact = ParticleRod(particles, listParamsForceGenerator[0]);
+			ParticleRod newParticleContact = ParticleRod(particles, listParamsForceGenerator[2]);
 			newParticleContact.addContact(listeParticulesContacts[currentIndex]);
 			break;
 		}

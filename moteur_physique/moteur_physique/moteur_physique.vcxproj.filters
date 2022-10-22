@@ -180,6 +180,9 @@
     <ClInclude Include="TimingData.h">
       <Filter>Headers\Utils</Filter>
     </ClInclude>
+    <ClInclude Include="AmatParticules.h">
+      <Filter>Headers\Demos</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">

@@ -183,6 +183,7 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AmatParticules.h" />
     <ClInclude Include="Headers\Wall.h" />
     <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />

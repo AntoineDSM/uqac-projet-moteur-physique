@@ -24,10 +24,13 @@
 using namespace TimingOldMethod;
 using namespace moteurJeux;
 using namespace Timing;
-//----jeu, faire un ammat de particules en les créant une a une a un endroit, les faire se déplacer dans une direction presque commune lentement et ajouter des contacts entre certaines d'entre elles.
+
 //----division d'une particule puis reassembler : au clic de souris sur une particule (ou avec IMGUI un booléen pour une particule), on supp la particule et on en créer deux a la place, ces deux sont ajoutées a la liste
 //		des particules et un lien (contact link) leur est directement attribué, elles etre rassembler si la distance les separants depasse une limite, on les rapproches, les supprime et on remet celle d'origine. OU au changement
 //		du meme booléen dans IMGUI
+
+//--PERMETTRE LA MISE EN PAUSE DU PROGRAMME AVEC UN BOOLEEN SUR IMGUI, LAISSER LE TEMPS A L'UTILISATEUR DE CREER SES ELEMENTS
+
 
 //-------------------------------------------------------------------------METHODES ADDITIONNELLES------------------------------------------------------------------------------------------------------------------------
 
@@ -37,20 +40,54 @@ bool buttonPressedRecently = false;
 //std::chrono::system_clock::time_point endTime = std::chrono::system_clock::now();
 
 //Liste des variables modifiables par IMGUI.
+//parametre de position de la camera dans notre repère
 int posCamX = 100;
 int posCamY = 50;
 int posCamZ = 100;
+//attribut d'une particule
 int posXObj = 0, posYObj = 0, posZObj = 0;
 int vitXObj = 0, vitYObj = 0, vitZObj = 0;
 int accXObj = 0, accYObj = 0, accZObj = 0;
-int posXMurA = 0, posYMurA = 0, posZMurA = 0;
-int posXMurB = 0, posYMurB = 0, posZMurB = 0;
-float restitution = 0;
 float dampingObj = 0.9;
 float masseObj = 1;
 double radius = 2;
+//attribut de restitution d'un mur
+float restitution = 0;
+int posXMurA = 0, posYMurA = 0, posZMurA = 0;
+int posXMurB = 0, posYMurB = 0, posZMurB = 0;
+//Choisir entre instancier mur ou particule, un contact ou un generateur
 bool instancierMur = false;
 bool instancierParticule = false;
+bool InstancierGenerateurForce = false;
+bool InstancierContact = false;
+
+//Mettre en pause l'evolution des elements
+bool pause = true;
+
+//Ajout des parametres pour les generateurs de force à appliquer sur les particules
+int typeGenerateurForce=0;
+//buoancy
+float m_maxDepth = 0, m_volume = 0, m_waterHeight = 0, m_liquidDensity = 0;
+//drag
+double m_k1Drag = 0, m_k2Drag = 0;
+//gravity
+int posXGravity = 0, posYGravity = 0, posZGravity = 0;
+//spring
+float m_k = 0;
+float m_restLength = 0;
+
+//Ajout des parametres pour les types de contacts entre particules
+int typeContact=0;
+//cable
+float maxLength = 0;
+float restitutionContacts = 0;
+//rod
+float length = 0;
+
+//la premiere particule sera toujours celle affecte par un generateur de force, le binome sera utilisé pour l'ajout de contact
+int first_currentParticuleSelected = 0;
+int second_currentParticuleSelected = 0;
+
 
 //Permet d'attendre avant de detecter un appui car ça peut etre le meme.
 void StartTimer()
@@ -59,7 +96,7 @@ void StartTimer()
     buttonPressedRecently = false;
 }
 
-void GestionSouris(float listParamsParticule[], float listParamsMur[],bool InstancierParticule = false, bool InstancierMur = false)
+void GestionSouris(float listParamsParticule[], float listParamsMur[], float listeParamsGenerateurForce[], float listeParamsContacts[], int typeGenerateurForce, int typeContact, Particle* particule1, Particle* particule2, bool InstancierParticule = false, bool InstancierMur = false)
 {
     buttonPressedRecently = true;
     //Eviter de prendre plusieurs entrees en une.
@@ -72,8 +109,14 @@ void GestionSouris(float listParamsParticule[], float listParamsMur[],bool Insta
     {
         physicWorld->InstancierMur(listParamsMur);
     }
-    //CreerGenerateurForce
-    //CreerTypeContactParticules
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !buttonPressedRecently && InstancierGenerateurForce)
+    {
+        physicWorld->CreerGenerateurForce(typeGenerateurForce, particule1, listeParamsGenerateurForce, particule2);
+    }
+    if (sf::Mouse::isButtonPressed(sf::Mouse::Right) && !buttonPressedRecently && InstancierContact)
+    {
+        physicWorld->CreerTypeContactParticules(typeContact ,particule1, particule2, listeParamsContacts);
+    }
 }
 
 //Fonction permettant la création d'un repere x,y,z orthonorme.
@@ -150,22 +193,84 @@ void IMGUI_ParticulesMursParameters()
     ImGui::InputInt("Pos Bz 0-150", &posZMurB, 0, 150);
     ImGui::Text("Changer la valeur de restitution du mur en cas de contact :");
     ImGui::InputFloat("0-1", &restitution, 0, 1);
-    //instancier l'un ou l'autre
-    ImGui::Text("Si vous voulez autoriser l'instanciation d'un mur et d'une particule :");
-    ImGui::Checkbox("Instancier particule", &instancierParticule);
-    ImGui::Checkbox("Instancier Mur", &instancierMur);
     //La fenetre est complete.
     ImGui::End();
 }
 
 void IMGUI_AjoutForceGenerator()
 {
+    //Creation fenetre IMGUI.
+    ImGui::Begin("Vous pouvez modifier des attributs de force generateur ici :");
 
+    ImGui::Text("Changer le type de force generator a instancier, 0>Buoancy, 1>Drag, 2>Gravity, 3>Spring :");
+    ImGui::SliderInt("Type : ", &typeGenerateurForce,0, 3);
+
+    ImGui::Text("Changer les attributs du generateur buoancy :");
+    ImGui::InputFloat("Max depth : ", &m_maxDepth, 0, 50);
+    ImGui::InputFloat("Volume : ", &m_volume, 0, 50);
+    ImGui::InputFloat("Water height :", &m_waterHeight, 0, 50);
+    ImGui::InputFloat("Liquid density : ", &m_liquidDensity, 0, 50);
+
+    ImGui::Text("Changer les attributs pour le generateur Drag :");
+    ImGui::InputDouble("K1 drag : ", &m_k1Drag, 0, 10);
+    ImGui::InputDouble("K2 drag : ", &m_k2Drag, 0, 10);
+
+    ImGui::Text("Changer le vecteur du generateur de gravite :");
+    ImGui::InputInt("Y : ", &posYGravity, -50, 50);
+
+    ImGui::Text("Changer les attributs du generateur Spring :");
+    ImGui::InputFloat("K : ", &m_k, 0, 10);
+    ImGui::InputFloat("Rest length : ", &m_restLength, 0, 10);
+
+    ImGui::End();
 }
 
 void IMGUI_AjoutTypeContacts()
 {
+    //Creation fenetre IMGUI.
+    ImGui::Begin("Vous pouvez modifier des attributs de type de contact ici :");
 
+    ImGui::Text("Changer le type de contact a appliquer sur deux particules, 0>Cable, 1>Rod :");
+    ImGui::SliderInt("Type : ", &typeContact, 0, 1);
+
+    ImGui::Text("Changer les attributs du contact cable :");
+    ImGui::InputFloat("Max length : ", &maxLength, 0, 50);
+    ImGui::InputFloat("Restitution : ", &restitutionContacts, 0, 50);
+
+    ImGui::Text("Changer les attributs du contact rod :");
+    ImGui::InputFloat("Length :", &length, 0, 50);
+
+    ImGui::End();
+}
+
+void IMGUI_ChoixParticleUnique_Binome()
+{
+    //Creation fenetre IMGUI.
+    ImGui::Begin("Vous choisir la particule/ le binome de particule qui seront affectes :");
+
+    ImGui::InputInt("Particule 1 : ", &first_currentParticuleSelected, 0, physicWorld->listeParticules.size());
+    ImGui::InputInt("Particule 2 :", &second_currentParticuleSelected, 0, physicWorld->listeParticules.size());
+
+    ImGui::End();
+}
+
+void IMGUI_ChoixInstanciation()
+{
+    //Creation fenetre IMGUI.
+    ImGui::Begin("Vous choisir la particule/ le binome de particule qui seront affectes :");
+
+    //Mettre en pause l'evolution des elements
+    ImGui::Checkbox("Pause : ", &pause);
+
+    //instancier l'un ou l'autre
+    ImGui::Text("Si vous voulez autoriser l'instanciation d'un mur et d'une particule :");
+    ImGui::Checkbox("Instancier particule : ", &instancierParticule);
+    ImGui::Checkbox("Instancier Mur : ", &instancierMur);
+    ImGui::Checkbox("Instancier Generateur Force : ", &InstancierGenerateurForce);
+    ImGui::Checkbox("Instancier Contact : ", &InstancierContact);
+
+
+    ImGui::End();
 }
 
 //---------------------------------------------------------------------MAIN TEST RENDU 2, FORCES ET CONTACTS--------------------------------------------------------------------------------------------------------------
@@ -194,7 +299,8 @@ int main(int argc, char** argv)
     //Initialiser IMGUI.
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO& io = ImGui::GetIO(); 
+    (void)io;
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 450");
@@ -204,15 +310,6 @@ int main(int argc, char** argv)
     glLoadIdentity();
     gluPerspective(70, (double)640 / 480, 1, 1000);
     glEnable(GL_DEPTH_TEST);
-
-    //Création menu IMGUI pour particules et murs.
-    IMGUI_ParticulesMursParameters();
-
-    //Création menu IMGUI pour ajouter des générateurs de forces aux particules.
-    IMGUI_AjoutForceGenerator();
-
-    //Création menu IMGUI pour ajouter des types de contacts entre nos particules.
-    IMGUI_AjoutTypeContacts();
 
     //lancement du timer.
     TimingData::init();
@@ -235,15 +332,37 @@ int main(int argc, char** argv)
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
 
+        //Création menu IMGUI pour particules et murs.
+        IMGUI_ParticulesMursParameters();
 
+        //Création menu IMGUI pour ajouter des générateurs de forces aux particules.
+        IMGUI_AjoutForceGenerator();
+
+        //Création menu IMGUI pour ajouter des types de contacts entre nos particules.
+        IMGUI_AjoutTypeContacts();
+
+        //Liste des particules instanciées afin de pouvoir leur appliquer generateur et force
+        IMGUI_ChoixParticleUnique_Binome();
+
+        //Permet de choisir si nous instantion une particule, un mur, un contact, un generateur de force
+        IMGUI_ChoixInstanciation();
 
         //-----------------------------------------------Recuperer les interactions clavier/souris de l'utilisateur.----------------------------------------------
+        Particle* particule1 = new Particle();
+        Particle* particule2 = new Particle();
+        if (physicWorld->listeParticules.size() > 0)
+        {
+            particule1 = physicWorld->listeParticules[first_currentParticuleSelected];
+            particule2 = physicWorld->listeParticules[second_currentParticuleSelected];
+        }
         float listParamsParticule[12] = { masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj, radius};
         float listeParamsMur[7] = { posXMurA,posYMurA,posZMurA,posXMurB,posYMurB,posZMurB, restitution };
-        GestionSouris(listParamsParticule, listeParamsMur,instancierParticule, instancierMur);
+        float listeParamsGenerator[9] = {m_maxDepth, m_volume, m_waterHeight, m_liquidDensity, m_k1Drag, m_k2Drag, posYGravity, m_k, m_restLength };
+        float listeParamsContacts[3] = {maxLength,restitutionContacts,length };
+        GestionSouris(listParamsParticule, listeParamsMur, listeParamsGenerator, listeParamsContacts, typeGenerateurForce, typeContact , particule1, particule2, instancierParticule, instancierMur);
         //----------------------------Actualisation des positions des particules + gestion des contacts entre nos particules, et ceux des murs--------------------------------------------------------
         TimingData::update();
-        physicWorld->UpdateVariousFrameRate();//getLastFrameDuration(startTime, endTime));
+        physicWorld->UpdateVariousFrameRate(pause);//getLastFrameDuration(startTime, endTime));
         //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
         DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
         //--------------------------------------------------------------Rendre nos particules et nos murs.--------------------------------------------------------------------
