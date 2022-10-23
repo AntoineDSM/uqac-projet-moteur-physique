@@ -1,4 +1,4 @@
-#include "Contacts/ParticleConctactGenerator.h"
+#include "Contacts/ParticleContactGenerator.h"
 #include <stdlib.h>
 #include <vector>
 #include "Particles/Particle.h"

@@ -65,7 +65,7 @@ bool pause = false;
 
 //Ajout des parametres pour les generateurs de force à appliquer sur les particules
 int typeGenerateurForce=0;
-//buoancy
+//buoyancy
 float m_maxDepth = 0, m_volume = 0, m_waterHeight = 0, m_liquidDensity = 0;
 //drag
 double m_k1Drag = 0, m_k2Drag = 0;

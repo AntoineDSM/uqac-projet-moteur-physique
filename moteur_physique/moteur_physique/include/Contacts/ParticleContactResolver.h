@@ -2,7 +2,7 @@
 
 #include "ParticleContact.h"
 #include "ParticleCable.h"
-#include "ParticleConctactGenerator.h"
+#include "ParticleContactGenerator.h"
 #include "Particlelink.h"
 #include "ParticleRod.h"
 #include "WallContactGenerator.h"
