@@ -10,11 +10,7 @@ ParticleCable::ParticleCable(Particle* particles[2], float maxLength, float rest
 
 void ParticleCable::addContact(ParticleContact* contact)
 {
-	float distance = std::sqrt((Precision::carre(particle[1]->getPosition().x - particle[0]->getPosition().x)) + (Precision::carre(particle[1]->getPosition().y - particle[0]->getPosition().y)) + (Precision::carre(particle[1]->getPosition().z - particle[0]->getPosition().z)));
-	if (distance > maxLength)
-	{
-		*contact = ParticleContact(particle, restitution, 0);
-	}
+	*contact = ParticleContact(particle, restitution, maxLength);
 }
 
 float ParticleCable::currentLength() const

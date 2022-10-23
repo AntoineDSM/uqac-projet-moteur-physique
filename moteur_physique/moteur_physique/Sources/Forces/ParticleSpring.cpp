@@ -26,20 +26,19 @@ void ParticleSpring::updateForce(Particle* particle, float duration)
 
 	//On initialise le delta position entre les deux
 	Vector3D d = position_1 - position_2;
-	Vector3D dAbs = (moteurJeux::Vector3D::get_abs(d));
-	if (dAbs.x != 0)
+	if (d.x != 0)
 	{
-		dAbs.x -= m_restlength;
+		d.x -= m_restlength;
 	}
-	if (dAbs.y != 0)
+	if (d.y != 0)
 	{
-		dAbs.y -= m_restlength;
+		d.y -= m_restlength;
 	}
-	if (dAbs.z != 0)
+	if (d.z != 0)
 	{
-		dAbs.z -= m_restlength;
+		d.z -= m_restlength;
 	}
-	force = Vector3D::get_normalization_2(dAbs * m_k * (float)(-1));
+	force = Vector3D::get_normalization_2(d * m_k * (float)(-1));
 
 	velocity_1.addScaledVector(force , duration);
 	velocity_2.addScaledVector(force * (float)(-1), duration);

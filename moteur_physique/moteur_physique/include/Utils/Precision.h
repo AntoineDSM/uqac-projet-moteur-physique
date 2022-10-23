@@ -10,7 +10,7 @@
 #define PRECISION_HPP
 
 #include <float.h>
-#define real_pow powf
+#include <vector>
 
 namespace Precision {
 
@@ -19,8 +19,7 @@ namespace Precision {
 		return x * x;
 	}
 
-    inline void swapNums(int nums[],
-        int first, int second, int secondArray[])
+    inline void swapNums(std::vector<int> nums, int first, int second, std::vector<int> secondArray)
     {
         int curr = nums[first];
         int currSecond = secondArray[first];
@@ -30,7 +29,7 @@ namespace Precision {
         secondArray[second] = currSecond;
     }
 
-    inline void sort(int num[] ,int len, int secondArray[])
+    inline void sort(std::vector<int> num ,int len, std::vector<int> secondArray)
     {
         bool isSwapped;
         for (int i = 0; i < len; i++)

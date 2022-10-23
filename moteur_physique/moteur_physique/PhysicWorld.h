@@ -25,6 +25,8 @@ public :
 	std::vector<Particle*> listeParticules = std::vector<Particle*>();
 	std::vector<ParticleContact*> listeParticulesContacts = std::vector<ParticleContact*>();
 
+	std::vector<ParticleContact*> listeContactsSpeciaux = std::vector<ParticleContact*>();
+
 
 	PhysicWorld()
 	{
@@ -52,8 +54,11 @@ public :
 	{
 		for (Particle* particule : listeParticules)
 		{
-			Particle* duoParticles[2] = { particule, newParticule };
-			listeParticulesContacts.push_back(new ParticleContact(duoParticles));//par defaut restitution à 0.5 et penetration à 0
+			if (particule != newParticule)
+			{
+				Particle* duoParticles[2] = { particule, newParticule };
+				listeParticulesContacts.push_back(new ParticleContact(duoParticles));//par defaut restitution à 0.5 et penetration à 0
+			}
 		}
 		for (WallContactGenerator* wallContact : listeMursResolveurs)
 		{
@@ -87,8 +92,11 @@ public :
 			//Actualisation des forces appliquées à nos particules
 			PFR->updateForces(duration);
 
-			////Resolutions de l'ensemble des contacts entre nos particules
-			//PCR->resolveContacts(listeParticulesContacts);
+			//Resolutions de l'ensemble des contacts entre nos particules
+			PCR->resolveContacts(listeParticulesContacts);
+			PCR->resolveSpecialsContacts(listeContactsSpeciaux);
+
+			//Resourdre la liste des contacts speciaux cable et rod.
 
 			////Resolutions des contacts en rapport avec nos murs.
 			for (WallContactGenerator* wallContactGenerator : listeMursResolveurs)
@@ -178,7 +186,7 @@ public :
 
 	void CreerTypeContactParticules(int type, Particle* particule1, Particle* particule2, float listParamsForceGenerator[] = {})//0 Cable, 1 Rod
 	{
-		int currentIndex;
+		int currentIndex = 0;
 		Particle* particles[2] = { particule1, particule2 };
 
 		for(int i = 0; i < listeParticulesContacts.size(); i++)
@@ -193,14 +201,16 @@ public :
 		{
 		case 0 :
 		{
-			ParticleCable newParticleContact = ParticleCable(particles, listParamsForceGenerator[0], listParamsForceGenerator[1]);
-			newParticleContact.addContact(listeParticulesContacts[currentIndex]);
+			ParticleCable* newParticleContact = new ParticleCable(particles, listParamsForceGenerator[0], listParamsForceGenerator[1]);
+			newParticleContact->addContact(listeParticulesContacts[currentIndex]);
+			listeContactsSpeciaux.push_back(listeParticulesContacts[currentIndex]);
 			break;
 		}
 		case 1 :
 		{
-			ParticleRod newParticleContact = ParticleRod(particles, listParamsForceGenerator[2]);
-			newParticleContact.addContact(listeParticulesContacts[currentIndex]);
+			ParticleRod* newParticleContact = new ParticleRod(particles, listParamsForceGenerator[2]);
+			newParticleContact->addContact(listeParticulesContacts[currentIndex]);
+			listeContactsSpeciaux.push_back(listeParticulesContacts[currentIndex]);
 			break;
 		}
 		}

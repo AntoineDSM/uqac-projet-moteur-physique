@@ -10,7 +10,7 @@ void WallContactGenerator::resolveContact()
 		double distanceParticuleB = std::sqrt((Precision::carre(particle->getPosition().x - wallElement->pointB->x)) + (Precision::carre(particle->getPosition().y - wallElement->pointB->y)) + (Precision::carre(particle->getPosition().z - wallElement->pointB->z)));
 		double distanceAB = std::sqrt((Precision::carre(wallElement->pointA->x - wallElement->pointB->x)) + (Precision::carre(wallElement->pointA->y - wallElement->pointB->y)) + (Precision::carre(wallElement->pointA->z - wallElement->pointB->z)));
 
-		if (distanceParticuleA + distanceParticuleB < distanceAB + 0.1)
+		if (distanceParticuleA + distanceParticuleB < distanceAB + 0.7)
 		{
 			Vector3D* nearestPoint = wallElement->listePointAB[0];
 			double nearestPointDistance = std::sqrt((Precision::carre(particle->getPosition().x - nearestPoint->x)) + (Precision::carre(particle->getPosition().y - nearestPoint->y)) + (Precision::carre(particle->getPosition().z - nearestPoint->z)));;
@@ -34,7 +34,7 @@ void WallContactGenerator::resolveContact()
 			Vector3D velocity = particle->getVelocity();
 			Vector3D resultante = get_resultante(particle);
 
-			if (particle->getVelocity() == gravityValue || velocity == Vector3D())//la particule est au repos.
+			if ((particle->getVelocity().y != 0 && particle->getVelocity().x == 0 && particle->getVelocity().z == 0) || velocity == Vector3D())//la particule est au repos.
 			{
 				Vector3D gravity = gravityValue;
 				//resoudre interpenetration
@@ -87,27 +87,21 @@ void WallContactGenerator::resolveVelocity(Particle* particle, Vector3D resultan
 		newVelocity_1.z *= resultante.z;
 	}
 	newVelocity_1 *= (1 / particle->getMass());
-	std::cout << "Nouvelle velocite de la particule : " << newVelocity_1 << "\n";
 	particle->setVelocity(newVelocity_1);
 }
 
 void WallContactGenerator::resolvePenetration(Particle* particle, Vector3D resultante)
 {
 	Vector3D positionParticule = particle->getPosition();
-	std::cout << "Position particule : " << positionParticule << "\n";
-	std::cout << "Direction resultante : " << resultante << "\n";
-
-	Vector3D newPos = positionParticule + (resultante * (double)2);
-	std::cout << "Nouvelle position particule : "<<newPos << "\n";
+	Vector3D newPos = positionParticule + (resultante * (double)0);
 	//nous avons calculer le vecteur de direction entre le point de contact le plus proche et notre particule et nous décalons la particule d'un pas sur cette direction.
-	particle->setPosition(particle->getPosition() + (resultante *(double)2));
+	particle->setPosition(particle->getPosition() + (resultante *(double)0));
 }
 
 Vector3D WallContactGenerator::get_resultante(Particle* particle)
 {
 	Vector3D normale = *wallElement->planMur;
 	double angle = (particle->getVelocity().scalarProduct(normale)) / std::sqrt(particle->getVelocity().get_magnitude() * normale.get_magnitude());
-	std::cout << "cos angle resultant : " << std::cos(angle) << "\n";
 	Vector3D resultante;
 	int signe = 1;
 	if (std::cos(angle) < 0)
@@ -126,6 +120,5 @@ Vector3D WallContactGenerator::get_resultante(Particle* particle)
 	{
 		resultante.z = normale.z * signe;
 	}
-	std::cout << "resultante : " << resultante << "\n";
 	return resultante;
 }

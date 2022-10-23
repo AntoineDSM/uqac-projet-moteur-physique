@@ -27,4 +27,6 @@ class ParticleContactResolver
 		//s'arrete lorsque tous les contacts ont été résolu ou que le nombre max d'itérations est atteind.
 		void resolveContacts (std::vector<ParticleContact*> listeContacts);
 
+		void resolveSpecialsContacts(std::vector<ParticleContact*> listeContacts = std::vector<ParticleContact*>());
+
 };

@@ -29,10 +29,8 @@ using namespace Timing;
 //		des particules et un lien (contact link) leur est directement attribué, elles etre rassembler si la distance les separants depasse une limite, on les rapproches, les supprime et on remet celle d'origine. OU au changement
 //		du meme booléen dans IMGUI
 
-//--PERMETTRE LA MISE EN PAUSE DU PROGRAMME AVEC UN BOOLEEN SUR IMGUI, LAISSER LE TEMPS A L'UTILISATEUR DE CREER SES ELEMENTS
 
-
-//-------------------------------------------------------------------------METHODES ADDITIONNELLES------------------------------------------------------------------------------------------------------------------------
+//-------------------------------------------------------------------------PARAMETRE POUR IMGUI------------------------------------------------------------------------------------------------------------------------
 
 PhysicWorld* physicWorld;
 bool buttonPressedRecently = false;
@@ -41,9 +39,9 @@ bool buttonPressedRecently = false;
 
 //Liste des variables modifiables par IMGUI.
 //parametre de position de la camera dans notre repère
-int posCamX = 70;
-int posCamY = 5;
-int posCamZ = 0;
+int posCamX = 300;
+int posCamY = 300;
+int posCamZ = 300;
 //attribut d'une particule
 int posXObj = 0, posYObj = 0, posZObj = 0;
 int vitXObj = 0, vitYObj = 0, vitZObj = 0;
@@ -89,6 +87,7 @@ float length = 0;
 int first_currentParticuleSelected = 0;
 int second_currentParticuleSelected = 0;
 
+//-------------------------------------------------------------------------METHODES ADDITIONNELLES------------------------------------------------------------------------------------------------------------------------
 
 //Permet d'attendre avant de detecter un appui car ça peut etre le meme.
 void StartTimer()
@@ -97,6 +96,7 @@ void StartTimer()
     buttonPressedRecently = false;
 }
 
+//NON TESTE POUR FORCE ET CONTACT
 void GestionSouris(float listParamsParticule[], float listParamsMur[], float listeParamsGenerateurForce[], float listeParamsContacts[], int typeGenerateurForce, int typeContact, Particle* particule1, Particle* particule2, Vector3D plan,bool InstancierParticule = false, bool InstancierMur = false)
 {
     buttonPressedRecently = true;
@@ -278,6 +278,105 @@ void IMGUI_ChoixInstanciation()
     ImGui::End();
 }
 
+void TestEachFunctionnalityMethod()
+{
+//--------------------------------------------------------------------------------------------------------------------------TEST FORCES OK
+// masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj, radius
+// m_maxDepth, m_volume, m_waterHeight, m_liquidDensity, m_k1Drag, m_k2Drag, posYGravity, m_k, m_restLength
+//GRAVITY OK, DRAG OK, SPRING OK, BUOANCY OK
+//float listP1[12] = { 1,0,15,5,0,0,0,0,0,0,0.9,2 };
+//float listP3[12] = { 1,0,15,10,0,0,0,0,0,0,0.9,2 };
+//float listP2[12] = { 1,0,15,10,0,-2,5,0,0,0,0.9,2 };
+//BUOANCY
+//float list2[9] = { 1,100,10,0.1,0,0,0,0,0 };
+//GRAVITE
+//float list3[9] = { 0,0,0,0,0,0,-1,0,0 };
+//DRAG
+//float list4[9] = { 0,0,0,0,5,5,0,0,0 };
+//SPRING
+//float list5[9] = { 0,0,0,0,0,0,0,0.8,10 };
+//physicWorld->InstancierParticule(listP1);
+//physicWorld->InstancierParticule(listP2);
+//physicWorld->InstancierParticule(listP3);
+//physicWorld->CreerGenerateurForce(2, physicWorld->listeParticules[0], list3);
+//physicWorld->CreerGenerateurForce(2, physicWorld->listeParticules[1], list3);
+//physicWorld->CreerGenerateurForce(0, physicWorld->listeParticules[0], list2);
+//physicWorld->CreerGenerateurForce(1, physicWorld->listeParticules[0], list4);
+//physicWorld->CreerGenerateurForce(3, physicWorld->listeParticules[0], list5, physicWorld->listeParticules[1]);
+
+//--------------------------------------------------------------------------------------------------------------------------TEST MURS CONTACT OK
+//posXMurA,posYMurA,posZMurA,posXMurB,posYMurB,posZMurB, restitution
+//float listM1[7] = { 0,5,30,0,20,30,0.8};
+//float listM2[7] = { 0,5,0,0,5,30,0.8};
+//Vector3D normalPlan1 = Vector3D(0, 0, 1);
+//Vector3D normalPlan2 = Vector3D(0, 1, 0);
+//physicWorld->InstancierMur(normalPlan, listM1);
+//physicWorld->InstancierMur(normalPlan2, listM2);
+//physicWorld->InstancierMur(normalPlan1, listM1);
+//--------------------------------------------------------------------------------------------------------------------------TEST CONTACT
+//maxLength,restitutionContacts,length
+//float list6[3] = { 20,0.8,20};
+//CABLE OK, ROD OK
+//physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[1], list6);
+//physicWorld->CreerTypeContactParticules(1, physicWorld->listeParticules[0], physicWorld->listeParticules[1], list6);
+}
+
+void Blob()
+{
+    float listP1[12] = { 1,0,10,5,0,5,-5,0,0,0,0.9,2 };
+    float listP2[12] = { 1,0,10,-5,0,0,5,0,0,0,0.9,2 };
+    float listP3[12] = { 1,0,15,0,0,5,-5,0,0,0,0.9,2 };
+    float listP4[12] = { 1,5,5,10,0,-5,5,0,0,0,0.9,2 };
+    float listP5[12] = { 1,10,-5,-15,0,5,0,0,0,0,0.9,2 };
+    float listP6[12] = { 1,-5,10,5,5,5,0,0,0,0,0.9,2 };
+    float listP7[12] = { 1,-15,-15,5,-5,5,-5,0,0,0,0.9,2 };
+    float listP8[12] = { 1,-5,-15,-5,0,5,0,0,0,0,0.9,2 };
+    float listP9[12] = { 1,10,0,10,-10,5,-5,0,0,0,0.9,2 };
+    float listP10[12] = { 1,0,5,-5,0,15,-5,0,0,0,0.9,2 };
+    float listP11[12] = { 1,10,-15,10,-15,5,-10,0,0,0,0.9,2 };
+    float listP12[12] = { 1,-10,0,0,5,15,-15,0,0,0,0.9,2 };
+    physicWorld->InstancierParticule(listP1);
+    physicWorld->InstancierParticule(listP2);
+    physicWorld->InstancierParticule(listP3);
+    physicWorld->InstancierParticule(listP4);
+    physicWorld->InstancierParticule(listP5);
+    physicWorld->InstancierParticule(listP6);
+    physicWorld->InstancierParticule(listP7);
+    physicWorld->InstancierParticule(listP8);
+    physicWorld->InstancierParticule(listP9);
+    physicWorld->InstancierParticule(listP10);
+    physicWorld->InstancierParticule(listP11);
+    physicWorld->InstancierParticule(listP12);
+    float list6[3] = { 20,0.8,20 };
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[2], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[1], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[1], physicWorld->listeParticules[2], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[1], physicWorld->listeParticules[5], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[2], physicWorld->listeParticules[4], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[2], physicWorld->listeParticules[6], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[3], physicWorld->listeParticules[5], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[3], physicWorld->listeParticules[0], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[4], physicWorld->listeParticules[1], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[4], physicWorld->listeParticules[5], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[5], physicWorld->listeParticules[6], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[5], physicWorld->listeParticules[6], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[7], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[7], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[7], physicWorld->listeParticules[8], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[4], physicWorld->listeParticules[8], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[11], physicWorld->listeParticules[9], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[0], physicWorld->listeParticules[9], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[8], physicWorld->listeParticules[10], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[6], physicWorld->listeParticules[10], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[7], physicWorld->listeParticules[11], list6);
+    physicWorld->CreerTypeContactParticules(0, physicWorld->listeParticules[3], physicWorld->listeParticules[11], list6);
+    float list3[9] = { 0,0,0,0,0,0,-4,0,0 };
+    for (int i = 0; i < physicWorld->listeParticules.size(); i++)
+    {
+        physicWorld->CreerGenerateurForce(2, physicWorld->listeParticules[i], list3);
+    }
+}
+
 //---------------------------------------------------------------------MAIN TEST RENDU 2, FORCES ET CONTACTS--------------------------------------------------------------------------------------------------------------
 
 int main(int argc, char** argv)
@@ -322,35 +421,11 @@ int main(int argc, char** argv)
     //creation de notre objet.
     physicWorld = new PhysicWorld();
 
-    //--------------------------------------------------------------------------------------------------------------------------TEST FORCES OK
-    // masseObj, posXObj,posYObj,posZObj,vitXObj,vitYObj,vitZObj,accXObj,accYObj,accZObj,dampingObj, radius
-    // m_maxDepth, m_volume, m_waterHeight, m_liquidDensity, m_k1Drag, m_k2Drag, posYGravity, m_k, m_restLength
-    //GRAVITY OK, DRAG OK, SPRING OK, BUOANCY OK
-    float listP1[12] = { 1,0,10,5,0,-2,5,0,0,0,0.9,2 };
-    float listP2[12] = { 1,0,15,-5,0,0,-5,0,0,0,0.9,2 };
-    //BUOANCY
-    float list2[9] = { 1,100,10,0.1,0,0,0,0,0 };
-    //GRAVITE
-    float list3[9] = { 0,0,0,0,0,0,-5,0,0 };
-    //DRAG
-    float list4[9] = { 0,0,0,0,5,5,0,0,0 };
-    //SPRING
-    float list5[9] = { 0,0,0,0,0,0,0,0.1,10 };
-    physicWorld->InstancierParticule(listP1);
-    //physicWorld->InstancierParticule(listP2);
-    //physicWorld->CreerGenerateurForce(2, physicWorld->listeParticules[0], list3);
-    //physicWorld->CreerGenerateurForce(0, physicWorld->listeParticules[0], list2);
-    //physicWorld->CreerGenerateurForce(1, physicWorld->listeParticules[0], list4);
-    //physicWorld->CreerGenerateurForce(3, physicWorld->listeParticules[0], list5, physicWorld->listeParticules[1]);
-    
-    //--------------------------------------------------------------------------------------------------------------------------TEST MURS CONTACT OK
-    //posXMurA,posYMurA,posZMurA,posXMurB,posYMurB,posZMurB, restitution
-    float listM1[7] = { 0,0,15,0,10,15,0.8};
-    Vector3D normalPlan = Vector3D(0, 0, 1);
-    physicWorld->InstancierMur(normalPlan, listM1);
+    //permet de tester des mecanismes, necessaire de decommenter des lignes de la fonction
+    TestEachFunctionnalityMethod();
 
-    //--------------------------------------------------------------------------------------------------------------------------TEST CONTACT
-    //physicWorld->CreerTypeContactParticules(typeContact, particule1, particule2, listeParamsContacts);
+    //Initialise notre amat de particules, amat de blob.
+    Blob();
 
 
     //Boucle while jusqu'a une fermeture de fenetre de la part de l'utilisateur.

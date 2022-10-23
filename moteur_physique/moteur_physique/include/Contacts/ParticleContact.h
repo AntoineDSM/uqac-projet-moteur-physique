@@ -32,19 +32,21 @@ class ParticleContact{
 		//Vecteur normal aux particles.
 		Vector3D contactNormal;
 
-		ParticleContact(Particle* particle[2], float restitution = 0.5, float penetration = 0);
+		ParticleContact(Particle* particle[2], float restitution = 0.8, float penetration = 0);
 
 		//Resoud la vitesse et l'interpenetration de nos particles.
 		void resolve ();
 		
 		//retourne la différence de vitesse entre nos particles.
-		float calculatingSeparatingVelocity();
+		Vector3D calculatingSeparatingVelocity();
 		
 		//Resoud l'impulsion générée.
 		void resolveVelocity();
 		
 		//Resoud l'interpénétration entre nos particles.
-		float resolveInterpretation();
+		bool resolveInterpretation();
+
+		bool separatingDistance();
 
 };
 

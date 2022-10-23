@@ -19,8 +19,8 @@ void ParticleDrag::updateForce(Particle* particle, float duration)
 	//On calcule notre force de trainée relative aux coefficient relatifs
 	Vector3D dragCoeff;
 	Vector3D powVelocity = (velocity * velocity);
-	Vector3D arg1 = moteurJeux::Vector3D::get_abs(velocity) * m_k1;
-	Vector3D arg2 = moteurJeux::Vector3D::get_abs(powVelocity) * m_k2;
+	Vector3D arg1 = velocity * m_k1;
+	Vector3D arg2 = powVelocity * m_k2;
 	Vector3D sum = arg1 + arg2;
 	dragCoeff = Vector3D::get_normalization(sum);
 

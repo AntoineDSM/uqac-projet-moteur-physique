@@ -51,7 +51,7 @@ private:
 	inline void fillListePoint()
 	{
 		double distance = std::sqrt((carre(pointB->x - pointA->x)) + (carre(pointB->y - pointA->y)) + (carre(pointB->z - pointA->z)));
-		double pas = 1;
+		double pas = 0.1;
 		double nombrePoints = distance / pas;
 
 		int cpt = 0;

@@ -111,15 +111,15 @@ class Vector3D
 		{
 			if (v.x < 0)
 			{
-				v.x* (-1);
+				v.x*= (-1);
 			}
 			if (v.y < 0)
 			{
-				v.y* (-1);
+				v.y*= (-1);
 			}
 			if (v.z < 0)
 			{
-				v.z* (-1);
+				v.z*= (-1);
 			}
 			return v;
 		}
