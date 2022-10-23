@@ -188,7 +188,7 @@
     <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />
-    <ClInclude Include="include\Contacts\ParticleConctactGenerator.h" />
+    <ClInclude Include="include\Contacts\ParticleContactGenerator.h" />
     <ClInclude Include="include\Contacts\ParticleContact.h" />
     <ClInclude Include="include\Contacts\ParticleContactResolver.h" />
     <ClInclude Include="include\Forces\ParticleDrag.h" />

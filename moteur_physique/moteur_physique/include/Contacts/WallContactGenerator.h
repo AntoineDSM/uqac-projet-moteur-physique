@@ -1,6 +1,6 @@
 #pragma one
 
-#include "ParticleConctactGenerator.h"
+#include "ParticleContactGenerator.h"
 #include "../Headers/Wall.h"
 #include "..\ValuesReferences.h"
 
