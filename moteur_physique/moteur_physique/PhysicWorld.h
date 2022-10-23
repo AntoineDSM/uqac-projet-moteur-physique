@@ -72,16 +72,17 @@ public :
 	}
 
 	//Rafraichissement des valeurs de position et de vitesse a valeur de temps variable, nous actualisons a la duree prise par la derniere frame pour s'executer.
-	void UpdateVariousFrameRate(bool pause)//float duration)
+	void UpdateVariousFrameRate(bool pause, float duration)
 	{
 		if (pause)
 		{
 			//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
 			//Nous prenons donc volontairement une unite de retard pour la simulation.
+			duration *= 0.0005;
 			
 			//on discretise plus que la normale//duration *=  0.0005f;//on discretise plus que la normale
-			float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
-			if (duration <= 0.0f) return;
+			//float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
+			//if (duration <= 0.0f) return;
 
 			//Actualisation de la vitesse et de l'acceleration de notre particule avec l'integration en fonction du temps (temps de la frame n-1).
 			for (Particle* particule : listeParticules)
