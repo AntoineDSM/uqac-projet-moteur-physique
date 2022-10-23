@@ -65,6 +65,7 @@ void GestionClavier()//(unsigned char key,int x, int y)
 //Fonction permettant la création d'un repere x,y,z orthonorme.
 void DessineRepereOrthonorme(int posCamX = 90, int posCamY = 70, int posCamZ = 100)
 {
+    glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glMatrixMode(GL_MODELVIEW);
