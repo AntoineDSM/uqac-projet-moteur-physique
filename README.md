@@ -2,11 +2,31 @@
 
 
 
-## Getting started
+## Comment utiliser la version 2
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+-Pour la génération de l'amat de particule / de blob :
+  
+  -Un fichier release blob contient le Release_blob.exe correspond si un problème subvenait.
+  -Lorsque vous lancez la solution, de nombreuses fonctions sont presentes avant le main, une d'entre elle s'appelle Blob(), il vous faudra décommenter son appel dans le main et commenter celui de TestEachFonctionnalities().
+  
+  Lorsque l'application aura compilée, plusieurs particules seront présentes, une dizaine. Pour simuler l'ensemble il est nécessaire d'appuyer sur le booléen "Pause" dans une des fenêtre IMGUI.
+  
+-Pour le test de chacune des fonctionnalités (Buoancy, drag, gravity.....)
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+  -Il vous faudra commenter l'appel de blob() dans le main et decommenter TestEachFonctionnalities().
+  -TestEachFonctionnalities() récupère un entier par défaut à 0 en paramètre, il faut changer cet entier soit dans l'appel dans le main soit directement dans la déclaration de la fonction. Il est possible de le mettre de 0 à 7 pour aller de Buancy à Contact Rod.
+  -Il faudra donc build pour tester une à une les foncitonnalités, n'oubliez pas d'appuyer sur le booléen "pause" du menu IMGUI pour lancer la simulation.
+  
+-L'utilisation des menus IMGUI :
+
+  -Le booléen "Pause" permet le lancement/l'arret de la simulation. Vous pouvez vous deplacer dans le repère avec les 3 premiers sliders de la fenêtre particle/mur.
+  -Un menu permet d'instancier une particule/un mur. Les paramètres sont à rentrer aux emplacements adéquates, ensuite, si vous voulez instancier une particule, mettre le booléen correspondant "InstancierParticule" à true et faite clic droit. De même pour l'instanciation d'un mur.
+  -L'ajout des forces et des contacts via les menus IMGUI n'ont pas été assez testé et ne sont pas fonctionnelles.
+  
+  -Pour les soucis de compilation sur machine vierge subvenus lors du premier rendu :
+  
+    -Les problèmes ont normalement été résolus, cependant pour tester le précédant rendu, un release à été déposé également. Son nom est "Release_demoBallisitc.exe".
+
 
 ## Add your files
 
