@@ -34,25 +34,6 @@ void ParticleContactResolver::resolveContacts(std::vector<ParticleContact*> list
 				}
 			}
 
-			//Precision::sort(value, size, index);//on trie la liste des valeurs dans l'odre croissant et la liste des index est mise à jour en conséquence
-			//if (value[0] > 0)//tous les contacts sont resolus
-			//{
-			//	return;
-			//}
-			//else//on lance la résolution des contacts
-			//{
-			//	for (int i = 0; i < size; i++)//parcours du contact le plus important au moins important
-			//	{
-			//		if (value[i] > 0)
-			//		{
-			//			//ne rien faire le contact est resolu
-			//		}
-			//		else
-			//		{
-			//			listeContacts[index[i]]->resolve();//on résoud le contact
-			//		}
-			//	}
-			//}
 			cpt++;
 		}
 	}

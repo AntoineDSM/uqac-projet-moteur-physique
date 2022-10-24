@@ -25,9 +25,14 @@ using namespace TimingOldMethod;
 using namespace moteurJeux;
 using namespace Timing;
 
-//----division d'une particule puis reassembler : au clic de souris sur une particule (ou avec IMGUI un booléen pour une particule), on supp la particule et on en créer deux a la place, ces deux sont ajoutées a la liste
-//		des particules et un lien (contact link) leur est directement attribué, elles etre rassembler si la distance les separants depasse une limite, on les rapproches, les supprime et on remet celle d'origine. OU au changement
-//		du meme booléen dans IMGUI
+/*----Division d'une particule puis reassemblement lors des événements suivants : 
+ _ au clic de souris sur une particule. 
+ _ au changement de la variable booléenne d'instanciation dans IMGUI
+
+ On supprime la particule et on en créer deux a la place, ces deux sont ajoutées a la liste des particules et un lien (contact link) leur est directement attribué, 
+ Elles sont ensuite rassembler si la distance les separants depasse une limite, nous les rapprochons, les suppriment et on remet celle d'origine.
+
+*/
 
 
 //-------------------------------------------------------------------------PARAMETRE POUR IMGUI------------------------------------------------------------------------------------------------------------------------
@@ -266,7 +271,7 @@ void IMGUI_ChoixInstanciation()
 
     //instancier l'un ou l'autre
     ImGui::Text("Si vous voulez autoriser l'instanciation d'un mur et d'une particule :");
-    ImGui::Checkbox("Instancier particule : ", &instancierParticule);
+    ImGui::Checkbox("Instancier Particule : ", &instancierParticule);
     ImGui::Checkbox("Instancier Mur : ", &instancierMur);
     ImGui::Checkbox("Instancier Generateur Force : ", &InstancierGenerateurForce);
     ImGui::Checkbox("Instancier Contact : ", &InstancierContact);
