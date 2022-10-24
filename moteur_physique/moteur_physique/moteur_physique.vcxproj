@@ -180,6 +180,10 @@
     <ClCompile Include="Sources\Forces\ParticleForceRegistry.cpp" />
     <ClCompile Include="Sources\Forces\ParticleGravity.cpp" />
     <ClCompile Include="Sources\Forces\ParticleSpring.cpp" />
+    <ClCompile Include="Sources\Rotations\Matrix33.cpp" />
+    <ClCompile Include="Sources\Rotations\Matrix34.cpp" />
+    <ClCompile Include="Sources\Rotations\Quaternion.cpp" />
+    <ClCompile Include="Sources\Rotations\RigidBody.cpp" />
     <ClCompile Include="Sources\Vector3D\Vector3D.cpp" />
     <ClCompile Include="TimingData.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -211,6 +215,10 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\Particles\Particle.h" />
+    <ClInclude Include="include\Rotations\Matrix33.h" />
+    <ClInclude Include="include\Rotations\Matrix34.h" />
+    <ClInclude Include="include\Rotations\Quaternion.h" />
+    <ClInclude Include="include\Rotations\RigidBody.h" />
     <ClInclude Include="include\Utils\Precision.h" />
     <ClInclude Include="include\Utils\Timing.h" />
     <ClInclude Include="include\Vector3D\Vector3D.h" />

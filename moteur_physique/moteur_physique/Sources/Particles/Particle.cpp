@@ -30,8 +30,6 @@ void Particle::integrate(double duration) {
 	//Damping correspond au facteur d'ammortissement (les frottements par exemple dus a la composition du milieu ambiant). Ainsi cette ammortissement agis sur notre vitesse.
 	//Car doit ralentir notre objet.
 	velocity *= pow(damping, duration); 
-<<<<<<<< HEAD:moteur_physique/moteur_physique/Sources/Particles/Particle.cpp
-========
 
 
 }

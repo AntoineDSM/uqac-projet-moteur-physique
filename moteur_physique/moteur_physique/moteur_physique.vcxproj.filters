@@ -82,11 +82,17 @@
     <ClCompile Include="TimingData.cpp">
       <Filter>Sources\Utils</Filter>
     </ClCompile>
-    <ClCompile Include="imgui_impl_opengl3.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Sources\Rotations\Matrix33.cpp">
+      <Filter>Sources\Rotations</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleAnchoredSpring.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="Sources\Rotations\Matrix34.cpp">
+      <Filter>Sources\Rotations</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\Quaternion.cpp">
+      <Filter>Sources\Rotations</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\RigidBody.cpp">
+      <Filter>Sources\Rotations</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -189,8 +195,17 @@
     <ClInclude Include="AmatParticules.h">
       <Filter>Headers\Demos</Filter>
     </ClInclude>
-    <ClInclude Include="ParticleAnchoredSpring.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="include\Rotations\Matrix33.h">
+      <Filter>Headers\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rotations\Matrix34.h">
+      <Filter>Headers\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rotations\Quaternion.h">
+      <Filter>Headers\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rotations\RigidBody.h">
+      <Filter>Headers\Rotations</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -253,6 +268,12 @@
     </Filter>
     <Filter Include="Headers\Forces">
       <UniqueIdentifier>{09a7c2e8-a664-4e50-b5e8-ff06bf0260f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Rotations">
+      <UniqueIdentifier>{a3c46664-1bdf-4d62-bb84-013670751a8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Rotations">
+      <UniqueIdentifier>{a02be99b-4e81-435f-ad5c-35de39c5ba95}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

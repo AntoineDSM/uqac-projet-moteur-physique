@@ -2,7 +2,7 @@
 
 #include "ParticleForceGenerator.h"
 
-#include "Particle.h"
+#include "Particles/Particle.h"
 using namespace moteurJeux;
 
 class ParticleBuoyancy : public ParticleForceGenerator

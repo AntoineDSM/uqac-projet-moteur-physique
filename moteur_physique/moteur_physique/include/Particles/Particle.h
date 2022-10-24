@@ -112,16 +112,16 @@ class Particle
 
 		inline double getInverseMass() { return inverseMass;}
 
-<<<<<<<< HEAD:moteur_physique/moteur_physique/include/Particles/Particle.h
+
 		inline double getRadius() { return radius; }
 
 		inline void setRadius(double _radius)
 		{
 			radius = _radius;
 		}
-========
+
 		bool hasFiniteMass() const;
->>>>>>>> bug fix:moteur_physique/moteur_physique/Particle.h
+
 
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 

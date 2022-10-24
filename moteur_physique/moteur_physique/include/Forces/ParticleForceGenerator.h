@@ -1,6 +1,7 @@
 #include "Particles/Particle.h"
 
 
+
 #pragma once
 
 // On peut demander à un générateur de force d'ajouter une force à une ou plusieurs particules. La foncton update force permet d'effectuer cette action.
