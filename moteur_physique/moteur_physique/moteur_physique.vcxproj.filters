@@ -94,6 +94,15 @@
     <ClCompile Include="Sources\Rotations\RigidBody.cpp">
       <Filter>Sources\Rotations</Filter>
     </ClCompile>
+    <ClCompile Include="Sources\Forces\ForceGenerator.cpp">
+      <Filter>Sources\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\GravityForceGenerator.cpp">
+      <Filter>Sources\Forces</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Forces\SpringForceGenerator.cpp">
+      <Filter>Sources\Forces</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -206,6 +215,15 @@
     </ClInclude>
     <ClInclude Include="include\Rotations\RigidBody.h">
       <Filter>Headers\Rotations</Filter>
+    </ClInclude>
+    <ClInclude Include="GravityForceGenerator.h">
+      <Filter>Headers\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="SpringForceGenerator.h">
+      <Filter>Headers\Forces</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Forces\ForceGenerator.h">
+      <Filter>Headers\Forces</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

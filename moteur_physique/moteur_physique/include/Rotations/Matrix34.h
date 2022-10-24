@@ -23,4 +23,5 @@ public:
 	Vector3D TransformPosition(const Vector3D& vector);
 	// Transform a direction by ignoring the translation
 	Vector3D TransformDirection(const Vector3D& vector);
+
 };

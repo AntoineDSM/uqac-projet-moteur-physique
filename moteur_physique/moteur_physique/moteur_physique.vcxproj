@@ -166,6 +166,9 @@
     <ClCompile Include="Main_rendu2.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Sources\Demos\ballistic.cpp" />
+    <ClCompile Include="Sources\Forces\ForceGenerator.cpp" />
+    <ClCompile Include="Sources\Forces\GravityForceGenerator.cpp" />
+    <ClCompile Include="Sources\Forces\SpringForceGenerator.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_draw.cpp" />
@@ -190,8 +193,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmatParticules.h" />
+    <ClInclude Include="GravityForceGenerator.h" />
     <ClInclude Include="Headers\Wall.h" />
     <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
+    <ClInclude Include="include\Forces\ForceGenerator.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />
     <ClInclude Include="include\Contacts\ParticleContactGenerator.h" />
@@ -224,6 +229,7 @@
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
     <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="TimingData.h" />
     <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>
