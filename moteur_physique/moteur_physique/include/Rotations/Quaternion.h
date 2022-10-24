@@ -7,8 +7,22 @@ class Quaternion
 {
 private:
 	// w, i,j.k
+
 	float value[4];
+
+
+
+
+
 public:
+
+	float w, i, j, k;
+
+	//quaternion de base
+	Quaternion() : w(1), i(0), j(0), k(0) {}
+
+
+
 	// normalize by multipling the quaternion by the inverse of its magnitude
 	void Normalized();
 	// Quaternion multiplication

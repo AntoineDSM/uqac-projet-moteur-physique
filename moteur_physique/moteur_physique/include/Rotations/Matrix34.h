@@ -7,10 +7,27 @@
 class Matrix34
 {
 private:
+	
+public:
+
 	// values of the Matrix 3X4
 	float values[12];
 
-public:
+	//Constructeur de matrice 3x4 identité
+	Matrix34()
+	{
+		
+		for (int i = 0; i < 12; i++) {
+			if (i % 5 == 0) {
+				values[i] = 1;
+			}
+			else {
+				values[i] = 0;
+			}
+		}
+			
+		
+	}
 	// combination of affine transformation
 	Matrix34 operator* (const Matrix34& other) const;
 	// Transform of a vector

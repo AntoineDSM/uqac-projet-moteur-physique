@@ -21,6 +21,8 @@ private:
 
 	//same as linear damping but for rotation
 	float m_angularDamping;
+
+
 	// Accumulated force added by ForceGenerator
 	Vector3D m_forceAccum;
 	// Accumulated torque added by ForceGenerator

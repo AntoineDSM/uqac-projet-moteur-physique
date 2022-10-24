@@ -164,6 +164,7 @@
     <ClCompile Include="include\Contacts\WallContactGenerator.cpp" />
     <ClCompile Include="Main_rendu1.cpp" />
     <ClCompile Include="Main_rendu2.cpp" />
+    <ClCompile Include="Main_rendu3.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Sources\Demos\ballistic.cpp" />
     <ClCompile Include="Sources\Forces\ForceGenerator.cpp" />

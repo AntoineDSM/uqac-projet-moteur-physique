@@ -76,12 +76,14 @@ class Particle
 		//Facteur d'ammortissement.
 		double damping;
 
-		//FAIRE LE COMMENTAIRE
+		//l'inverse de la masse, plus simmple à calculer et permet d'eviter des erreurs en cas de masse null
 		double inverseMass;
 
 		//rayon de notre particule
 		double radius;
 
+		//les forces accumulé appliqué à la prochaine itération
+		Vector3D forceAccum;
 	    public :
 
 		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------
@@ -195,6 +197,8 @@ class Particle
 
 		//Ajouter une force a cet accumulateur. 
 		void addForce(const Vector3D& force);
+
+
 
 		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
 

@@ -103,6 +103,9 @@
     <ClCompile Include="Sources\Forces\SpringForceGenerator.cpp">
       <Filter>Sources\Forces</Filter>
     </ClCompile>
+    <ClCompile Include="Main_rendu3.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
