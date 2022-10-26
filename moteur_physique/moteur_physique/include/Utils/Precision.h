@@ -19,7 +19,11 @@ namespace Precision {
 		return x * x;
 	}
 
+<<<<<<< HEAD
     inline void swapNums(std::vector<int> nums, int first, int second, std::vector<int> secondArray)
+=======
+    inline void swapNums(int nums[], int first, int second, int secondArray[])
+>>>>>>> Axel
     {
         int curr = nums[first];
         int currSecond = secondArray[first];
@@ -29,7 +33,12 @@ namespace Precision {
         secondArray[second] = currSecond;
     }
 
+<<<<<<< HEAD
     inline void sort(std::vector<int> num ,int len, std::vector<int> secondArray)
+=======
+
+    inline void sort(int num[] ,int len, int secondArray[])
+>>>>>>> Axel
     {
         bool isSwapped;
         for (int i = 0; i < len; i++)
@@ -50,6 +59,10 @@ namespace Precision {
         }
     }
 
+<<<<<<< HEAD
+=======
+   
+>>>>>>> Axel
 }//namespace Precision
 
 #endif PRECISION_HPP

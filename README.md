@@ -3,6 +3,7 @@
 ## Comment utiliser l'application
 
 Le tire c’est clic droit
+<<<<<<< HEAD
 Vous pouvez changer les arme avec les touches AZERT
 Changer la caméra avec les 3 première réglette
 Changer la masse
@@ -39,6 +40,28 @@ la position initiale
 
 =======
 >>>>>>> Modif Read me + Add document
+=======
+
+Vous pouvez changer les arme avec les touches AZERT
+
+Changer la caméra avec les 3 première réglette
+
+Changer la masse
+
+Changer la vitesse
+
+Changer l’accélération
+
+l'amortissement
+
+la position initiale
+
+## Getting started
+
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+>>>>>>> Axel
 
 ## Add your files
 
