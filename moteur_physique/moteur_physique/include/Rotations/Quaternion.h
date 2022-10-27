@@ -11,9 +11,6 @@ private:
 	float value[4];
 
 
-
-
-
 public:
 
 	float w, i, j, k;

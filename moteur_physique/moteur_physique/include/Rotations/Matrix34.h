@@ -25,9 +25,9 @@ public:
 				values[i] = 0;
 			}
 		}
-			
 		
 	}
+
 	// combination of affine transformation
 	Matrix34 operator* (const Matrix34& other) const;
 	// Transform of a vector

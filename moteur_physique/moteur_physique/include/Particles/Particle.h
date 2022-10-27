@@ -82,12 +82,9 @@ class Particle
 		//rayon de notre particule
 		double radius;
 
-<<<<<<< HEAD
 		//les forces accumul� appliqu� � la prochaine it�ration
 		Vector3D forceAccum;
-=======
 
->>>>>>> Axel
 	    public :
 
 		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------
@@ -203,7 +200,6 @@ class Particle
 		void addForce(const Vector3D& force);
 
 
-<<<<<<< HEAD
 
 		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
 
@@ -233,8 +229,6 @@ class Particle
 			}
 		}
 
-=======
->>>>>>> Axel
 	};
 }//moteurJeux
 
