@@ -8,9 +8,9 @@ private:
 	float values[9];
 public:
 	// combination of linear transformation
-	Matrix33 operator*(const Matrix33& other) const;
+	Matrix33 const operator*(const Matrix33& other) ;
 	// Transform of a vector
-	Vector3D operator* (const Vector3D& vector) const;
+	Vector3D const operator* (const Vector3D& vector) ;
 	// Get the Inverse matrix
 	Matrix33 Inverse( );
 
