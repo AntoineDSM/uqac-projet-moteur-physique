@@ -3,6 +3,7 @@
 #include "Vector3D/Vector3D.h"
 #include "Quaternion.h"
 #include "Matrix34.h"
+#include "Matrix33.h"
 
 class RigidBody {
 
@@ -12,6 +13,13 @@ private:
 	float linearDamping;
 	Vector3D position;
 	Vector3D velocity;
+	Vector3D acceleration;
+	
+	// Linear acceleration
+	Vector3D linearAcceleration;
+	// Linear acceleration
+	Vector3D angularAcceleration;
+
 	// Orientation of the rigid body
 	Quaternion orientation;
 	// Angular velocity of the rigid body
@@ -28,6 +36,9 @@ private:
 	// Accumulated torque added by ForceGenerator
 	Vector3D m_torqueAccum;
 
+	// holds the inverse inertia tensor of the body in the world space
+	Matrix33 inverseInertiaTensorWorld;
+
 public:
 	// Integrate the rigid body by modifying position, orientation and velocities.
 	void Integrate(float duration);
@@ -43,7 +54,7 @@ public:
 	// Generate force and torque
 	void AddForceAtBodyPoint(const Vector3D& force, const Vector3D& LocalPoint);
 	// called each frame to reset m_forceAccum and m_torqueAccum
-	void ClearAccumulator();
+	void clearAccumulator();
 
 private:
 	// call each frame to calculate the transformMatrix and normalize the orientation.
