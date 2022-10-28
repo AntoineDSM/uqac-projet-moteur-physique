@@ -84,6 +84,7 @@ class Particle
 
 		//les forces accumulé appliqué à la prochaine itération
 		Vector3D forceAccum;
+
 	    public :
 
 		//----------------------------------------------------METHODS DEFINIES DANS LE .CPP-------------------------------------------------------------------

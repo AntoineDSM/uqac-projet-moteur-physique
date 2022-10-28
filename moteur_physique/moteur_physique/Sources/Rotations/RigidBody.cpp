@@ -1,10 +1,8 @@
 ﻿#include "Rotations/RigidBody.h"
 
 
-void Integrate(float duration) {
-	Vector3D position = position;
-	Vector3D velocity = velocity;
-	Vector3D rotation = rotation;
+void RigidBody::Integrate(float duration) {
+	
 	//1. Mettre à jour la position : 𝒑 ′ = 𝒑 + 𝒑ሶ𝒕 
 	position.addScaledVector(velocity,duration);
 
@@ -20,7 +18,7 @@ void Integrate(float duration) {
 	clearAccumulator();
 
 }
-void CalculatetransformMatrix(Matrix34& transformMatrix, Vector3D& position, Quaternion& orientation) {
+void  CalculatetransformMatrix(Matrix34& transformMatrix, Vector3D& position, Quaternion& orientation) {
 
 	//on transforme chaque valeur de la matrice avec les valeurs du quaternion d'orientation
 	transformMatrix.values[0] = 1 - (2 * orientation.j * orientation.j) - (2 * orientation.k * orientation.k);
@@ -36,27 +34,25 @@ void CalculatetransformMatrix(Matrix34& transformMatrix, Vector3D& position, Qua
 	transformMatrix.values[10] = 1 - (2 * orientation.i * orientation.i) - (2 * orientation.j * orientation.j);
 	transformMatrix.values[11] = position.z;
 }
-void CalculateDerivedData() {
-	Matrix34 transformMatrix = transformMatrix;
-	Vector3D position = position;
-	Quaternion orientation = orientation;
+void  RigidBody::CalculateDerivedData() {
+	
 	CalculatetransformMatrix(transformMatrix,  position, orientation);
 
 }
 
-void AddForce(const Vector3D& force) {
-	Vector3D m_forceAccum = m_forceAccum;
+void  RigidBody::AddForce(const Vector3D& force) {
+	
 	m_forceAccum += force;
 }
 
-void addForceAtBodyPoint(const Vector3D& force,
+void  RigidBody::AddForceAtPoint(const Vector3D& force,
 	const Vector3D& point)
 {
 	
 
 }
 
-void addForceAtPoint(const Vector3D& force,
+void AddForceAtBodyPoint(const Vector3D& force,
 	const Vector3D& point)
 {
 	
