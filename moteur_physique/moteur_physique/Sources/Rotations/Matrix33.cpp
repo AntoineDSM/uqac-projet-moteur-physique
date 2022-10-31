@@ -30,19 +30,18 @@ Matrix33 Matrix33::Inverse() {
 
 Matrix33 const Matrix33::operator*(const Matrix33& other) {
 
-    return Matrix33{
-        values[0] * other.values[0] + values[1] * other.values[3] + values[2] * other.values[6],
-        values[0] * other.values[1] + values[1] * other.values[4] + values[2] * other.values[7],
-        values[0] * other.values[2] + values[1] * other.values[5] + values[2] * other.values[8],
+    Matrix33 result;
+    result.values[0] * other.values[0] + values[1] * other.values[3] + values[2] * other.values[6];
+    result.values[0] * other.values[1] + values[1] * other.values[4] + values[2] * other.values[7];
+    result.values[0] * other.values[2] + values[1] * other.values[5] + values[2] * other.values[8];
+    result.values[3] * other.values[0] + values[4] * other.values[3] + values[5] * other.values[6];
+    result.values[3] * other.values[1] + values[4] * other.values[4] + values[5] * other.values[7];
+    result.values[3] * other.values[2] + values[4] * other.values[5] + values[5] * other.values[8];
+    result.values[6] * other.values[0] + values[7] * other.values[3] + values[8] * other.values[6];
+    result.values[6] * other.values[1] + values[7] * other.values[4] + values[8] * other.values[7];
+    result.values[6] * other.values[2] + values[7] * other.values[5] + values[8] * other.values[8];
 
-        values[3] * other.values[0] + values[4] * other.values[3] + values[5] * other.values[6],
-        values[3] * other.values[1] + values[4] * other.values[4] + values[5] * other.values[7],
-        values[3] * other.values[2] + values[4] * other.values[5] + values[5] * other.values[8],
-
-        values[6] * other.values[0] + values[7] * other.values[3] + values[8] * other.values[6],
-        values[6] * other.values[1] + values[7] * other.values[4] + values[8] * other.values[7],
-        values[6] * other.values[2] + values[7] * other.values[5] + values[8] * other.values[8]
-    };
+    return result;
 }
 
 Vector3D const Matrix33::operator* (const Vector3D& vector) {

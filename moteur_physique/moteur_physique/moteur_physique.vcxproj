@@ -219,6 +219,7 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="include\Forces\SpringForceGenerator.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\Particles\Particle.h" />
     <ClInclude Include="include\Rotations\Matrix33.h" />
@@ -230,7 +231,6 @@
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
     <ClInclude Include="PhysicWorld.h" />
-    <ClInclude Include="SpringForceGenerator.h" />
     <ClInclude Include="TimingData.h" />
     <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>

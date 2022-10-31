@@ -7,7 +7,7 @@
 class SpringForceGenerator : public ForceGenerator {
 private:
 	// Anchor point in Local coordinate.
-	Vector3D m_bodyAcnchor;
+	Vector3D m_bodyAnchor;
 	RigidBody* m_otherRigidBody = nullptr;
 	// Other anchor point in other's Local coordinate.
 	Vector3D m_otherBodyAnchor;

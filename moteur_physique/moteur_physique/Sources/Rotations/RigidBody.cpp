@@ -14,6 +14,7 @@ void RigidBody::Integrate(float duration) {
 	linearAcceleration = acceleration;
 	linearAcceleration.addScaledVector(m_forceAccum, inverseMasse);
 	//5. Calculer l’accélération angulaire : 𝜽ሷ = 𝛪 −1 ′ 𝝉 
+	
 	//angularAcceleration = inverseInertiaTensorWorld.transform(m_torqueAccum);
 	//6. Mettre à jour la vélocité linéaire : 𝒑ሷ ′ = 𝒑ሶ(𝑑𝑎𝑚𝑝) 𝑡 + 𝒑ሷ𝒕;
 	velocity.addScaledVector(linearAcceleration, duration);
@@ -45,18 +46,20 @@ void  RigidBody::CalculateDerivedData() {
 
 }
 
+//pas besoin
 void  RigidBody::AddForce(const Vector3D& force) {
 	
 	m_forceAccum += force;
 }
 
+//ptet besoin
 void  RigidBody::AddForceAtPoint(const Vector3D& force,
 	const Vector3D& point)
 {
 	
 
 }
-
+//ptet besoin
 void AddForceAtBodyPoint(const Vector3D& force,
 	const Vector3D& point)
 {

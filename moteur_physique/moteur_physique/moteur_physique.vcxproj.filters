@@ -222,10 +222,10 @@
     <ClInclude Include="GravityForceGenerator.h">
       <Filter>Headers\Forces</Filter>
     </ClInclude>
-    <ClInclude Include="SpringForceGenerator.h">
+    <ClInclude Include="include\Forces\ForceGenerator.h">
       <Filter>Headers\Forces</Filter>
     </ClInclude>
-    <ClInclude Include="include\Forces\ForceGenerator.h">
+    <ClInclude Include="include\Forces\SpringForceGenerator.h">
       <Filter>Headers\Forces</Filter>
     </ClInclude>
   </ItemGroup>
