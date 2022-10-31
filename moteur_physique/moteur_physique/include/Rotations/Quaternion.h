@@ -6,7 +6,7 @@ using namespace moteurJeux;
 class Quaternion
 {
 private:
-	// w, i,j.k
+	// w, i,j,k
 
 	float value[4];
 

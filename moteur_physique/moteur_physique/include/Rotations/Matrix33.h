@@ -17,7 +17,9 @@ public:
 	// Get the Transpose matrix
 	Matrix33 Transpose();
 
+	// Get the Transpose matrix
+	Vector3D Transform(const Vector3D& vector);
 
 	// Set the matrix base on a quaternion
-	void Set0rientation(const Quaternion& q);
+	void SetOrientation(const Quaternion& q);
 };
