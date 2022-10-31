@@ -1,13 +1,9 @@
-//Date de création : 16/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 18/09/22
-//Modifié par : Victor GUIRAUD
+/*
 
 #include "Demos/Ballistic.h"
 #include <SFML/Window/Keyboard.hpp>
-#include "../../TimingData.h"
 
-using namespace TimingOldMethod;
+
 
 void Ballistic::Shoot(float listParamsObj[] = {}, bool initialValues = true) {
 
@@ -288,3 +284,5 @@ const char* Ballistic::getCurrentType()
 		return "ARROW";
 	}
 }
+
+*/

@@ -181,7 +181,6 @@
     <ClCompile Include="Sources\Forces\ParticleGravity.cpp" />
     <ClCompile Include="Sources\Forces\ParticleSpring.cpp" />
     <ClCompile Include="Sources\Vector3D\Vector3D.cpp" />
-    <ClCompile Include="TimingData.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -216,7 +215,6 @@
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
     <ClInclude Include="PhysicWorld.h" />
-    <ClInclude Include="TimingData.h" />
     <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

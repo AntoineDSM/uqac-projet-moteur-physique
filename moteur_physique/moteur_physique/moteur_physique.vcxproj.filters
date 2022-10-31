@@ -79,9 +79,6 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Sources\Element</Filter>
     </ClCompile>
-    <ClCompile Include="TimingData.cpp">
-      <Filter>Sources\Utils</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -176,9 +173,6 @@
     </ClInclude>
     <ClInclude Include="ValuesReferences.h">
       <Filter>Headers</Filter>
-    </ClInclude>
-    <ClInclude Include="TimingData.h">
-      <Filter>Headers\Utils</Filter>
     </ClInclude>
     <ClInclude Include="AmatParticules.h">
       <Filter>Headers\Demos</Filter>
