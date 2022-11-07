@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #pragma once
 #include "Vector3D/Vector3D.h"
@@ -7,16 +7,16 @@
 class Matrix34
 {
 private:
-	
+
 public:
 
 	// values of the Matrix 3X4
 	float values[12];
 
-	//Constructeur de matrice 3x4 identit�
+	//Constructeur de matrice 3x4 identit�
 	Matrix34()
 	{
-		
+
 		for (int i = 0; i < 12; i++) {
 			if (i % 5 == 0) {
 				values[i] = 1;
@@ -25,13 +25,13 @@ public:
 				values[i] = 0;
 			}
 		}
-			
-		
+
 	}
+
 	// combination of affine transformation
-	Matrix34 operator* (const Matrix34& other) const;
+	Matrix34 const operator* (const Matrix34& other);
 	// Transform of a vector
-	Vector3D operator* (const Vector3D& vector) const;
+	Vector3D const operator* (const Vector3D& vector);
 	// Get the Inverse matrix
 	Matrix34 Inverse();
 	// Set the matrix base on a quaternion and a position
@@ -40,5 +40,13 @@ public:
 	Vector3D TransformPosition(const Vector3D& vector);
 	// Transform a direction by ignoring the translation
 	Vector3D TransformDirection(const Vector3D& vector);
+
+
+	//Transforme le vecteur donné par la matrice
+
+	Vector3D const transform(const Vector3D& vector)
+	{
+		return (*this) * vector;
+	}
 
 };

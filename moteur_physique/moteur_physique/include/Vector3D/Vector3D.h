@@ -295,6 +295,32 @@ namespace moteurJeux {
 			}
 		}
 
+		/**
+		* Updates this vector to be the vector product of its current
+		* value and the given vector.
+		*/
+		/*void operator %=(const Vector3D& vector)
+		{
+			*this = vectorialProduct(vector);
+		}
+		*/
+		/**
+		 * Calculates and returns the vector product of this vector
+		 * with the given vector.
+		 */
+		Vector3D operator%(const Vector3D& vector) const
+		{
+			return Vector3D(y * vector.z - z * vector.y,
+				z * vector.x - x * vector.z,
+				x * vector.y - y * vector.x);
+		}
+
+		 
+		 //Transforme le vecteur donné par une matrice
+
+		Vector3D const transform(const Vector3D& vector) ;
+	
+		
 		//Permet d'afficher dans la console notre type personne.
 		friend std::ostream& operator<<(std::ostream& out, Vector3D& v) {
 			out << "X : " << v.x << ", Y : " << v.y << ", Z : " << v.z << "\n";

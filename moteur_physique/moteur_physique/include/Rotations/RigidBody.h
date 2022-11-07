@@ -55,6 +55,13 @@ public:
 	void AddForceAtBodyPoint(const Vector3D& force, const Vector3D& LocalPoint);
 	// called each frame to reset m_forceAccum and m_torqueAccum
 	void clearAccumulator();
+	
+	//Matrix34 getTransform() const;
+	 
+    //Convertit le point donné du World Space en espace local du corps.
+	//changer de nom de fonction
+	Vector3D getPointInWorldSpace(const Vector3D& point) ;
+	
 
 private:
 	// call each frame to calculate the transformMatrix and normalize the orientation.

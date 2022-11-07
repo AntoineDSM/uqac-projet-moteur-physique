@@ -22,4 +22,13 @@ public:
 
 	// Set the matrix base on a quaternion
 	void Set0rientation(const Quaternion& q);
+
+
+
+	//Transforme le vecteur donné par la matrice
+
+	Vector3D const transform(const Vector3D& vector)
+	{
+		return (*this) * vector;
+	}
 };

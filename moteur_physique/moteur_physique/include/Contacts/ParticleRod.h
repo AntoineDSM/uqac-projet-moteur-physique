@@ -8,7 +8,7 @@ class ParticleRod: public ParticleLink
 
 	public:
 		
-		// a contact will be genereated if the distance / between particles is not equal to the length.
+		// un contact sera genereux si la distance / entre les particules n'est pas égale à la longueur.
 		float length;
 
 		ParticleRod(Particle* particles[2], float length);
@@ -16,8 +16,8 @@ class ParticleRod: public ParticleLink
 		//Retourne la longueur du lien
 		float currentLength() const;
 
-		// Fill ParticleContact with information from particles and contact generator.
-		// Contact is different wether the distance is shorter or greater then the length
+		// Remplir ParticleContact avec les informations des particules et du générateur de contact.
+		// Le contact est différent si la distance est plus courte ou plus grande que la longueur.
 		void addContact(ParticleContact* contact);
 
 };

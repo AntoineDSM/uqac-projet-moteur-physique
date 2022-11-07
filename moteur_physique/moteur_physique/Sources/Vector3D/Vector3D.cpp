@@ -70,3 +70,4 @@ void Vector3D::addMultipliedVector(Vector3D& vect, double facteur)
 
 //---------------------------------------------------------------------VERIFICATION ON VECTOR3D--------------------------------------------------
 
+

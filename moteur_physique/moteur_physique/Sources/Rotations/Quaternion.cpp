@@ -29,7 +29,18 @@ void Quaternion::RotateByVector(const Vector3D& vector)
 	*this = q;
 }
 
-void UpdateByAngularVelocity(const Vector3D& rotation, float duration)
+void Quaternion::UpdateByAngularVelocity(const Vector3D& r, float d)
 {
+	Quaternion q;
+	q.value[0] = 0;
+	q.value[1] = r.x * d;
+	q.value[2] = r.y * d;
+	q.value[3] = r.z * d;
 
+	q = q * *this;
+
+	w = w + q.w * 0.5;
+	i = i + q.i * 0.5;
+	j = j + q.j * 0.5;
+	k = k + q.k * 0.5;
 }
