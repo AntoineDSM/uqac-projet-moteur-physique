@@ -8,6 +8,11 @@
 #include "math.h"
 #include "Vector3D/Vector3D.h"
 
+#include <GL/glut.h>
+#include <GL/glu.h>
+#include <GL/gl.h>
+#include <GLFW/glfw3.h>
+
 
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
@@ -24,29 +29,18 @@ class Particle
 		//--------------------------------------------------------------CONSTRUCTEURS-----------------------------------------------------------------------------
 
 		//Constructeur par defaut
-<<<<<<< HEAD
 		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0), radius(0)
-=======
-		Particle() : position(), velocity(), acceleration(), damping(0), inverseMass(0)
->>>>>>> origin/Victor
 		{
 		}
 		
 		//Constructeur avec initialisation
-<<<<<<< HEAD
-		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass, double radius) : 
-=======
-		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass) : 
->>>>>>> origin/Victor
+		Particle(Vector3D newPosition, Vector3D newVelocity, Vector3D newAcceleration, double newDamping, double newInverseMass = 1, double radius = 2) : 
 			position(newPosition)
 			, velocity(newVelocity)
 			, acceleration(newAcceleration)
 			, damping(newDamping)
 			, inverseMass(newInverseMass)
-<<<<<<< HEAD
 			, radius(radius)
-=======
->>>>>>> origin/Victor
 		{
 		}
 
@@ -58,10 +52,7 @@ class Particle
 			acceleration = p.acceleration;
 			damping = p.damping;
 			inverseMass = p.inverseMass;
-<<<<<<< HEAD
 			radius = p.radius;
-=======
->>>>>>> origin/Victor
 		}
 
 		//Destructeur
@@ -88,16 +79,8 @@ class Particle
 		//FAIRE LE COMMENTAIRE
 		double inverseMass;
 
-<<<<<<< HEAD
 		//rayon de notre particule
 		double radius;
-=======
-		//Dans la partie 2, notre particule pourra etre impactee par de multiples forces exterieure, nous les concatenerons dans un seul vecteur3D qui agira sur l'acceleration.
-		Vector3D forceAccum;
->>>>>>> origin/Victor
-
-		//Etat dormant
-		bool isSleep;
 
 	    public :
 
@@ -129,11 +112,13 @@ class Particle
 
 		inline double getInverseMass() { return inverseMass;}
 
-<<<<<<< HEAD
 		inline double getRadius() { return radius; }
 
-=======
->>>>>>> origin/Victor
+		inline void setRadius(double _radius)
+		{
+			radius = _radius;
+		}
+
 		//--------------------------------------------------POSITION METHODS, GETTER & SETTER------------------------------------------------------------------
 
 		//void getPosition(Vector3D* position) const;
@@ -203,12 +188,32 @@ class Particle
 		//Ajouter une force a cet accumulateur. 
 		void addForce(const Vector3D& force);
 
-		bool isSpleeping() {
-			return this->isSleep;
-		}
+		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
 
-		void setIsSpleep() {
-			this->isSleep = !this->isSleep;
+		inline void render()
+		{
+			Vector3D position = getPosition();
+			double radius = getRadius();
+
+			//affichage de notre sphere.
+			glColor3f(1, 0, 0);
+			glPushMatrix();
+			glTranslatef(position.x, position.y, position.z);
+			glutSolidSphere(radius, radius, radius);
+			//glutSolidSphere(radius, radius, radius);
+			glPopMatrix();
+		}
+			
+		friend bool operator==(Particle p1, Particle p2)
+		{
+			if (p1.acceleration == p2.acceleration && p1.damping == p2.damping && p1.inverseMass == p2.inverseMass && p1.position == p2.position && p1.radius == p2.radius && p1.velocity == p2.velocity)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
 		}
 
 	};

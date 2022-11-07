@@ -1,8 +1,3 @@
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 21/09/22
-//Modifié par : Victor GUIRAUD
-
 #include "Forces/ParticleSpring.h"
 #include "Vector3D/Vector3D.h"
 #include "Particles/Particle.h"
@@ -32,11 +27,24 @@ void ParticleSpring::updateForce(Particle* particle, float duration)
 
 	//On initialise le delta position entre les deux
 	Vector3D d = position_1 - position_2;
-	force = Vector3D::get_normalization(d) * m_k * (d.get_magnitude() - m_restlength);
+	if (d.x != 0)
+	{
+		d.x -= m_restlength;
+	}
+	if (d.y != 0)
+	{
+		d.y -= m_restlength;
+	}
+	if (d.z != 0)
+	{
+		d.z -= m_restlength;
+	}
+	force = Vector3D::get_normalization_2(d * m_k * (float)(-1));
 
-	//On applique
-	particle->setVelocity((velocity_1 - force) * duration);
-	m_other->setVelocity((velocity_2 - force) * duration);
+	velocity_1.addScaledVector(force , duration);
+	velocity_2.addScaledVector(force * (float)(-1), duration);
+	particle->setVelocity(velocity_1);
+	m_other->setVelocity(velocity_2);
 	
 
 =======

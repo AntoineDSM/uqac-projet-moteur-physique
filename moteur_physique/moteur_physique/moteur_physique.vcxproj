@@ -100,7 +100,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;glut32.lib</AdditionalDependencies>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -120,6 +121,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(ProjectDir)lib-vc2019;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>glfw3.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib</AdditionalDependencies>
+      <ImageHasSafeExceptionHandlers>false</ImageHasSafeExceptionHandlers>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -154,48 +156,49 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ballistic.cpp" />
-    <ClCompile Include="imgui\imgui.cpp" />
-    <ClCompile Include="imgui\imgui_demo.cpp" />
-    <ClCompile Include="imgui\imgui_draw.cpp" />
-    <ClCompile Include="imgui\imgui_impl_glfw.cpp" />
-    <ClCompile Include="imgui\imgui_tables.cpp" />
-    <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="imgui_impl_opengl3.cpp" />
+    <ClCompile Include="include\Contacts\ParticleCable.cpp" />
+    <ClCompile Include="include\Contacts\ParticleContact.cpp" />
+    <ClCompile Include="include\Contacts\ParticleContactResolver.cpp" />
+    <ClCompile Include="include\Contacts\Particlelink.cpp" />
+    <ClCompile Include="include\Contacts\ParticleRod.cpp" />
+    <ClCompile Include="include\Contacts\WallContactGenerator.cpp" />
     <ClCompile Include="Main_rendu1.cpp" />
     <ClCompile Include="Main_rendu2.cpp" />
-    <ClCompile Include="Particle.cpp" />
-    <ClCompile Include="ParticleAnchoredSpring.cpp" />
-    <ClCompile Include="ParticleBuoyancy.cpp" />
-    <ClCompile Include="ParticleCable.cpp" />
-    <ClCompile Include="ParticleContact.cpp" />
-    <ClCompile Include="ParticleContactResolver.cpp" />
-    <ClCompile Include="ParticleDrag.cpp" />
-    <ClCompile Include="ParticleForceGenerator.cpp" />
-    <ClCompile Include="ParticleForceRegistry.cpp" />
-    <ClCompile Include="ParticleGravity.cpp" />
-    <ClCompile Include="ParticleLink.cpp" />
-    <ClCompile Include="ParticleRod.cpp" />
-    <ClCompile Include="ParticleSpring.cpp" />
-    <ClCompile Include="Timing.cpp" />
-    <ClCompile Include="Vector3D.cpp" />
+    <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="Sources\Demos\ballistic.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_demo.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_draw.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_tables.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_widgets.cpp" />
+    <ClCompile Include="Sources\IMGUI\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Sources\Particles\Particle.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleBuoyancy.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleDrag.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleForceGenerator.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleForceRegistry.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleGravity.cpp" />
+    <ClCompile Include="Sources\Forces\ParticleSpring.cpp" />
+    <ClCompile Include="Sources\Vector3D\Vector3D.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="NaiveParticleConctactGenerator.h" />
-    <ClInclude Include="ParticleAnchoredSpring.h" />
-    <ClInclude Include="ParticleBuoyancy.h" />
-    <ClInclude Include="ParticleCable.h" />
-    <ClInclude Include="ParticleContactGenerator.h" />
-    <ClInclude Include="ParticleContact.h" />
-    <ClInclude Include="ParticleContactResolver.h" />
-    <ClInclude Include="ParticleDrag.h" />
-    <ClInclude Include="ParticleForceGenerator.h" />
-    <ClInclude Include="ParticleForceRegistry.h" />
-    <ClInclude Include="ParticleGravity.h" />
-    <ClInclude Include="Particlelink.h" />
-    <ClInclude Include="ParticleRod.h" />
-    <ClInclude Include="ParticleSpring.h" />
-    <ClInclude Include="Precision.h" />
+    <ClInclude Include="AmatParticules.h" />
+    <ClInclude Include="Headers\Wall.h" />
+    <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
+    <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
+    <ClInclude Include="include\Contacts\ParticleCable.h" />
+    <ClInclude Include="include\Contacts\ParticleContactGenerator.h" />
+    <ClInclude Include="include\Contacts\ParticleContact.h" />
+    <ClInclude Include="include\Contacts\ParticleContactResolver.h" />
+    <ClInclude Include="include\Forces\ParticleDrag.h" />
+    <ClInclude Include="include\Forces\ParticleForceGenerator.h" />
+    <ClInclude Include="include\Forces\ParticleForceRegistry.h" />
+    <ClInclude Include="include\Forces\ParticleGravity.h" />
+    <ClInclude Include="include\Contacts\Particlelink.h" />
+    <ClInclude Include="include\Contacts\ParticleRod.h" />
+    <ClInclude Include="include\Forces\ParticleSpring.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui.h" />
     <ClInclude Include="imgui\imgui_impl_glfw.h" />
@@ -206,10 +209,13 @@
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
-    <ClInclude Include="Particle.h" />
-    <ClInclude Include="Timing.h" />
-    <ClInclude Include="Vector3D.h" />
-    <ClInclude Include="WallContactGenerator.h" />
+    <ClInclude Include="include\Particles\Particle.h" />
+    <ClInclude Include="include\Utils\Precision.h" />
+    <ClInclude Include="include\Utils\Timing.h" />
+    <ClInclude Include="include\Vector3D\Vector3D.h" />
+    <ClInclude Include="include\Contacts\WallContactGenerator.h" />
+    <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

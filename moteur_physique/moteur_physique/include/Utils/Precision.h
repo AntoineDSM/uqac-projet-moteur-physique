@@ -10,7 +10,7 @@
 #define PRECISION_HPP
 
 #include <float.h>
-#define real_pow powf
+#include <vector>
 
 namespace Precision {
 
@@ -19,14 +19,7 @@ namespace Precision {
 		return x * x;
 	}
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    inline void swapNums(int nums[],
-        int first, int second, int secondArray[])
-=======
-    inline void swapNums(int nums[], int first, int second, int secondArray[])
->>>>>>> origin/Axel
+    inline void swapNums(std::vector<int> nums, int first, int second, std::vector<int> secondArray)
     {
         int curr = nums[first];
         int currSecond = secondArray[first];
@@ -36,12 +29,7 @@ namespace Precision {
         secondArray[second] = currSecond;
     }
 
-<<<<<<< HEAD
->>>>>>> origin/Victor
-=======
-
->>>>>>> origin/Axel
-    inline void sort(int num[] ,int len, int secondArray[])
+    inline void sort(std::vector<int> num ,int len, std::vector<int> secondArray)
     {
         bool isSwapped;
         for (int i = 0; i < len; i++)
@@ -62,26 +50,6 @@ namespace Precision {
         }
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    inline void swapNums(int nums[],
-        int first, int second, int secondArray[])
-    {
-        int curr = nums[first];
-        int currSecond = secondArray[first];
-        nums[first] = nums[second];
-        secondArray[first] = secondArray[second];
-        nums[second] = curr;
-        secondArray[second] = currSecond;
-    }
-=======
-    
-
->>>>>>> origin/Victor
-
-=======
-   
->>>>>>> origin/Axel
 }//namespace Precision
 
 #endif PRECISION_HPP

@@ -1,6 +1,17 @@
 #include "ParticleRod.h"
 
-unsigned int ParticleRod::addContact(ParticleContact* contact, unsigned int limit) const
+ParticleRod::ParticleRod(Particle* particles[2], float length) : length(length)
 {
-	return 0;
+	particle[0] = particles[0];
+	particle[1] = particles[1];
+}
+
+void ParticleRod::addContact(ParticleContact* contact)
+{
+	*contact = ParticleContact(particle, 1, length);
+}
+
+float ParticleRod::currentLength() const
+{
+	return length;
 }

@@ -97,6 +97,33 @@ class Vector3D
 				return vect;
 		}
 
+		inline static Vector3D get_normalization_2(Vector3D vect)
+		{
+			if (get_magnitude(vect) > 1)
+			{
+				return vect *= ((double)1) / get_magnitude(vect);
+			}
+			else
+				return vect;
+		}
+
+		inline static Vector3D get_abs(Vector3D &v)
+		{
+			if (v.x < 0)
+			{
+				v.x*= (-1);
+			}
+			if (v.y < 0)
+			{
+				v.y*= (-1);
+			}
+			if (v.z < 0)
+			{
+				v.z*= (-1);
+			}
+			return v;
+		}
+
 		//------------------------------------------------------------------------MAGNITUDE-------------------------------------------------------------------------
 
 		//avoir la magnitude veut dire obtenir la longueur de ce vecteur par rapport a l'origine du repere (0,0,0)
@@ -122,11 +149,7 @@ class Vector3D
 		Vector3D vectorialProduct(Vector3D& vect);
 
 		//avoir le produit vectoriel entre deux vecteur donnes.
-<<<<<<< HEAD
 		inline static Vector3D vectorialProduct(const Vector3D& vect1,const Vector3D& vect2)
-=======
-		inline static Vector3D vectorialProduct(Vector3D& vect1, Vector3D& vect2)
->>>>>>> origin/Victor
 		{
 			return Vector3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
 		}
@@ -134,11 +157,7 @@ class Vector3D
 		//-------------------------------------------------------------------------SCALAR PRODUCT-------------------------------------------------------------------
 
 		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
-<<<<<<< HEAD
 		double scalarProduct(const Vector3D& vect);
-=======
-		double scalarProduct(Vector3D& vect);
->>>>>>> origin/Victor
 		
 		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 
@@ -186,13 +205,27 @@ class Vector3D
 			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
 		}
 
+		Vector3D operator*(Vector3D& vect)
+		{
+			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
+		}
+
+		Vector3D operator*(const Vector3D& vect)
+		{
+			return Vector3D(x * vect.x, y * vect.y, z * vect.z);
+		}
+
 		//permettre d'obtenir un vecteur correspondant a l'addition entre notre vecteur et un second.
 		Vector3D operator+(Vector3D& v)
 		{
 			return Vector3D(x + v.x, y + v.y, z + v.z);
 		}
 
-<<<<<<< HEAD
+		Vector3D operator+(double value)
+		{
+			return Vector3D(x + value, y + value, z + value);
+		}
+
 		Vector3D operator+(const Vector3D& v)
 		{
 			return Vector3D(x + v.x, y + v.y, z + v.z);
@@ -203,8 +236,16 @@ class Vector3D
 			return new Vector3D(x - v->x, y - v->y, z - v->z);
 		}
 
-=======
->>>>>>> origin/Victor
+		Vector3D operator-(float value)
+		{
+			return Vector3D(x - value, y - value, z - value);
+		}
+
+		Vector3D operator*(float value)
+		{
+			return Vector3D(x * value, y * value, z * value);
+		}
+
 		//ajouter un vecteur a notre vecteur.
 		void operator+=(const Vector3D& v)
 		{
@@ -222,11 +263,7 @@ class Vector3D
 		}
 
 		//avoir un vecteur correspondant a la soustraction entre notre vecteur et un second.
-<<<<<<< HEAD
 		Vector3D operator-(const Vector3D& v)
-=======
-		Vector3D operator-(Vector3D& v)
->>>>>>> origin/Victor
 		{
 			return Vector3D(x - v.x, y - v.y, z - v.z);
 		}
@@ -244,6 +281,24 @@ class Vector3D
 			x = v.x;
 			y = v.y;
 			z = v.z;
+		}
+
+		bool operator==(const Vector3D& v2)
+		{
+			if (x == v2.x && y == v2.y && z == v2.z)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		//Permet d'afficher dans la console notre type personne.
+		friend std::ostream& operator<<(std::ostream& out, Vector3D& v) {
+			out << "X : " <<  v.x << ", Y : " << v.y << ", Z : " << v.z << "\n";
+			return out;
 		}
 
 	};
