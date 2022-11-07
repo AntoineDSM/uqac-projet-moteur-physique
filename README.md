@@ -1,6 +1,17 @@
 # UQAC Projet moteur physique
 
+## Comment utiliser l'application
 
+Le tire c’est clic droit
+<<<<<<< HEAD
+Vous pouvez changer les arme avec les touches AZERT
+Changer la caméra avec les 3 première réglette
+Changer la masse
+Changer la vitesse
+Changer l’accélération
+l'amortissement
+la position initiale
+<<<<<<< refs/remotes/origin/Victor
 
 ## Comment utiliser la version 2
 
@@ -27,6 +38,30 @@
   
     -Les problèmes ont normalement été résolus, cependant pour tester le précédant rendu, un release à été déposé également. Son nom est "Release_demoBallisitc.exe".
 
+=======
+>>>>>>> Modif Read me + Add document
+=======
+
+Vous pouvez changer les arme avec les touches AZERT
+
+Changer la caméra avec les 3 première réglette
+
+Changer la masse
+
+Changer la vitesse
+
+Changer l’accélération
+
+l'amortissement
+
+la position initiale
+
+## Getting started
+
+To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+
+Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+>>>>>>> Axel
 
 ## Add your files
 

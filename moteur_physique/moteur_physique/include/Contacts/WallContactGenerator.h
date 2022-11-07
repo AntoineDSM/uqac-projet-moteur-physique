@@ -3,12 +3,17 @@
 #include "ParticleContactGenerator.h"
 #include "../Headers/Wall.h"
 #include "..\ValuesReferences.h"
+#include "ParticleConctactGenerator.h"
+#include "Forces/ParticleGravity.h"
+#include "Utils/timing.h"
+
 
 using namespace valuesReferences;
 
 
 class WallContactGenerator
 {
+
 public:
 
 	Wall* wallElement;
@@ -28,4 +33,5 @@ public:
 
 	void resolvePenetration(Particle* particle, Vector3D resultante);
 	Vector3D get_resultante(Particle* particle);
+
 };

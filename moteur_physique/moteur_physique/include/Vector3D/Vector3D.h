@@ -1,7 +1,7 @@
-//Date de création :
-//Créer par :
-//Date de dernière modification :
-//Modifié par : 
+ï»¿//Date de crï¿½ation :
+//Crï¿½er par :
+//Date de derniï¿½re modification :
+//Modifiï¿½ par : 
 
 
 #pragma once
@@ -15,34 +15,34 @@
 
 namespace moteurJeux {
 
-//Notre objet Vector3D contient 3 coordonnees, X,Y et Z. Permet de modeliser des positions, des vitesses, des accelarations....
-class Vector3D
+	//Notre objet Vector3D contient 3 coordonnees, X,Y et Z. Permet de modeliser des positions, des vitesses, des accelarations....
+	class Vector3D
 	{
 
-	//---------------------------------------------------------------------ATTRIBUTES--------------------------------------------------------------------------
+		//---------------------------------------------------------------------ATTRIBUTES--------------------------------------------------------------------------
 
-	//Les coordonnees de notre vecteur.
+		//Les coordonnees de notre vecteur.
 	public:
-		
+
 		double x;
 		double y;
 		double z;
 
-	//------------------------------------------------------------------CONSTRUCTEURS---------------------------------------------------------------------------
-	
+		//------------------------------------------------------------------CONSTRUCTEURS---------------------------------------------------------------------------
+
 	public:
 
 		//Constructeur par defaut.
-		Vector3D() : x(0), y(0), z(0) 
+		Vector3D() : x(0), y(0), z(0)
 		{
 			//nothing more to be had here
 		}
 
 		//Constructeur avec initialisation
-		Vector3D(const double xCoord, const double yCoord, const double zCoord) : 
+		Vector3D(const double xCoord, const double yCoord, const double zCoord) :
 			x(xCoord)
 			, y(yCoord)
-			, z(zCoord) 
+			, z(zCoord)
 		{
 		}
 
@@ -61,10 +61,10 @@ class Vector3D
 
 		//-----------------------------------------------------------------------METHODS-------------------------------------------------------------------------
 
-	public :
+	public:
 
 		//------------------------------------------------------------------DISPLAY OUR VECTOR------------------------------------------------------------------------------
-		
+
 		inline void display(std::string indication) {
 			std::cout << indication << "\n";
 			std::cout << "(" << x << "," << y << "," << z << ")\n" << std::endl;
@@ -75,7 +75,7 @@ class Vector3D
 		//normalize a vector means to obtain his coordinates between 0 and 1, in the unit circle. We normalize only if the actual Vector3D is not in the unit circle.
 		/*
 		* if it's in the unit circle, that means the magnitude (the lenght) is < 1. So we need to verify the magnitude before normalizing it.
-		* if it's not, it means that the max value of the vector is equal to the magnitude (ex : magnitude of 4 -> sqrt(0*0 + 4*4 + 0*0) = 4). So we need to divide by magnitude 
+		* if it's not, it means that the max value of the vector is equal to the magnitude (ex : magnitude of 4 -> sqrt(0*0 + 4*4 + 0*0) = 4). So we need to divide by magnitude
 		* each parameter to fit them between 0 and 1.
 		*/
 		inline void get_normalization()
@@ -107,19 +107,19 @@ class Vector3D
 				return vect;
 		}
 
-		inline static Vector3D get_abs(Vector3D &v)
+		inline static Vector3D get_abs(Vector3D& v)
 		{
 			if (v.x < 0)
 			{
-				v.x*= (-1);
+				v.x *= (-1);
 			}
 			if (v.y < 0)
 			{
-				v.y*= (-1);
+				v.y *= (-1);
 			}
 			if (v.z < 0)
 			{
-				v.z*= (-1);
+				v.z *= (-1);
 			}
 			return v;
 		}
@@ -127,16 +127,16 @@ class Vector3D
 		//------------------------------------------------------------------------MAGNITUDE-------------------------------------------------------------------------
 
 		//avoir la magnitude veut dire obtenir la longueur de ce vecteur par rapport a l'origine du repere (0,0,0)
-		inline double get_magnitude() { return sqrt(x * x + y * y + z * z);}
+		inline double get_magnitude() { return sqrt(x * x + y * y + z * z); }
 
 		//avoir la magnitude d'un vecteur donne.
-		inline static double get_magnitude(Vector3D& vect) { return sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z);}
+		inline static double get_magnitude(Vector3D& vect) { return sqrt(vect.x * vect.x + vect.y * vect.y + vect.z * vect.z); }
 
 		//-----------------------------------------------------------ADDITION AND MULTIPLICATION BY SCALAR VALUE---------------------------------------------------------
 
 		//ajouter un vecteur multiplie par un facteur a notre vecteur.
 		void addMultipliedVector(Vector3D& vect, double facteur);
-		
+
 		//meme methode que precedemment avec implementation differente.
 		void addScaledVector(const Vector3D& vector, double scale);
 
@@ -149,16 +149,16 @@ class Vector3D
 		Vector3D vectorialProduct(Vector3D& vect);
 
 		//avoir le produit vectoriel entre deux vecteur donnes.
-		inline static Vector3D vectorialProduct(const Vector3D& vect1,const Vector3D& vect2)
+		inline static Vector3D vectorialProduct(const Vector3D& vect1, const Vector3D& vect2)
 		{
 			return Vector3D(vect1.y * vect2.z - vect1.z * vect2.y, vect1.z * vect2.x - vect1.x * vect2.z, vect1.x * vect2.y - vect1.y * vect2.x);
 		}
-		
+
 		//-------------------------------------------------------------------------SCALAR PRODUCT-------------------------------------------------------------------
 
 		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
 		double scalarProduct(const Vector3D& vect);
-		
+
 		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 
 		struct orthonormalBasis //9 points dans la base, basis[0-2] vecteur1, basis[3-5] vecteur2, basis[6-8] vecteur3.
@@ -297,7 +297,7 @@ class Vector3D
 
 		//Permet d'afficher dans la console notre type personne.
 		friend std::ostream& operator<<(std::ostream& out, Vector3D& v) {
-			out << "X : " <<  v.x << ", Y : " << v.y << ", Z : " << v.z << "\n";
+			out << "X : " << v.x << ", Y : " << v.y << ", Z : " << v.z << "\n";
 			return out;
 		}
 
@@ -306,5 +306,4 @@ class Vector3D
 } //namespace moteurJeux
 
 #endif VECTOR3D_HPP
-
 

@@ -13,7 +13,7 @@ void ParticleContactResolver::resolveContacts(std::vector<ParticleContact*> list
 		//liste des index rangés dans l'ordre croissant du contact le moins important au plus important
 		//std::vector<int> index = std::vector<int>();
 
-
+		
 		int cpt = 0;
 		while (cpt < iteration)//tant que nous n'avons pas atteind le nombre max d'itération, si la resolution d'un contact en créer d'autre
 		{

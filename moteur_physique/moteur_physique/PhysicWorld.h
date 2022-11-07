@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <vector>
 #include "Utils/Timing.h"
@@ -12,14 +12,14 @@ using namespace Timing;
 class PhysicWorld
 {
 
-public : 
+public:
 
 	ParticleForceRegistry* PFR;
 	ParticleContactResolver* PCR;
 
 	std::vector<Wall*> listeMurs = std::vector<Wall*>();
 	std::vector<WallContactGenerator*> listeMursResolveurs = std::vector<WallContactGenerator*>();
-	
+
 	std::vector<Particle*> listeParticules = std::vector<Particle*>();
 	std::vector<ParticleContact*> listeParticulesContacts = std::vector<ParticleContact*>();
 
@@ -55,7 +55,7 @@ public :
 			if (particule != newParticule)
 			{
 				Particle* duoParticles[2] = { particule, newParticule };
-				listeParticulesContacts.push_back(new ParticleContact(duoParticles));//par defaut restitution à 0.5 et penetration à 0
+				listeParticulesContacts.push_back(new ParticleContact(duoParticles));//par defaut restitution ï¿½ 0.5 et penetration ï¿½ 0
 			}
 		}
 		for (WallContactGenerator* wallContact : listeMursResolveurs)
@@ -77,7 +77,7 @@ public :
 			//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
 			//Nous prenons donc volontairement une unite de retard pour la simulation.
 			duration *= 0.0005;
-			
+
 			//on discretise plus que la normale//duration *=  0.0005f;//on discretise plus que la normale
 			//float duration = (float)TimingData::get().lastFrameDuration * 0.001f;
 			//if (duration <= 0.0f) return;
@@ -88,7 +88,7 @@ public :
 				particule->integrate(duration);
 			}
 
-			//Actualisation des forces appliquées à nos particules
+			//Actualisation des forces appliquï¿½es ï¿½ nos particules
 			PFR->updateForces(duration);
 
 			//Resolutions de l'ensemble des contacts entre nos particules
@@ -131,7 +131,7 @@ public :
 		Vector3D pointA = Vector3D(listParamsObj[0], listParamsObj[1], listParamsObj[2]);
 		Vector3D pointB = Vector3D(listParamsObj[3], listParamsObj[4], listParamsObj[5]);
 		Wall* newWall = new Wall(pointA, pointB, plan);
-	
+
 		listeMurs.push_back(newWall);
 
 		CreerMursResolveurs(newWall, listParamsObj[6]);
@@ -139,28 +139,28 @@ public :
 
 	void CreerGenerateurForce(int type, Particle* particule, float listParamsForceGenerator[] = {}, Particle* otherParticule = new Particle())//0 Buoancy, 1 drag, 2 gravity, 3 spring
 	{
-		switch(type)
+		switch (type)
 		{
-		case 0 :
+		case 0:
 		{
 			ParticleBuoyancy* PFG = new ParticleBuoyancy(listParamsForceGenerator[0], listParamsForceGenerator[1], listParamsForceGenerator[2], listParamsForceGenerator[3]);
 			PFR->add(particule, PFG);
 			break;
 		}
-		case 1 :
+		case 1:
 		{
 			ParticleDrag* PFG = new ParticleDrag(listParamsForceGenerator[4], listParamsForceGenerator[5]);
 			PFR->add(particule, PFG);
 			break;
 		}
-		case 2 :
+		case 2:
 		{
 			Vector3D gravity = Vector3D(0, listParamsForceGenerator[6], 0);
 			ParticleGravity* PFG = new ParticleGravity(gravity);
 			PFR->add(particule, PFG);
 			break;
 		}
-		case 3 :
+		case 3:
 		{
 			if (!(*otherParticule == Particle()))
 			{
@@ -170,7 +170,7 @@ public :
 			}
 			else
 			{
-				std::cout << "Impossible d'ajouter un particle spring avec une seconde particule non initialisée.\n";
+				std::cout << "Impossible d'ajouter un particle spring avec une seconde particule non initialisï¿½e.\n";
 			}
 		}
 		default:
@@ -188,7 +188,7 @@ public :
 		int currentIndex = 0;
 		Particle* particles[2] = { particule1, particule2 };
 
-		for(int i = 0; i < listeParticulesContacts.size(); i++)
+		for (int i = 0; i < listeParticulesContacts.size(); i++)
 		{
 			if ((listeParticulesContacts[i]->particle[0] == particule1 || listeParticulesContacts[i]->particle[1] == particule1) && (listeParticulesContacts[i]->particle[0] == particule2 || listeParticulesContacts[i]->particle[1] == particule2))
 			{
@@ -198,14 +198,14 @@ public :
 		}
 		switch (type)
 		{
-		case 0 :
+		case 0:
 		{
 			ParticleCable* newParticleContact = new ParticleCable(particles, listParamsForceGenerator[0], listParamsForceGenerator[1]);
 			newParticleContact->addContact(listeParticulesContacts[currentIndex]);
 			listeContactsSpeciaux.push_back(listeParticulesContacts[currentIndex]);
 			break;
 		}
-		case 1 :
+		case 1:
 		{
 			ParticleRod* newParticleContact = new ParticleRod(particles, listParamsForceGenerator[2]);
 			newParticleContact->addContact(listeParticulesContacts[currentIndex]);
@@ -215,4 +215,3 @@ public :
 		}
 	}
 };
-

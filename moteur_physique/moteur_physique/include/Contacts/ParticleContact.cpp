@@ -17,7 +17,7 @@ Vector3D ParticleContact::calculatingSeparatingVelocity()
 	return velocity;
 };
 
-void ParticleContact::resolve()// si nous resolvons les contacts ici, l'inversion de vitesse et l'ajustement de la position sont instantanés, la durée d'une frame n'a pas grand chose a faire la ? rien ne dépend du temps c'est une impulsion
+void ParticleContact::resolve()// si nous resolvons les contacts ici, l'inversion de vitesse et l'ajustement de la position sont instantanï¿½s, la durï¿½e d'une frame n'a pas grand chose a faire la ? rien ne dï¿½pend du temps c'est une impulsion
 {
 	if (resolveInterpretation())
 	{
@@ -45,7 +45,7 @@ void ParticleContact::resolveVelocity()
 	{
 		//seperatingVelocity reste la meme
 	}
-	else if (restitution == 0)//parfaitement inélastique
+	else if (restitution == 0)//parfaitement inï¿½lastique
 	{
 		seperatingVelocity = Vector3D();
 	}
@@ -56,9 +56,9 @@ void ParticleContact::resolveVelocity()
 	
 	//difference de vitesse entre nos deux objets
 	Vector3D velocity = particle[0]->getVelocity() - particle[1]->getVelocity();
-	//calcul du vecteur normal à nos objets
+	//calcul du vecteur normal ï¿½ nos objets
 	Vector3D normal = Vector3D::vectorialProduct(particle[0]->getVelocity(),particle[1]->getVelocity());
-	if (normal.get_magnitude() == 0 || penetration != 0)//les velocité sont parallèles donc on utilise l'une d'entre elle a la place ou nous avons tige/cable
+	if (normal.get_magnitude() == 0 || penetration != 0)//les velocitï¿½ sont parallï¿½les donc on utilise l'une d'entre elle a la place ou nous avons tige/cable
 	{
 		Vector3D velocity1 = particle[0]->getVelocity();
 		velocity1 = moteurJeux::Vector3D::get_normalization(velocity1);
@@ -78,7 +78,7 @@ bool ParticleContact::resolveInterpretation()
 {
 	//vecteur normal entre nos deux objets
 	Vector3D normal = Vector3D::vectorialProduct(particle[0]->getVelocity(), particle[1]->getVelocity());
-	if (normal.get_magnitude() == 0)//les velocité sont parallèles donc on utilise l'une d'entre elle a la place
+	if (normal.get_magnitude() == 0)//les velocitï¿½ sont parallï¿½les donc on utilise l'une d'entre elle a la place
 	{
 		Vector3D velocity1 = particle[0]->getVelocity();
 		velocity1 = moteurJeux::Vector3D::get_normalization(velocity1);
@@ -94,7 +94,7 @@ bool ParticleContact::resolveInterpretation()
 	//distance entre cet extreme et le centre seconde particule
 	double distance = std::sqrt((Precision::carre(particle[1]->getPosition().x-contactPointParticle_0.x))+(Precision::carre(particle[1]->getPosition().y-contactPointParticle_0.y))+(Precision::carre(particle[1]->getPosition().z-contactPointParticle_0.z)));
 
-	if (distance > penetration && restitution == 1)//nous sommes face à une tige
+	if (distance > penetration && restitution == 1)//nous sommes face ï¿½ une tige
 	{
 		double dif = distance - penetration;
 		Vector3D direction = particle[0]->getPosition() - particle[1]->getPosition();

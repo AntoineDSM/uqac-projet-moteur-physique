@@ -1,7 +1,7 @@
-//Date de création : 16/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 16/09/22
-//Modifié par : Victor GUIRAUD
+//Date de crï¿½ation : 16/09/22
+//Crï¿½er par : Victor GUIRAUD
+//Date de derniï¿½re modification : 16/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 #pragma once
 
@@ -19,7 +19,9 @@ namespace Precision {
 		return x * x;
 	}
 
+
     inline void swapNums(std::vector<int> nums, int first, int second, std::vector<int> secondArray)
+
     {
         int curr = nums[first];
         int currSecond = secondArray[first];
@@ -30,6 +32,7 @@ namespace Precision {
     }
 
     inline void sort(std::vector<int> num ,int len, std::vector<int> secondArray)
+
     {
         bool isSwapped;
         for (int i = 0; i < len; i++)
