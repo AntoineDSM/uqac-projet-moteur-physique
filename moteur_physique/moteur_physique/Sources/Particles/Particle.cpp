@@ -16,9 +16,6 @@ void Particle::integrate(double duration) {
 	if (inverseMass <= 0.0f) return;
 	assert(duration > 0.0);
 
-	//on applique notre accumulateur sur notre velocite
-	//velocity.multiplyBy(forceAccum);
-
 	//nous actualisons la position en fonction de la vitesse et de la duree de la derniere frame. Vu que nous n'avons pas encore le temps de la frame courante
 	//et le temps que les calculs vont nous prendre, nous nous callons sur la duree de la frame n-1. Nous gardons un decalage de 1 pour se preserver des pertes
 	//de performances eventuelles. p = p + vt
@@ -31,7 +28,5 @@ void Particle::integrate(double duration) {
 	//Car doit ralentir notre objet.
 	velocity *= pow(damping, duration);
 
-	//on nettoie notre accumulateur de force, une force � l'instant t n'est peut etre plus appliquee � t+1
-	clearAccumulator();
 }
 

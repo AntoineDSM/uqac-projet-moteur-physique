@@ -1,5 +1,3 @@
-
-
 #pragma once
 
 #include <Windows.h>
@@ -19,9 +17,7 @@
 #include "IMGUI/imgui_impl_glfw.h"
 #include "IMGUI/imgui_impl_opengl3.h"
 #include "Vector3D/Vector3D.h"
-#include "TimingData.h"
 
-using namespace TimingOldMethod;
 using namespace moteurJeux;
 using namespace Timing;
 
@@ -504,8 +500,6 @@ int main(int argc, char** argv)
     gluPerspective(70, (double)640 / 480, 1, 1000);
     glEnable(GL_DEPTH_TEST);
 
-    //lancement du timer.
-    TimingData::init();
 
     //creation de notre objet.
     physicWorld = new PhysicWorld();
@@ -562,7 +556,6 @@ int main(int argc, char** argv)
         Vector3D plan = Vector3D(planXMur, planYMur, planZMur);
         GestionSouris(listParamsParticule, listeParamsMur, listeParamsGenerator, listeParamsContacts, typeGenerateurForce, typeContact, particule1, particule2, plan, instancierParticule, instancierMur);
         //----------------------------Actualisation des positions des particules + gestion des contacts entre nos particules, et ceux des murs--------------------------------------------------------
-        TimingData::update();
         physicWorld->UpdateVariousFrameRate(pause, getLastFrameDuration(startTime, endTime));
         //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
         DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
@@ -584,9 +577,6 @@ int main(int argc, char** argv)
 
         endTime = std::chrono::system_clock::now();
     }
-
-    //arret du timer.
-    TimingData::deinit();
 
     //Si nous quitter la boucle, on déinitialise les elements de OpenGL et de IMGUI
     ImGui_ImplOpenGL3_Shutdown();
