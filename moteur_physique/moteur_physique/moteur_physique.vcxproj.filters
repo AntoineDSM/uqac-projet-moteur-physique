@@ -94,6 +94,18 @@
     <ClCompile Include="Sources\Rotations\Matrix33.cpp">
       <Filter>Sources\Matrices</Filter>
     </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoCube.cpp">
+      <Filter>Sources\Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeRenderer.cpp">
+      <Filter>Headers\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Headers\Cube</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -201,6 +213,36 @@
     <ClInclude Include="include\Rotations\Quaternion.h">
       <Filter>Headers\RB</Filter>
     </ClInclude>
+    <ClInclude Include="Cube.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\glxew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\wglew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\eglew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\glew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoCube.h">
+      <Filter>Headers\Demos</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeRenderer.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -274,6 +316,9 @@
     </Filter>
     <Filter Include="Headers\RB">
       <UniqueIdentifier>{295ee7eb-1e9b-44b7-81ac-aa3f1a4a4407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Cube">
+      <UniqueIdentifier>{1b8c230e-9985-4102-8d56-930e8e5bd90c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

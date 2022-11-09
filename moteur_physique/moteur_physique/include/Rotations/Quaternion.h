@@ -3,29 +3,49 @@
 
 using namespace moteurJeux;
 
+//------------------------------------------------CLASSE IMPLEMENTATN LES QUATERNIONS--------------------------------------------------------------------------
+
 class Quaternion
 {
-private:
-	// w, i,j,k
 
-	float value[4];
+	public:
+	
+		//w,i,j,k
+		float value[4];
+	
+		//--------------------------------------------------CONSTRUCTEURS----------------------------------------------------------
+		
+		//Constructeur par defaut
+		Quaternion() = default;
+	
+		//Constructeur par passage de parametres
+		Quaternion(float w, float i, float j, float k) : value{ w,i,j,k }
+		{
+			//rien a ajouter
+		}
+		
+		//Constructeur par recopie
+		Quaternion(const Quaternion& other) : value{other.value[0], other.value[1], other.value[2], other.value[3]}
+		{
+			//rien a ajouter
+		}
 
+		//--------------------------------------------METHODES PUBLIQUES-----------------------------------------------------------
+		
+		//utilitaire
+		Vector3D ToEuler();
 
-public:
+		void SetByEulerRotation(Vector3D euler);
 
-	float w, i, j, k;
+		// normalize by multipling the quaternion by the inverse of its magnitude
+		void Normalized();
 
-	//quaternion de base
-	Quaternion() : w(1), i(0), j(0), k(0) {}
+		// Rotate the quaternion by a vector -multiply this by q = (e, dx, dy, dz)
+		void RotateByVector(const Vector3D& vector);
 
+		// Apply the quaternion update by the angular velcity
+		void UpdateByAngularVelocity(const Vector3D& rotation, float duration);
 
-
-	// normalize by multipling the quaternion by the inverse of its magnitude
-	void Normalized();
-	// Quaternion multiplication
-	Quaternion operator* (const Quaternion& other);
-	// Rotate the quaternion by a vector -multiply this by q = (e, dx, dy, dz)
-	void RotateByVector(const Vector3D& vector);
-	// Apply the quaternion update by the angular velcity
-	void UpdateByAngularVelocity(const Vector3D& rotation, float duration);
+		// Quaternion multiplication
+		Quaternion operator* (const Quaternion& other);
 };

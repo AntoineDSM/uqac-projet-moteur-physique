@@ -1,5 +1,5 @@
 
-
+/*
 #pragma once
 
 #include <Windows.h>
@@ -28,7 +28,7 @@ using namespace Timing;
  _ au changement de la variable booléenne d'instanciation dans IMGUI
  On supprime la particule et on en créer deux a la place, ces deux sont ajoutées a la liste des particules et un lien (contact link) leur est directement attribué,
  Elles sont ensuite rassembler si la distance les separants depasse une limite, nous les rapprochons, les suppriment et on remet celle d'origine.
-*/
+
 
 
 //-------------------------------------------------------------------------PARAMETRE POUR IMGUI------------------------------------------------------------------------------------------------------------------------
@@ -590,3 +590,4 @@ int main(int argc, char** argv)
 
     glfwTerminate();
 }
+*/

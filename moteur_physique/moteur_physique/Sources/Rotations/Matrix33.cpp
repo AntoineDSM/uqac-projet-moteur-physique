@@ -11,40 +11,48 @@ Matrix33 Matrix33::Transpose() {
 }
 
 Matrix33 Matrix33::Inverse() {
-    float valPos = values[0] * values[4] * values[8] + values[3] * values[7] * values[2] + values[6] * values[1] * values[5];
-    float valNeg = values[0] * values[7] * values[5] - values[6] * values[7] * values[2] - values[3] * values[1] * values[8];
-    float detVal = valPos - valNeg;
 
-    if (detVal == 0) return;
+    Matrix33 matrice = Matrix33();
 
-    values[0] = (values[4] * values[8]) - (values[6] * values[7]);
-    values[1] = (values[2] * values[7]) - (values[1] * values[8]);
-    values[2] = (values[1] * values[5]) - (values[2] * values[4]);
-    values[3] = (values[5] * values[6]) - (values[3] * values[8]);
-    values[4] = (values[0] * values[8]) - (values[2] * values[6]);
-    values[5] = (values[2] * values[3]) - (values[0] * values[5]);
-    values[6] = (values[3] * values[7]) - (values[4] * values[6]);
-    values[7] = (values[3] * values[7]) - (values[0] * values[7]);
-    values[8] = (values[0] * values[4]) - (values[1] * values[3]);
+    float detVal = GetDeterminant(*this);
 
-    *values = (1 / detVal) * *values;
+    if (detVal == 0) return NULL;
+
+    matrice.values[0] = (values[4] * values[8]) - (values[6] * values[7]);
+    matrice.values[1] = (values[2] * values[7]) - (values[1] * values[8]);
+    matrice.values[2] = (values[1] * values[5]) - (values[2] * values[4]);
+    matrice.values[3] = (values[5] * values[6]) - (values[3] * values[8]);
+    matrice.values[4] = (values[0] * values[8]) - (values[2] * values[6]);
+    matrice.values[5] = (values[2] * values[3]) - (values[0] * values[5]);
+    matrice.values[6] = (values[3] * values[7]) - (values[4] * values[6]);
+    matrice.values[7] = (values[3] * values[7]) - (values[0] * values[7]);
+    matrice.values[8] = (values[0] * values[4]) - (values[1] * values[3]);
+
+    *matrice.values = (1 / detVal) * *values;
+
+    return matrice;
 }
 
-Matrix33 const Matrix33::operator*(const Matrix33& other){
+Matrix33& const Matrix33::operator*=(const Matrix33& other){
 
-    Matrix33 result;
-    
-        result.values[0] * other.values[0] + values[1] * other.values[3] + values[2] * other.values[6];
-        result.values[0] * other.values[1] + values[1] * other.values[4] + values[2] * other.values[7];
-        result.values[0] * other.values[2] + values[1] * other.values[5] + values[2] * other.values[8];                                                                       
-        result.values[3] * other.values[0] + values[4] * other.values[3] + values[5] * other.values[6];
-        result.values[3] * other.values[1] + values[4] * other.values[4] + values[5] * other.values[7];
-        result.values[3] * other.values[2] + values[4] * other.values[5] + values[5] * other.values[8];                                                                     
-        result.values[6] * other.values[0] + values[7] * other.values[3] + values[8] * other.values[6];
-        result.values[6] * other.values[1] + values[7] * other.values[4] + values[8] * other.values[7];
-        result.values[6] * other.values[2] + values[7] * other.values[5] + values[8] * other.values[8];
-        
-     return result;
+    Matrix33 mat = Matrix33();
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++) {
+            mat.values[i + j * 3] = 0;
+            for (int k = 0; k < 3; k++)
+                mat.values[i + j * 3] += values[k + i * 3] * other.values[j + k * 3];
+        }
+    for (int i = 0; i < 9; i++) {
+        values[i] = mat.values[i];
+    }
+    return (*this);
+}
+
+Matrix33 operator*(const Matrix33& premiereMat, const Matrix33& secondeMat)
+{
+    Matrix33 troisiemeMat = premiereMat;
+    troisiemeMat *= secondeMat;
+    return troisiemeMat;
 }
 
 Vector3D const Matrix33::operator* (const Vector3D& vector) {
@@ -56,49 +64,30 @@ Vector3D const Matrix33::operator* (const Vector3D& vector) {
     };
 }
 
+float Matrix33::GetDeterminant(const Matrix33& matrice)
+{
+    return 
+        matrice.values[0] * matrice.values[4] * matrice.values[8] +
+        matrice.values[3] * matrice.values[7] * matrice.values[2] +
+        matrice.values[6] * matrice.values[1] * matrice.values[5] -
+        matrice.values[0] * matrice.values[7] * matrice.values[5] -
+        matrice.values[6] * matrice.values[4] * matrice.values[2] -
+        matrice.values[3] * matrice.values[1] * matrice.values[8];
+}
+
 void Matrix33::SetOrientation(const Quaternion& q) {
 
-    values[0] = 1 - (2*q.j * q.j + 2 * q.k * q.k);
-    values[1] = 2 * q.i * q.j + 2 * q.k * q.w;
-    values[2] = 2 * q.i * q.k - 2 * q.j * q.w;
-    values[3] = 2 * q.i * q.j - 2 * q.k * q.w;
-    values[4] = 1 - (2 * q.i * q.i + 2 * q.k * q.k);
-    values[5] = 2 * q.j * q.k + 2 * q.i * q.w;
-    values[6] = 2 * q.i * q.k + 2 * q.j * q.w;
-    values[7] = 2 * q.j * q.k - 2 * q.i * q.w;
-    values[8] = 1 - (2 * q.i * q.i + 2 * q.j * q.j);
+    values[0] = 1 - (2*q.value[2] * q.value[2] + 2 * q.value[3] * q.value[3]);
+    values[1] = 2 * q.value[1] * q.value[2] + 2 * q.value[3] * q.value[0];
+    values[2] = 2 * q.value[1] * q.value[3] - 2 * q.value[2] * q.value[0];
+    values[3] = 2 * q.value[1] * q.value[2] - 2 * q.value[3] * q.value[0];
+    values[4] = 1 - (2 * q.value[1] * q.value[1] + 2 * q.value[3] * q.value[3]);
+    values[5] = 2 * q.value[2] * q.value[3] + 2 * q.value[1] * q.value[0];
+    values[6] = 2 * q.value[1] * q.value[3] + 2 * q.value[2] * q.value[0];
+    values[7] = 2 * q.value[2] * q.value[3] - 2 * q.value[1] * q.value[0];
+    values[8] = 1 - (2 * q.value[1] * q.value[1] + 2 * q.value[2] * q.value[2]);
 }
 
 Vector3D Matrix33::Transform(const Vector3D& v) {
     return (*this) * v;
 }
-
-/*
- * Retourne la transposé de la matrice
- * @return Une matrice 4
- */
- /*
-Matrix3 Matrix3::TranpositionM()
-{
-    Matrix4 B(getA());
-    B.TranpositionA();
-    return B;
-}
-
-/**
- * Transpose la matrice A
- */
-
- /*
-void Matrix3::TranpositionA()
-{
-    float B[16] = { 0 };
-    for (int i = 0; i < 15; i++)
-    {
-        B[i] = A[(i * 4) % 15];
-        B[15] = A[15];
-    }
-    setA(B);
-}
-
-*/

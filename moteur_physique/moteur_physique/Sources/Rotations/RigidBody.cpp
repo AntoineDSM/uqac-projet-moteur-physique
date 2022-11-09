@@ -1,72 +1,112 @@
 ﻿#include "Rotations/RigidBody.h"
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 
-void Integrate(float duration) {
-	Vector3D position = position;
-	Vector3D velocity = velocity;
-	Vector3D rotation = rotation;
-	//1. Mettre à jour la position : 𝒑 ′ = 𝒑 + 𝒑ሶ𝒕 
-	position.addScaledVector(velocity,duration);
-
-	//2. Mettre à jour l’orientation : 
-	position.addScaledVector(rotation,duration);
-	//3. Calculer les valeurs dérivées(matrice de transformation et 𝛪 −1 ′) 
-	
-	//4. Calculer l’accélération linéaire : 𝒑ሷ = 𝟏 𝒎 𝒇 
-	//5. Calculer l’accélération angulaire : 𝜽ሷ = 𝛪 −1 ′ 𝝉 
-	//6. Mettre à jour la vélocité linéaire : 𝒑ሷ ′ = 𝒑ሶ(𝑑𝑎𝑚𝑝) 𝑡 + 𝒑ሷ𝒕;
-	//7. Mettre à jour la vélocité angulaire : 𝜽ሶ ′ = 𝜽ሶ(𝑑𝑎𝑚𝑝) 𝑡 + 𝜽ሷ𝑡;
-	//8. Remettre à zéro les accumulateurs(forces et couples).
-	clearAccumulator();
-
-}
-void CalculatetransformMatrix(Matrix34& transformMatrix, Vector3D& position, Quaternion& orientation) {
-
-	//on transforme chaque valeur de la matrice avec les valeurs du quaternion d'orientation
-	transformMatrix.values[0] = 1 - (2 * orientation.j * orientation.j) - (2 * orientation.k * orientation.k);
-	transformMatrix.values[1] = (2 * orientation.i * orientation.j) - (2 * orientation.w * orientation.k);
-	transformMatrix.values[2] = (2 * orientation.i * orientation.k) + (2 * orientation.w * orientation.j);
-	transformMatrix.values[3] = position.x; 
-	transformMatrix.values[4] = 2 * (orientation.i * orientation.j) + (2 * orientation.w * orientation.k);
-	transformMatrix.values[5] = 1 - (2 * orientation.i * orientation.i) - (2 * orientation.k * orientation.k);
-	transformMatrix.values[6] = (2 * orientation.j * orientation.k) - (2 * orientation.w * orientation.w);
-	transformMatrix.values[7] = position.y;
-    transformMatrix.values[8] = (2 * orientation.i * orientation.k) - (2 * orientation.w * orientation.j); 
-	transformMatrix.values[9] = (2 * orientation.j * orientation.k) + (2 * orientation.w * orientation.w); 
-	transformMatrix.values[10] = 1 - (2 * orientation.i * orientation.i) - (2 * orientation.j * orientation.j);
-	transformMatrix.values[11] = position.z;
-}
-void CalculateDerivedData() {
-	Matrix34 transformMatrix = transformMatrix;
-	Vector3D position = position;
-	Quaternion orientation = orientation;
-	CalculatetransformMatrix(transformMatrix,  position, orientation);
-
+//Permet d'initialiser le rigidBody et lui assigner les valeurs correspondantes.
+void RigidBody::Initialize(float mass, float damping, float angularDamping, Matrix33 tenseurInertie)
+{
+	inverseMasse = 1 / mass;
+	damping = damping;
+	m_angularDamping = angularDamping;
+	SetInertieTenseur(tenseurInertie);
+	CalculateDerivedData();
 }
 
-void AddForce(const Vector3D& force) {
-	Vector3D m_forceAccum = m_forceAccum;
+//Permet de déterminer la nouvelle position, velocity, rotation, orientation d'un rigidBody, appelé tous les pas de temps t dans la boucle de jeu.
+void RigidBody::Integrate(float duration)
+{
+	//Acceleration
+	Vector3D linearAcceleration = m_forceAccum * inverseMasse;
+	Vector3D angularAcceleration = tenseurInertie * m_torqueAccum;
+
+	//Vitesse
+	velocity = velocity * pow(linearDamping, duration) + linearAcceleration * duration;
+	rotation = rotation * pow(m_angularDamping, duration) + angularAcceleration * duration;
+
+	//Position
+	position = position + velocity * duration;
+	orientation.UpdateByAngularVelocity(rotation, duration);
+
+	transform->setPosition(position);
+	transform->setRotation(orientation.ToEuler() * ((double)360 / (2 * M_PI)));
+
+	//Update datas
+	CalculateDerivedData();
+	ClearAccumulator();
+}
+
+//-------------------------------------------------------------------------------METHODES UTILITAIRES-----------------------------------------------------------------------------------------------
+
+//Permet de reset les accumulateurs 
+void RigidBody::ClearAccumulator()
+{
+	m_forceAccum.clear();
+	m_torqueAccum.clear();
+}
+
+void RigidBody::ComputeTenseurInertieWorld(Matrix33& inertieTenseur)
+{
+	Matrix33 transformMatrix33 = transformMatrix.ToMatrix33();
+	inertieTenseur = transformMatrix33 * tenseurInertie;
+	inertieTenseur *= transformMatrix33.Inverse();
+}
+
+//Permet d'obtenir la coordonnée du repère local dans le repère du monde
+Vector3D RigidBody::LocalToWorld(Vector3D& local)
+{
+	return  transformMatrix.Inverse() * (local + position);
+}
+
+//Permet d'obtenir la coordonnée du monde dans le repère local
+Vector3D RigidBody::WorldToLocal(Vector3D& world)
+{
+	return  transformMatrix.Inverse() * (world - position);
+}
+
+void RigidBody::CalculateDerivedData() 
+{
+	transformMatrix.SetOrientationAndPosition(orientation, position);
+	ComputeTenseurInertieWorld(tenseurInertieWorld);
+}
+
+//Ajout d'une force dans l'accumulateur correspondant
+void RigidBody::AddForce(const Vector3D& force) 
+{
 	m_forceAccum += force;
 }
 
-void addForceAtBodyPoint(const Vector3D& force,
-	const Vector3D& point)
+//Application d'une force a un point précis du rigidBody
+void RigidBody::AddForceAtBodyPoint(const Vector3D& force, Vector3D& point)
 {
-	
-
+	Vector3D world = LocalToWorld(point);
+	AddForceAtPoint(force, world);
 }
 
-void addForceAtPoint(const Vector3D& force,
-	const Vector3D& point)
+//==
+void RigidBody::AddForceAtPoint(const Vector3D& force, Vector3D& point)
 {
-	
+	AddForce(force);
+	m_torqueAccum += Vector3D::vectorialProduct((position - point), force);
 }
 
-void clearAccumulator()
-{
-	Vector3D m_forceAccum = m_forceAccum;
-	Vector3D m_torqueAccum = m_torqueAccum;
-	m_forceAccum.clear();
-	m_torqueAccum.clear();
+//----------------------------------------------------------------------------METHODES ADDITIONNELLES-----------------------------------------------------------------------------------
 
+//Permet de calculer le resultat de la matrice apres application de la position et de la rotation
+Matrix34 CalculatetransformMatrix(Matrix34& transformMatrix, Vector3D& position, Quaternion& orientation) {
+
+	//on transforme chaque valeur de la matrice avec les valeurs du quaternion d'orientation
+	transformMatrix.values[0] = 1 - (2 * orientation.value[2] * orientation.value[2]) - (2 * orientation.value[3] * orientation.value[3]);
+	transformMatrix.values[1] = (2 * orientation.value[1] * orientation.value[2]) - (2 * orientation.value[0] * orientation.value[3]);
+	transformMatrix.values[2] = (2 * orientation.value[1] * orientation.value[3]) + (2 * orientation.value[0] * orientation.value[2]);
+	transformMatrix.values[3] = position.x;
+	transformMatrix.values[4] = 2 * (orientation.value[1] * orientation.value[2]) + (2 * orientation.value[1] * orientation.value[3]);
+	transformMatrix.values[5] = 1 - (2 * orientation.value[1] * orientation.value[1]) - (2 * orientation.value[3] * orientation.value[3]);
+	transformMatrix.values[6] = (2 * orientation.value[2] * orientation.value[3]) - (2 * orientation.value[1] * orientation.value[1]);
+	transformMatrix.values[7] = position.y;
+	transformMatrix.values[8] = (2 * orientation.value[1] * orientation.value[3]) - (2 * orientation.value[1] * orientation.value[2]);
+	transformMatrix.values[9] = (2 * orientation.value[2] * orientation.value[3]) + (2 * orientation.value[1] * orientation.value[1]);
+	transformMatrix.values[10] = 1 - (2 * orientation.value[1] * orientation.value[1]) - (2 * orientation.value[2] * orientation.value[2]);
+	transformMatrix.values[11] = position.z;
+	return transformMatrix;
 }
