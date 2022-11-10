@@ -1,6 +1,5 @@
 #include "ParticleCable.h"
 #include "ParticleContact.h"
-#include <Contacts/NaiveParticleConctactGenerator.h>
 
 ParticleCable::ParticleCable(Particle* particles[2], float maxLength, float restitution) : maxLength(maxLength), restitution(restitution)
 {

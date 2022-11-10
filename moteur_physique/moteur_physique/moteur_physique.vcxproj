@@ -156,6 +156,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DemoCube.cpp" />
     <ClCompile Include="include\Contacts\ParticleCable.cpp" />
     <ClCompile Include="include\Contacts\ParticleContact.cpp" />
     <ClCompile Include="include\Contacts\ParticleContactResolver.cpp" />
@@ -166,10 +167,9 @@
     <ClCompile Include="Main_rendu2.cpp" />
     <ClCompile Include="Main_rendu3.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShapeRenderer.cpp" />
     <ClCompile Include="Sources\Demos\ballistic.cpp" />
-    <ClCompile Include="Sources\Forces\ForceGenerator.cpp" />
-    <ClCompile Include="Sources\Forces\GravityForceGenerator.cpp" />
-    <ClCompile Include="Sources\Forces\SpringForceGenerator.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_demo.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_draw.cpp" />
@@ -189,15 +189,14 @@
     <ClCompile Include="Sources\Rotations\Quaternion.cpp" />
     <ClCompile Include="Sources\Rotations\RigidBody.cpp" />
     <ClCompile Include="Sources\Vector3D\Vector3D.cpp" />
-    <ClCompile Include="TimingData.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmatParticules.h" />
-    <ClInclude Include="GravityForceGenerator.h" />
+    <ClInclude Include="Cube.h" />
+    <ClInclude Include="DemoCube.h" />
     <ClInclude Include="Headers\Wall.h" />
-    <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h" />
-    <ClInclude Include="include\Forces\ForceGenerator.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />
     <ClInclude Include="include\Contacts\ParticleContactGenerator.h" />
@@ -219,7 +218,10 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="include\Forces\SpringForceGenerator.h" />
+    <ClInclude Include="include\GLEW\eglew.h" />
+    <ClInclude Include="include\GLEW\glew.h" />
+    <ClInclude Include="include\GLEW\glxew.h" />
+    <ClInclude Include="include\GLEW\wglew.h" />
     <ClInclude Include="include\GLFW\glfw3.h" />
     <ClInclude Include="include\Particles\Particle.h" />
     <ClInclude Include="include\Rotations\Matrix33.h" />
@@ -231,7 +233,10 @@
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
     <ClInclude Include="PhysicWorld.h" />
-    <ClInclude Include="TimingData.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeRenderer.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

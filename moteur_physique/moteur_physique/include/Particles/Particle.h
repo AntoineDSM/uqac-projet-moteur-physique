@@ -1,7 +1,7 @@
-//Date de création :
-//Créer par : 
-//Date de dernière modification : 16/09/22
-//Modifié par : Victor GUIRAUD
+//Date de crï¿½ation :
+//Crï¿½er par : 
+//Date de derniï¿½re modification : 16/09/22
+//Modifiï¿½ par : Victor GUIRAUD
 
 #pragma once
 
@@ -19,7 +19,7 @@
 
 using namespace moteurJeux;
 
-//Implémenter la classe contenant les différents types de particules (balles, boulets, laser...) et les comportements différents de ces objets
+//Implï¿½menter la classe contenant les diffï¿½rents types de particules (balles, boulets, laser...) et les comportements diffï¿½rents de ces objets
 namespace moteurJeux {
 
 class Particle
@@ -76,13 +76,13 @@ class Particle
 		//Facteur d'ammortissement.
 		double damping;
 
-		//l'inverse de la masse, plus simmple à calculer et permet d'eviter des erreurs en cas de masse null
+		//l'inverse de la masse, plus simmple ï¿½ calculer et permet d'eviter des erreurs en cas de masse null
 		double inverseMass;
 
 		//rayon de notre particule
 		double radius;
 
-		//les forces accumulé appliqué à la prochaine itération
+		//les forces accumulï¿½ appliquï¿½ ï¿½ la prochaine itï¿½ration
 		Vector3D forceAccum;
 
 	    public :
@@ -190,16 +190,6 @@ class Particle
 		}
 
 		inline double getDamping() const { return damping; }
-
-		//------------------------------------------------------METHOD FOR FORCE ACCUMULATOR, GETTER & SETTER-------------------------------------------------------
-
-		//Notre accumulateur de force qui agira sur l'acceleration pourra etre reinitialise.
-		void clearAccumulator();
-
-		//Ajouter une force a cet accumulateur. 
-		void addForce(const Vector3D& force);
-
-
 
 		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
 

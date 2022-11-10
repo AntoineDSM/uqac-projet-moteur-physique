@@ -79,32 +79,32 @@
     <ClCompile Include="Wall.cpp">
       <Filter>Sources\Element</Filter>
     </ClCompile>
-    <ClCompile Include="TimingData.cpp">
-      <Filter>Sources\Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Rotations\Matrix33.cpp">
-      <Filter>Sources\Rotations</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Rotations\Matrix34.cpp">
-      <Filter>Sources\Rotations</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Rotations\Quaternion.cpp">
-      <Filter>Sources\Rotations</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Rotations\RigidBody.cpp">
-      <Filter>Sources\Rotations</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Forces\ForceGenerator.cpp">
-      <Filter>Sources\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Forces\GravityForceGenerator.cpp">
-      <Filter>Sources\Forces</Filter>
-    </ClCompile>
-    <ClCompile Include="Sources\Forces\SpringForceGenerator.cpp">
-      <Filter>Sources\Forces</Filter>
-    </ClCompile>
     <ClCompile Include="Main_rendu3.cpp">
       <Filter>Sources</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\Quaternion.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\RigidBody.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\Matrix34.cpp">
+      <Filter>Sources\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="Sources\Rotations\Matrix33.cpp">
+      <Filter>Sources\Matrices</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="DemoCube.cpp">
+      <Filter>Sources\Demos</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeRenderer.cpp">
+      <Filter>Headers\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Headers\Cube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +137,6 @@
     </ClInclude>
     <ClInclude Include="imgui\imstb_rectpack.h">
       <Filter>Headers\Imgui</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Contacts\NaiveParticleConctactGenerator.h">
-      <Filter>Headers\Contacts</Filter>
     </ClInclude>
     <ClInclude Include="include\Forces\ParticleBuoyancy.h">
       <Filter>Headers\Forces</Filter>
@@ -201,32 +198,50 @@
     <ClInclude Include="ValuesReferences.h">
       <Filter>Headers</Filter>
     </ClInclude>
-    <ClInclude Include="TimingData.h">
-      <Filter>Headers\Utils</Filter>
-    </ClInclude>
     <ClInclude Include="AmatParticules.h">
       <Filter>Headers\Demos</Filter>
     </ClInclude>
     <ClInclude Include="include\Rotations\Matrix33.h">
-      <Filter>Headers\Rotations</Filter>
+      <Filter>Headers\Matrices</Filter>
     </ClInclude>
     <ClInclude Include="include\Rotations\Matrix34.h">
-      <Filter>Headers\Rotations</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rotations\Quaternion.h">
-      <Filter>Headers\Rotations</Filter>
+      <Filter>Headers\Matrices</Filter>
     </ClInclude>
     <ClInclude Include="include\Rotations\RigidBody.h">
-      <Filter>Headers\Rotations</Filter>
+      <Filter>Headers\RB</Filter>
     </ClInclude>
-    <ClInclude Include="GravityForceGenerator.h">
-      <Filter>Headers\Forces</Filter>
+    <ClInclude Include="include\Rotations\Quaternion.h">
+      <Filter>Headers\RB</Filter>
     </ClInclude>
-    <ClInclude Include="include\Forces\ForceGenerator.h">
-      <Filter>Headers\Forces</Filter>
+    <ClInclude Include="Cube.h">
+      <Filter>Headers\Cube</Filter>
     </ClInclude>
-    <ClInclude Include="include\Forces\SpringForceGenerator.h">
-      <Filter>Headers\Forces</Filter>
+    <ClInclude Include="include\GLEW\glxew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\wglew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\eglew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="include\GLEW\glew.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="DemoCube.h">
+      <Filter>Headers\Demos</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeRenderer.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Headers\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Headers\Cube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -290,11 +305,20 @@
     <Filter Include="Headers\Forces">
       <UniqueIdentifier>{09a7c2e8-a664-4e50-b5e8-ff06bf0260f8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Headers\Rotations">
-      <UniqueIdentifier>{a3c46664-1bdf-4d62-bb84-013670751a8f}</UniqueIdentifier>
+    <Filter Include="Sources\Matrices">
+      <UniqueIdentifier>{b6362ce2-3cb4-41d5-8902-7de6a32e5a64}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Sources\Rotations">
-      <UniqueIdentifier>{a02be99b-4e81-435f-ad5c-35de39c5ba95}</UniqueIdentifier>
+    <Filter Include="Headers\Matrices">
+      <UniqueIdentifier>{6e6ecbed-c82b-436a-b086-6035c3f6373e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\RB">
+      <UniqueIdentifier>{902274f3-5029-481e-8706-871641f49452}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\RB">
+      <UniqueIdentifier>{295ee7eb-1e9b-44b7-81ac-aa3f1a4a4407}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Cube">
+      <UniqueIdentifier>{1b8c230e-9985-4102-8d56-930e8e5bd90c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

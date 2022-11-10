@@ -2,7 +2,7 @@
 
 #pragma once
 #include "Vector3D/Vector3D.h"
-#include "Quaternion.h"
+#include "Rotations/Quaternion.h"
 
 class Matrix34
 {

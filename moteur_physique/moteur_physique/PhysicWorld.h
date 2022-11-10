@@ -6,9 +6,7 @@
 #include "Particles/Particle.h"
 #include "Forces/ParticleForceRegistry.h"//tous les includes de force sont dans ce header
 #include "Contacts/ParticleContactResolver.h"//tous les includes de contacts sont dans ce header
-#include "TimingData.h"
 
-using namespace TimingOldMethod;
 using namespace Timing;
 
 class PhysicWorld
