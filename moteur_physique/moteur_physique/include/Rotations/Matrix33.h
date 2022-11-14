@@ -25,18 +25,20 @@ public:
 		}
 	}
 
+
 	//----------------------------------------------------------------------METHODES PUBLIQUES------------------------------------------------------------------------------------------------
 
 	//Get determinant of our matrice
-	static float GetDeterminant(const Matrix33& mat);
+	static float GetDeterminant(const Matrix33 & mat);
 
 	// Get the Inverse matrix
 	Matrix33 Inverse();
 
 	// Get the Transpose matrix
 	Matrix33 Transpose();
+	//----------------------------------------------------------------------METHODES PUBLIQUES------------------------------------------------------------------------------------------------
 
-	// Get the Transform matrix
+	// Get the Transpose matrix
 	Vector3D Transform(const Vector3D& vector);
 
 	// Set the matrix base on a quaternion
@@ -44,18 +46,7 @@ public:
 
 	//Multiplication par une seconde matrice
 	Matrix33& const operator*=(const Matrix33& other);
-
 	friend Matrix33 operator*(const Matrix33& premiereMatrice, const Matrix33& secondeMatrice);
 	//Multiplication de l'ensemble par un vecteur
 	Vector3D const operator*(const Vector3D& vector);
-
-	// combination of linear transformation
-	Matrix33  const operator*(const Matrix33& other);
-
-	//Transforme le vecteur donné par la matrice
-
-	Vector3D const transform(const Vector3D& vector)
-	{
-		return (*this) * vector;
-	}
 };

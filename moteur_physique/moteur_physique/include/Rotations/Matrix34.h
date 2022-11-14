@@ -58,9 +58,9 @@ public:
 	}
 
 	//-----------------------------------------------------METHODES PUBLIQUES-------------------------------------------------------------------------------------
-		// combination of affine transformation
-	Matrix34 const operator* (const Matrix34& other);
-	// Get the Inverse matrix
+	//-----------------------------------------------------METHODES PUBLIQUES-------------------------------------------------------------------------------------
+
+		// Get the Inverse matrix
 	Matrix34 Inverse();
 
 	// Set the matrix base on a quaternion and a position
@@ -69,7 +69,6 @@ public:
 	// Get a 33 from this 34
 	Matrix33 ToMatrix33() const;
 
-	// Transform a position
 	Vector3D TransformPosition(const Vector3D& vector);
 
 	// Transform a direction by ignoring the translation
@@ -78,17 +77,10 @@ public:
 
 	//Multiplication par une seconde matrice
 	Matrix34& const operator*=(const Matrix34& other);
-	friend Matrix34 operator*(const Matrix34& premiereMatrice, const Matrix34& secondeMatrice);
+	friend Matrix34 operator* (const Matrix34& premiereMatrice, const Matrix34& secondeMatrice);
 
 	//Multiplication de l'ensemble par un vecteur
 	Vector3D const operator* (const Vector3D& vector);
-
-	Vector3D const transform(const Vector3D& vector)
-	{
-		return (*this) * vector;
-	}
-
-
 
 };
 

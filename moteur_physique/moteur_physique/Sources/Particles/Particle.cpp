@@ -1,6 +1,5 @@
-﻿
-//Date de cr�ation :
-//Cr�er par :
+﻿//Date de cr�ation :
+//Creer par :
 //Date de derni�re modification : 16/09/22
 //Modifi� par : Victor GUIRAUD
 
@@ -9,6 +8,15 @@
 #include "Vector3D/Vector3D.h"
 
 using namespace moteurJeux;
+
+void Particle::addForce(const Vector3D& force)
+{
+	forceAccum += force;
+};
+
+void Particle::clearAccumulator() {
+	return;
+}
 
 void Particle::integrate(double duration) {
 
@@ -31,9 +39,6 @@ void Particle::integrate(double duration) {
 	//on nettoie notre accumulateur de force, une force à l'instant t n'est peut etre plus appliquee à t+1
 	clearAccumulator();
 
-	void Particle::addForce(const Vector3D & force)
-	{
-		forceAccum += force; 
-	};
+	
 }
 
