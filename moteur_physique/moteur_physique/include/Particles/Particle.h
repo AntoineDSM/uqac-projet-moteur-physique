@@ -131,9 +131,6 @@ class Particle
 		//void getPosition(Vector3D* position) const;
 
 		inline Vector3D getPosition() const { return position;}
-
-		void getPosition(Vector3D* position) const;
-
 		inline void setPosition(const Vector3D& newPosition)
 		{
 			position = newPosition;
@@ -151,8 +148,6 @@ class Particle
 		//void getVelocity(Vector3D *position) const;
 
 		inline Vector3D getVelocity() const { return velocity; }
-
-		void getVelocity(Vector3D* velocity) const;
 
 		inline void setVelocity(const Vector3D& newVelocity)
 		{
