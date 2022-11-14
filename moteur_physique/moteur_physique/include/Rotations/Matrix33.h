@@ -1,31 +1,58 @@
-#pragma once
+﻿#pragma once
 #include "Vector3D/Vector3D.h"
-#include "Quaternion.h"
+#include "Rotations/Quaternion.h"
+#include "vector"
+
+//-------------------------------------------------------------------------------CLASSE MATRICE 3x3------------------------------------------------------------------------------------------
 class Matrix33
 {
-private:
-	// values of the Matrix 3X3
-	float values[9];
+
 public:
-	// combination of linear transformation
-	Matrix33  const operator*(const Matrix33& other) ;
-	// Transform of a vector
-	Vector3D const operator* (const Vector3D& vector) ;
+
+	//elle poss�de 9 valeurs
+	float values[9];
+
+	//----------------------------------------------------------------------CONSTRUCTEURS------------------------------------------------------------------------------------------------
+
+	//constructeur par defaut
+	Matrix33() = default;
+
+	//constructeur avec passage de valeur
+	Matrix33(float value[9])
+	{
+		for (int i = 0; i < 9; i++) {
+			values[i] = value[i];
+		}
+	}
+
+	//----------------------------------------------------------------------METHODES PUBLIQUES------------------------------------------------------------------------------------------------
+
+	//Get determinant of our matrice
+	static float GetDeterminant(const Matrix33& mat);
+
 	// Get the Inverse matrix
-	Matrix33 Inverse( );
-
-
+	Matrix33 Inverse();
 
 	// Get the Transpose matrix
 	Matrix33 Transpose();
 
+	// Get the Transform matrix
+	Vector3D Transform(const Vector3D& vector);
 
 	// Set the matrix base on a quaternion
-	void Set0rientation(const Quaternion& q);
+	void SetOrientation(const Quaternion& q);
 
+	//Multiplication par une seconde matrice
+	Matrix33& const operator*=(const Matrix33& other);
 
+	friend Matrix33 operator*(const Matrix33& premiereMatrice, const Matrix33& secondeMatrice);
+	//Multiplication de l'ensemble par un vecteur
+	Vector3D const operator*(const Vector3D& vector);
 
-	//Transforme le vecteur donn� par la matrice
+	// combination of linear transformation
+	Matrix33  const operator*(const Matrix33& other);
+
+	//Transforme le vecteur donné par la matrice
 
 	Vector3D const transform(const Vector3D& vector)
 	{

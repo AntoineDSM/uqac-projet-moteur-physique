@@ -3,7 +3,7 @@
 
 using namespace moteurJeux;
 
-//------------------------------------------------CLASSE IMPLEMENTATN LES QUATERNIONS--------------------------------------------------------------------------
+//------------------------------------------------CLASSE IMPLEMENTANT LES QUATERNIONS--------------------------------------------------------------------------
 
 class Quaternion
 {
@@ -15,8 +15,11 @@ class Quaternion
 	
 		//--------------------------------------------------CONSTRUCTEURS----------------------------------------------------------
 		
+		//quaternion de base
+		float w, i, j, k;
+		Quaternion() : w(1), i(0), j(0), k(0) {}
 		//Constructeur par defaut
-		Quaternion() = default;
+		//Quaternion() = default;
 	
 		//Constructeur par passage de parametres
 		Quaternion(float w, float i, float j, float k) : value{ w,i,j,k }

@@ -29,6 +29,18 @@ Vector3D const Matrix34::operator* (const Vector3D& vector) {
 }
 
 
+Matrix34 Matrix34::Inverse()
+{
+	float valuesMatrix33[9] = { values[0] , values[1], values[2], values[4], values[5], values[6], values[8], values[9], values[10] };
+	Matrix33 mat33 = Matrix33(valuesMatrix33);
+	mat33 = mat33.Inverse();
+	float valuesVectorRajout[3] = { values[3], values[7], values[11] };
+	Vector3D vectDerniereColonne = mat33 * Vector3D(-1 * valuesVectorRajout[0], -1 * valuesVectorRajout[1], -1 * valuesVectorRajout[2]);
+	return Matrix34(mat33, vectDerniereColonne);
+}
+
+/*
+
 Matrix34 Matrix34::Inverse() {
 	float valPos = values[0] * values[5] * values[10] + values[4] * values[9] * values[2] + values[8] * values[1] * values[6];
 	float valNeg = values[0] * values[9] * values[6] - values[8] * values[9] * values[2] - values[4] * values[1] * values[10];
@@ -50,6 +62,7 @@ Matrix34 Matrix34::Inverse() {
 	values[7] = -values[7];
 	values[11] = -values[11];
 }
+*/
 
 
 

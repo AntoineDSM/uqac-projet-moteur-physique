@@ -16,6 +16,7 @@ Quaternion Quaternion::operator* (const Quaternion& other) {
 	i = q.w * other.i + q.i * other.w + q.j * other.k - q.k * other.j;
 	j = q.w * other.j + q.j * other.w + q.k * other.i - q.i * other.k;
 	k = q.w * other.k + q.k * other.w + q.i * other.j - q.j * other.i;
+	return q;
 }
 
 void Quaternion::RotateByVector(const Vector3D& vector)
