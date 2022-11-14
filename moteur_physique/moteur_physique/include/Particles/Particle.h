@@ -191,6 +191,15 @@ class Particle
 
 		inline double getDamping() const { return damping; }
 
+		//------------------------------------------------------METHOD FOR FORCE ACCUMULATOR, GETTER & SETTER-------------------------------------------------------
+
+		//Notre accumulateur de force qui agira sur l'acceleration pourra etre reinitialise.
+		void clearAccumulator();
+
+		//Ajouter une force a cet accumulateur. 
+		void addForce(const Vector3D& force);
+
+		
 		//-------------------------------------------------------------------------Afficher notre particule------------------------------------------------------------------------
 
 		inline void render()

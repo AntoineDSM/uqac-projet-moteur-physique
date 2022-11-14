@@ -16,6 +16,7 @@ ParticleGravity::ParticleGravity(Vector3D& gravity) : gravity(gravity)
 void ParticleGravity::updateForce(Particle* particle, float duration)
 {
 	// Appliquer la force à l'échelle de la masse à la particule.
+	
 
 	//On cast la gravité dans un vector3D non const
 	Vector3D adaptedGravity = gravity;
@@ -28,3 +29,7 @@ void ParticleGravity::updateForce(Particle* particle, float duration)
 	velocity.addScaledVector(gravity, duration);
 	particle->setVelocity(velocity);
 }
+
+/*
+void ParticleGravity::updateForce(Particle* particle, real duration) { // Check that we do not have infinite mass. if (!particle->hasFiniteMass()) return; } // Apply the mass-scaled force to the particle. particle->addForce(gravity * particle->getMass());
+*/

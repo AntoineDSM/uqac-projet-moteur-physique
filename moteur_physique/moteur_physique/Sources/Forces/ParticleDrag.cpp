@@ -28,3 +28,5 @@ void ParticleDrag::updateForce(Particle* particle, float duration)
 	velocity.addScaledVector(dragCoeff  * (float)(-1), duration);
 	particle->setVelocity(velocity);
 } 
+
+/*void ParticleDrag::updateForce(Particle* particle, real duration) { Vector3 force; particle->getVelocity(&force); // Calculate the total drag coefficient. real dragCoeff = force.magnitude(); dragCoeff = k1 * dragCoeff + k2 * dragCoeff * dragCoeff; } // Calculate the final force and apply it. force.normalize(); force *= -dragCoeff; particle->addForce(force);*/

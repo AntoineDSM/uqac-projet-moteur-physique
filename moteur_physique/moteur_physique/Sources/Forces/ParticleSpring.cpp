@@ -45,5 +45,6 @@ void ParticleSpring::updateForce(Particle* particle, float duration)
 	particle->setVelocity(velocity_1);
 	m_other->setVelocity(velocity_2);
 	
+	/*void ParticleSpring::updateForce(Particle* particle, real duration) { // Calculate the vector of the spring. Vector3 force; particle->getPosition(&force); force -= other->getPosition(); // Calculate the magnitude of the force. real magnitude = force.magnitude(); magnitude = real_abs(magnitude - restLength); magnitude *= springConstant; } // Calculate the final force and apply it. force.normalize(); force *= -magnitude; particle->addForce(force);*/
 
 }
