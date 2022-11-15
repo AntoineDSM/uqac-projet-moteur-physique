@@ -40,6 +40,7 @@ public:
 	{
 		transform = _transform;
 		inverseMasse = 1.0f;
+		linearDamping = 1.0f;
 		m_forceAccum = Vector3D(0, 0, 0);
 		m_torqueAccum = Vector3D(0, 0, 0);
 		Vector3D _position = transform->getPosition();
@@ -76,6 +77,11 @@ public:
 	inline Vector3D GetPosition() const
 	{
 		return position;
+	}
+
+	inline Quaternion GetRotation() const
+	{
+		return orientation;
 	}
 
 	inline Vector3D GetVelocity()

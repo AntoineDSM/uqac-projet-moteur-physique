@@ -13,7 +13,7 @@ class Transform
 	
 		Vector3D position = Vector3D();
 		Vector3D rotation = Vector3D();
-		Vector3D scale = Vector3D(1,1,1);
+		Vector3D scale = Vector3D(0.1,0.1,0.1);
 		std::string name;
 	
 	public:

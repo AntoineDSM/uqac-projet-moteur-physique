@@ -68,7 +68,7 @@ public:
             -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
             -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
         };
-
+        unsigned int VBO;
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
 

@@ -2,6 +2,7 @@
 #include "GLM/glm/glm.hpp"
 #include "GLM/glm/gtc/matrix_transform.hpp"
 
+#include "Camera.h"
 #include "Shape.h"
 #include "Shader.h"
 #include "Cube.h"
@@ -18,18 +19,23 @@ public:
     ShapeRenderer(RigidBody* rb) : rb(rb)
     {
         m_shader = new Shader("Shader/cubeShader.vs", "Shader/cubeShader.fs");
-        m_shape = new Cube(Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(1, 1, 1));//On créer notre forme de cube
+        m_shape = new Cube(Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(0.01, 0.01, 0.01));//On créer notre forme de cube
     }
 
     //permet de rendre la forme voulue dans la fenêtre courante.
-    void render(GLFWwindow* window)
+    void render(GLFWwindow* window, Camera camera)
     {
         int width, height;
         glfwGetWindowSize(window, &width, &height);
 
         glBindVertexArray(m_shape->getVAO());
-
         m_shader->use();
+
+        glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)width / (float)height, 0.1f, 100.0f);
+        m_shader->setMat4("projection", projection);
+
+        glm::mat4 view = camera.GetViewMatrix();
+        m_shader->setMat4("view", view);
 
         //On recupère position, rotation et taille du rigidbody.
         Vector3D position = rb->transform->getPosition();
@@ -47,6 +53,7 @@ public:
 
         glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
         m_shader->setVec3("light.position", lightPos);
+        m_shader->setVec3("viewPos", camera.Position);
 
         glm::vec3 lightColor;
         lightColor.x = sin(glfwGetTime() * 2.0f);
@@ -65,7 +72,7 @@ public:
         m_shader->setVec3("material.specular", 0.5f, 0.5f, 0.5f);
         m_shader->setFloat("material.shininess", 32.0f);
 
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         glDrawArrays(GL_TRIANGLES, 0, 36);
     }
 
@@ -74,4 +81,5 @@ private:
     RigidBody* rb;
     Shape* m_shape;
     Shader* m_shader;
+
 };

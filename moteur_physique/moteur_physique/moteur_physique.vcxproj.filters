@@ -243,6 +243,9 @@
     <ClInclude Include="Shape.h">
       <Filter>Headers\Cube</Filter>
     </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Headers\OpenGL</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">

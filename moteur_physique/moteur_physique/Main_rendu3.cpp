@@ -14,6 +14,7 @@
 #include <string.h>
 #include "Utils/Timing.h"
 #include "Vector3D/Vector3D.h"
+#include "Camera.h"
 
 using namespace moteurJeux;
 using namespace Timing;
@@ -21,9 +22,16 @@ using namespace Timing;
 
 //-------------------------------------------------------------------------PARAMETRE POUR IMGUI------------------------------------------------------------------------------------------------------------------------
 DemoCube* demoCube;
+Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
 bool buttonPressedRecently = false;
 std::chrono::system_clock::time_point startTime = std::chrono::system_clock::now();
 std::chrono::system_clock::time_point endTime = std::chrono::system_clock::now();
+
+//Variable pour inpits
+float lastX = 1600 / 2.0f;
+float lastY = 1000 / 2.0f;
+bool firstMousePress = true;
+bool firstMouseRelease = true;
 
 //Liste des variables modifiables par IMGUI.
 
@@ -32,7 +40,7 @@ int posCamX = 50;
 int posCamY = 20;
 int posCamZ = 50;
 //Mettre en pause l'evolution des elements
-bool pause = false;
+bool pause = true;
 
 
 void IMGUI_Utils()
@@ -66,8 +74,6 @@ void StartTimer()
 //Fonction permettant la création d'un repere x,y,z orthonorme.
 void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 100)
 {
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
@@ -77,7 +83,7 @@ void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 
     //Repere XYZ
     glBegin(GL_LINES);
 
-    glColor3ub(0, 0, 255); //axe bleue
+    glColor3ub(255, 166, 0); //axe orange
     glVertex3d(0, 0, 0);  glVertex3d(20, 0, 0); // X
 
     glColor3ub(0, 255, 0); //axe vert
@@ -89,14 +95,140 @@ void DessineRepereOrthonorme(int posCamX = 100, int posCamY = 50, int posCamZ = 
     glEnd();
 }
 
+void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+{
+    glViewport(0, 0, width, height);
+}
+
+void mouse_callback(GLFWwindow* window, double xpos, double ypos)
+{
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_PRESS)
+    {
+        if (firstMousePress)
+        {
+            lastX = xpos;
+            lastY = ypos;
+            firstMousePress = false;
+            firstMouseRelease = true;
+        }
+
+        float xoffset = xpos - lastX;
+        float yoffset = lastY - ypos;
+
+        lastX = xpos;
+        lastY = ypos;
+
+        camera.ProcessMouseMovement(xoffset, yoffset);
+    }
+    if (glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT) == GLFW_RELEASE)
+    {
+        if (firstMouseRelease)
+        {
+            firstMouseRelease = false;
+            firstMousePress = true;
+        }
+    }
+}
+
 //---------------------------------------------------------------------MAIN TEST RENDU 2, FORCES ET CONTACTS--------------------------------------------------------------------------------------------------------------
 
+int main(int argc, char** argv)
+{
+
+    GLFWwindow* window;
+
+    //GLFW initialization
+    if (!glfwInit()) {
+        exit(EXIT_FAILURE);
+    }
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
+    window = glfwCreateWindow(1600, 1000, "Rendu 3, Quaternion, rigidbody et rotation", NULL, NULL);
+    if (!window) {
+        glfwTerminate();
+        exit(EXIT_FAILURE);
+    }
+
+    glfwMakeContextCurrent(window);
+
+    // tell GLFW to capture our mouse
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    glfwSwapInterval(1);
+
+    if (glewInit() != GLEW_OK) {
+        exit(EXIT_FAILURE);
+    }
+
+    //Initialiser IMGUI.
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO& io = ImGui::GetIO();
+    (void)io;
+    ImGui::StyleColorsDark();
+    ImGui_ImplGlfw_InitForOpenGL(window, true);
+    ImGui_ImplOpenGL3_Init("#version 450");
+
+    glEnable(GL_DEPTH_TEST);
+
+    // inputs
+    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+    glfwSetCursorPosCallback(window, mouse_callback);
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+
+    //creation de notre objet.
+    demoCube = new DemoCube(window, camera);
+
+    while (!glfwWindowShouldClose(window))
+    {
+        startTime = std::chrono::system_clock::now();
+        std::chrono::duration<double, std::milli> work_time = startTime - endTime;
+
+        //Setup View
+        float ratio;
+        int width, height;
+        glfwGetFramebufferSize(window, &width, &height);
+        ratio = width / (float)height;
+        glViewport(0, 0, width, height);
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        //----------------------------Actualisation des positions des particules + gestion des contacts entre nos particules, et ceux des murs--------------------------------------------------------
+        demoCube->UpdateVariousFrameRate(pause, getLastFrameDuration(startTime, endTime));
+
+
+        //---------------------------------------------------------Affichage-------------------------------------------------------------------------
+        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //--------------------------------------------------------------Rendre nos particules et nos murs.--------------------------------------------------------------------
+        demoCube->DisplayOpenGL();
+        //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
+        //DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
+        
+        //Swap buffer and check for events
+        glfwSwapBuffers(window);
+        glfwPollEvents();
+
+        endTime = std::chrono::system_clock::now();
+    }
+
+    ImGui_ImplOpenGL3_Shutdown();
+    ImGui_ImplGlfw_Shutdown();
+    ImGui::DestroyContext();
+    glfwDestroyWindow(window);
+    glfwTerminate;
+
+
+}
+
+/*
 int main(int argc, char** argv)
 {
     //Creation de l'objet correspondant a notre fenetre.
     GLFWwindow* window;
 
     glGetString(GL_VERSION);
+
     //Initialisation de la librairie de OpenGL.
     if (!glfwInit())
         return -1;
@@ -111,6 +243,18 @@ int main(int argc, char** argv)
 
     //Donner le contexte a la fenetre actuelle.
     glfwMakeContextCurrent(window);
+
+    GLenum err = glewInit();
+    if (err != GLEW_OK)
+    {
+        std::cout << GLEW_VERSION << "\n";
+        exit(1); // or handle the error in a nicer way
+    }
+    if (!GLEW_VERSION_2_1)  // check that the machine supports the 2.1 API.
+    {
+        std::cout << GLEW_VERSION << "\n";
+        exit(1); // or handle the error in a nicer way
+    }
 
     //Initialiser IMGUI.
     IMGUI_CHECKVERSION();
@@ -138,22 +282,21 @@ int main(int argc, char** argv)
         startTime = std::chrono::system_clock::now();
         std::chrono::duration<double, std::milli> work_time = startTime - endTime;
 
-        //On peut rendre des elements dans cette boucle.
-        glClear(GL_COLOR_BUFFER_BIT);
-
         //Dire a OpenGL que une nouvelle image va devoir etre affichee.
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-
         IMGUI_Utils();
+
+        glClearColor(0, 0, 1, 0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         //----------------------------Actualisation des positions des particules + gestion des contacts entre nos particules, et ceux des murs--------------------------------------------------------
         demoCube->UpdateVariousFrameRate(pause, getLastFrameDuration(startTime, endTime));
-        //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
-        DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
         //--------------------------------------------------------------Rendre nos particules et nos murs.--------------------------------------------------------------------
         demoCube->DisplayOpenGL();
+        //------------------------------------------------------------Dessin de notre repere XYZ.------------------------------------------------------------------
+        DessineRepereOrthonorme(posCamX, posCamY, posCamZ);
 
         //Affichage des elements de IMGUI
         ImGui::Render();
@@ -176,3 +319,4 @@ int main(int argc, char** argv)
 
     glfwTerminate();
 }
+*/

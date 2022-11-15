@@ -14,8 +14,9 @@ class Shape
 	protected:
 	
 		Vector3D position, rotation, scale;//informations relatives a notre forme
-		unsigned int m_VBO, m_VAO;
-	
+		unsigned int m_VBO;
+		unsigned int m_VAO = -1;
+
 	public:
 
 		//-------------------------------GETTER & SETTER----------------------------------

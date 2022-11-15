@@ -11,7 +11,9 @@
 class Shader
 {
 public:
+
     unsigned int ID;
+
     // constructor generates the shader on the fly
     // ------------------------------------------------------------------------
     Shader(const char* vertexPath, const char* fragmentPath)
