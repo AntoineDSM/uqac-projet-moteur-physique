@@ -42,7 +42,7 @@ public :
 		ShapeRenderer* shapeRenderer = new ShapeRenderer(rb);
 
 		std::cout << "Position : "<< rb->GetPosition().x << "  " << rb->GetPosition().y << "  " << rb->GetPosition().z << std::endl;
-		std::cout << "Orientation : "<< rb->GetRotation().i << "  " << rb->GetRotation().j << "  " << rb->GetRotation().k << std::endl;
+		std::cout << "Orientation : w: " << rb->GetRotation().w << " i: " << rb->GetRotation().i << " j : " << rb->GetRotation().j << " k : " << rb->GetRotation().k << std::endl;
 			
 		Vector3D localPoint = Vector3D(0.1, 0.25, 0.15);
 		rb->AddForceAtBodyPoint(Vector3D(1, 2, 0), localPoint);
@@ -68,7 +68,7 @@ public :
 				listeRigidBody[i]->Integrate(newDuration);
 				//drawSquare(listeRigidBody[i]->GetPosition().x, listeRigidBody[i]->GetPosition().y, 40);
 				std::cout << "Position : " << listeRigidBody[i]->GetPosition().x << "  " << listeRigidBody[i]->GetPosition().y << "  " << listeRigidBody[i]->GetPosition().z << std::endl;
-				std::cout << "Orientation : " << listeRigidBody[i]->GetRotation().i << "  " << listeRigidBody[i]->GetRotation().j << "  " << listeRigidBody[i]->GetRotation().k << std::endl;
+				std::cout << "Orientation : w: " << listeRigidBody[i]->GetRotation().w << " i : " << listeRigidBody[i]->GetRotation().i << " j : " << listeRigidBody[i]->GetRotation().j << " k : " << listeRigidBody[i]->GetRotation().k << std::endl;
 			}
 		}
 	}

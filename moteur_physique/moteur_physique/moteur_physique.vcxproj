@@ -169,6 +169,7 @@
     <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShapeRenderer.cpp" />
+    <ClCompile Include="skybox.cpp" />
     <ClCompile Include="Sources\Demos\ballistic.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui.cpp" />
     <ClCompile Include="Sources\IMGUI\imgui_demo.cpp" />
@@ -237,8 +238,17 @@
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeRenderer.h" />
+    <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ValuesReferences.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\fond.png" />
+    <Image Include="..\..\..\..\..\Downloads\bas.png" />
+    <Image Include="..\..\..\..\..\Downloads\face.png" />
+    <Image Include="..\..\..\..\..\Downloads\gauche.png" />
+    <Image Include="..\..\..\..\..\Downloads\droite.jpg" />
+    <Image Include="..\..\..\..\..\Downloads\haut.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -47,7 +47,8 @@ public:
 		Vector3D _rotation = transform->getRotation();
 		position = Vector3D(_position.x, _position.y, _position.z);
 		velocity = _velocity;
-		orientation = Quaternion(1, 0, 0, 0);
+		orientation = Quaternion();
+		orientation.w = 1;
 		orientation.RotateByVector(_rotation);
 	}
 

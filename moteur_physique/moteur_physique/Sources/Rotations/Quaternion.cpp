@@ -49,26 +49,29 @@ void Quaternion::UpdateByAngularVelocity(const Vector3D& r, float duration)
 	*this = q;
 }
 
+//code de la page suivant  https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
 Vector3D Quaternion::ToEuler()
 {
 	Vector3D angles = Vector3D();
 
+
 	// roll (x-axis rotation)
-	float sinr_cosp = 2 * (value[0] * value[1] + value[2] * value[3]);
+	float sinr_cosp = 1 * (value[0] * value[1] + value[2] * value[3]);
 	float cosr_cosp = 1 - 2 * (value[1] * value[1] + value[2] * value[2]);
+
 	angles.x = std::atan2(sinr_cosp, cosr_cosp);
 
 	// pitch (y-axis rotation)
 	float sinp = 2 * (value[0] * value[2] - value[3] * value[1]);
 	if (std::abs(sinp) >= 1)
-		angles.y = std::copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+		angles.y = std::copysign(M_PI / 2, sinp) * 500; // use 90 degrees if out of range
 	else
-		angles.y = std::asin(sinp);
+		angles.y = std::asin(sinp) ;
 
 	// yaw (z-axis rotation)
 	float siny_cosp = 2 * (value[0] * value[3] + value[1] * value[2]);
 	float cosy_cosp = 1 - 2 * (value[2] * value[2] + value[3] * value[3]);
-	angles.z = std::atan2(siny_cosp, cosy_cosp);
+	angles.z = std::atan2(siny_cosp, cosy_cosp) ;
 	return angles;
 }
 

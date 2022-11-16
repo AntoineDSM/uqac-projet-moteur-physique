@@ -106,6 +106,9 @@
     <ClCompile Include="Shader.cpp">
       <Filter>Headers\Cube</Filter>
     </ClCompile>
+    <ClCompile Include="skybox.cpp">
+      <Filter>Sources\SkyBox</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -246,6 +249,9 @@
     <ClInclude Include="Camera.h">
       <Filter>Headers\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="SkyBox.h">
+      <Filter>Headers\SkyBox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">
@@ -323,5 +329,34 @@
     <Filter Include="Headers\Cube">
       <UniqueIdentifier>{1b8c230e-9985-4102-8d56-930e8e5bd90c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\SkyBox">
+      <UniqueIdentifier>{69c98768-986c-406c-b03f-03da3c0db1b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\SkyBox">
+      <UniqueIdentifier>{a407bc78-0f80-4727-89c2-9b7c5d5c863b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\ImgSkyBox">
+      <UniqueIdentifier>{e1392a47-33af-4a18-adf5-6b0fdccb4791}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\..\Downloads\face.png">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\gauche.png">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\droite.jpg">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\haut.png">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\fond.png">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
+    <Image Include="..\..\..\..\..\Downloads\bas.png">
+      <Filter>Sources\ImgSkyBox</Filter>
+    </Image>
   </ItemGroup>
 </Project>
