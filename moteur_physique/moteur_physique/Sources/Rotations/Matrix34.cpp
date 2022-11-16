@@ -28,7 +28,7 @@ Vector3D const Matrix34::operator* (const Vector3D& vector) {
 	};
 }
 
-
+/*
 Matrix34 Matrix34::Inverse()
 {
 	float valuesMatrix33[9] = { values[0] , values[1], values[2], values[4], values[5], values[6], values[8], values[9], values[10] };
@@ -38,31 +38,18 @@ Matrix34 Matrix34::Inverse()
 	Vector3D vectDerniereColonne = mat33 * Vector3D(-1 * valuesVectorRajout[0], -1 * valuesVectorRajout[1], -1 * valuesVectorRajout[2]);
 	return Matrix34(mat33, vectDerniereColonne);
 }
-
-/*
-
-Matrix34 Matrix34::Inverse() {
-	float valPos = values[0] * values[5] * values[10] + values[4] * values[9] * values[2] + values[8] * values[1] * values[6];
-	float valNeg = values[0] * values[9] * values[6] - values[8] * values[9] * values[2] - values[4] * values[1] * values[10];
-	float detVal = valPos - valNeg;
-
-	if (detVal == 0) return;
-
-	values[0] = (1 / detVal) * (values[5] * values[10]) - (values[8] * values[9]);
-	values[1] = (1 / detVal) * (values[2] * values[9]) - (values[1] * values[10]);
-	values[2] = (1 / detVal) * (values[1] * values[6]) - (values[2] * values[5]);
-	values[4] = (1 / detVal) * (values[6] * values[10]) - (values[4] * values[10]);
-	values[5] = (1 / detVal) * (values[0] * values[10]) - (values[2] * values[8]);
-	values[6] = (1 / detVal) * (values[2] * values[4]) - (values[0] * values[6]);
-	values[8] = (1 / detVal) * (values[4] * values[9]) - (values[5] * values[8]);
-	values[9] = (1 / detVal) * (values[4] * values[9]) - (values[0] * values[9]);
-	values[10] = (1 / detVal) * (values[0] * values[5]) - (values[1] * values[4]);
-
-	values[3] = -values[3];
-	values[7] = -values[7];
-	values[11] = -values[11];
-}
 */
+
+
+Matrix34 Matrix34::Inverse()
+{
+	float valuesMatrix33[9] = { values[0] , values[1], values[2], values[4], values[5], values[6], values[8], values[9], values[10] };
+	Matrix33 mat33 = Matrix33(valuesMatrix33);
+	mat33 = mat33.Inverse();
+	float valuesVectorRajout[3] = { values[3], values[7], values[11] };
+	Vector3D vectDerniereColonne = mat33 * Vector3D(-1.0 * valuesVectorRajout[0], -1.0 * valuesVectorRajout[1], -1.0 * valuesVectorRajout[2]);
+	return Matrix34(mat33, vectDerniereColonne);
+}
 
 
 
@@ -101,4 +88,18 @@ Vector3D Matrix34::TransformDirection(const Vector3D& v) {
 		v.x * values[4] + v.y * values[5] + v.z * values[6],
 		v.x * values[8] + v.y * values[9] + v.z * values[10],
 	};
+}
+
+
+Matrix33 Matrix34::ToMatrix33() const
+{
+	{
+		float values33[9];
+		for (int i = 0; i < 3; i++) {
+			for (int j = 0; j < 3; j++) {
+				values33[i + 3 * j] = values[i + 4 * j];
+			}
+		}
+		return Matrix33(values33);
+	}
 }
