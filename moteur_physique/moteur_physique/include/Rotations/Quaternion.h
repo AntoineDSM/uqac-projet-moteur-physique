@@ -31,10 +31,10 @@ class Quaternion
 		}
 		
 		//Constructeur par recopie
-		/*Quaternion(const Quaternion& other) : value{other.value[0], other.value[1], other.value[2], other.value[3]}
+		Quaternion(const Quaternion& other) : value{other.value[0], other.value[1], other.value[2], other.value[3]}
 		{
 			//rien a ajouter
-		}*/
+		}
 
 
 		//--------------------------------------------METHODES PUBLIQUES-----------------------------------------------------------

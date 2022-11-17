@@ -26,15 +26,6 @@ void RigidBody::Integrate(float duration)
 
 	//Position
 	position = position + velocity * duration;
-	this->orientation.w = 1;
-	this->orientation.i = 1;
-	this->orientation.j = 1;
-	this->orientation.k = 1;
-
-	this->rotation.x = 1;
-	this->rotation.y = 1;
-	this->rotation.z = 1;
-
 	orientation.UpdateByAngularVelocity(rotation, duration);
 
 	transform->setPosition(position);
