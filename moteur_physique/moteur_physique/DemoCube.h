@@ -14,6 +14,12 @@ private :
 
 	std::vector<RigidBody*> listeRigidBody = std::vector<RigidBody*>();
 	std::vector<ShapeRenderer*> listeShapeRenderer = std::vector<ShapeRenderer*>();
+	bool followCube = false;
+
+	Vector3D cubePosition;
+	Vector3D cubeVelocity;
+	Vector3D localPointOnCube;
+	Vector3D forceApplicated;
 
 
 public :
@@ -21,10 +27,16 @@ public :
 	GLFWwindow* window;
 	Camera camera;
 
-	DemoCube(GLFWwindow* newWindow, Camera newCamera)
+	DemoCube(GLFWwindow* newWindow, Camera newCamera, bool follow, Vector3D position, Vector3D velocity, Vector3D localPointCoords, Vector3D force)
 	{
 		window = newWindow;
 		camera = newCamera;
+		followCube = follow;
+
+		cubePosition = position;
+		cubeVelocity = velocity;
+		localPointOnCube = localPointCoords;
+		forceApplicated = force;
 
 		Init();
 	}
@@ -34,41 +46,46 @@ public :
 		std::cout << "Creation du rigidBody" << std::endl;
 
 		Transform* transform = new Transform("RigidBodyCube");
-		transform->setPosition(Vector3D(-1,0,-1));
+		transform->setPosition(cubePosition);
 
-		RigidBody* rb = new RigidBody(transform, Vector3D (1,1,1));
+		RigidBody* rb = new RigidBody(transform, cubeVelocity);
 		rb->Initialize(1, 0.9, 0.9, CubeBis(1, Vector3D(1, 1, 1)));
 
 		ShapeRenderer* shapeRenderer = new ShapeRenderer(rb);
 
-		std::cout << "Position : "<< rb->GetPosition().x << "  " << rb->GetPosition().y << "  " << rb->GetPosition().z << std::endl;
-		std::cout << "Orientation : w: " << rb->GetRotation().w << " i: " << rb->GetRotation().i << " j : " << rb->GetRotation().j << " k : " << rb->GetRotation().k << std::endl;
-			
-		Vector3D localPoint = Vector3D(0.1, 0.25, 0.15);
-		rb->AddForceAtBodyPoint(Vector3D(1, 2, 0), localPoint);
-
 		listeRigidBody.push_back(rb);
 		listeShapeRenderer.push_back(shapeRenderer);
 
-		camera.Position = glm::vec3(rb->GetPosition().x+1, rb->GetPosition().y+1, 3);
+		camera.Position = glm::vec3(rb->GetPosition().x+5, rb->GetPosition().y, 10);
+
+		std::cout << "Position : " << rb->GetPosition().x << "  " << rb->GetPosition().y << "  " << rb->GetPosition().z << std::endl;
+		std::cout << "Orientation : w: " << rb->GetRotation().value[0] << " i: " << rb->GetRotation().value[1] << " j : " << rb->GetRotation().value[2] << " k : " << rb->GetRotation().value[3] << std::endl;
+
 	}
 
 	//Rafraichissement des valeurs de position et de vitesse a valeur de temps variable, nous actualisons a la duree prise par la derniere frame pour s'executer.
-	void UpdateVariousFrameRate(bool pause, float duration)
+	void UpdateFixedFrameRate(bool pause, float duration)
 	{
-		if (pause && duration < 500)
+		if (duration < 500)
 		{
 			//La duree de la frame precedente va nous permettre de simuler la physique de n-1, nous ne savons pas le temps que cette frame va prendre pour effectuer sa boucle de jeu.
 			//Nous prenons donc volontairement une unite de retard pour la simulation.
-			float newDuration = duration * 0.000005;
+			float newDuration = duration * 0.00005;
 			std::cout << "duration : " << newDuration << "\n";
 
 			for (int i = 0; i < listeRigidBody.size(); i++)
 			{
+				listeRigidBody[i]->AddForceAtBodyPoint(forceApplicated, localPointOnCube);
 				listeRigidBody[i]->Integrate(newDuration);
-				//drawSquare(listeRigidBody[i]->GetPosition().x, listeRigidBody[i]->GetPosition().y, 40);
+				
+				if (followCube)//permettre a la camera de suivre le déplacement du cube
+				{
+					camera.Position = glm::vec3(listeRigidBody[i]->GetPosition().x, listeRigidBody[i]->GetPosition().y, listeRigidBody[i]->GetPosition().z + 3);
+				}
+
 				std::cout << "Position : " << listeRigidBody[i]->GetPosition().x << "  " << listeRigidBody[i]->GetPosition().y << "  " << listeRigidBody[i]->GetPosition().z << std::endl;
-				std::cout << "Orientation : w: " << listeRigidBody[i]->GetRotation().w << " i : " << listeRigidBody[i]->GetRotation().i << " j : " << listeRigidBody[i]->GetRotation().j << " k : " << listeRigidBody[i]->GetRotation().k << std::endl;
+				std::cout << "Rotation : x : " << listeRigidBody[i]->transform->getRotation().x << " y : " << listeRigidBody[i]->transform->getRotation().y << " z : " << listeRigidBody[i]->transform->getRotation().z << std::endl;
+				std::cout << "Orientation : w: " << listeRigidBody[i]->GetRotation().value[0] << " i : " << listeRigidBody[i]->GetRotation().value[1] << " j : " << listeRigidBody[i]->GetRotation().value[2] << " k : " << listeRigidBody[i]->GetRotation().value[3] << std::endl;
 			}
 		}
 	}
@@ -86,9 +103,9 @@ public :
 	{
 		float values[] =
 		{
-			1 / 12.0f * m * (d.y * d.y + d.z * d.z), 0,0,
-			0,1 / 12.0f * m * (d.x * d.x + d.z * d.z), 0,
-			0,0,1 / 12.0f * m * (d.y * d.y + d.x * d.x)
+			1/12.0f * m * (d.y * d.y + d.z * d.z), 0,0,
+			0, 1/12.0f * m * (d.x * d.x + d.z * d.z), 0,
+			0, 0, 1/12.0f * m * (d.y * d.y + d.x * d.x)
 		};
 		return Matrix33(values);
 	}

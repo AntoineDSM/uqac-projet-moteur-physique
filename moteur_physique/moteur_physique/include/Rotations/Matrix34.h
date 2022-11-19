@@ -16,18 +16,14 @@ public:
 
 	//---------------------------------------------------------------CONSTRUCTEURS-------------------------------------------------------------------------------------
 
+	Matrix34() = default;
+
 	//Constructeur de matrice 3x4 identit�
-	Matrix34()
+	Matrix34(float value[12])
 	{
 		for (int i = 0; i < 12; i++) {
-			if (i % 5 == 0) {
-				values[i] = 1;
-			}
-			else {
-				values[i] = 0;
-			}
+			values[i] = value[i];
 		}
-
 	}
 
 	//constructeur par recopie

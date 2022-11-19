@@ -25,8 +25,8 @@ private:
 	// calculates transform matrix from orientation and rotation
 	Matrix34 transformMatrix;
 	//Calculates tenseur of inertia
-	Matrix33 tenseurInertie;
-	Matrix33 tenseurInertieWorld;
+	Matrix33 tenseurInertieInverse;
+	Matrix33 tenseurInertieWorldInverse;
 	//same as linear damping but for rotation
 	float m_angularDamping;
 	// Accumulated force added by ForceGenerator
@@ -47,8 +47,7 @@ public:
 		Vector3D _rotation = transform->getRotation();
 		position = Vector3D(_position.x, _position.y, _position.z);
 		velocity = _velocity;
-		orientation = Quaternion();
-		orientation.w = 1;
+		orientation = Quaternion(1, 0, 0, 0);
 		orientation.RotateByVector(_rotation);
 	}
 
@@ -104,7 +103,7 @@ public:
 
 	inline void SetInertieTenseur(const Matrix33& _tenseurInertie)
 	{
-		tenseurInertie = _tenseurInertie;
+		tenseurInertieInverse = _tenseurInertie.Inverse();
 	}
 
 	inline void SetOrientation(Vector3D _pos)

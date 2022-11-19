@@ -32,15 +32,12 @@ public:
 	static float GetDeterminant(const Matrix33 & mat);
 
 	// Get the Inverse matrix
-	Matrix33 Inverse();
+	Matrix33 Inverse() const;
 
 	// Get the Transpose matrix
 	Matrix33 Transpose();
 	//----------------------------------------------------------------------METHODES PUBLIQUES------------------------------------------------------------------------------------------------
-
-	// Get the Transpose matrix
-	Vector3D Transform(const Vector3D& vector);
-
+	// 
 	// Set the matrix base on a quaternion
 	void SetOrientation(const Quaternion& q);
 
@@ -49,4 +46,5 @@ public:
 	friend Matrix33 operator*(const Matrix33& premiereMatrice, const Matrix33& secondeMatrice);
 	//Multiplication de l'ensemble par un vecteur
 	Vector3D const operator*(const Vector3D& vector);
+	Matrix33& operator*=(const float& f1);
 };

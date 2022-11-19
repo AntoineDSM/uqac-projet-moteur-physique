@@ -14,13 +14,15 @@ class Quaternion
 		float value[4];
 	
 		//--------------------------------------------------CONSTRUCTEURS----------------------------------------------------------
-		
-		//quaternion de base
-		float w, i, j, k;
-		Quaternion() : w(1), i(0), j(0), k(0) {}
-		//Constructeur par defaut
-		//Quaternion() = default;
 	
+		Quaternion()
+		{
+			value[0] = 1;
+			value[1] = 0;
+			value[2] = 0;
+			value[3] = 0;
+		}
+
 		//Constructeur par passage de parametres
 		Quaternion(float w, float i, float j, float k)
 		{
@@ -31,10 +33,10 @@ class Quaternion
 		}
 		
 		//Constructeur par recopie
-		/*Quaternion(const Quaternion& other) : value{other.value[0], other.value[1], other.value[2], other.value[3]}
+		Quaternion(const Quaternion& other) : value{other.value[0], other.value[1], other.value[2], other.value[3]}
 		{
 			//rien a ajouter
-		}*/
+		}
 
 
 		//--------------------------------------------METHODES PUBLIQUES-----------------------------------------------------------

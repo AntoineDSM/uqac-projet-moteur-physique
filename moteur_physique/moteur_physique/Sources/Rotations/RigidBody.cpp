@@ -18,7 +18,7 @@ void RigidBody::Integrate(float duration)
 {
 	//Acceleration
 	Vector3D linearAcceleration = m_forceAccum * inverseMasse;
-	Vector3D angularAcceleration = tenseurInertie * m_torqueAccum;
+	Vector3D angularAcceleration = tenseurInertieWorldInverse * m_torqueAccum;
 
 	//Vitesse
 	velocity = velocity * pow(linearDamping, duration) + linearAcceleration * duration;
@@ -26,20 +26,10 @@ void RigidBody::Integrate(float duration)
 
 	//Position
 	position = position + velocity * duration;
-	this->orientation.w = 1;
-	this->orientation.i = 1;
-	this->orientation.j = 1;
-	this->orientation.k = 1;
-
-	this->rotation.x = 1;
-	this->rotation.y = 1;
-	this->rotation.z = 1;
-
 	orientation.UpdateByAngularVelocity(rotation, duration);
 
 	transform->setPosition(position);
 	transform->setRotation(orientation.ToEuler() * ((double)360 / (2 * M_PI)));
-	//transform->setRotation(Vector3D(20.0f,30.0f,5.3f));
 
 	//Update datas
 	CalculateDerivedData();
@@ -55,17 +45,18 @@ void RigidBody::ClearAccumulator()
 	m_torqueAccum.clear();
 }
 
-void RigidBody::ComputeTenseurInertieWorld(Matrix33& inertieTenseur)
+void RigidBody::ComputeTenseurInertieWorld(Matrix33& inertieTenseurWorld)
 {
 	Matrix33 transformMatrix33 = transformMatrix.ToMatrix33();
-	inertieTenseur = transformMatrix33 * tenseurInertie;
-	inertieTenseur *= transformMatrix33.Inverse();
+	inertieTenseurWorld = transformMatrix33 * tenseurInertieInverse;
+	inertieTenseurWorld *= transformMatrix33.Inverse();
+	tenseurInertieWorldInverse = inertieTenseurWorld;
 }
 
 //Permet d'obtenir la coordonnée du repère local dans le repère du monde
 Vector3D RigidBody::LocalToWorld(Vector3D& local)
 {
-	return  transformMatrix.Inverse() * (local + position);
+	return  transformMatrix * (local + position);
 }
 
 //Permet d'obtenir la coordonnée du monde dans le repère local
@@ -77,7 +68,7 @@ Vector3D RigidBody::WorldToLocal(Vector3D& world)
 void RigidBody::CalculateDerivedData()
 {
 	transformMatrix.SetOrientationAndPosition(orientation, position);
-	ComputeTenseurInertieWorld(tenseurInertieWorld);
+	ComputeTenseurInertieWorld(tenseurInertieWorldInverse);
 }
 
 //Ajout d'une force dans l'accumulateur correspondant

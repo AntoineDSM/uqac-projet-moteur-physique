@@ -10,43 +10,38 @@ void Quaternion::Normalized() {
 		return;
 	}
 	result = ((float)1.0) / sqrt(result);
-	value[0], value[1], value[2], value[3] *= result;
+	value[0] *= result;
+	value[1] *= result;
+	value[2] *= result;
+	value[3] *= result;
 }
 
 Quaternion Quaternion::operator* (const Quaternion& other) {
-	Quaternion q = *this;
-	value[0] = q.value[0] * other.value[0] - q.value[1] * other.value[1] - q.value[2] * other.value[2] - q.value[3] * other.value[3];
-	value[1] = q.value[0] * other.value[1] + q.value[1] * other.value[0] + q.value[2] * other.value[3] - q.value[3] * other.value[2];
-	value[2] = q.value[0] * other.value[2] + q.value[2] * other.value[0] + q.value[3] * other.value[1] - q.value[1] * other.value[3];
-	value[3] = q.value[0] * other.value[3] + q.value[3] * other.value[0] + q.value[1] * other.value[2] - q.value[2] * other.value[1];
-	return q;
+	value[0] = value[0] * other.value[0] - value[1] * other.value[1] - value[2] * other.value[2] - value[3] * other.value[3];
+	value[1] = value[0] * other.value[1] + value[1] * other.value[0] + value[2] * other.value[3] - value[3] * other.value[2];
+	value[2] = value[0] * other.value[2] + value[2] * other.value[0] + value[3] * other.value[1] - value[1] * other.value[3];
+	value[3] = value[0] * other.value[3] + value[3] * other.value[0] + value[1] * other.value[2] - value[2] * other.value[1];
+	return (*this);
 }
 
 void Quaternion::RotateByVector(const Vector3D& vector)
 {
-	value[0] = 0;
-	value[1] = vector.x;
-	value[2] = vector.y;
-	value[3] = vector.z;
+	Quaternion q = Quaternion(0, vector.x, vector.y, vector.z);
+	(*this) = (*this) * q;
+	Normalized();
 }
 
 void Quaternion::UpdateByAngularVelocity(const Vector3D& r, float duration)
 {
-	Quaternion q = *this;
-	q.value[1] = r.x * duration;
-	q.value[2] = r.y * duration;
-	q.value[3] = r.z * duration;
+	Quaternion q = Quaternion(0, r.x, r.y, r.z);
 
-	q = q * *this;
+	q = q * (*this);
 
-	value[0] = value[0] + q.value[0] * 0.5;
-	value[1] = value[1] + q.value[1] * 0.5;
-	value[2] = value[2] + q.value[2] * 0.5;
-	value[3] = value[3] + q.value[3] * 0.5;
-
-	q.Normalized();
-
-	*this = q;
+	value[0] += q.value[0] * 0.5 * duration;
+	value[1] += q.value[1] * 0.5 * duration;
+	value[2] += q.value[2] * 0.5 * duration;
+	value[3] += q.value[3] * 0.5 * duration;
+	Normalized();
 }
 
 //code de la page suivant  https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
@@ -75,7 +70,8 @@ Vector3D Quaternion::ToEuler()
 	return angles;
 }
 
-void Quaternion::SetByEulerRotation(Vector3D euler) {
+void Quaternion::SetByEulerRotation(Vector3D euler) 
+{
 	double cy = cos(euler.z * 0.5);
 	double sy = sin(euler.z * 0.5);
 	double cp = cos(euler.y * 0.5);

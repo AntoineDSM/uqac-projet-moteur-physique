@@ -23,8 +23,10 @@ Matrix34 operator*(const Matrix34& premiereMatrice, const Matrix34& secondeMatri
 	return troisiemeMatrice;
 }
 
-Vector3D const Matrix34::operator* (const Vector3D& vector) {
-	return Vector3D{
+Vector3D const Matrix34::operator* (const Vector3D& vector) 
+{
+	return Vector3D
+	{
 		vector.x * values[0] + vector.y * values[11] + vector.z * values[2] + values[3],
 		vector.x * values[4] + vector.y * values[5] + vector.z * values[6] + values[7],
 		vector.x * values[8] + vector.y * values[9] + vector.z * values[10] + values[11]
@@ -44,7 +46,8 @@ Matrix34 Matrix34::Inverse()
 
 
 
-void Matrix34::SetOrientationAndPosition(const Quaternion& q, const Vector3D& p) {
+void Matrix34::SetOrientationAndPosition(const Quaternion& q, const Vector3D& p) 
+{
 	values[0] = 1 - (2 * q.value[2] * q.value[2] + 2 * q.value[3] * q.value[3]);
 	values[1] = 2 * q.value[1] * q.value[2] + 2 * q.value[3] * q.value[0];
 	values[2] = 2 * q.value[1] * q.value[3] - 2 * q.value[2] * q.value[0];

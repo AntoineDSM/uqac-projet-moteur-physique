@@ -19,7 +19,7 @@ public:
     ShapeRenderer(RigidBody* rb) : rb(rb)
     {
         m_shader = new Shader("Shader/cubeShader.vs", "Shader/cubeShader.fs");
-        m_shape = new Cube(Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(0.01, 0.01, 0.01));//On créer notre forme de cube
+        m_shape = new Cube(Vector3D(0, 0, 0), Vector3D(0, 0, 0), Vector3D(1, 1, 1));//On créer notre forme de cube
     }
 
     //permet de rendre la forme voulue dans la fenêtre courante.
