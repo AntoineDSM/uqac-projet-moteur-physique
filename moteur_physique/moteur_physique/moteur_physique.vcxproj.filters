@@ -109,6 +109,9 @@
     <ClCompile Include="skybox.cpp">
       <Filter>Sources\SkyBox</Filter>
     </ClCompile>
+    <ClCompile Include="Main_rendu4.cpp">
+      <Filter>Sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -251,6 +254,24 @@
     </ClInclude>
     <ClInclude Include="SkyBox.h">
       <Filter>Headers\SkyBox</Filter>
+    </ClInclude>
+    <ClInclude Include="Sphere.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="Plan.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="Boite.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionData.h">
+      <Filter>Headers\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="Primitive.h">
+      <Filter>Headers\RB</Filter>
+    </ClInclude>
+    <ClInclude Include="ContactResolution.h">
+      <Filter>Headers\Contacts</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

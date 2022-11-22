@@ -169,6 +169,7 @@
     <ClCompile Include="Main_rendu1.cpp" />
     <ClCompile Include="Main_rendu2.cpp" />
     <ClCompile Include="Main_rendu3.cpp" />
+    <ClCompile Include="Main_rendu4.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShapeRenderer.cpp" />
@@ -198,7 +199,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AmatParticules.h" />
+    <ClInclude Include="Boite.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="CollisionData.h" />
+    <ClInclude Include="ContactResolution.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DemoCube.h" />
     <ClInclude Include="Headers\Wall.h" />
@@ -238,10 +242,13 @@
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
     <ClInclude Include="PhysicWorld.h" />
+    <ClInclude Include="Plan.h" />
+    <ClInclude Include="Primitive.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
     <ClInclude Include="ShapeRenderer.h" />
     <ClInclude Include="SkyBox.h" />
+    <ClInclude Include="Sphere.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="ValuesReferences.h" />
   </ItemGroup>
