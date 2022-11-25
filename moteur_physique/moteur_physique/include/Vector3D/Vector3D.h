@@ -236,6 +236,7 @@ namespace moteurJeux {
 			return new Vector3D(x - v->x, y - v->y, z - v->z);
 		}
 
+
 		Vector3D operator-(float value)
 		{
 			return Vector3D(x - value, y - value, z - value);
