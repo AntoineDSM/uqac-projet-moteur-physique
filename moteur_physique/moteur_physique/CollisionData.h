@@ -5,7 +5,7 @@
 #include "Vecteur3D.h"
 #include "Rotations/RigidBody.h"
 
-struct {             
+struct CollisionData {
 	Vector3D pointContact; //point de contact
 	Vector3D normalContact; //normal au contact
 	float penetration; //pénétration dans la direction de la normal

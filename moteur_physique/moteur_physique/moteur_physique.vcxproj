@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ContactResolution.cpp" />
     <ClCompile Include="DemoCube.cpp" />
     <ClCompile Include="include\Contacts\ParticleCable.cpp" />
     <ClCompile Include="include\Contacts\ParticleContact.cpp" />

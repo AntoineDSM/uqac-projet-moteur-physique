@@ -112,6 +112,9 @@
     <ClCompile Include="Main_rendu4.cpp">
       <Filter>Sources</Filter>
     </ClCompile>
+    <ClCompile Include="ContactResolution.cpp">
+      <Filter>Sources\Contacts</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
