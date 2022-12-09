@@ -33,7 +33,7 @@ Vector3D const Matrix34::operator* (const Vector3D& vector)
 	};
 }
 
-
+/*
 Matrix34 Matrix34::Inverse()
 {
 	float valuesMatrix33[9] = { values[0] , values[1], values[2], values[4], values[5], values[6], values[8], values[9], values[10] };
@@ -43,6 +43,7 @@ Matrix34 Matrix34::Inverse()
 	Vector3D vectDerniereColonne = mat33 * Vector3D(-1.0 * valuesVectorRajout[0], -1.0 * valuesVectorRajout[1], -1.0 * valuesVectorRajout[2]);
 	return Matrix34(mat33, vectDerniereColonne);
 }
+*/
 
 
 
