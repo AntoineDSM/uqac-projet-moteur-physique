@@ -115,6 +115,18 @@
     <ClCompile Include="ContactResolution.cpp">
       <Filter>Sources\Contacts</Filter>
     </ClCompile>
+    <ClCompile Include="OctreeDetection.cpp" />
+    <ClCompile Include="Sphere.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="Boite.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="Plan.cpp">
+      <Filter>Sources\RB</Filter>
+    </ClCompile>
+    <ClCompile Include="RigidBodyContact.cpp" />
+    <ClCompile Include="RigidBodyContactResolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\GLFW\glfw3.h">
@@ -275,6 +287,15 @@
     </ClInclude>
     <ClInclude Include="ContactResolution.h">
       <Filter>Headers\Contacts</Filter>
+    </ClInclude>
+    <ClInclude Include="OctreeDetection.h" />
+    <ClInclude Include="DemoRigidBodiesCollision.h">
+      <Filter>Sources\Demos</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidBodyContact.h" />
+    <ClInclude Include="RigidBodyContactResolver.h" />
+    <ClInclude Include="ShapeRB.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

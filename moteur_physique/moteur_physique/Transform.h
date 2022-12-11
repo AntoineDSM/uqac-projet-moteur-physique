@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
 #include "Rotations/Quaternion.h"
 
 //-------------------------------------------------------------------CLASSE TRANSFORM-------------------------------------------------------------
@@ -14,9 +14,15 @@ class Transform
 		Vector3D position = Vector3D();
 		Vector3D rotation = Vector3D();
 		Vector3D scale = Vector3D(1,1,1);
-		std::string name;
 	
 	public:
+
+		std::string name;
+
+		Transform()
+		{
+			name = "";
+		}
 		
 		//Constructeur
 		Transform(std::string name);

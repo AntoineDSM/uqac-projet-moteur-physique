@@ -1,6 +1,7 @@
 ﻿#include "ContactResolution.h"
 
-void CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2) {
+/*
+int CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2, CollisionData* data) {
 	float normDistance;
 	Vector3D pointContact;
 	float Interpenetration;
@@ -8,13 +9,14 @@ void CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2) {
 	sphere2.body->GetPosition().get_normalization();
 
 	normDistance = sqrt((sphere1.body->GetPosition().x - sphere2.body->GetPosition().x) * (sphere1.body->GetPosition().x - sphere2.body->GetPosition().x) + (sphere1.body->GetPosition().y - sphere2.body->GetPosition().y) * (sphere1.body->GetPosition().y - sphere2.body->GetPosition().y) + (sphere1.body->GetPosition().z - sphere2.body->GetPosition().z) * (sphere1.body->GetPosition().z - sphere2.body->GetPosition().z)); // <--- il manque la valeur absolue // Normale de la distance entre les 2 sphère
-	if ((normDistance * normDistance) < ((sphere1.radius + sphere2.radius) * (sphere1.radius + sphere2.radius)))
-		Interpenetration = normDistance - (sphere1.radius + sphere2.radius);	// <--- pas sur de la formule // Somme des rayons moins la distance entre le centre des sphère
+	if ((normDistance * normDistance) < ((sphere1.m_radius + sphere2.m_radius) * (sphere1.m_radius + sphere2.m_radius)))
+		Interpenetration = normDistance - (sphere1.m_radius + sphere2.m_radius);	// <--- pas sur de la formule // Somme des rayons moins la distance entre le centre des sphère
 
 	pointContact = sphere1.body->GetPosition() + normDistance - Interpenetration; //Point sur la surface d'une sphères dans la direction du contact
 }
+*/
 
-void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
+/*int CollisionSpherePlan(Sphere& sphere, Plan& plan, CollisionData* data) {
 
 
 	float distance;
@@ -25,13 +27,13 @@ void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
 	// Trouver la distance entre la sphère et le plan (prendre en compte le rayon) 𝑑=𝒑∙𝒍−𝑙 //
 	// Où l est le vecteur normal au plan et l le décalage du plan.
 	distance = sqrt((sphere.body->GetPosition().x - plan.body->GetPosition().x) * (sphere.body->GetPosition().x - plan.body->GetPosition().x) + (sphere.body->GetPosition().y - plan.body->GetPosition().y) * (sphere.body->GetPosition().y - plan.body->GetPosition().y) + (sphere.body->GetPosition().z - plan.body->GetPosition().z) * (sphere.body->GetPosition().z - plan.body->GetPosition().z)); // <--- il manque la valeur absolue // Normale de la distance entre les 2 sphère
-	distance = (distance - plan.offset) * plan.normal;
+	distance = (distance - plan.offset) * plan.m_normal;
 
 	// TO DO 2
-	if (distance.isNULL) {
+	if (distance <= 0) {
 
 		plan.body->GetPosition().get_normalization();	// Normale direction du plan
-		plan.normal = plan.body->GetPosition();
+		plan.m_normal = plan.body->GetPosition();
 		Interpenetration = sphere.body->GetPosition() - plan.body->GetPosition();	// Interpénétration sois la distance entre la sphère et le plan
 
 		pointContact = normal - Interpenetration;// Point sur la sphère en direction du contact
@@ -39,23 +41,39 @@ void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
 	}
 
 }
+*/
 
-void CollisionBoitePlan(const Boite& boite, const Plan& plan) {
+static int CollisionBoitePlan(const Boite& boite, const Plan& plan, CollisionData* data)
+{
 
+	if (data->contactLeft <= 0) return 0;
 
-	// Peut générer plusieurs contacts.
-
-	for (int i = 0; i < 16; i++)
+	for (size_t i = 0; i < 8; i++)
 	{
-		boite.body->GetPosition();
-		// Consiste à valider chacun des points de la boîte par rapport au plan en utilisant la formule : 𝑑=𝒑∙𝒍−𝑙
+		// Calculate the distance from the plane with dot product(vertexPos, planeNormal)
+		float vertexDistance = Vector3D::scalarProduct(boite.getVertex(i), plan.getNormal()); //============================================== calculer position en fonction de la transform+offset
 
+		// Compare this to the plane’s distance.
+		if (vertexDistance <= plan.getPlaneOffset())
+		{
+			// Create the contact data.
+			// The contact point is halfway between the vertex and the
+			// plane - we multiply the direction by half the separation
+			// distance and add the vertex location.
+			RigidBodyContact* contact = new RigidBodyContact();
+			contact->pointContact = plan.getNormal();
+			contact->pointContact *= (vertexDistance - plan.getPlaneOffset());
+			contact->pointContact += boite.getVertex(i);
+			contact->m_contactNormal = plan.getNormal();
+			contact->m_penetration = plan.getPlaneOffset() - vertexDistance;
+			data->contacts.push_back(contact);
+			data->addContact(1);
+		}
 	}
-
-
 }
 
-void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) //Face-Face
+/*
+int CollisionBoiteSphere(const Sphere& sphere, const Boite& boite, CollisionData* data) //Face-Face
 {
 	Vector3D pointProche;
 	float distance = 0;
@@ -75,8 +93,10 @@ void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) //Face-Face
 
 	// pointProche va permettre d'extraire les données de contacts
 }
+*/
 
-void CollisionBoiteBoite(const Boite& boite1, const Boite& boite2)
+/*
+int CollisionBoiteBoite(const Boite& boite1, const Boite& boite2, CollisionData* data)
 {
 	Vector3D axe[15];
 	for (int i = 0; i < 15; i++) { // To Do Calculer les 15 Axes
@@ -91,6 +111,5 @@ void CollisionBoiteBoite(const Boite& boite1, const Boite& boite2)
 		// identifier L'Axe et générer la collision corrspondante 
 		//Edge Edge ou Face Vertex.
 	}
-
-
 }
+*/

@@ -9,6 +9,7 @@
 #include <iostream>
 #include <xmemory>
 #include <memory>
+#include <vector>
 
 #ifndef VECTOR3D_HPP
 #define VECTOR3D_HPP
@@ -71,6 +72,18 @@ namespace moteurJeux {
 		}
 
 		//--------------------------------------------------------------------NORMALIZATION--------------------------------------------------------------------------------
+
+		std::vector<double> getValues() const
+		{
+			return { x, y, z};
+		}
+
+		float getMax() const
+		{
+			float max = x > y ? x : y;
+			max = max > z ? max : z;
+			return max;
+		}
 
 		//normalize a vector means to obtain his coordinates between 0 and 1, in the unit circle. We normalize only if the actual Vector3D is not in the unit circle.
 		/*
@@ -158,6 +171,11 @@ namespace moteurJeux {
 
 		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
 		double scalarProduct(const Vector3D& vect);
+
+		static double scalarProduct(const Vector3D& vect1, const Vector3D& vect2)
+		{
+			return vect1.x * vect2.x + vect1.y * vect2.y + vect1.z * vect2.z;
+		}
 
 		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 

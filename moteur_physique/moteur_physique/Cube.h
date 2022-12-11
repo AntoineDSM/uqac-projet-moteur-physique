@@ -6,7 +6,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
 #include "Shape.h"
 
 

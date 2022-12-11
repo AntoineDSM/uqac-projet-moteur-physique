@@ -5,11 +5,20 @@
 #include "Matrix33.h"
 #include "Rotations/Quaternion.h"
 #include "../../Transform.h"
+#include "../../Primitive.h"
+#include "../../Sphere.h"
+#include "../../Boite.h"
+#include "../../Plan.h"
 
 class RigidBody {
 public:
 
 	Transform* transform;
+	Primitive* primitive;
+	Plan* primitivePlan;
+	Boite* primitiveBoite;
+	Sphere* primitiveSphere;
+	Sphere* volumeEnglobant;
 
 private:
 
@@ -36,9 +45,20 @@ private:
 
 public:
 
+	RigidBody()
+	{
+		//nothing to be add here
+	}
+
 	RigidBody(Transform* _transform, Vector3D _velocity)
 	{
 		transform = _transform;
+		primitive = new Primitive();
+		primitivePlan = new Plan();
+		primitiveBoite = new Boite();
+		primitiveSphere = new Sphere();
+		volumeEnglobant = new Sphere();
+
 		inverseMasse = 1.0f;
 		linearDamping = 1.0f;
 		m_forceAccum = Vector3D(0, 0, 0);
@@ -49,6 +69,28 @@ public:
 		velocity = _velocity;
 		orientation = Quaternion(1, 0, 0, 0);
 		orientation.RotateByVector(_rotation);
+	}
+
+	void SetPrimitiveBoite(Boite* _primitiveBoite)
+	{
+		primitiveBoite = _primitiveBoite;
+		primitive = primitiveBoite;
+		//volumeEnglobant = new Sphere();
+	}
+
+	void SetPrimitivePlan(Plan* _primitivePlan)
+	{
+		primitivePlan = _primitivePlan;
+		primitive = primitivePlan;
+		//volumeEnglobant->Initialize(primitivePlan->m_radius);
+	}
+
+	void SetPrimitiveSphere(Sphere* _primitiveSphere)
+	{
+		primitiveSphere = _primitiveSphere;
+		primitive = primitiveSphere;
+		//volumeEnglobant = new Sphere();
+		//volumeEnglobant->Initialize(_primitiveSphere->m_radius + 0.5);
 	}
 
 	//Allow us to initialize our RB with some inputed values

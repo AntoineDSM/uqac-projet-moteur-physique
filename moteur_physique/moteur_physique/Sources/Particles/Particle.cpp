@@ -41,8 +41,3 @@ void Particle::integrate(double duration) {
 
 	
 }
-
-void Particle::addForce(const Vector3D& force)
-{
-	forceAccum += force;
-};

@@ -3,18 +3,21 @@
 #include "Sphere.h"
 #include "Plan.h"
 #include "Boite.h"
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
+#include "CollisionData.h"
 
 class ContactResolutions {
 
 public:
-	void CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2) {}
+	//Methode resolveContacts()
 
-	void CollisionSpherePlan(Sphere& sphere, Plan& plan) {}
+	static int CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2, CollisionData* data) {}
 
-	void CollisionBoitePlan(const Boite& boite, const Plan& plan) {}
+	static int CollisionSpherePlan(Sphere& sphere, Plan& plan, CollisionData* data) {}
 
-	void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) {}
+	static int CollisionBoitePlan(const Boite& boite, const Plan& plan, CollisionData* data) {}
 
-	void CollisionBoiteBoite(const Boite& boite1, const Boite& boite2) {}
+	static int CollisionBoiteSphere(const Sphere& sphere, const Boite& boite, CollisionData* data) {}
+
+	static int CollisionBoiteBoite(const Boite& boite1, const Boite& boite2, CollisionData* data) {}
 };

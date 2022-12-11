@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boite.cpp" />
     <ClCompile Include="ContactResolution.cpp" />
     <ClCompile Include="DemoCube.cpp" />
     <ClCompile Include="include\Contacts\ParticleCable.cpp" />
@@ -171,7 +172,11 @@
     <ClCompile Include="Main_rendu2.cpp" />
     <ClCompile Include="Main_rendu3.cpp" />
     <ClCompile Include="Main_rendu4.cpp" />
+    <ClCompile Include="OctreeDetection.cpp" />
     <ClCompile Include="PhysicWorld.cpp" />
+    <ClCompile Include="Plan.cpp" />
+    <ClCompile Include="RigidBodyContact.cpp" />
+    <ClCompile Include="RigidBodyContactResolver.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShapeRenderer.cpp" />
     <ClCompile Include="skybox.cpp" />
@@ -195,6 +200,7 @@
     <ClCompile Include="Sources\Rotations\Quaternion.cpp" />
     <ClCompile Include="Sources\Rotations\RigidBody.cpp" />
     <ClCompile Include="Sources\Vector3D\Vector3D.cpp" />
+    <ClCompile Include="Sphere.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -206,6 +212,7 @@
     <ClInclude Include="ContactResolution.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DemoCube.h" />
+    <ClInclude Include="DemoRigidBodiesCollision.h" />
     <ClInclude Include="Headers\Wall.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />
@@ -242,11 +249,15 @@
     <ClInclude Include="include\Utils\Timing.h" />
     <ClInclude Include="include\Vector3D\Vector3D.h" />
     <ClInclude Include="include\Contacts\WallContactGenerator.h" />
+    <ClInclude Include="OctreeDetection.h" />
     <ClInclude Include="PhysicWorld.h" />
     <ClInclude Include="Plan.h" />
     <ClInclude Include="Primitive.h" />
+    <ClInclude Include="RigidBodyContact.h" />
+    <ClInclude Include="RigidBodyContactResolver.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Shape.h" />
+    <ClInclude Include="ShapeRB.h" />
     <ClInclude Include="ShapeRenderer.h" />
     <ClInclude Include="SkyBox.h" />
     <ClInclude Include="Sphere.h" />

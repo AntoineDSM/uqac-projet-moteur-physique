@@ -2,16 +2,23 @@
 #define COLLISIONDATA_H
 
 #pragma once
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
 #include "Rotations/RigidBody.h"
+#include "RigidBodyContact.h"
+#include <vector>
 
-struct CollisionData {
-	Vector3D pointContact; //point de contact
-	Vector3D normalContact; //normal au contact
-	float penetration; //pénétration dans la direction de la normal
-	RigidBody corpsRigides[2]; //Corp rigides concernées (1 ou 2)
-	float coeffDeRestitution; // Coefficiet de restitution
-	float friction; // Friction entre les 2 objets
-} CollisionData;       // Structure variable 
+class CollisionData
+{
+public:
 
-#endif
+	std::vector<RigidBodyContact*> contacts;
+
+	int contactLeft;
+
+	void addContact(int count)
+	{
+		contactLeft -= count;
+	}
+};
+
+#endif COLLISIONDATA_H
