@@ -213,6 +213,7 @@
     <ClInclude Include="ContactRigidBody.h" />
     <ClInclude Include="Cube.h" />
     <ClInclude Include="DemoCube.h" />
+    <ClInclude Include="DemoRigidBodiesCollision.h" />
     <ClInclude Include="Headers\Wall.h" />
     <ClInclude Include="include\Forces\ParticleBuoyancy.h" />
     <ClInclude Include="include\Contacts\ParticleCable.h" />

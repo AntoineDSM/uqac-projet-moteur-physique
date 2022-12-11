@@ -5,6 +5,25 @@
 
 #include "Plan.h"
 #include "Boite.h"
+#include "ContactRigidBody.h"
+
+//------------------------------------------------------------------COLLISION DATA------------------------------------------------------------------------
+
+struct CollisionData 
+{
+	//On recupere l'ensemble des contacts generes
+	std::vector<ContactRigidBody*> contact = std::vector<ContactRigidBody*>();
+
+	//Combien de contact il nous reste a resoudre
+	int contactLeft = 0;
+
+	void addContact(int count)
+	{
+		contactLeft -= count;
+	}
+};
+
+//------------------------------------------------------------------COLLISION RESOLUTION------------------------------------------------------------------------
 
 //Cette classe nous permettra de detecter le type du contact face auquel nous sommes.
 //Ne devons a minima implementer un contact boite->plan, sphere n'est donc pas developper et est exclu du projet pour le moment.

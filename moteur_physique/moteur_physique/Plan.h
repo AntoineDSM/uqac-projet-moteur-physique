@@ -7,7 +7,7 @@
 #include <Vector3D/Vector3D.h>
 
 
-class Plan : Primitive
+class Plan : public Primitive
 {
 
 public:
@@ -20,6 +20,7 @@ public:
 	{
 		Vector3D normal = Vector3D(0, 1, 0);
 		offset = 0;
+		m_offset = Matrix34();
 	}
 
 	void Initialize(Vector3D _normal, float _offset);

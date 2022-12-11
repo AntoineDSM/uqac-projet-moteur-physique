@@ -286,6 +286,9 @@
     <ClInclude Include="OctreeDetection.h" />
     <ClInclude Include="ContactRigidBody.h" />
     <ClInclude Include="RigidBodyContactResolver.h" />
+    <ClInclude Include="DemoRigidBodiesCollision.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Sources">

@@ -9,15 +9,17 @@ class ContactRigidBody
 {
 public:
 
+	ContactRigidBody()
+	{
+		//rien a ajouter
+	}
 	ContactRigidBody(RigidBody* r1, RigidBody* r2, float restitution, float penetration);
-	ContactRigidBody() = default;
-	~ContactRigidBody() = default;
 
 	void resolve(float duration);
 
 	float calculateSeperatingVelocity() const;
 
-	RigidBody* m_rigidbodies[2];
+	RigidBody* m_rigidbodies[2] = {new  RigidBody()};
 
 	//elasticness
 	float m_restitution = 0;
@@ -30,11 +32,15 @@ public:
 
 	void printInfoContact() const;
 
+/*
 private:
 
-	//void resolveVelocity();
-	//void resolveInterpretation();
+	void resolveVelocity();
+	void resolveInterpretation();
+
+*/
 };
+
 
 #endif CONTACT_RIGIDBODY
 

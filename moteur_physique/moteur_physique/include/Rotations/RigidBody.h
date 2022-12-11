@@ -11,35 +11,40 @@
 class RigidBody {
 public:
 
-	Transform* transform;
+	Transform* transform = new Transform("");
 	Primitive* primitive = new Primitive();
 	Boite* primitiveBoite = new Boite();
 	Plan* primitivePlan = new Plan();
 	// calculates transform matrix from orientation and rotation
-	Matrix34 transformMatrix;
+	Matrix34 transformMatrix = Matrix34();
 
 private:
 
 	// same as for Particle
-	float inverseMasse;
-	float linearDamping;
-	Vector3D position;
-	Vector3D velocity;
+	float inverseMasse = 0;
+	float linearDamping = 0;
+	Vector3D position = Vector3D(0,0,0);
+	Vector3D velocity = Vector3D(0, 0, 0);
 	// Orientation of the rigid body
-	Quaternion orientation;
+	Quaternion orientation = Quaternion();
 	// Angular velocity of the rigid body
-	Vector3D rotation;
+	Vector3D rotation = Vector3D(0, 0, 0);
 	//Calculates tenseur of inertia
-	Matrix33 tenseurInertieInverse;
-	Matrix33 tenseurInertieWorldInverse;
+	Matrix33 tenseurInertieInverse = Matrix33();
+	Matrix33 tenseurInertieWorldInverse = Matrix33();
 	//same as linear damping but for rotation
-	float m_angularDamping;
+	float m_angularDamping = 0;
 	// Accumulated force added by ForceGenerator
-	Vector3D m_forceAccum;
+	Vector3D m_forceAccum = Vector3D(0, 0, 0);
 	// Accumulated torque added by ForceGenerator
-	Vector3D m_torqueAccum;
+	Vector3D m_torqueAccum = Vector3D(0, 0, 0);
 
 public:
+
+	RigidBody()
+	{
+		//rien a ajouter	
+	}
 
 	RigidBody(Transform* _transform, Vector3D _velocity, Primitive* _primitive, Boite* boite, Plan* plan)
 	{

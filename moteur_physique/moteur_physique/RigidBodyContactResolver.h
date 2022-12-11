@@ -14,7 +14,7 @@ public:
 
 	RigidBodyContactResolver() = default;
 
-	void resolveContacts(ContactRigidBody * contactArray,
+	void resolveContacts(ContactRigidBody* contactArray,
 		unsigned int numContact,
 		float duration);
 };

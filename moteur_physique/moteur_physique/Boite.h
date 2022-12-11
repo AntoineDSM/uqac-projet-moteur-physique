@@ -5,7 +5,7 @@
 
 #include "Primitive.h"
 
-class Boite : Primitive
+class Boite : public Primitive
 {
 
 private :
