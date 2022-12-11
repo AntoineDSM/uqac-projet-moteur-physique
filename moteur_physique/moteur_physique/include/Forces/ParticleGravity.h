@@ -1,11 +1,8 @@
-
-//Date de création : 19/09/22
-//Créer par : Victor GUIRAUD
-//Date de dernière modification : 19/09/22
-//Modifié par : Victor GUIRAUD
-
-
 #pragma once
+
+#ifndef PARTICLE_GRAVITY
+#define PARTICLE_GRAVITY
+
 #include "Vector3D/Vector3D.h"
 #include "Forces/ParticleForceGenerator.h"
 
@@ -29,3 +26,4 @@ class ParticleGravity : public ParticleForceGenerator
 
 };
 
+#endif PARTICLE_GRAVITY

@@ -1,5 +1,11 @@
 ﻿#include "ContactResolution.h"
 
+//-----------------------------------------------------------------------IMPLEMENTEES--------------------------------------------------------------------
+
+
+//-----------------------------------------------------------------------NON IMPLEMENTEES--------------------------------------------------------------------
+
+/*
 void CollisionSphereSphere(Sphere& sphere1, Sphere& sphere2) {
 	float normDistance;
 	Vector3D pointContact;
@@ -37,22 +43,6 @@ void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
 		pointContact = normal - Interpenetration;// Point sur la sphère en direction du contact
 
 	}
-
-}
-
-void CollisionBoitePlan(const Boite& boite, const Plan& plan) {
-
-
-	// Peut générer plusieurs contacts.
-
-	for (int i = 0; i < 16; i++)
-	{
-		boite.body->GetPosition();
-		// Consiste à valider chacun des points de la boîte par rapport au plan en utilisant la formule : 𝑑=𝒑∙𝒍−𝑙
-
-	}
-
-
 }
 
 void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) //Face-Face
@@ -75,22 +65,4 @@ void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) //Face-Face
 
 	// pointProche va permettre d'extraire les données de contacts
 }
-
-void CollisionBoiteBoite(const Boite& boite1, const Boite& boite2)
-{
-	Vector3D axe[15];
-	for (int i = 0; i < 15; i++) { // To Do Calculer les 15 Axes
-
-		axe[i]; // calcule entre les 6 axes principales et 9 axes issue du produit Vectoriel de axes des deux boites
-		// To Do pour chaque Axe
-			// Projection des boîtes sur l,axe
-			// Calculer l'interpénétration - conserver l'axe la plus petite
-			// Dès que l’axe ne produit pas d’interpénétration, les objets ne sont pas en collision.
-
-
-		// identifier L'Axe et générer la collision corrspondante 
-		//Edge Edge ou Face Vertex.
-	}
-
-
-}
+*/

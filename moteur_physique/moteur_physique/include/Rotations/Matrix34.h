@@ -1,6 +1,8 @@
 ﻿#pragma once
 
-#pragma once
+#ifndef MATRIX34
+#define MATRIX34
+
 #include "Vector3D/Vector3D.h"
 #include "Rotations/Quaternion.h"
 #include "Matrix33.h"
@@ -54,9 +56,8 @@ public:
 	}
 
 	//-----------------------------------------------------METHODES PUBLIQUES-------------------------------------------------------------------------------------
-	//-----------------------------------------------------METHODES PUBLIQUES-------------------------------------------------------------------------------------
 
-		// Get the Inverse matrix
+	// Get the Inverse matrix
 	Matrix34 Inverse();
 
 	// Set the matrix base on a quaternion and a position
@@ -80,4 +81,4 @@ public:
 
 };
 
-	
+#endif MATRIX34

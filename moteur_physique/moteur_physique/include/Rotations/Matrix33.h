@@ -1,7 +1,11 @@
 ﻿#pragma once
+
+#ifndef MATRIX33
+#define MATRIX33
+
 #include "Vector3D/Vector3D.h"
 #include "Rotations/Quaternion.h"
-#include "vector"
+#include <vector>
 
 //-------------------------------------------------------------------------------CLASSE MATRICE 3x3------------------------------------------------------------------------------------------
 class Matrix33
@@ -48,3 +52,5 @@ public:
 	Vector3D const operator*(const Vector3D& vector);
 	Matrix33& operator*=(const float& f1);
 };
+
+#endif MATRIX33

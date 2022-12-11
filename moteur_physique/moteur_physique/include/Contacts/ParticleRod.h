@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef PARTICLE_ROD
+#define PARTICLE_ROD
+
 #include "Particlelink.h"
 #include "ParticleContact.h"
 
@@ -21,3 +24,5 @@ class ParticleRod: public ParticleLink
 		void addContact(ParticleContact* contact);
 
 };
+
+#endif PARTICLE_ROD

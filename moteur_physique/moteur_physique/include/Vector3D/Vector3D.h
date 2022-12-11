@@ -1,17 +1,13 @@
-﻿//Date de cr�ation :
-//Cr�er par :
-//Date de derni�re modification :
-//Modifi� par : 
+﻿#pragma once
 
+#ifndef VECTOR3D_HPP
+#define VECTOR3D_HPP
 
-#pragma once
 #include <math.h>
 #include <iostream>
 #include <xmemory>
 #include <memory>
-
-#ifndef VECTOR3D_HPP
-#define VECTOR3D_HPP
+#include <vector>
 
 namespace moteurJeux {
 
@@ -71,6 +67,18 @@ namespace moteurJeux {
 		}
 
 		//--------------------------------------------------------------------NORMALIZATION--------------------------------------------------------------------------------
+
+		std::vector<double> getValues() const
+		{
+			return { x, y, z };
+		}
+
+		float getMax() const
+		{
+			double max = x > y ? x : y;
+			max = max > z ? max : z;
+			return (float)max;
+		}
 
 		//normalize a vector means to obtain his coordinates between 0 and 1, in the unit circle. We normalize only if the actual Vector3D is not in the unit circle.
 		/*
@@ -159,11 +167,21 @@ namespace moteurJeux {
 		//avoir le produit scalaire entre notre vecteur et un second, le produit scalaire de a.b veut dire obtenir la longueur de b projete sur a.
 		double scalarProduct(const Vector3D& vect);
 
+		static double scalarProduct_2(const Vector3D& vect1, const Vector3D& vect2)
+		{
+			return vect1.x * vect2.x + vect1.y * vect2.y + vect1.z * vect2.z;
+		}
+
 		//--------------------------------------------------------------------CREATE AN ORTHONOMAL BASIS-------------------------------------------------------------
 
 		struct orthonormalBasis //9 points dans la base, basis[0-2] vecteur1, basis[3-5] vecteur2, basis[6-8] vecteur3.
 		{
 			double basis[8];
+
+			orthonormalBasis()
+			{
+				basis[8] = {0};
+			}
 		};
 
 		//savoir si un vecteur est un vecteur null, soit (0,0,0).

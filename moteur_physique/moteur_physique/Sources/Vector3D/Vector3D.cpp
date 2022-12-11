@@ -31,7 +31,11 @@ Vector3D::orthonormalBasis createOrthonormalBasis(Vector3D& vect1, Vector3D& vec
 		return myBase;
 	}
 	else//Si le produit vectoriel est null.
+	{
 		std::cout << "Theses vector are parallel, creating a basis is impossible\n";
+		return Vector3D::orthonormalBasis();
+	}
+	
 }
 
 //-----------------------------------------------------------------OPERATION ON VECTOR3D-----------------------------------------------------

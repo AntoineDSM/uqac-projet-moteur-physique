@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef PARTICLE_FORCE_REGISTRY
+#define PARTICLE_FORCE_REGISTRY
+
 #include "Vector3D/Vector3D.h"
 #include "Particles/Particle.h"
 #include "Forces/ParticleForceGenerator.h"
@@ -49,6 +52,7 @@ class ParticleForceRegistry
 }; 
 
 
+#endif PARTICLE_FORCE_REGISTRY
 
 
 

@@ -1,4 +1,4 @@
-
+/*
 #pragma once
 
 
@@ -277,3 +277,4 @@ void SwapOpenGLBuffers(GLFWwindow* window)
     glfwSwapBuffers(window);
     glfwPollEvents();
 }
+*/

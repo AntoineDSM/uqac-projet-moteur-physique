@@ -1,9 +1,7 @@
-//Date de création :
-//Créer par : 
-//Date de dernière modification : 16/09/22
-//Modifié par : Victor GUIRAUD
-
 #pragma once
+
+#ifndef PARTICLECONTACT_HPP
+#define PARTICLECONTACT_HPP
 
 #include "math.h"
 #include "Vector3D/Vector3D.h"
@@ -11,9 +9,6 @@
 #include "Utils/Precision.h"
 #include "../Headers/Wall.h"
 #include <vector>
-
-#ifndef PARTICLECONTACT_HPP
-#define PARTICLECONTACT_HPP
 
 class ParticleContact{
   

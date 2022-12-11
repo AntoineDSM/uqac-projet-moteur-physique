@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef PARTICLE_LINK
+#define PARTICLE_LINK
+
 #include "Particles/particle.h"
 
 class ParticleLink
@@ -16,3 +19,5 @@ class ParticleLink
 			//rien a ajouter
 		};
 };
+
+#endif PARTICLE_LINK

@@ -1,15 +1,22 @@
 #pragma once
 
-#include "Vector3D/Vector3D.h"
-#include "Matrix34.h"
+#ifndef RIGIDBODY
+#define RIGIDBODY
+
 #include "Matrix33.h"
-#include "Rotations/Quaternion.h"
 #include "../../Transform.h"
+#include "../Boite.h"
+#include "../Plan.h"
 
 class RigidBody {
 public:
 
 	Transform* transform;
+	Primitive* primitive = new Primitive();
+	Boite* primitiveBoite = new Boite();
+	Plan* primitivePlan = new Plan();
+	// calculates transform matrix from orientation and rotation
+	Matrix34 transformMatrix;
 
 private:
 
@@ -22,8 +29,6 @@ private:
 	Quaternion orientation;
 	// Angular velocity of the rigid body
 	Vector3D rotation;
-	// calculates transform matrix from orientation and rotation
-	Matrix34 transformMatrix;
 	//Calculates tenseur of inertia
 	Matrix33 tenseurInertieInverse;
 	Matrix33 tenseurInertieWorldInverse;
@@ -36,9 +41,19 @@ private:
 
 public:
 
-	RigidBody(Transform* _transform, Vector3D _velocity)
+	RigidBody(Transform* _transform, Vector3D _velocity, Primitive* _primitive, Boite* boite, Plan* plan)
 	{
 		transform = _transform;
+		primitive = _primitive;
+		if (primitive->getShape() == "Boite")
+		{
+			primitiveBoite = boite;
+		}
+		else if (primitive->getShape() == "Plan")
+		{
+			primitivePlan = plan;
+		}
+
 		inverseMasse = 1.0f;
 		linearDamping = 1.0f;
 		m_forceAccum = Vector3D(0, 0, 0);
@@ -125,3 +140,5 @@ private:
 	//return a world based pos to a local based pos
 	Vector3D WorldToLocal(Vector3D& world);
 };
+
+#endif RIGIDBODY

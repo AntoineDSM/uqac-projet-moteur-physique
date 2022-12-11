@@ -33,7 +33,6 @@ Vector3D const Matrix34::operator* (const Vector3D& vector)
 	};
 }
 
-/*
 Matrix34 Matrix34::Inverse()
 {
 	float valuesMatrix33[9] = { values[0] , values[1], values[2], values[4], values[5], values[6], values[8], values[9], values[10] };
@@ -43,11 +42,8 @@ Matrix34 Matrix34::Inverse()
 	Vector3D vectDerniereColonne = mat33 * Vector3D(-1.0 * valuesVectorRajout[0], -1.0 * valuesVectorRajout[1], -1.0 * valuesVectorRajout[2]);
 	return Matrix34(mat33, vectDerniereColonne);
 }
-*/
 
-
-
-void Matrix34::SetOrientationAndPosition(const Quaternion& q, const Vector3D& p) 
+void Matrix34::SetOrientationAndPosition(const Quaternion& q, const Vector3D& p)
 {
 	values[0] = 1 - (2 * q.value[2] * q.value[2] + 2 * q.value[3] * q.value[3]);
 	values[1] = 2 * q.value[1] * q.value[2] + 2 * q.value[3] * q.value[0];
@@ -86,13 +82,11 @@ Vector3D Matrix34::TransformDirection(const Vector3D& v) {
 
 Matrix33 Matrix34::ToMatrix33() const
 {
-	{
-		float values33[9];
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				values33[i + 3 * j] = values[i + 4 * j];
-			}
+	float values33[9];
+	for (int i = 0; i < 3; i++) {
+		for (int j = 0; j < 3; j++) {
+			values33[i + 3 * j] = values[i + 4 * j];
 		}
-		return Matrix33(values33);
 	}
+	return Matrix33(values33);
 }

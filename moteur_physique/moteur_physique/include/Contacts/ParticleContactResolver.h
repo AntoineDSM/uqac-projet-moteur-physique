@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef PARTICLE_CONTACT_RESOLVER
+#define PARTICLE_CONTACT_RESOLVER
+
 #include "ParticleContact.h"
 #include "ParticleCable.h"
 #include "ParticleContactGenerator.h"
@@ -30,3 +33,5 @@ class ParticleContactResolver
 		void resolveSpecialsContacts(std::vector<ParticleContact*> listeContacts = std::vector<ParticleContact*>());
 
 };
+
+#endif PARTICLE_CONTACT_RESOLVER
