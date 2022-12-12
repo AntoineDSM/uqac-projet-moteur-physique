@@ -42,7 +42,7 @@ void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
 
 void CollisionBoitePlan(const Boite& boite, const Plan& plan) {
 
-
+	CollisionData cd = new CollisionData{};
 	// Peut générer plusieurs contacts.
 
 	for (int i = 0; i < 16; i++)
