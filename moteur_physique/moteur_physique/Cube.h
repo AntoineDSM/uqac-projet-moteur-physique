@@ -6,7 +6,7 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
 #include "Shape.h"
 
 
@@ -68,7 +68,7 @@ public:
             -0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
             -0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
         };
-        unsigned int VBO;
+        unsigned int VBO = 0;
         glGenVertexArrays(1, &m_VAO);
         glGenBuffers(1, &m_VBO);
 

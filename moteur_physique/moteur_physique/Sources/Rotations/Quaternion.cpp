@@ -1,6 +1,4 @@
 #include "Rotations/Quaternion.h"
-#define _USE_MATH_DEFINES
-#include <math.h>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -39,10 +37,10 @@ void Quaternion::UpdateByAngularVelocity(const Vector3D& r, float duration)
 
 	q = q * (*this);
 
-	value[0] += q.value[0] * 0.5 * duration;
-	value[1] += q.value[1] * 0.5 * duration;
-	value[2] += q.value[2] * 0.5 * duration;
-	value[3] += q.value[3] * 0.5 * duration;
+	value[0] += q.value[0] * 0.5 * (double)duration;
+	value[1] += q.value[1] * 0.5 * (double)duration;
+	value[2] += q.value[2] * 0.5 * (double)duration;
+	value[3] += q.value[3] * 0.5 * (double)duration;
 	Normalized();
 }
 

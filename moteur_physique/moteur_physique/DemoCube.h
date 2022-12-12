@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include <ostream>
@@ -111,3 +112,4 @@ public :
 	}
 };
 
+*/

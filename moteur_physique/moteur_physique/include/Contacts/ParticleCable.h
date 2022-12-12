@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef PARTICLE_CABLE
+#define PARTICLE_CABLE
+
 #include "Particlelink.h"
 #include "ParticleContact.h"
 
@@ -21,3 +24,5 @@ class ParticleCable: public ParticleLink
 		void addContact(ParticleContact* contact);
 
 };
+
+#endif PARTICLE_CABLE

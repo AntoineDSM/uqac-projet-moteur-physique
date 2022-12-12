@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef QUATERNION
+#define QUATERNION
+
 #include "Vector3D/Vector3D.h"
 
 using namespace moteurJeux;
@@ -58,3 +62,5 @@ class Quaternion
 		// Quaternion multiplication
 		Quaternion operator* (const Quaternion& other);
 };
+
+#endif QUATERNION

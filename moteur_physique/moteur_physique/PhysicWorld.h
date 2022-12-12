@@ -1,5 +1,8 @@
 ﻿#pragma once
 
+#ifndef PHYSICWORLD
+#define PHYSICWORLD
+
 #include <vector>
 #include "Utils/Timing.h"
 #include "Vector3D/Vector3D.h"
@@ -215,3 +218,5 @@ public:
 		}
 	}
 };
+
+#endif PHYSICWORLD

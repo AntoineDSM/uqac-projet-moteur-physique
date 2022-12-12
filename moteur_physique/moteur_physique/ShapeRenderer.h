@@ -6,7 +6,7 @@
 #include "Shape.h"
 #include "Shader.h"
 #include "Cube.h"
-#include "Vecteur3D.h"
+#include "Vector3D/Vector3D.h"
 #include "Rotations/RigidBody.h"
 
 //---------------------------------------------------------------------CLASSE PERMETTANT L'AFFICHAGE DES CONTOURS D'UN "SHAPE"------------------------------------------------------------------------

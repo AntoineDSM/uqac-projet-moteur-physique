@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef PARTICLE_SPRING
+#define PARTICLE_SPRING
+
 #include "Vector3D/Vector3D.h"
 #include "Forces/ParticleForceGenerator.h"
 #include "../../ParticleForceGenerator.h"
@@ -28,3 +32,4 @@ class ParticleSpring : public ParticleForceGenerator
 		void updateForce(Particle* particle, float duration);
 };
 
+#endif PARTICLE_SPRING

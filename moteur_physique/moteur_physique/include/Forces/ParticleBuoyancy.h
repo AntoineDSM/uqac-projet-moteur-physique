@@ -1,7 +1,9 @@
 #pragma once
 
-#include "ParticleForceGenerator.h"
+#ifndef PARTICLE_BUOYANCY
+#define PARTICLE_BUOYANCY
 
+#include "ParticleForceGenerator.h"
 #include "Particles/Particle.h"
 using namespace moteurJeux;
 
@@ -26,3 +28,4 @@ class ParticleBuoyancy : public ParticleForceGenerator
 		void updateForce(Particle* particle, float duration);
 };
 
+#endif PARTICLE_BUOYANCY

@@ -1,4 +1,8 @@
 #pragma once
+
+#ifndef PARTICLE_DRAG
+#define PARTICLE_DRAG
+
 #include "Vector3D/Vector3D.h"
 #include "Forces/ParticleForceGenerator.h"
 
@@ -21,3 +25,4 @@ class ParticleDrag : public ParticleForceGenerator
 		void updateForce(Particle* particle, float duration);
 };
 
+#endif PARTICLE_DRAG

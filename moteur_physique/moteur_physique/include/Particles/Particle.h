@@ -1,9 +1,7 @@
-//Date de cr�ation :
-//Cr�er par : 
-//Date de derni�re modification : 16/09/22
-//Modifi� par : Victor GUIRAUD
-
 #pragma once
+
+#ifndef PARTICLE_HPP
+#define PARTICLE_HPP
 
 #include "math.h"
 #include "Vector3D/Vector3D.h"
@@ -12,10 +10,6 @@
 #include <GL/glu.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
-
-
-#ifndef PARTICLE_HPP
-#define PARTICLE_HPP
 
 using namespace moteurJeux;
 

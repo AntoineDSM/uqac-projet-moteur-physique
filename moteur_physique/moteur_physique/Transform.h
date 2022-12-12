@@ -1,6 +1,8 @@
 #pragma once
 
-#include "Vecteur3D.h"
+#ifndef TRANSFORM
+#define TRANSFORM
+
 #include "Rotations/Quaternion.h"
 
 //-------------------------------------------------------------------CLASSE TRANSFORM-------------------------------------------------------------
@@ -32,5 +34,8 @@ class Transform
 		Vector3D getRotation();
 	
 		Vector3D getScale();
+
+		std::string getName();
 };
 
+#endif TRANSFORM

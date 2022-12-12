@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef WALL
+#define WALL
+
 #include "Vector3D/Vector3D.h"
 #include "Utils/Precision.h"
 #include <vector>
@@ -78,3 +81,4 @@ private:
 
 };
 
+#endif WALL

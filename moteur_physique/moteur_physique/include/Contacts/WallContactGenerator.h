@@ -1,4 +1,7 @@
-#pragma one
+#pragma once
+
+#ifndef WALL_CONTACT_GENERATOR
+#define WALL_CONTACT_GENERATOR
 
 #include "ParticleContactGenerator.h"
 #include "../Headers/Wall.h"
@@ -35,3 +38,5 @@ public:
 	Vector3D get_resultante(Particle* particle);
 
 };
+
+#endif WALL_CONTACT_GENERATOR

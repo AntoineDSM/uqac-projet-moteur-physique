@@ -1,5 +1,4 @@
 #include "Transform.h"
-#include "Rotations/Rigidbody.h"
 
 //-------------------------------------------------------METHODES DE LA CLASSE TRANSFORM---------------------------------------------------------------------
 
@@ -36,4 +35,9 @@ Vector3D Transform::getRotation() {
 Vector3D Transform::getScale() 
 {
 	return scale;
+}
+
+std::string Transform::getName()
+{
+	return name;
 }
