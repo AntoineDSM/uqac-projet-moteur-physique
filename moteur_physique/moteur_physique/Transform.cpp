@@ -3,9 +3,10 @@
 //-------------------------------------------------------METHODES DE LA CLASSE TRANSFORM---------------------------------------------------------------------
 
 //Constructeur
-Transform::Transform(std::string _name)
+Transform::Transform(std::string _name, Vector3D _scale)
 {
 	name = _name;
+	scale = _scale;
 }
 
 //------------------------------------------------------------------GETTER & SETTER--------------------------------------------------------------------

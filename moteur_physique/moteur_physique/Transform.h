@@ -21,7 +21,7 @@ class Transform
 	public:
 		
 		//Constructeur
-		Transform(std::string name);
+		Transform(std::string name, Vector3D scale = Vector3D(1,1,1));
 		
 		//--------------------GETTER & SETTER------------------------
 

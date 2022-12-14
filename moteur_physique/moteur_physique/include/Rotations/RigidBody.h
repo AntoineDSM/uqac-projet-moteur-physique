@@ -53,10 +53,12 @@ public:
 		if (primitive->getShape() == "Boite")
 		{
 			primitiveBoite = boite;
+			primitive->shape = primitiveBoite->shape;
 		}
 		else if (primitive->getShape() == "Plan")
 		{
 			primitivePlan = plan;
+			primitive->shape = primitivePlan->shape;
 		}
 
 		inverseMasse = 1.0f;
@@ -107,6 +109,11 @@ public:
 	inline Vector3D GetVelocity()
 	{
 		return velocity;
+	}
+
+	inline void SetVelocity(Vector3D _velocity)
+	{
+		velocity = _velocity;
 	}
 
 	inline void SetPosition(Vector3D newPos)

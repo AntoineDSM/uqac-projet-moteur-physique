@@ -12,5 +12,5 @@ void Primitive::setOffset(Matrix34 _offset)
 
 std::string Primitive::getShape() const
 {
-    return "";
+    return shape;
 }

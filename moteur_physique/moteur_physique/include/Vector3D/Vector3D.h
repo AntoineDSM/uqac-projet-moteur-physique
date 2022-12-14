@@ -80,6 +80,24 @@ namespace moteurJeux {
 			return (float)max;
 		}
 
+		Vector3D getInverse(float value)
+		{
+			Vector3D inverse = Vector3D();
+			if (value == 0)
+			{
+				x == 1 ? inverse.x = 0 : inverse.x = 1;
+				y == 1 ? inverse.y = 0 : inverse.y = 1;
+				z == 1 ? inverse.z = 0 : inverse.z = 1;
+			}
+			else
+			{
+				inverse.x = value;
+				inverse.y = value;
+				inverse.z = value;
+			}
+			return inverse;
+		}
+
 		//normalize a vector means to obtain his coordinates between 0 and 1, in the unit circle. We normalize only if the actual Vector3D is not in the unit circle.
 		/*
 		* if it's in the unit circle, that means the magnitude (the lenght) is < 1. So we need to verify the magnitude before normalizing it.

@@ -18,9 +18,10 @@ public:
 	//Constrcuteur par default
 	Plan()
 	{
-		Vector3D normal = Vector3D(0, 1, 0);
+		normal = Vector3D(0, 1, 0);
 		offset = 0;
 		m_offset = Matrix34();
+		shape = "Plan";
 	}
 
 	void Initialize(Vector3D _normal, float _offset);

@@ -1,12 +1,18 @@
 #include "OctreeDetection.h"
 
+//-------------------------------------------------------------------------------------------
+//Inspiration du pseudo code vu en cours d'algorithmie et de structures de donnees avancees.
+//-------------------------------------------------------------------------------------------
+
 OctreeDetection::OctreeDetection(RigidBody* rb)
 {
 	m_center = rb->transform->getPosition();
-	if (rb->primitive->getShape() == "Boite") {
-		m_radius = rb->primitiveBoite->getHalfSize().getMax() * 1.41421356f;		//Le chiffre 1.41421356 est une approximation de racine de 2
+	if (rb->primitive->getShape() == "Boite") 
+	{
+		m_radius = rb->primitiveBoite->getHalfSize().getMax() * 1.4;//1.4 permet d'approcher racine de 2 afin d'approcher la valeur de la diagonale de notre cube
 	}
-	else {	//Si c'est un plan alors la rayon est nul
+	else //nous sommes face a un plan, pas besoin d'associer un rayon
+	{
 		m_radius = 0;
 	}
 	m_rb = rb;
@@ -26,6 +32,7 @@ OctreeNode* OctreeNode::BuildOctree(Vector3D center, float halfWidth, int maxDep
 
 		for (int i = 0; i < 8; i++) {
 			//les opérations sur les bits ci-dessous nous permettent d'inverser ou non les valeurs x, y, z du centre d'une region. 
+			//nous avons 8 regions au total qui divisent un cube principal en sous regions.
 			offset.x = ((i & 1) ? step : -step);
 			offset.y = ((i & 2) ? step : -step);
 			offset.z = ((i & 4) ? step : -step);
@@ -33,10 +40,6 @@ OctreeNode* OctreeNode::BuildOctree(Vector3D center, float halfWidth, int maxDep
 		}
 		return returnNode;
 	}
-}
-
-OctreeNode::OctreeNode()
-{
 }
 
 int OctreeNode::getChildIndex(const Vector3D& objectPos)
@@ -51,26 +54,26 @@ int OctreeNode::getChildIndex(const Vector3D& objectPos)
 void OctreeNode::InsertObject(OctreeDetection* obj)
 {
 	int index = 0;
-	int straddle = 0; //Chevauchement
+	int chevauchement = 0; //chevauchement d'un objet sur 2 sous regions distinctes
 
 	for (int i = 0; i < 3; i++) {
 		float delta = (float)obj->m_center.getValues()[i] - (float)m_center.getValues()[i];
-		if (abs(delta) < m_halfWidth + obj->m_radius) {		//Si l'objet est en majorité dans une autre celulle, alors on ne l'ajoute pas
-			straddle = 1;
+		if (abs(delta) < m_halfWidth + obj->m_radius)//Si l'objet est en majorité dans une autre celulle, alors on ne l'ajoute pas
+		{
+			chevauchement = 1;//nous avons un chevauchement
 			break;
 		}
-		//Il y a ici deux opération binaires: un "OU" et un décalage de bit vers la gauche. Ici, le décalage reviens à
-		//mettre 2 à la puissance i.
-		//La ligne suivante selectionne la cellule la plus appropriée, en regardant l'éloignement de l'objet par rapport au centre de la cellule.
-		if (delta > 0.0f) index |= (1 << i);
+		if (delta > 0.0f)
+		{
+			index |= (1 << i);
+		}
 	}
-	if (!straddle && m_childrens[index]) {
-		//Entièrement contenu dans un noeud enfant existant; on l'ajoute dans ce sous-arbre
+	if (!chevauchement && m_childrens[index]) //nous n'avons pas de chauvement, nous inserons l'objet dans la liste des enfants de la sous regions correspondante
+	{
 		m_childrens[index]->InsertObject(obj);
 	}
-	else {
-		//Il y a du chevauchement, ou aucun noeud enfant dans lequel aller, alors on connecte l'objet dans la liste connectée
-		//de ce noeud
+	else 
+	{
 		obj->m_nextObject = m_objectList;
 		m_objectList = obj;
 	}
@@ -81,9 +84,13 @@ void OctreeNode::TestAllCollisions(CollisionData* collisionData)
 	const int MAX_DEPTH = 3;
 	static OctreeNode* ancestorStack[MAX_DEPTH];
 	static int depth = 0;
-	if (depth >= MAX_DEPTH) return;
+	if (depth >= MAX_DEPTH) 
+	{
+		return;
+	}
 	ancestorStack[depth++] = this;
-	for (int n = 0; n < depth; n++) {
+	for (int n = 0; n < depth; n++) 
+	{
 		OctreeDetection* a = ancestorStack[n]->m_objectList;
 		bool aHasNextObject = true;
 		bool bHasNextObject = true;
@@ -91,19 +98,37 @@ void OctreeNode::TestAllCollisions(CollisionData* collisionData)
 
 			OctreeDetection* b = m_objectList;
 			bHasNextObject = true;
-			while (bHasNextObject && b) {
+			while (bHasNextObject && b) 
+			{
 				if (a == b)
+				{
 					break;
+				}
 				TestCollision(a, b, collisionData);
-				if (b->m_nextObject != nullptr) b = b->m_nextObject;
-				else bHasNextObject = false;
+				if (b->m_nextObject != nullptr)
+				{
+					b = b->m_nextObject;
+				}
+				else
+				{
+					bHasNextObject = false;
+				}
 			}
-			if (a->m_nextObject != nullptr) a = a->m_nextObject;
-			else aHasNextObject = false;
+			if (a->m_nextObject != nullptr)
+			{
+				a = a->m_nextObject;
+			}
+			else
+			{
+				aHasNextObject = false;
+			}
 		}
 	}
 	for (int i = 0; i < 8; i++) {
-		if (m_childrens[i]) m_childrens[i]->TestAllCollisions(collisionData);
+		if (m_childrens[i])
+		{
+			m_childrens[i]->TestAllCollisions(collisionData);
+		}
 	}
 	depth--;
 }
@@ -115,13 +140,13 @@ void OctreeNode::TestCollision(OctreeDetection* a, OctreeDetection* b, Collision
 	std::string shapeB = b->m_rb->primitive->getShape();
 	if (shapeA == "Plan") {
 		if (shapeB == "Boite") {
-			ContactResolutions::CollisionBoitePlan(*b->m_rb->primitiveBoite, *a->m_rb->primitivePlan, collisionData);
+			ContactResolutions::CollisionBoitePlan(b->m_rb, a->m_rb, collisionData);
 			return;
 		}
 	}
 	if (shapeA == "Boite") {
 		if (shapeB == "Plan") {
-			ContactResolutions::CollisionBoitePlan(*a->m_rb->primitiveBoite, *b->m_rb->primitivePlan, collisionData);
+			ContactResolutions::CollisionBoitePlan(a->m_rb, b->m_rb, collisionData);
 			return;
 		}
 		else if (shapeB == "Boite") {

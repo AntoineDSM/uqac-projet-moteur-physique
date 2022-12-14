@@ -8,7 +8,7 @@
 class Primitive
 {
 
-protected:
+public:
 		std::string shape;
 		Matrix34 m_offset = Matrix34();
 

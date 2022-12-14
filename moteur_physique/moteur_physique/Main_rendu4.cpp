@@ -61,6 +61,7 @@ int main(int argc, char** argv)
 {
 
     InitOpenGL();
+    demoRigidbodiesCollision = new DemoRigidBodiesCollision(window, camera, false);//si l'utilisateur met "true" en dernier parametre, une force sera ajoute sur un point des cubes, ce qui donnera une rotation et une orientation.
 
     while (!glfwWindowShouldClose(window))
     {

@@ -33,9 +33,6 @@ struct OctreeNode
 	//Elements presents dans cette region
 	OctreeDetection* m_objectList;
 
-	//Constructeur
-	OctreeNode();
-
 	//-------------------------------------------------------GETTERS & SETTERS---------------------------------------------------------------------------
 
 	int	getChildIndex(const Vector3D& objectPos);
