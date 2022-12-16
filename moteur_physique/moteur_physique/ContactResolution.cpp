@@ -45,6 +45,21 @@ void CollisionSpherePlan(Sphere& sphere, Plan& plan) {
 	}
 }
 
+void CollisionBoitePlan(const Boite& boite, const Plan& plan) {
+
+	CollisionData cd = new CollisionData{};
+	// Peut générer plusieurs contacts.
+
+	for (int i = 0; i < 16; i++)
+	{
+		boite.body->GetPosition();
+		// Consiste à valider chacun des points de la boîte par rapport au plan en utilisant la formule : 𝑑=𝒑∙𝒍−𝑙
+
+	}
+
+
+}
+
 void CollisionBoiteSphere(const Sphere& sphere, const Boite& boite) //Face-Face
 {
 	Vector3D pointProche;
